@@ -1,51 +1,51 @@
-// src/components/home/AlmanacWidget.jsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { CalendarDays, Sparkles } from 'lucide-react';
-import { todayInScience, upcomingScienceDays } from '../../data/almanac';
+import { useCollection } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
 
+const pad = (n) => String(n).padStart(2, '0');
+
 export default function AlmanacWidget() {
-  const { t, tc } = useLanguage();
-  const today = todayInScience();
-  const upcoming = upcomingScienceDays(4);
+  const { t, tc, lang } = useLanguage();
+  const days = useCollection('scienceDays');
+  const facts = useCollection('thisDay');
+
+  const { today, upcoming } = useMemo(() => {
+    const now = new Date();
+    const key = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+    const sorted = [...facts].sort((a, b) => a.date.localeCompare(b.date));
+    const fact = sorted.find((f) => f.date === key) || sorted.find((f) => f.date > key) || sorted[0];
+    const y = now.getFullYear();
+    const start = new Date(y, now.getMonth(), now.getDate());
+    const list = days.map((d) => {
+      let date = new Date(y, d.month - 1, d.day);
+      if (date < start) date = new Date(y + 1, d.month - 1, d.day);
+      return { ...d, date };
+    }).sort((a, b) => a.date - b.date).slice(0, 5);
+    return { today: fact, upcoming: list };
+  }, [days, facts]);
 
   return (
-    <section className="bg-gradient-to-br from-primary-50 to-neutral-50 py-12 dark:from-neutral-900 dark:to-neutral-950">
-      <div className="dst-container grid gap-6 lg:grid-cols-2">
-        {/* This day in science */}
-        <div className="dst-card p-6">
-          <p className="dst-eyebrow flex items-center gap-2">
-            <Sparkles size={14} aria-hidden="true" /> {t('scienceAlmanac')}
-          </p>
-          <h3 className="mt-2 text-xl font-bold text-neutral-900 dark:text-white">{t('thisDayInScience')}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-200">{tc(today.text)}</p>
-          <p className="mt-3 text-xs font-semibold text-primary-700 dark:text-primary-300">{today.key}</p>
+    <div className="dst-card p-4">
+      <p className="section-eyebrow mb-1">{t('scienceAlmanac')}</p>
+      {today && (
+        <div className="p-3 rounded-3 bg-soft mb-4">
+          <p className="d-flex align-items-center gap-2 fw-semibold mb-1"><Sparkles size={16} className="text-warning" aria-hidden="true" /> {t('thisDayInScience')}</p>
+          <p className="mb-0">{tc(today.text)}</p>
         </div>
-
-        {/* Upcoming science days */}
-        <div className="dst-card p-6">
-          <p className="dst-eyebrow flex items-center gap-2">
-            <CalendarDays size={14} aria-hidden="true" /> {t('scienceDays')}
-          </p>
-          <h3 className="mt-2 text-xl font-bold text-neutral-900 dark:text-white">Upcoming observances</h3>
-          <ul className="mt-4 space-y-3">
-            {upcoming.map((d, i) => (
-              <li key={i} className="flex items-center gap-3 border-b border-neutral-100 pb-2 last:border-0 dark:border-neutral-800">
-                <span className="flex h-11 w-11 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-neutral-900 text-white">
-                  <span className="text-sm font-extrabold leading-none">{d.date.getDate()}</span>
-                  <span className="text-[0.6rem] uppercase leading-none">
-                    {d.date.toLocaleString('en', { month: 'short' })}
-                  </span>
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-neutral-900 dark:text-neutral-100">{tc(d.name)}</span>
-                  <span className="block text-xs text-neutral-500 dark:text-neutral-300">{d.theme}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
+      )}
+      <h3 className="h6 fw-bold d-flex align-items-center gap-2"><CalendarDays size={16} aria-hidden="true" /> {t('scienceDays')}</h3>
+      <ul className="list-unstyled mb-0 d-grid gap-2">
+        {upcoming.map((d) => (
+          <li key={d.id} className="d-flex align-items-center gap-3">
+            <span className="text-center rounded-3 border px-2 py-1 flex-shrink-0" style={{ minWidth: 56 }}>
+              <span className="d-block fw-bold lh-1">{d.date.getDate()}</span>
+              <small className="text-muted-2">{d.date.toLocaleDateString(lang === 'te' ? 'te-IN' : 'en-IN', { month: 'short' })}</small>
+            </span>
+            <span><span className="fw-medium">{tc(d.name)}</span>{d.theme && <small className="d-block text-muted-2">{d.theme}</small>}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

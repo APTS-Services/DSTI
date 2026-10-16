@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Government of Andhra Pradesh">
+  <!-- Placeholder emblem. Replace with the official Government of Andhra Pradesh logo from the CMS (Settings > Site identity). -->
+  <circle cx="60" cy="60" r="57" fill="#ffffff" stroke="#0b3d91" stroke-width="4"/>
+  <circle cx="60" cy="60" r="47" fill="none" stroke="#c8a24a" stroke-width="2"/>
+  <g fill="#0b3d91">
+    <path d="M60 22l5 10h-10z"/>
+    <rect x="42" y="36" width="36" height="6" rx="2"/>
+    <rect x="45" y="44" width="6" height="26"/><rect x="57" y="44" width="6" height="26"/><rect x="69" y="44" width="6" height="26"/>
+    <rect x="38" y="72" width="44" height="6" rx="2"/>
+  </g>
+  <text x="60" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#0b3d91">GOVT OF AP</text>
+</svg>

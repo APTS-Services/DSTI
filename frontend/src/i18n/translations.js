@@ -216,7 +216,7 @@ export const translations = {
 
   te: {
     // Global chrome
-    siteName: 'ఖగోళ, సాంకేతిక & ఆవిష్కరణ మండలి',
+    siteName: 'విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ',
     siteShort: 'DSTI',
     gov: 'ఆంధ్రప్రదేశ్ ప్రభుత్వం',
     skipToContent: 'ప్రధాన విషయానికి వెళ్లండి',
@@ -432,5 +432,80 @@ export const LANGS = [
 export function pick(value, lang) {
   if (value == null) return '';
   if (typeof value === 'string') return value;
-  return value[lang] ?? value.en ?? value.te ?? '';
+  if (typeof value !== 'object') return String(value);
+  // Fall back to English when a Telugu translation has not been entered yet.
+  return value[lang] || value.en || value.te || '';
 }
+
+// ---- Additional interface strings ----
+Object.assign(translations.en, {
+  contentUnavailable: 'The website content could not be loaded. Please check your connection and reload the page.',
+  captcha: 'Security code', captchaAlt: 'Security code image', refreshCaptcha: 'Get a new security code',
+  captchaHelp: 'Type the characters shown in the image (not case-sensitive).',
+  region: 'Region', headquarters: 'Headquarters', searchDocuments: 'Search by number, subject or department…',
+  allTypes: 'All types', year: 'Year', allYears: 'All years', notAvailable: 'Not available',
+  videoComingSoon: 'Video will be published shortly.', previous: 'Previous', next: 'Next', sectors: 'Sectors',
+  viewDetails: 'View details', quickAccessTitle: 'Explore the Department', keyMessages: 'Key messages',
+  learnAboutUs: 'Learn about us', slide: 'Slide', play: 'Play', pause: 'Pause', new: 'New',
+  districtsCovered: 'Districts covered', documentsPublished: 'Orders, documents & tenders',
+  opensNewWindow: 'opens in a new window', allRights: 'All rights reserved.', backToTop: 'Back to top',
+  howCanIHelp: 'How can I help you today?',
+  noAnswer: 'I could not find an answer to that in the content published on this website. Please try different words, use the site search, or reach the Department through',
+  errName: 'Please enter your name.', errEmail: 'Please enter a valid e-mail address.', errPhone: 'Please enter a valid 10-digit mobile number.',
+  errMessage: 'Please enter a message of at least 10 characters.', errCaptcha: 'Please enter the security code.',
+  referenceNo: 'Reference number', sendAnother: 'Send another message',
+  feedbackPrivacy: 'Your details are used only to respond to your feedback.', fax: 'Fax', sector: 'Sector',
+  externalLinksNote: 'These links open external websites in a new window.', nodalOfficer: 'Nodal Officer',
+  searchResults: 'Search results', resultsFor: 'results for', districtExplorerTitle: 'Science & technology across 26 districts',
+  openExplorer: 'Open District Explorer', eGovDesc: 'Citizen-centric digital services delivered by the Department and its organisations.',
+  projectsDesc: 'Flagship projects and initiatives, with their current progress.', progress: 'progress',
+  whyInvest: 'Why invest in Andhra Pradesh', howToInvest: 'How to invest', sectorPolicies: 'Sector policies',
+  eventsDesc: 'Science fairs, conclaves, workshops and observances across the State.',
+  pageNotFound: 'Page not found', pageNotFoundDesc: 'The page you are looking for may have been moved or removed.',
+  organisationsDesc: 'Organisations under the Department working on science, technology, innovation, e-Governance and space applications.',
+  keyFunctions: 'Key functions', relatedPolicies: 'Related policies', abbreviation: 'Abbreviation', established: 'Established',
+  visitWebsite: 'Visit website', sectorsAndPolicies: 'Sectors, policies and organisations',
+  policiesDesc: 'Sector policies of the Department that guide investment, research and innovation in Andhra Pradesh.',
+  downloadPolicy: 'Download policy (PDF)', implementingOrganisations: 'Implementing organisations',
+  tendersDesc: 'Tender notices of the Department and its organisations, with documents for download.',
+  searchTenders: 'Search tenders…', emd: 'EMD', notifications: 'Notifications', circulars: 'Circulars',
+  type_page: 'Page', type_organisation: 'Organisation', type_policy: 'Policy', type_ict: 'ICT', type_tender: 'Tender',
+  type_document: 'Document', type_event: 'Event', type_video: 'Video', type_faq: 'FAQ', type_award: 'Award',
+  type_district: 'District', type_news: 'Update',
+});
+
+Object.assign(translations.te, {
+  contentUnavailable: 'వెబ్‌సైట్ విషయం లోడ్ కాలేదు. దయచేసి మీ కనెక్షన్‌ను తనిఖీ చేసి పేజీని మళ్లీ లోడ్ చేయండి.',
+  captcha: 'భద్రతా కోడ్', captchaAlt: 'భద్రతా కోడ్ చిత్రం', refreshCaptcha: 'కొత్త భద్రతా కోడ్ పొందండి',
+  captchaHelp: 'చిత్రంలో చూపిన అక్షరాలను టైప్ చేయండి.',
+  region: 'ప్రాంతం', headquarters: 'ప్రధాన కేంద్రం', searchDocuments: 'సంఖ్య, విషయం లేదా శాఖ ద్వారా వెతకండి…',
+  allTypes: 'అన్ని రకాలు', year: 'సంవత్సరం', allYears: 'అన్ని సంవత్సరాలు', notAvailable: 'అందుబాటులో లేదు',
+  videoComingSoon: 'వీడియో త్వరలో ప్రచురించబడుతుంది.', previous: 'మునుపటి', next: 'తదుపరి', sectors: 'రంగాలు',
+  viewDetails: 'వివరాలు చూడండి', quickAccessTitle: 'శాఖను అన్వేషించండి', keyMessages: 'ముఖ్య సందేశాలు',
+  learnAboutUs: 'మా గురించి తెలుసుకోండి', slide: 'స్లయిడ్', play: 'ప్లే', pause: 'ఆపు', new: 'కొత్త',
+  districtsCovered: 'జిల్లాలు', documentsPublished: 'ఉత్తర్వులు, పత్రాలు & టెండర్లు',
+  opensNewWindow: 'కొత్త విండోలో తెరుచుకుంటుంది', allRights: 'అన్ని హక్కులు ప్రత్యేకించబడ్డాయి.', backToTop: 'పైకి వెళ్లండి',
+  howCanIHelp: 'ఈ రోజు నేను మీకు ఎలా సహాయం చేయగలను?',
+  noAnswer: 'ఈ వెబ్‌సైట్‌లో ప్రచురించిన విషయంలో దీనికి సమాధానం దొరకలేదు. దయచేసి వేరే పదాలతో ప్రయత్నించండి లేదా శాఖను సంప్రదించండి:',
+  errName: 'దయచేసి మీ పేరు నమోదు చేయండి.', errEmail: 'దయచేసి సరైన ఇ-మెయిల్ చిరునామా నమోదు చేయండి.', errPhone: 'దయచేసి సరైన 10 అంకెల మొబైల్ నంబర్ నమోదు చేయండి.',
+  errMessage: 'దయచేసి కనీసం 10 అక్షరాల సందేశం నమోదు చేయండి.', errCaptcha: 'దయచేసి భద్రతా కోడ్ నమోదు చేయండి.',
+  referenceNo: 'సూచన సంఖ్య', sendAnother: 'మరో సందేశం పంపండి',
+  feedbackPrivacy: 'మీ వివరాలు మీ అభిప్రాయానికి స్పందించడానికి మాత్రమే ఉపయోగించబడతాయి.', fax: 'ఫ్యాక్స్', sector: 'రంగం',
+  externalLinksNote: 'ఈ లింకులు బాహ్య వెబ్‌సైట్లను కొత్త విండోలో తెరుస్తాయి.', nodalOfficer: 'నోడల్ అధికారి',
+  searchResults: 'శోధన ఫలితాలు', resultsFor: 'ఫలితాలు', districtExplorerTitle: '26 జిల్లాల్లో విజ్ఞానం & సాంకేతికత',
+  openExplorer: 'జిల్లా అన్వేషిణి తెరవండి', eGovDesc: 'శాఖ మరియు దాని సంస్థలు అందించే పౌర-కేంద్రిత డిజిటల్ సేవలు.',
+  projectsDesc: 'ప్రధాన ప్రాజెక్టులు మరియు కార్యక్రమాలు, వాటి ప్రస్తుత పురోగతితో.', progress: 'పురోగతి',
+  whyInvest: 'ఆంధ్రప్రదేశ్‌లో ఎందుకు పెట్టుబడి పెట్టాలి', howToInvest: 'పెట్టుబడి ఎలా పెట్టాలి', sectorPolicies: 'రంగ విధానాలు',
+  eventsDesc: 'రాష్ట్రవ్యాప్తంగా విజ్ఞాన ప్రదర్శనలు, సదస్సులు, వర్క్‌షాప్‌లు మరియు పర్వదినాలు.',
+  pageNotFound: 'పేజీ కనబడలేదు', pageNotFoundDesc: 'మీరు వెతుకుతున్న పేజీ తరలించబడి ఉండవచ్చు లేదా తొలగించబడి ఉండవచ్చు.',
+  organisationsDesc: 'విజ్ఞానం, సాంకేతికత, ఆవిష్కరణ, ఇ-గవర్నెన్స్ మరియు అంతరిక్ష అనువర్తనాలపై పనిచేసే శాఖ సంస్థలు.',
+  keyFunctions: 'ముఖ్య విధులు', relatedPolicies: 'సంబంధిత విధానాలు', abbreviation: 'సంక్షిప్త నామం', established: 'స్థాపన',
+  visitWebsite: 'వెబ్‌సైట్ సందర్శించండి', sectorsAndPolicies: 'రంగాలు, విధానాలు మరియు సంస్థలు',
+  policiesDesc: 'ఆంధ్రప్రదేశ్‌లో పెట్టుబడి, పరిశోధన మరియు ఆవిష్కరణలకు మార్గదర్శనం చేసే శాఖ రంగ విధానాలు.',
+  downloadPolicy: 'విధానం డౌన్‌లోడ్ (PDF)', implementingOrganisations: 'అమలు చేసే సంస్థలు',
+  tendersDesc: 'శాఖ మరియు దాని సంస్థల టెండర్ నోటీసులు, డౌన్‌లోడ్ చేయదగిన పత్రాలతో.',
+  searchTenders: 'టెండర్లు వెతకండి…', emd: 'ఈఎండీ', notifications: 'నోటిఫికేషన్లు', circulars: 'సర్క్యులర్లు',
+  type_page: 'పేజీ', type_organisation: 'సంస్థ', type_policy: 'విధానం', type_ict: 'ఐసీటీ', type_tender: 'టెండర్',
+  type_document: 'పత్రం', type_event: 'కార్యక్రమం', type_video: 'వీడియో', type_faq: 'ప్రశ్న', type_award: 'అవార్డు',
+  type_district: 'జిల్లా', type_news: 'సమాచారం',
+});

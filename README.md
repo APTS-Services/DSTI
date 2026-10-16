@@ -1,92 +1,237 @@
-# DSTI — Department of Science, Technology & Innovation, Government of Andhra Pradesh
+# DSTI Website — Department of Science, Technology & Innovation, Government of Andhra Pradesh
 
-Official website project for the **Department of Science, Technology & Innovation (DSTI)**, Government of Andhra Pradesh.
+Official bilingual (English / తెలుగు) website of DSTI, with a role-based Content Management System (CMS).
+**Every part of the public website is managed from the CMS**: menu, hero banner, home page sections, news, events,
+tenders, Government Orders and other documents, organisations, policies, districts, awards, FAQs, officers, all
+content pages, logo, contact details and social media links.
 
-Built as a **frontend-first prototype** with realistic seeded content. The public website is fully
-implemented; the CMS runs on a local content store and is designed to be wired to the backend next.
-
----
-
-## What's implemented
-
-### Pages (per the Department's requirements)
-
-| Section | Routes |
+| Layer | Technology |
 | --- | --- |
-| **Home** | `/` — hero banner with key messages, latest-updates ticker, "What brings you here?" (Citizens, Students, Researchers, Investors), quick links, District Explorer preview, Science Almanac, illustrated story, "How it all connects", Science Stories, Events |
-| **About the Department** | `/about`, `/about/mission`, `/about/objectives`, `/about/organisation`, `/about/awards` (year-wise) |
-| **Organisations** | `/organisations`, `/organisations/:id`, `/districts` (District Explorer), `/how-it-connects` |
-| **ICT** | `/ict` (e-Governance), `/ict/projects` (Projects & Initiatives) |
-| **Policies** | `/policies` + one page per policy (`/policies/:id`) — IT & GCC, Electronics, Semiconductor, Data Centre, Drone, Space, Biotechnology, Science, Technology & Innovation |
-| **Investor's Corner** | `/investors` |
-| **e-Citizen** | `/ecitizen` hub + RTI, Acts & Rules, Government Orders, Notifications/Circulars, Policies, Guidelines, FAQs, Useful Links, IT Act 2000 (Procedure, Judgements), PoSH Act |
-| **Tenders** | `/tenders` — open / closed status, search, PDF download |
-| **Media** | `/media` hub, `/media/science-stories`, `/media/events` |
-| **Contact Us** | `/contact` — head office, list of officers, feedback form |
-| **Statutory / Footer** | Website Policy, Privacy Policy, Terms of Use, Copyright, Disclaimer, Hyperlink Policy, Accessibility Statement, Screen Reader Access, Help, Sitemap (routed under `/policies/:slug`, `/screen-reader-access`, `/help`, `/sitemap`) |
-| **CMS** | `/admin` (login at `/admin/login`) |
-
-### Features
-
-- **Bilingual** English / తెలుగు with a language switch on every page (UI chrome translated; content carries `en`/`te` fields).
-- **Fully responsive** layout (mobile, tablet, desktop).
-- **GIGW / WCAG 2.1 AA accessibility**: skip-to-content link, keyboard navigation, visible focus outlines, ARIA labels, text resizing (90–140%), high-contrast mode and dark mode, accessibility statement.
-- **Site-wide search** across pages, policies, orders, documents, tenders and more.
-- **"Ask Vigyan Mitra"** assistant — answers **only** from the website's own content and cites the source page (no external API, no third-party scripts).
-- **Interactive District Explorer** — a map of all **26 districts** of Andhra Pradesh with institutions/activities, plus an equivalent accessible **table view**.
-- **Document repository** with search, type filter, date sorting and PDF download.
-- **Feedback form** wired to a secure content store with a notification flag; viewable in the CMS inbox.
-- **SEO**: per-page titles, meta descriptions, Open Graph / social card tags.
-- **Social media links** and a **visitor statistics** counter (hit counter).
-- **CMS with user roles** (Administrator / Editor / Publisher) to manage tenders, documents, news, events and feedback.
+| Frontend | React 18, React Router 7, Bootstrap 5.3 (SCSS, only the parts used), HTML5, CSS3, Vite 7 |
+| Backend | Node.js 18+ and Express 4 |
+| Database | MySQL 8 (or MariaDB 10.6+) |
+| Tests | Node test runner + Supertest (API), Playwright (end-to-end, desktop and mobile) |
 
 ---
 
-## Tech stack
+## 1. Features (mapped to the Department's requirements)
 
-- **Frontend**: React 18, Vite 4, Tailwind CSS 3 (custom navy / teal / saffron design system), React Router 6, lucide-react.
-- **Backend** (`backend/`): Express + MySQL layered architecture (legacy from the previous project; kept for wiring up next).
+**Pages** — Home · About (Introduction, Mission, Objectives, Organisation Structure, year-wise Awards) ·
+Organisations (listing, one page per organisation, District Explorer, "How it all connects") · ICT (e-Governance,
+Projects & Initiatives) · Policies (listing and one page per policy) · Investor's Corner · e-Citizen (RTI, Acts &
+Rules, Government Orders, Notifications / Circulars, Policies, Guidelines, FAQs, Useful Links, IT Act 2000 with
+Procedure and Judgements, PoSH Act) · Tenders (open / closed, document download) · Media (Science Stories videos,
+Events) · Contact Us (Head Office, List of Officers, Feedback form) · Statutory pages (Website Policy, Privacy Policy,
+Terms of Use, Copyright, Disclaimer, Hyperlink Policy, Accessibility Statement, Screen Reader Access, Help, Sitemap).
 
-## Getting started
+**Features**
+- English / Telugu switch on every page; content has English and Telugu fields (falls back to English if Telugu is empty).
+- Responsive on mobile, tablet and desktop. Modern layout with subtle fade-up animations on scroll (disabled automatically for visitors who prefer reduced motion).
+- GIGW / WCAG 2.1 AA: skip link, keyboard navigation, visible focus, ARIA labels, text resize (90–140 %), high-contrast and dark modes, table alternatives for the map and charts, accessibility statement.
+- Site-wide search over pages, policies, orders, documents, tenders, events and more.
+- **Ask Vigyan Mitra** assistant: answers only from the website's own content and links to the source page. It runs in the browser; no external AI service or third-party script.
+- Interactive **District Explorer** for all 26 districts, with an accessible table view.
+- Home page: hero banner with key messages, latest-updates ticker, "What brings you here?" (Citizens, Students, Researchers, Investors), quick links, statistics, news band, District map, Science Almanac (observances and this-day-in-science), illustrated story, "How it all connects", Science Stories and Events. Each section can be switched on or off from the CMS.
+- Document repository with search, type and year filters, date sorting and PDF download.
+- Feedback form with CAPTCHA, stored in MySQL, e-mail notification to the Department (SMTP optional) and a CMS inbox.
+- CMS with three roles (Administrator, Publisher, Editor), draft/publish workflow, file library, audit log, visitor statistics, user management, and content backup / restore.
+- SEO: page titles, meta descriptions, canonical links, Open Graph / Twitter cards, `sitemap.xml` and `robots.txt` generated from the CMS.
+- Social media links (managed in the CMS) and an anonymous visitor counter (no cookies, no IP storage).
+- Light and fast: pages are code-split; the home page loads about 80 KB of JavaScript and 33 KB of CSS (gzipped). All content arrives in one cached request, and fonts are self-hosted.
+
+---
+
+## 2. Local setup
+
+### 2.1 Prerequisites
+
+- **Node.js 18.18 or later** (20 LTS or 22 LTS recommended) — `node -v`
+- **MySQL 8** or **MariaDB 10.6+** running locally
+- Git
+
+### 2.2 Get the code
+
+```bash
+git clone https://github.com/Rakeshkumar-369/DSTI.git
+cd DSTI
+```
+
+### 2.3 Create the database and a least-privilege user
+
+Log in to MySQL as root (`mysql -u root -p`) and run:
+
+```sql
+CREATE DATABASE dsti CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'dsti_app'@'localhost' IDENTIFIED BY 'Choose-A-Strong#Password1';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, REFERENCES ON dsti.* TO 'dsti_app'@'localhost';
+
+-- Only needed to run the automated tests:
+CREATE DATABASE dsti_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, REFERENCES, DROP ON dsti_test.* TO 'dsti_app'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+### 2.4 Configure and start the backend
+
+```bash
+cd backend
+cp .env.example .env          # Windows: copy .env.example .env
+```
+
+Edit `backend/.env`:
+
+| Variable | Meaning |
+| --- | --- |
+| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` | MySQL connection. **Wrap values containing `#` in double quotes**, e.g. `DB_PASSWORD="Choose-A-Strong#Password1"` |
+| `ADMIN_USERNAME`, `ADMIN_PASSWORD` | First CMS administrator, created by the seed step. Must be 10–64 characters with upper- and lower-case letters, a digit and a special character. It **must be changed at first sign-in**. |
+| `PUBLIC_ORIGIN` | Address of the website (`http://localhost:5173` in development) |
+| `SMTP_*` | Optional: SMTP server for feedback notification e-mails |
+
+Then:
+
+```bash
+npm install
+npm run db:setup     # creates the tables and loads the initial content (safe to re-run)
+npm run dev          # API on http://localhost:5000 (restarts on file changes)
+```
+
+`npm run db:seed -- --reset` reloads the original seed content (it **replaces all content**; users are kept).
+
+### 2.5 Start the frontend
+
+In a second terminal:
 
 ```bash
 cd frontend
 npm install
-npm run dev        # http://localhost:5173
-npm run build      # production build → dist/
+npm run dev          # http://localhost:5173
 ```
 
-### CMS demo accounts
+The Vite dev server forwards `/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` to the backend on port 5000.
+To use a different backend address, copy `frontend/.env.example` to `frontend/.env` and set `VITE_BACKEND_URL`.
 
-| Role | Username | Password |
-| --- | --- | --- |
-| Administrator | `admin` | `admin@123` |
-| Editor | `editor` | `editor@123` |
-| Publisher | `publisher` | `publish@123` |
+### 2.6 Sign in to the CMS
+
+Open **http://localhost:5173/admin**, sign in with `ADMIN_USERNAME` / `ADMIN_PASSWORD` and the security code, then set
+a new password. Create accounts for other staff under **Users & roles**.
+
+> Sign-in encrypts the password in the browser with Web Crypto, which browsers allow only on **HTTPS or `localhost`**.
+> Use `localhost`, not a LAN IP address, when testing over plain HTTP.
+
+### 2.7 Production-style run on one port
+
+```bash
+cd frontend && npm run build              # creates frontend/dist
+cd ../backend && NODE_ENV=production npm start
+```
+
+Express serves the built website, the API and the uploads from one origin (http://localhost:5000). In production mode
+cookies are `Secure` and HSTS is on, so put it behind HTTPS (see section 5).
 
 ---
 
-## Project structure (frontend)
+## 3. Running the tests
+
+Both suites use the `dsti_test` database (they drop and recreate its tables). Override the name with `TEST_DB_NAME`.
+
+```bash
+# API, security and role tests (24 tests)
+cd backend && npm test
+
+# End-to-end browser tests (22 tests: every page, search, assistant, district map, tenders,
+# documents, feedback, accessibility tools, language switch, mobile layout, SEO, and the full
+# CMS workflow: forced password change, create / upload / publish / unpublish / delete,
+# repeaters, settings, editor role, inbox, audit log, backup)
+cd frontend && npm run build
+cd ../e2e && npm install && npx playwright install chromium && npm test
+```
+
+The end-to-end suite starts the backend itself on port 5055 (with the built frontend), so nothing else needs to be running.
+
+---
+
+## 4. Project structure
 
 ```
-frontend/src/
-├── components/
-│   ├── common/      Header, TopBar, Footer, SearchOverlay, VigyanMitra, DocumentTable, …
-│   ├── districts/   DistrictExplorer (map + accessible table)
-│   └── home/        HeroBanner, NewsTicker, WhatBringsYouHere, QuickLinks, AlmanacWidget, …
-├── context/         ThemeContext (dark mode, high contrast, font scaling)
-├── data/            Seeded content (organisations, policies, ICT, tenders, documents, districts,
-│                    events, science stories, awards, almanac, FAQs, news, statutory pages) + store.js
-├── hooks/           useVisitorStats
-├── i18n/            LanguageContext + English/Telugu UI translations
-├── pages/           HomePage, about/, organisations/, ict/, policies/, ecitizen/, media/, admin/, …
-└── utils/           searchIndex (site search + Vigyan Mitra), adminAuth, useSEO
+backend/
+  src/
+    app.js                 Express app: security headers, CSP, routes, static hosting
+    server.js              Entry point, timeouts, session clean-up
+    config/env.js          Configuration from .env
+    content/schemas.js     ★ Content model: every CMS section and field is defined here once
+    content/validate.js    Schema-driven server-side validation / sanitisation
+    content/store.js       Content data access + cached public bundle
+    db/schema.sql          MySQL tables          db/migrate.js, db/seed.js
+    middleware/            Sessions, CSRF, roles, rate limits, security guards, errors
+    routes/                public.js (content, feedback, stats, sitemap) · auth.js · admin.js (CMS API)
+    utils/                 Password encryption & policy, CAPTCHA, audit log, mailer
+  seed/content.json        Initial website content (English + Telugu)
+  scripts/backup.sh        Scheduled database + uploads backup     scripts/restore.sh
+  tests/api.test.js
+frontend/
+  src/
+    App.jsx                Routes (code-split)
+    styles/main.scss       Bootstrap 5 theme, animations, dark / high-contrast modes
+    context/               ContentContext (loads CMS content), ThemeContext (accessibility)
+    i18n/                  English / Telugu interface strings
+    components/            layout (TopBar, Header, Footer, Search, Vigyan Mitra), home sections, common widgets
+    pages/                 Public pages
+    admin/                 CMS (login, dashboard, schema-driven editors, users, audit, backup…)
+    utils/searchIndex.js   Site search and Vigyan Mitra
+e2e/                       Playwright tests
+docs/                      SECURITY_AUDIT.md (audit compliance report), CMS_USER_GUIDE.md
 ```
 
-## Status & next steps
+**Adding a new editable field or section:** add it to `backend/src/content/schemas.js`. Validation and the CMS form
+pick it up automatically; then show it in the relevant React page.
 
-- The frontend is complete as a working prototype with seeded content.
-- **Next**: wire the public pages and CMS to the Express + MySQL backend (replace the `data/store.js`
-  reads with API calls), then implement the remaining backend domains (organisations, policies,
-  documents, tenders, events, districts, feedback).
-- Hosting, security audit and one-year support are handled at deployment (AP State Data Centre, `.ap.gov.in`, SSL).
+---
+
+## 5. Deployment (AP State Data Centre)
+
+1. Server: Ubuntu 22.04/24.04 LTS (or RHEL 9), Node.js 20 LTS, MySQL 8, Nginx; domain `dsti.ap.gov.in` with an SSL certificate.
+2. Copy the code, then `npm ci` in `backend` and `frontend`; run `npm run build` in `frontend`.
+3. `backend/.env`: `NODE_ENV=production`, `PUBLIC_ORIGIN=https://dsti.ap.gov.in`, `ALLOWED_HOSTS=dsti.ap.gov.in,www.dsti.ap.gov.in`, `TRUST_PROXY=1`, real DB and SMTP credentials. `chmod 600 .env`.
+4. `npm run db:setup`, then run the app as an unprivileged user with systemd or PM2 (`pm2 start src/server.js --name dsti`).
+5. Nginx in front (TLS 1.2/1.3 only):
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name dsti.ap.gov.in;
+    ssl_certificate     /etc/ssl/dsti/fullchain.pem;
+    ssl_certificate_key /etc/ssl/dsti/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    server_tokens off;
+    client_max_body_size 12m;
+
+    # Optional: allow the CMS only from the Secretariat / VPN network
+    # location /admin { allow 10.0.0.0/8; deny all; proxy_pass http://127.0.0.1:5000; }
+    # location /api/admin { allow 10.0.0.0/8; deny all; proxy_pass http://127.0.0.1:5000; }
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+server { listen 80; server_name dsti.ap.gov.in; return 301 https://$host$request_uri; }
+```
+
+6. Backups: schedule `backend/scripts/backup.sh` daily with cron (it reads `.env`, keeps 30 days and writes to
+   `backend/backups/`; copy them off the server). Restore with `scripts/restore.sh`. Administrators can also download
+   or restore a content backup from **CMS → Backup & restore**.
+7. Replace the placeholder emblem: **CMS → Settings → Site identity & social → Header logo**. Upload the official
+   Government of Andhra Pradesh logo as PNG or WEBP.
+
+---
+
+## 6. Security
+
+The application was reviewed against the OWASP Top 10 (2021) and the usual CERT-In audit checklist before go-live. See
+[`docs/SECURITY_AUDIT.md`](docs/SECURITY_AUDIT.md) for each control and how it is tested. Highlights: strict CSP with
+no inline scripts and no third-party scripts, server-side sessions in httpOnly / SameSite=Strict cookies, CSRF tokens,
+CAPTCHA and account lockout, passwords encrypted in transit and hashed with bcrypt, password policy, history and
+forced first change, role-based access, schema-validated input, upload checks of file signatures, rate limiting, an
+audit trail, and generic error messages.

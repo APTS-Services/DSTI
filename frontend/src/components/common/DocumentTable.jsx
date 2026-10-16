@@ -1,124 +1,98 @@
-// src/components/common/DocumentTable.jsx
-// Document repository table with search, type filter, date sorting and PDF download.
+// Searchable, filterable, date-sortable document list with PDF download.
 import React, { useMemo, useState } from 'react';
-import { ArrowDownUp, Download, FileText, Search } from 'lucide-react';
+import { Download, FileText, Search } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { formatDate } from '../../utils/format';
+import Empty from './Empty';
 
-const TYPE_LABELS = {
-  go: 'Government Order',
-  notification: 'Notification',
-  circular: 'Circular',
-  act: 'Act',
-  rule: 'Rule',
-  guideline: 'Guideline',
-};
+const TYPE_KEYS = { go: 'governmentOrders', notification: 'notifications', circular: 'circulars', act: 'acts', rule: 'rules', guideline: 'guidelines' };
 
-export default function DocumentTable({ documents, showTypeFilter = false }) {
-  const { t, tc } = useLanguage();
-  const [query, setQuery] = useState('');
-  const [type, setType] = useState('all');
-  const [sortDesc, setSortDesc] = useState(true);
-
-  const types = useMemo(() => [...new Set(documents.map((d) => d.type))], [documents]);
+export default function DocumentTable({ documents, showTypeFilter = false, caption }) {
+  const { t, tc, lang } = useLanguage();
+  const [q, setQ] = useState('');
+  const [type, setType] = useState('');
+  const [sort, setSort] = useState('desc');
+  const [year, setYear] = useState('');
+  const types = [...new Set(documents.map((d) => d.type))];
+  const years = [...new Set(documents.map((d) => (d.date || '').slice(0, 4)).filter(Boolean))].sort().reverse();
 
   const rows = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const term = q.trim().toLowerCase();
     return documents
-      .filter((d) => (type === 'all' ? true : d.type === type))
-      .filter((d) => {
-        if (!q) return true;
-        return `${d.number} ${tc(d.title)} ${d.department}`.toLowerCase().includes(q);
-      })
-      .sort((a, b) => (sortDesc ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)));
-  }, [documents, query, type, sortDesc, tc]);
+      .filter((d) => !type || d.type === type)
+      .filter((d) => !year || (d.date || '').startsWith(year))
+      .filter((d) => !term || `${d.number} ${d.title?.en} ${d.title?.te} ${d.department}`.toLowerCase().includes(term))
+      .sort((a, b) => (sort === 'desc' ? -1 : 1) * String(a.date).localeCompare(String(b.date)));
+  }, [documents, q, type, sort, year]);
 
   return (
     <div>
-      {/* Controls */}
-      <div className="mb-4 flex flex-wrap items-center gap-3">
-        <label className="relative flex-1 sm:max-w-xs">
-          <span className="sr-only">{t('search')}</span>
-          <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500" aria-hidden="true" />
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={t('search')}
-            className="input-style pl-9"
-          />
-        </label>
-
-        {showTypeFilter && (
-          <select value={type} onChange={(e) => setType(e.target.value)} className="input-style max-w-[12rem]" aria-label={t('filterBy')}>
-            <option value="all">{t('all')}</option>
-            {types.map((ty) => (
-              <option key={ty} value={ty}>{TYPE_LABELS[ty] || ty}</option>
-            ))}
-          </select>
+      <div className="row g-2 mb-3" role="search">
+        <div className="col-md">
+          <label className="visually-hidden" htmlFor="doc-q">{t('search')}</label>
+          <div className="input-group">
+            <span className="input-group-text bg-surface"><Search size={16} aria-hidden="true" /></span>
+            <input id="doc-q" type="search" className="form-control" placeholder={t('searchDocuments')} value={q} onChange={(e) => setQ(e.target.value)} maxLength={100} />
+          </div>
+        </div>
+        {showTypeFilter && types.length > 1 && (
+          <div className="col-6 col-md-auto">
+            <label className="visually-hidden" htmlFor="doc-type">{t('category')}</label>
+            <select id="doc-type" className="form-select" value={type} onChange={(e) => setType(e.target.value)}>
+              <option value="">{t('allTypes')}</option>
+              {types.map((x) => <option key={x} value={x}>{t(TYPE_KEYS[x] || x)}</option>)}
+            </select>
+          </div>
         )}
-
-        <button type="button" onClick={() => setSortDesc((v) => !v)} className="btn-outline">
-          <ArrowDownUp size={15} aria-hidden="true" />
-          {sortDesc ? t('newestFirst') : t('oldestFirst')}
-        </button>
+        <div className="col-6 col-md-auto">
+          <label className="visually-hidden" htmlFor="doc-year">{t('year')}</label>
+          <select id="doc-year" className="form-select" value={year} onChange={(e) => setYear(e.target.value)}>
+            <option value="">{t('allYears')}</option>
+            {years.map((y) => <option key={y} value={y}>{y}</option>)}
+          </select>
+        </div>
+        <div className="col-6 col-md-auto">
+          <label className="visually-hidden" htmlFor="doc-sort">{t('sortBy')}</label>
+          <select id="doc-sort" className="form-select" value={sort} onChange={(e) => setSort(e.target.value)}>
+            <option value="desc">{t('newestFirst')}</option>
+            <option value="asc">{t('oldestFirst')}</option>
+          </select>
+        </div>
       </div>
-
-      {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <table className="dst-table">
-          <caption className="sr-only">{t('documentRepository')}</caption>
-          <thead>
-            <tr>
-              <th scope="col" className="w-16">{t('number')}</th>
-              <th scope="col">{t('subject')}</th>
-              <th scope="col" className="hidden sm:table-cell w-32">{t('department')}</th>
-              <th scope="col" className="w-32">{t('date')}</th>
-              <th scope="col" className="w-28">{t('download')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 && (
+      <p className="small text-muted-2" aria-live="polite">{rows.length} {t('records')}</p>
+      {rows.length === 0 ? <Empty /> : (
+        <div className="table-wrap">
+          <table className="table dst-table table-hover">
+            {caption && <caption className="visually-hidden">{caption}</caption>}
+            <thead>
               <tr>
-                <td colSpan={5} className="py-8 text-center text-neutral-500 dark:text-neutral-300">{t('noRecords')}</td>
+                <th scope="col">{t('number')}</th>
+                <th scope="col">{t('date')}</th>
+                <th scope="col">{t('subject')}</th>
+                <th scope="col" className="d-none d-md-table-cell">{t('department')}</th>
+                <th scope="col" className="text-end">{t('download')}</th>
               </tr>
-            )}
-            {rows.map((d) => (
-              <tr key={d.id}>
-                <td className="font-semibold text-neutral-700 dark:text-neutral-200">{d.number}</td>
-                <td>
-                  <span className="flex items-start gap-2">
-                    <FileText size={15} className="mt-0.5 flex-shrink-0 text-primary-600" aria-hidden="true" />
-                    <span>
-                      <span className="block font-medium text-neutral-900 dark:text-neutral-100">{tc(d.title)}</span>
-                      {showTypeFilter && (
-                        <span className="mt-0.5 inline-block rounded bg-neutral-100 px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">
-                          {TYPE_LABELS[d.type] || d.type}
-                        </span>
-                      )}
-                    </span>
-                  </span>
-                </td>
-                <td className="hidden sm:table-cell">{d.department}</td>
-                <td className="whitespace-nowrap">{new Date(d.date).toLocaleDateString('en-IN')}</td>
-                <td>
-                  <a
-                    href={d.file}
-                    download
-                    className="inline-flex items-center gap-1 text-primary-700 hover:underline dark:text-primary-300"
-                    aria-label={`${t('downloadPdf')}: ${tc(d.title)}`}
-                  >
-                    <Download size={14} aria-hidden="true" /> PDF
-                    <span className="hidden text-[0.7rem] text-neutral-500 dark:text-neutral-300 lg:inline">({d.size})</span>
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-300">
-        {rows.length} {rows.length === 1 ? 'record' : 'records'}
-      </p>
+            </thead>
+            <tbody>
+              {rows.map((d) => (
+                <tr key={d.id}>
+                  <td className="fw-semibold text-nowrap">{d.number}</td>
+                  <td className="text-nowrap">{formatDate(d.date, lang)}</td>
+                  <td>{tc(d.title)}</td>
+                  <td className="d-none d-md-table-cell small text-muted-2">{d.department}</td>
+                  <td className="text-end">
+                    {d.file ? (
+                      <a href={d.file} className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 text-nowrap" target="_blank" rel="noopener" aria-label={`${t('downloadPdf')}: ${tc(d.title)}${d.size ? ` (${d.size})` : ''}`}>
+                        <Download size={14} aria-hidden="true" /> PDF{d.size ? <small className="ms-1 opacity-75">{d.size}</small> : null}
+                      </a>
+                    ) : <FileText size={16} className="text-muted-2" aria-label={t('notAvailable')} />}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

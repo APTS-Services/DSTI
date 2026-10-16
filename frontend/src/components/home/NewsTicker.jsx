@@ -1,42 +1,40 @@
-// src/components/home/NewsTicker.jsx — latest updates / news ticker.
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, ChevronRight } from 'lucide-react';
-import { useCollection } from '../../data/store';
+import { Pause, Play } from 'lucide-react';
+import { useCollection } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { byDateDesc, formatDate, isExternal, safeHref } from '../../utils/format';
 
 export default function NewsTicker() {
-  const { t, tc } = useLanguage();
-  const items = useCollection('news');
-  if (!items?.length) return null;
-  // Duplicate the list so the marquee loop is seamless.
-  const loop = [...items, ...items];
+  const { t, tc, lang } = useLanguage();
+  const news = useCollection('news');
+  const [paused, setPaused] = useState(false);
+  const items = useMemo(() => [...news].sort(byDateDesc()).slice(0, 8), [news]);
+  if (!items.length) return null;
+
+  const Item = ({ n, hidden }) => {
+    const body = <>{n.isNew && <span className="badge text-bg-danger me-2">{t('new')}</span>}<span className="text-muted-2 me-2">{formatDate(n.date, lang)}</span>{tc(n.title)}</>;
+    const props = hidden ? { tabIndex: -1, 'aria-hidden': true } : {};
+    if (!n.link) return <span {...props}>{body}</span>;
+    return isExternal(n.link)
+      ? <a href={safeHref(n.link)} target="_blank" rel="noopener noreferrer" {...props}>{body}</a>
+      : <Link to={n.link} {...props}>{body}</Link>;
+  };
 
   return (
-    <div className="border-b border-neutral-200 bg-secondary-50 dark:border-neutral-800 dark:bg-neutral-900">
-      <div className="dst-container flex items-center gap-3 py-2">
-        <span className="flex flex-shrink-0 items-center gap-1.5 rounded-full bg-secondary-500 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-wide text-neutral-950">
-          <Bell size={13} aria-hidden="true" /> {t('latestUpdates')}
-        </span>
-        <div className="group relative flex-1 overflow-hidden" aria-label={t('latestUpdates')}>
-          <div className="animate-ticker flex w-max gap-8 group-hover:[animation-play-state:paused]">
-            {loop.map((n, i) => (
-              <Link
-                key={`${n.id}-${i}`}
-                to={n.link || '/'}
-                className="flex flex-shrink-0 items-center gap-2 text-sm font-medium text-neutral-800 hover:text-primary-700 dark:text-neutral-100"
-              >
-                {n.isNew && <span className="rounded bg-danger-600 px-1.5 py-0.5 text-[0.6rem] font-bold uppercase text-white">New</span>}
-                <span>{tc(n.title)}</span>
-                <ChevronRight size={13} className="text-primary-600" aria-hidden="true" />
-              </Link>
-            ))}
+    <section className={`ticker ${paused ? 'paused' : ''}`} aria-label={t('latestUpdates')}>
+      <div className="container d-flex align-items-stretch px-0 px-sm-3">
+        <h2 className="label h6 mb-0 d-flex align-items-center">{t('latestUpdates')}</h2>
+        <div className="track d-flex align-items-center px-3">
+          <div className="move">
+            {items.map((n) => <Item key={n.id} n={n} />)}
+            {items.map((n) => <Item key={`dup-${n.id}`} n={n} hidden />)}
           </div>
         </div>
-        <Link to="/search?q=updates" className="hidden flex-shrink-0 text-xs font-semibold text-primary-700 hover:underline dark:text-primary-300 sm:block">
-          {t('viewAllUpdates')}
-        </Link>
+        <button type="button" className="btn btn-link text-body px-3" onClick={() => setPaused((p) => !p)} aria-label={paused ? t('play') : t('pause')}>
+          {paused ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />}
+        </button>
       </div>
-    </div>
+    </section>
   );
 }

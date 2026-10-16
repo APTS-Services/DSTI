@@ -1,0 +1,12 @@
+{
+  "name": "dsti-e2e",
+  "private": true,
+  "type": "module",
+  "description": "End-to-end functional tests for the DSTI website and CMS",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}
