@@ -1,278 +1,114 @@
-// src/utils/searchIndex.js
-// Builds a searchable index over all published site content.
-// Powers (a) the site-wide search overlay / results page and
-// (b) the "Ask Vigyan Mitra" assistant, which answers only from this content.
+// Site-wide search over all published content, also used by "Ask Vigyan Mitra",
+// which answers only from this content and always cites the source page.
 
-import { organisations } from '../data/organisations';
-import { policies } from '../data/policies';
-import { eGovernance, projects } from '../data/ict';
-import { tenders } from '../data/tenders';
-import { documents } from '../data/documents';
-import { events } from '../data/events';
-import { scienceStories } from '../data/scienceStories';
-import { faqs } from '../data/faqs';
-import { news } from '../data/news';
-import { awardYears, aboutIntro, mission, objectives } from '../data/about';
-import { districts } from '../data/districts';
-import { statutoryPages } from '../data/statutory';
-import { whyInvest, investorIntro, investorIncentives } from '../data/investors';
+const bi = (v) => (v && typeof v === 'object' ? `${v.en || ''} ${v.te || ''}` : v || '');
+const one = (v, lang) => (v && typeof v === 'object' ? v[lang] || v.en || '' : v || '');
+const flat = (vals, lang) => vals.flat(3).filter(Boolean).map((v) => one(v, lang)).join(' ').replace(/\s+/g, ' ').trim();
+// Text is kept per language so answers are shown in the visitor's language.
+const join = (...vals) => ({ en: flat(vals, 'en'), te: flat(vals, 'te') });
 
-const join = (...vals) =>
-  vals
-    .flat()
-    .filter(Boolean)
-    .map((v) => (typeof v === 'string' ? v : `${v.en || ''} ${v.te || ''}`))
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-
-const bilingual = (v) => (v && typeof v === 'object' ? `${v.en || ''} ${v.te || ''}` : v || '');
-
-function makeRecord({ id, type, title, text, path, meta }) {
-  return {
-    id,
-    type,
-    title: bilingual(title),
-    titleObj: typeof title === 'object' ? title : { en: title, te: title },
-    text,
-    haystack: `${bilingual(title)} ${text}`.toLowerCase(),
-    path,
-    meta: meta || {},
-  };
+function rec(id, type, title, text, path, meta = {}) {
+  const titleObj = title && typeof title === 'object' ? title : { en: title || '', te: title || '' };
+  const t = typeof text === 'string' ? { en: text, te: text } : text;
+  return { id, type, titleObj, text: t, path, meta, haystack: `${bi(title)} ${t.en} ${t.te}`.toLowerCase(), titleLower: bi(title).toLowerCase() };
 }
 
-// Build the index once on first use.
-let INDEX = null;
+export const docPath = (d) => {
+  if (d.topic === 'it-act') return '/ecitizen/it-act-2000';
+  if (d.topic === 'posh') return '/ecitizen/posh-act';
+  if (d.type === 'go') return '/ecitizen/government-orders';
+  if (d.type === 'notification' || d.type === 'circular') return '/ecitizen/notifications';
+  if (d.type === 'act' || d.type === 'rule') return '/ecitizen/acts';
+  return '/ecitizen/guidelines';
+};
 
-export function buildSearchIndex() {
-  if (INDEX) return INDEX;
-  const records = [];
+const PAGE_PATHS = {
+  rti: '/ecitizen/rti', 'it-act-2000': '/ecitizen/it-act-2000', 'posh-act': '/ecitizen/posh-act',
+  'screen-reader-access': '/screen-reader-access', help: '/help', ecitizen: '/ecitizen',
+};
+export const pagePath = (id) => PAGE_PATHS[id] || `/policies/${id}`;
 
-  // Pages / sections
-  const staticPages = [
-    { id: 'page-home', title: { en: 'Home', te: 'హోమ్' }, text: 'DSTI department of science technology innovation Andhra Pradesh home', path: '/' },
-    { id: 'page-about', title: { en: 'About the Department', te: 'శాఖ పరిచయం' }, text: join(aboutIntro, mission), path: '/about' },
-    { id: 'page-objectives', title: { en: 'Objectives', te: 'లక్ష్యాలు' }, text: join(objectives), path: '/about/objectives' },
-    { id: 'page-districts', title: { en: 'District Explorer', te: 'జిల్లా అన్వేషకుడు' }, text: 'district map 26 districts science institutions activities andhra pradesh', path: '/districts' },
-    { id: 'page-connect', title: { en: 'How it all connects', te: 'అన్నీ ఎలా అనుసంధానమవుతాయి' }, text: 'organisations policies sectors connections', path: '/how-it-connects' },
-    { id: 'page-investors', title: { en: "Investor's Corner", te: 'పెట్టుబడిదారుల విభాగం' }, text: join(investorIntro, whyInvest, investorIncentives.map((i) => [i.title, i.detail])), path: '/investors' },
-    { id: 'page-ecitizen', title: { en: 'e-Citizen', te: 'ఇ-పౌరుడు' }, text: 'rti acts rules government orders notifications policies guidelines faqs useful links it act posh', path: '/ecitizen' },
-    { id: 'page-contact', title: { en: 'Contact Us', te: 'సంప్రదించండి' }, text: 'head office officers feedback contact department', path: '/contact' },
-  ];
-  staticPages.forEach((p) => records.push(makeRecord({ ...p, type: 'page' })));
+const cache = new WeakMap();
 
-  // Organisations
-  organisations.forEach((o) =>
-    records.push(
-      makeRecord({
-        id: `org-${o.id}`,
-        type: 'organisation',
-        title: o.name,
-        text: join(o.summary, o.functions, o.category, o.abbr),
-        path: `/organisations/${o.id}`,
-        meta: { abbr: o.abbr, category: o.category },
-      })
-    )
-  );
+export function buildIndex(data) {
+  if (cache.has(data)) return cache.get(data);
+  const c = data.collections || {};
+  const s = data.settings || {};
+  const L = (name) => c[name] || [];
+  const r = [];
 
-  // Policies
-  policies.forEach((p) =>
-    records.push(
-      makeRecord({
-        id: `policy-${p.id}`,
-        type: 'policy',
-        title: p.name,
-        text: join(p.summary, p.objectives, p.incentives, p.sector),
-        path: `/policies/${p.id}`,
-        meta: { sector: p.sector, year: p.year },
-      })
-    )
-  );
+  r.push(rec('about', 'page', { en: 'About the Department', te: 'శాఖ గురించి' }, join(s.about?.intro, s.about?.mission), '/about'));
+  r.push(rec('objectives', 'page', { en: 'Objectives', te: 'లక్ష్యాలు' }, join(s.about?.objectives), '/about/objectives'));
+  r.push(rec('structure', 'page', { en: 'Organisation Structure', te: 'సంస్థాగత నిర్మాణం' }, join(s.about?.orgStructure), '/about/organisation'));
+  r.push(rec('investors', 'page', { en: "Investor's Corner", te: 'పెట్టుబడిదారుల విభాగం' }, join(s.investors?.intro, s.investors?.whyInvest, L('investorIncentives').map((i) => [i.title, i.detail])), '/investors'));
+  r.push(rec('contact', 'page', { en: 'Contact Us', te: 'సంప్రదించండి' }, join('head office address phone email officers feedback', s.contact?.headOffice, s.contact?.email, s.contact?.phone), '/contact'));
+  r.push(rec('districts', 'page', { en: 'District Explorer', te: 'జిల్లా అన్వేషిణి' }, 'district map 26 districts science institutions activities andhra pradesh', '/districts'));
 
-  // ICT
-  eGovernance.forEach((e) =>
-    records.push(makeRecord({ id: `egov-${e.id}`, type: 'ict', title: e.name, text: join(e.summary, e.tags), path: '/ict' }))
-  );
-  projects.forEach((p) =>
-    records.push(makeRecord({ id: `proj-${p.id}`, type: 'ict', title: p.name, text: join(p.summary, p.sector), path: '/ict/projects' }))
-  );
+  L('organisations').forEach((o) => r.push(rec(`org-${o.id}`, 'organisation', o.name, join(o.abbr, o.category, o.summary, o.functions), `/organisations/${o.id}`)));
+  L('policies').forEach((p) => r.push(rec(`pol-${p.id}`, 'policy', p.name, join(p.sector, p.summary, p.objectives, p.incentives), `/policies/${p.id}`)));
+  L('egov').forEach((e) => r.push(rec(`egov-${e.id}`, 'ict', e.name, join(e.summary, e.tags), '/ict')));
+  L('projects').forEach((p) => r.push(rec(`proj-${p.id}`, 'ict', p.name, join(p.sector, p.summary), '/ict/projects')));
+  L('tenders').forEach((t) => r.push(rec(`t-${t.id}`, 'tender', t.title, join(t.tenderNo, t.department, t.status), '/tenders', { status: t.status })));
+  L('documents').forEach((d) => r.push(rec(`d-${d.id}`, 'document', d.title, join(d.number, d.department, d.type), docPath(d))));
+  L('events').forEach((e) => r.push(rec(`e-${e.id}`, 'event', e.title, join(e.category, e.location, e.summary), '/media/events')));
+  L('scienceStories').forEach((v) => r.push(rec(`v-${v.id}`, 'video', v.title, join(v.category, v.summary), '/media/science-stories')));
+  L('faqs').forEach((f) => r.push(rec(`f-${f.id}`, 'faq', f.q, join(f.a), '/ecitizen/faqs')));
+  L('awards').forEach((y) => (y.awards || []).forEach((a, i) => r.push(rec(`a-${y.id}-${i}`, 'award', a.name, join(a.recipient, a.field, String(y.year)), `/about/awards?year=${y.year}`))));
+  L('districts').forEach((d) => r.push(rec(`dist-${d.id}`, 'district', d.name, join(d.hq, (d.institutions || []).map((x) => x.name), d.activities), `/districts?district=${d.id}`)));
+  L('pages').forEach((p) => r.push(rec(`p-${p.id}`, 'page', p.title, join(p.subtitle, (p.sections || []).map((x) => [x.heading, x.body])), pagePath(p.id))));
+  L('news').forEach((n) => r.push(rec(`n-${n.id}`, 'news', n.title, join(n.category), n.link || '/')));
 
-  // Tenders
-  tenders.forEach((t) =>
-    records.push(
-      makeRecord({
-        id: `tender-${t.id}`,
-        type: 'tender',
-        title: t.title,
-        text: join(t.tenderNo, t.department, t.status),
-        path: '/tenders',
-        meta: { status: t.status, number: t.tenderNo },
-      })
-    )
-  );
-
-  // Documents — route each type to its e-Citizen page.
-  const docPath = (d) => {
-    if (d.id.startsWith('it-')) return '/ecitizen/it-act-2000';
-    if (d.id.startsWith('posh')) return '/ecitizen/posh-act';
-    if (d.type === 'go') return '/ecitizen/government-orders';
-    if (d.type === 'notification' || d.type === 'circular') return '/ecitizen/notifications';
-    if (d.type === 'act' || d.type === 'rule') return '/ecitizen/acts';
-    return '/ecitizen/guidelines';
-  };
-  documents.forEach((d) =>
-    records.push(
-      makeRecord({
-        id: `doc-${d.id}`,
-        type: 'document',
-        title: d.title,
-        text: join(d.number, d.department, d.type),
-        path: docPath(d),
-        meta: { number: d.number, docType: d.type },
-      })
-    )
-  );
-
-  // Events
-  events.forEach((e) =>
-    records.push(
-      makeRecord({ id: `event-${e.id}`, type: 'event', title: e.title, text: join(e.summary, e.category, e.location), path: '/media/events', meta: { date: e.date, status: e.status } })
-    )
-  );
-
-  // Science stories
-  scienceStories.forEach((s) =>
-    records.push(makeRecord({ id: `story-${s.id}`, type: 'video', title: s.title, text: join(s.summary, s.category), path: '/media/science-stories' }))
-  );
-
-  // FAQs
-  faqs.forEach((f, i) =>
-    records.push(makeRecord({ id: `faq-${i}`, type: 'faq', title: f.q, text: f.a, path: '/ecitizen/faqs' }))
-  );
-
-  // Awards
-  awardYears.forEach((y) =>
-    y.awards.forEach((a, i) =>
-      records.push(
-        makeRecord({ id: `award-${y.year}-${i}`, type: 'award', title: a.name, text: join(a.recipient, a.field), path: `/about/awards?year=${y.year}` })
-      )
-    )
-  );
-
-  // Districts
-  districts.forEach((d) =>
-    records.push(
-      makeRecord({
-        id: `district-${d.id}`,
-        type: 'district',
-        title: d.name,
-        text: join(d.institutions.map((x) => x.name), d.activities, d.hq),
-        path: `/districts?district=${d.id}`,
-        meta: { districtId: d.id },
-      })
-    )
-  );
-
-  // Statutory pages
-  statutoryPages.forEach((p) =>
-    records.push(
-      makeRecord({
-        id: `statutory-${p.slug}`,
-        type: 'page',
-        title: p.title,
-        text: join(p.sections.map((s) => [s.heading, s.body])),
-        path: `/policies/${p.slug}`,
-      })
-    )
-  );
-
-  // News
-  news.forEach((n) =>
-    records.push(makeRecord({ id: `news-${n.id}`, type: 'news', title: n.title, text: n.category, path: n.link, meta: { date: n.date } }))
-  );
-
-  INDEX = records;
-  return INDEX;
+  cache.set(data, r);
+  return r;
 }
 
-const STOP = new Set([
-  'the', 'a', 'an', 'of', 'to', 'in', 'and', 'or', 'for', 'on', 'is', 'are', 'what', 'how',
-  'where', 'when', 'can', 'i', 'do', 'does', 'me', 'my', 'you', 'your', 'about', 'with', 'at',
-]);
+const STOP = new Set(['the', 'a', 'an', 'of', 'to', 'in', 'and', 'or', 'for', 'on', 'is', 'are', 'what', 'how', 'where', 'when', 'can', 'i', 'do', 'does', 'me', 'my', 'you', 'your', 'about', 'with', 'at', 'which', 'who', 'there', 'any']);
 
-function tokenize(q) {
-  return q
-    .toLowerCase()
-    .replace(/[^a-z0-9\u0C00-\u0C7F\s]/g, ' ')
-    .split(/\s+/)
-    .filter((t) => t.length > 1 && !STOP.has(t));
-}
+const tokenize = (q) => q.toLowerCase().replace(/[^a-z0-9ఀ-౿\s]/g, ' ').split(/\s+/).filter((t) => t.length > 1 && !STOP.has(t));
 
-/** Ranked full-text search across the site content. */
-export function searchContent(query, { limit = 20, types } = {}) {
-  const idx = buildSearchIndex();
-  const terms = tokenize(query);
+export function search(data, query, { limit = 25, lang = 'en' } = {}) {
+  const terms = tokenize(query || '');
   if (!terms.length) return [];
-  const pool = types ? idx.filter((r) => types.includes(r.type)) : idx;
-
-  const scored = pool
+  return buildIndex(data)
     .map((r) => {
       let score = 0;
-      for (const term of terms) {
-        const inTitle = r.title.toLowerCase().includes(term);
-        const inBody = r.haystack.includes(term);
-        if (inTitle) score += 6;
-        if (inBody) score += 2;
-        // Partial / prefix match (helps for Telugu and inflections)
-        if (r.haystack.includes(term.slice(0, Math.max(3, term.length - 2)))) score += 0.5;
+      let hits = 0;
+      for (const t of terms) {
+        const stem = t.length > 4 ? t.slice(0, t.length - 2) : t;
+        if (r.titleLower.includes(t)) score += 6;
+        if (r.haystack.includes(t)) { score += 2; hits += 1; } else if (r.haystack.includes(stem)) { score += 1; hits += 1; }
       }
-      return { record: r, score };
+      if (hits === terms.length) score += 3;
+      return { r, score };
     })
-    .filter((s) => s.score > 0)
+    .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
-
-  return scored.map((s) => ({
-    ...s.record,
-    score: s.score,
-    snippet: makeSnippet(s.record, terms),
-  }));
+    .slice(0, limit)
+    .map(({ r, score }) => ({ ...r, score, snippet: snippet(r.text[lang] || r.text.en, terms) }));
 }
 
-function makeSnippet(record, terms) {
-  const source = record.text;
-  const lower = source.toLowerCase();
+function snippet(text, terms) {
+  const lower = text.toLowerCase();
   let at = -1;
   for (const t of terms) {
     at = lower.indexOf(t);
     if (at >= 0) break;
   }
-  if (at < 0) return source.slice(0, 140);
-  const start = Math.max(0, at - 50);
-  return (start > 0 ? '… ' : '') + source.slice(start, start + 150).trim() + (source.length > start + 150 ? ' …' : '');
+  if (at < 0) return text.slice(0, 160);
+  const start = Math.max(0, at - 60);
+  return `${start > 0 ? '… ' : ''}${text.slice(start, start + 180).trim()}${text.length > start + 180 ? ' …' : ''}`;
 }
 
-/**
- * Vigyan Mitra: answer only from the site's own content and cite the source page.
- * Returns { answer, sources, matched }.
- */
-export function askVigyanMitra(query) {
-  const trimmed = (query || '').trim();
-  if (!trimmed) {
-    return { answer: '', sources: [], matched: false };
-  }
-  const results = searchContent(trimmed, { limit: 4 });
-  if (!results.length) {
-    return {
-      answer:
-        'I could not find an answer to that in the content published on this website. Please try rephrasing, use the site search, or contact the Department through the Contact Us page.',
-      sources: [],
-      matched: false,
-    };
-  }
-
+/** Vigyan Mitra: answers strictly from site content, with source pages. */
+export function ask(data, question, lang = 'en') {
+  const results = search(data, question, { limit: 4, lang });
+  if (!results.length || results[0].score < 3) return { matched: false, sources: [] };
   const best = results[0];
-  const answer = `According to “${best.title}”: ${best.snippet}`;
-  const sources = results.slice(0, 3).map((r) => ({ title: r.title, path: r.path, type: r.type }));
-  return { answer, sources, matched: true };
+  const title = best.titleObj[lang] || best.titleObj.en;
+  return {
+    matched: true,
+    title,
+    answer: best.snippet,
+    sources: results.slice(0, 3).map((x) => ({ title: x.titleObj[lang] || x.titleObj.en, path: x.path, type: x.type })),
+  };
 }

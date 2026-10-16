@@ -1,15 +1,26 @@
-// src/components/common/PageHero.jsx
 import React from 'react';
-import Breadcrumbs from './Breadcrumbs';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../../i18n/LanguageContext';
 
-export default function PageHero({ title, subtitle, breadcrumbs = [], children }) {
+/** Inner-page title band with breadcrumbs. `crumbs` = [{ label, to? }]. */
+export default function PageHero({ title, subtitle, crumbs = [], children }) {
+  const { t } = useLanguage();
   return (
-    <section className="border-b border-neutral-200 bg-gradient-to-br from-neutral-900 via-neutral-800 to-primary-800 dark:border-neutral-800">
-      <div className="dst-container py-8 md:py-10">
-        <Breadcrumbs items={breadcrumbs} />
-        <h1 className="mt-3 text-2xl font-extrabold text-white md:text-3xl lg:text-4xl">{title}</h1>
-        {subtitle && <p className="mt-2 max-w-3xl text-sm text-neutral-100 md:text-base">{subtitle}</p>}
-        {children && <div className="mt-5">{children}</div>}
+    <section className="page-hero">
+      <div className="container">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item"><Link to="/">{t('home')}</Link></li>
+            {crumbs.map((c, i) => (
+              <li key={i} className={`breadcrumb-item ${i === crumbs.length - 1 ? 'active' : ''}`} aria-current={i === crumbs.length - 1 ? 'page' : undefined}>
+                {c.to && i !== crumbs.length - 1 ? <Link to={c.to}>{c.label}</Link> : c.label}
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <h1>{title}</h1>
+        {subtitle && <p className="text-muted-2 mb-0" style={{ maxWidth: '60rem' }}>{subtitle}</p>}
+        {children}
       </div>
     </section>
   );

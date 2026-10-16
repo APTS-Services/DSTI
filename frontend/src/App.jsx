@@ -1,137 +1,97 @@
-// src/App.jsx — DSTI application shell and routing.
-import React, { useState } from 'react';
+// Application shell and routing. Pages are code-split so each visit downloads
+// only what it needs.
+import React, { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { ContentProvider, useContent } from './context/ContentContext';
+import { useLanguage } from './i18n/LanguageContext';
+import TopBar from './components/layout/TopBar';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import SearchOverlay from './components/layout/SearchOverlay';
+import VigyanMitra, { AssistantLauncher } from './components/layout/VigyanMitra';
+import ScrollTopButton from './components/layout/ScrollTopButton';
+import Loading from './components/common/Loading';
+import usePageTracking from './hooks/usePageTracking';
 
-// Shell
-import TopBar from './components/common/TopBar';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
-import ScrollToTop from './components/common/ScrollToTop';
-import ScrollToTopButton from './components/common/ScrollToTopButton';
-import SearchOverlay from './components/common/SearchOverlay';
-import VigyanMitra from './components/common/VigyanMitra';
+const HomePage = lazy(() => import('./pages/HomePage'));
+const About = lazy(() => import('./pages/AboutPages'));
+const Orgs = lazy(() => import('./pages/OrganisationPages'));
+const ICT = lazy(() => import('./pages/ICTPages'));
+const Policies = lazy(() => import('./pages/PolicyPages'));
+const InvestorsPage = lazy(() => import('./pages/InvestorsPage'));
+const ECitizen = lazy(() => import('./pages/ECitizenPages'));
+const TendersPage = lazy(() => import('./pages/TendersPage'));
+const Media = lazy(() => import('./pages/MediaPages'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const Extra = lazy(() => import('./pages/ExtraPages'));
+const AdminApp = lazy(() => import('./admin/AdminApp'));
 
-// Public pages
-import HomePage from './pages/HomePage';
-import { AboutPage, AwardsPage, MissionPage, ObjectivesPage, OrganisationStructurePage } from './pages/about/AboutPages';
-import { DistrictExplorerPage, HowItConnectsPage, OrganisationDetailPage, OrganisationsPage } from './pages/organisations/OrganisationPages';
-import { ICTPage, ProjectsPage } from './pages/ict/ICTPages';
-import { PoliciesPage, PolicyDetailPage } from './pages/policies/PolicyPages';
-import InvestorsPage from './pages/InvestorsPage';
-import {
-  ActsRulesPage, ECitizenPage, FAQsPage, GovernmentOrdersPage, GuidelinesPage, ITActPage,
-  NotificationsPage, PoSHPage, PoliciesEcPage, RTIPage, UsefulLinksPage,
-} from './pages/ecitizen/ECitizenPages';
-import TendersPage from './pages/TendersPage';
-import { EventsPage, MediaPage, ScienceStoriesPage } from './pages/media/MediaPages';
-import ContactPage from './pages/ContactPage';
-import { HelpPage, ScreenReaderAccessPage, SitemapPage } from './pages/StatutoryExtraPages';
-import SearchResultsPage from './pages/SearchResultsPage';
-import NotFoundPage from './pages/NotFoundPage';
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
-// Admin
-import AdminLoginPage from './pages/admin/AdminLoginPage';
-import AdminLayout from './pages/admin/AdminLayout';
-import {
-  AdminAnalytics, AdminDashboard, AdminFeedbackInbox, ManageDocuments, ManageEvents, ManageNews, ManageTenders,
-} from './pages/admin/AdminPages';
-
-export default function App() {
-  const location = useLocation();
+function PublicSite() {
+  const { t } = useLanguage();
+  const { ready, error } = useContent();
   const [searchOpen, setSearchOpen] = useState(false);
   const [assistantOpen, setAssistantOpen] = useState(false);
-
-  const isAdmin = location.pathname.startsWith('/admin');
-
-  if (isAdmin) {
-    return (
-      <Routes>
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="tenders" element={<ManageTenders />} />
-          <Route path="documents" element={<ManageDocuments />} />
-          <Route path="news" element={<ManageNews />} />
-          <Route path="events" element={<ManageEvents />} />
-          <Route path="feedback" element={<AdminFeedbackInbox />} />
-          <Route path="analytics" element={<AdminAnalytics />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    );
-  }
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
+  const closeAssistant = useCallback(() => setAssistantOpen(false), []);
+  usePageTracking();
 
   return (
-    <div className="flex min-h-screen flex-col bg-white dark:bg-neutral-950">
-      <a
-        href="#main-content"
-        className="sr-only-focusable absolute left-4 top-2 z-[60] rounded bg-secondary-500 px-4 py-2 font-semibold text-neutral-950"
-      >
-        Skip to main content
-      </a>
-
+    <div className="d-flex flex-column min-vh-100">
+      <a href="#main-content" className="skip-link">{t('skipToContent')}</a>
       <TopBar />
-      <Header onOpenSearch={() => setSearchOpen(true)} onOpenAssistant={() => setAssistantOpen(true)} />
+      <Header onSearch={() => setSearchOpen(true)} onAssistant={() => setAssistantOpen(true)} />
       <ScrollToTop />
-
-      <main id="main-content" className="flex-grow">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/about/mission" element={<MissionPage />} />
-          <Route path="/about/objectives" element={<ObjectivesPage />} />
-          <Route path="/about/organisation" element={<OrganisationStructurePage />} />
-          <Route path="/about/awards" element={<AwardsPage />} />
-
-          <Route path="/organisations" element={<OrganisationsPage />} />
-          <Route path="/organisations/:id" element={<OrganisationDetailPage />} />
-          <Route path="/districts" element={<DistrictExplorerPage />} />
-          <Route path="/how-it-connects" element={<HowItConnectsPage />} />
-
-          <Route path="/ict" element={<ICTPage />} />
-          <Route path="/ict/projects" element={<ProjectsPage />} />
-
-          <Route path="/policies" element={<PoliciesPage />} />
-          <Route path="/policies/:id" element={<PolicyDetailPage />} />
-
-          <Route path="/investors" element={<InvestorsPage />} />
-
-          <Route path="/ecitizen" element={<ECitizenPage />} />
-          <Route path="/ecitizen/rti" element={<RTIPage />} />
-          <Route path="/ecitizen/acts" element={<ActsRulesPage />} />
-          <Route path="/ecitizen/government-orders" element={<GovernmentOrdersPage />} />
-          <Route path="/ecitizen/notifications" element={<NotificationsPage />} />
-          <Route path="/ecitizen/policies" element={<PoliciesEcPage />} />
-          <Route path="/ecitizen/guidelines" element={<GuidelinesPage />} />
-          <Route path="/ecitizen/faqs" element={<FAQsPage />} />
-          <Route path="/ecitizen/useful-links" element={<UsefulLinksPage />} />
-          <Route path="/ecitizen/it-act-2000" element={<ITActPage />} />
-          <Route path="/ecitizen/posh-act" element={<PoSHPage />} />
-
-          <Route path="/tenders" element={<TendersPage />} />
-
-          <Route path="/media" element={<MediaPage />} />
-          <Route path="/media/science-stories" element={<ScienceStoriesPage />} />
-          <Route path="/media/events" element={<EventsPage />} />
-
-          <Route path="/contact" element={<ContactPage />} />
-
-          <Route path="/screen-reader-access" element={<ScreenReaderAccessPage />} />
-          <Route path="/help" element={<HelpPage />} />
-          <Route path="/sitemap" element={<SitemapPage />} />
-
-          <Route path="/search" element={<SearchResultsPage />} />
-
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+      <main id="main-content" tabIndex={-1} className="flex-grow-1">
+        {error && !ready && (
+          <div className="container py-5"><div className="alert alert-warning">{t('contentUnavailable')}</div></div>
+        )}
+        {!ready && !error && <Loading lines={5} />}
+        {ready && (
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about/*" element={<About />} />
+              <Route path="/organisations/*" element={<Orgs />} />
+              <Route path="/districts" element={<Orgs page="districts" />} />
+              <Route path="/how-it-connects" element={<Orgs page="connect" />} />
+              <Route path="/ict/*" element={<ICT />} />
+              <Route path="/policies/*" element={<Policies />} />
+              <Route path="/investors" element={<InvestorsPage />} />
+              <Route path="/ecitizen/*" element={<ECitizen />} />
+              <Route path="/tenders" element={<TendersPage />} />
+              <Route path="/media/*" element={<Media />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="*" element={<Extra />} />
+            </Routes>
+          </Suspense>
+        )}
       </main>
-
       <Footer />
-      <ScrollToTopButton />
-
-      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
-      <VigyanMitra open={assistantOpen} onClose={() => setAssistantOpen(false)} />
+      <ScrollTopButton />
+      <AssistantLauncher onOpen={() => setAssistantOpen(true)} />
+      <SearchOverlay open={searchOpen} onClose={closeSearch} />
+      <VigyanMitra open={assistantOpen} onClose={closeAssistant} />
     </div>
+  );
+}
+
+export default function App() {
+  const { pathname } = useLocation();
+  return (
+    <ContentProvider>
+      {pathname.startsWith('/admin') ? (
+        <Suspense fallback={<Loading />}><AdminApp /></Suspense>
+      ) : (
+        <PublicSite />
+      )}
+    </ContentProvider>
   );
 }

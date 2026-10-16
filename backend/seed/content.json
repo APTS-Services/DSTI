@@ -1,0 +1,4162 @@
+{
+ "settings": {
+  "site": {
+   "name": {
+    "en": "Department of Science, Technology & Innovation",
+    "te": "విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ"
+   },
+   "shortName": "DSTI",
+   "tagline": {
+    "en": "Science, technology and innovation for a developed Andhra Pradesh",
+    "te": "అభివృద్ధి చెందిన ఆంధ్రప్రదేశ్ కోసం విజ్ఞానం, సాంకేతికత, ఆవిష్కరణ"
+   },
+   "gov": {
+    "en": "Government of Andhra Pradesh",
+    "te": "ఆంధ్రప్రదేశ్ ప్రభుత్వం"
+   },
+   "logo": "/images/ap-govt-logo.svg",
+   "domain": "https://dsti.ap.gov.in",
+   "ctaLabel": {
+    "en": "Ask Vigyan Mitra",
+    "te": "విజ్ఞాన మిత్రను అడగండి"
+   },
+   "footerAbout": {
+    "en": "The nodal department for science, technology, innovation, electronics, IT and space applications in Andhra Pradesh.",
+    "te": "ఆంధ్రప్రదేశ్‌లో విజ్ఞానం, సాంకేతికత, ఆవిష్కరణ, ఎలక్ట్రానిక్స్, ఐటీ మరియు అంతరిక్ష అనువర్తనాలకు నోడల్ శాఖ."
+   },
+   "social": [
+    {
+     "id": "facebook",
+     "label": "Facebook",
+     "href": "https://www.facebook.com/APGovt"
+    },
+    {
+     "id": "x",
+     "label": "X (Twitter)",
+     "href": "https://x.com/APGovt"
+    },
+    {
+     "id": "youtube",
+     "label": "YouTube",
+     "href": "https://www.youtube.com/@APGovt"
+    },
+    {
+     "id": "instagram",
+     "label": "Instagram",
+     "href": "https://www.instagram.com/apgovt"
+    }
+   ]
+  },
+  "contact": {
+   "headOffice": {
+    "en": "Department of Science, Technology & Innovation, Government of Andhra Pradesh, 3rd Floor, D-Block, AP Secretariat, Velagapudi, Amaravati – 522238, Andhra Pradesh, India",
+    "te": "విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ, ఆంధ్రప్రదేశ్ ప్రభుత్వం, 3వ అంతస్తు, డి-బ్లాక్, ఏపీ సెక్రటేరియట్, వెలగపూడి, అమరావతి – 522238"
+   },
+   "phone": "+91 863 244 1234",
+   "fax": "+91 863 244 1235",
+   "email": "dsti@ap.gov.in",
+   "workingHours": {
+    "en": "Monday to Friday, 10:00 AM – 5:00 PM (except public holidays)",
+    "te": "సోమవారం నుండి శుక్రవారం, ఉదయం 10:00 – సాయంత్రం 5:00 (ప్రభుత్వ సెలవులు మినహా)"
+   }
+  },
+  "about": {
+   "intro": [
+    {
+     "en": "The Department of Science, Technology & Innovation (DSTI) of the Government of Andhra Pradesh is the nodal department for science, technology, innovation, electronics, information technology and space applications in the State.",
+     "te": "ఆంధ్రప్రదేశ్ ప్రభుత్వంలోని విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ (DSTI) రాష్ట్రంలో విజ్ఞానం, సాంకేతికత, ఆవిష్కరణ, ఎలక్ట్రానిక్స్, సమాచార సాంకేతికత మరియు అంతరిక్ష అనువర్తనాలకు నోడల్ శాఖ."
+    },
+    {
+     "en": "The Department works to build a knowledge-driven economy and a strong culture of research and innovation. It coordinates the State’s science and technology institutions, shapes sector policies, drives e-Governance and leverages emerging technologies for inclusive growth.",
+     "te": "జ్ఞాన ఆధారిత ఆర్థిక వ్యవస్థను మరియు బలమైన పరిశోధన, ఆవిష్కరణ సంస్కృతిని నిర్మించడానికి ఈ శాఖ పనిచేస్తుంది. రాష్ట్ర విజ్ఞాన, సాంకేతిక సంస్థలను సమన్వయం చేస్తుంది, రంగ విధానాలను రూపొందిస్తుంది, ఇ-గవర్నెన్స్‌ను నడిపిస్తుంది."
+    },
+    {
+     "en": "Through its organisations and flagship missions, DSTI connects universities, research institutions, industry and citizens to translate scientific ideas into public good — from agriculture and health to space, semiconductors and artificial intelligence.",
+     "te": "తన సంస్థలు మరియు ప్రధాన మిషన్ల ద్వారా, DSTI విశ్వవిద్యాలయాలు, పరిశోధన సంస్థలు, పరిశ్రమ మరియు పౌరులను అనుసంధానించి విజ్ఞాన ఆలోచనలను ప్రజా ప్రయోజనంగా మారుస్తుంది."
+    }
+   ],
+   "mission": {
+    "en": "To position Andhra Pradesh among India’s leading science, technology and innovation economies by fostering research, enabling emerging technologies, delivering citizen-centric e-Governance and building a world-class technology talent base.",
+    "te": "పరిశోధనను ప్రోత్సహించి, ఉద్భవిస్తున్న సాంకేతికతలను అందుబాటులోకి తెచ్చి, పౌర-కేంద్రిత ఇ-గవర్నెన్స్ అందించి, ప్రపంచ స్థాయి సాంకేతిక ప్రతిభను నిర్మించి, ఆంధ్రప్రదేశ్‌ను భారతదేశపు ప్రముఖ విజ్ఞాన, సాంకేతిక, ఆవిష్కరణ ఆర్థిక వ్యవస్థల్లో నిలపడం."
+   },
+   "objectives": [
+    {
+     "en": "Promote scientific temper and a strong research culture across the State.",
+     "te": "రాష్ట్రవ్యాప్తంగా శాస్త్రీయ దృక్పథం మరియు బలమైన పరిశోధన సంస్కృతిని ప్రోత్సహించడం."
+    },
+    {
+     "en": "Attract investment in electronics, semiconductors, IT, data centres, drones and space technology.",
+     "te": "ఎలక్ట్రానిక్స్, సెమీకండక్టర్లు, ఐటీ, డేటా సెంటర్లు, డ్రోన్లు మరియు అంతరిక్ష సాంకేతికతలో పెట్టుబడులను ఆకర్షించడం."
+    },
+    {
+     "en": "Deliver citizen-centric, accessible and secure e-Governance services.",
+     "te": "పౌర-కేంద్రిత, ప్రాప్యత మరియు భద్రమైన ఇ-గవర్నెన్స్ సేవలను అందించడం."
+    },
+    {
+     "en": "Build a future-ready skilled technology workforce.",
+     "te": "భవిష్యత్తుకు సిద్ధమైన నైపుణ్యం కలిగిన సాంకేతిక కార్మిక శక్తిని నిర్మించడం."
+    },
+    {
+     "en": "Foster start-ups, incubation and industry–academia collaboration.",
+     "te": "స్టార్టప్‌లు, ఇన్‌క్యుబేషన్ మరియు పరిశ్రమ–అకాడమీ సహకారాన్ని పెంపొందించడం."
+    },
+    {
+     "en": "Leverage space, geospatial and AI technologies for governance and development.",
+     "te": "పరిపాలన మరియు అభివృద్ధి కోసం అంతరిక్ష, భౌగోళిక మరియు AI సాంకేతికతలను వినియోగించడం."
+    }
+   ],
+   "orgStructure": {
+    "en": "The Department is headed by the Special Chief Secretary. It coordinates eight organisations, including the AP Innovation Society, the AP State Council of Science & Technology, APTS, APSRAC, APSAC, AMTZ, APEDC and the AP Council for Science, Technology & Innovation. Each organisation reports through the Department to the Government.",
+    "te": "ఈ శాఖకు ప్రత్యేక ప్రధాన కార్యదర్శి నేతృత్వం వహిస్తారు. ఇది ఎనిమిది సంస్థలను సమన్వయం చేస్తుంది — ఏపీ ఇన్నోవేషన్ సొసైటీ, ఏపీ రాష్ట్ర విజ్ఞాన & సాంకేతిక మండలి, APTS, APSRAC, APSAC, AMTZ, APEDC మరియు ఏపీ విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ మండలి."
+   }
+  },
+  "investors": {
+   "intro": {
+    "en": "Andhra Pradesh is among India’s fastest-growing technology economies, with a long coastline, strong ports, skilled talent and a single-window system for clearances. The Department of Science, Technology & Innovation offers a competitive incentive framework across electronics, semiconductors, IT, data centres, drones, space technology, biotechnology and innovation.",
+    "te": "ఆంధ్రప్రదేశ్ భారతదేశపు వేగంగా వృద్ధి చెందుతున్న సాంకేతిక ఆర్థిక వ్యవస్థల్లో ఒకటి — పొడవైన తీరం, బలమైన ఓడరేవులు, నైపుణ్యం కలిగిన ప్రతిభ మరియు అనుమతులకు ఏక్-విండో వ్యవస్థ. ఎలక్ట్రానిక్స్, సెమీకండక్టర్లు, ఐటీ, డేటా సెంటర్లు, డ్రోన్లు, అంతరిక్ష సాంకేతికత, జీవ సాంకేతికత మరియు ఆవిష్కరణల్లో పోటీ ప్రోత్సాహక చట్రాన్ని అందిస్తుంది."
+   },
+   "whyInvest": [
+    {
+     "en": "Single-window clearance for all approvals and incentives.",
+     "te": "అన్ని అనుమతులు మరియు ప్రోత్సాహకాలకు ఏక్-విండో క్లియరెన్స్."
+    },
+    {
+     "en": "Long coastline with world-class ports and logistics.",
+     "te": "ప్రపంచ స్థాయి ఓడరేవులు మరియు లాజిస్టిక్స్‌తో పొడవైన తీరం."
+    },
+    {
+     "en": "Competitive incentive packages across technology sectors.",
+     "te": "సాంకేతిక రంగాల్లో పోటీ ప్రోత్సాహక ప్యాకేజీలు."
+    },
+    {
+     "en": "Large, young and skilled technology talent pool.",
+     "te": "పెద్ద, యువ, నైపుణ్యం కలిగిన సాంకేతిక ప్రతిభా నిక్షేపం."
+    },
+    {
+     "en": "Dedicated electronics, semiconductor and space-tech clusters.",
+     "te": "అంకితమైన ఎలక్ట్రానిక్స్, సెమీకండక్టర్ మరియు స్పేస్-టెక్ క్లస్టర్లు."
+    }
+   ],
+   "steps": [
+    {
+     "en": "Register on the single-window portal and submit the project proposal.",
+     "te": "ఏక్-విండో పోర్టల్‌లో నమోదు చేసి ప్రాజెక్ట్ ప్రతిపాదనను సమర్పించండి."
+    },
+    {
+     "en": "Receive consolidated approvals from the single-window committee.",
+     "te": "ఏక్-విండో కమిటీ నుండి సమగ్ర అనుమతులు పొందండి."
+    },
+    {
+     "en": "Execute the incentive agreement for the applicable policy.",
+     "te": "వర్తించే విధానానికి ప్రోత్సాహక ఒప్పందాన్ని అమలు చేయండి."
+    },
+    {
+     "en": "Commission the plant and claim incentives as per milestones.",
+     "te": "కర్మాగారాన్ని ప్రారంభించి మైలురాళ్ల ప్రకారం ప్రోత్సాహకాలను క్లెయిమ్ చేయండి."
+    }
+   ]
+  },
+  "home": {
+   "showTicker": true,
+   "showAudiences": true,
+   "showServices": true,
+   "showStats": true,
+   "showDistricts": true,
+   "showAlmanac": true,
+   "showStory": true,
+   "showConnections": true,
+   "showArticles": true,
+   "showStories": true,
+   "showEvents": true,
+   "articlesTitle": {
+    "en": "News, Orders & Updates",
+    "te": "వార్తలు, ఉత్తర్వులు & తాజా సమాచారం"
+   },
+   "articlesSubtitle": {
+    "en": "Explore the latest announcements, Government Orders, circulars and events from the Department.",
+    "te": "శాఖ నుండి తాజా ప్రకటనలు, ప్రభుత్వ ఉత్తర్వులు, సర్క్యులర్లు మరియు కార్యక్రమాలను చూడండి."
+   }
+  },
+  "system": {
+   "feedbackNotifyEmail": "dsti@ap.gov.in"
+  }
+ },
+ "collections": {
+  "navigation": [
+   {
+    "id": "home",
+    "label": {
+     "en": "Home",
+     "te": "హోమ్"
+    },
+    "to": "/",
+    "children": []
+   },
+   {
+    "id": "about",
+    "label": {
+     "en": "About the Department",
+     "te": "శాఖ పరిచయం"
+    },
+    "to": "/about",
+    "children": [
+     {
+      "label": {
+       "en": "Introduction",
+       "te": "పరిచయం"
+      },
+      "to": "/about"
+     },
+     {
+      "label": {
+       "en": "Mission",
+       "te": "మిషన్"
+      },
+      "to": "/about/mission"
+     },
+     {
+      "label": {
+       "en": "Objectives",
+       "te": "లక్ష్యాలు"
+      },
+      "to": "/about/objectives"
+     },
+     {
+      "label": {
+       "en": "Organisation Structure",
+       "te": "సంస్థ నిర్మాణం"
+      },
+      "to": "/about/organisation"
+     },
+     {
+      "label": {
+       "en": "Awards",
+       "te": "అవార్డులు"
+      },
+      "to": "/about/awards"
+     }
+    ]
+   },
+   {
+    "id": "organisations",
+    "label": {
+     "en": "Organisations",
+     "te": "సంస్థలు"
+    },
+    "to": "/organisations",
+    "children": [
+     {
+      "label": {
+       "en": "All Organisations",
+       "te": "అన్ని సంస్థలు"
+      },
+      "to": "/organisations"
+     },
+     {
+      "label": {
+       "en": "District Explorer",
+       "te": "జిల్లా అన్వేషకుడు"
+      },
+      "to": "/districts"
+     },
+     {
+      "label": {
+       "en": "How it all connects",
+       "te": "అన్నీ ఎలా అనుసంధానమవుతాయి"
+      },
+      "to": "/how-it-connects"
+     }
+    ]
+   },
+   {
+    "id": "ict",
+    "label": {
+     "en": "ICT",
+     "te": "ICT"
+    },
+    "to": "/ict",
+    "children": [
+     {
+      "label": {
+       "en": "e-Governance",
+       "te": "ఇ-గవర్నెన్స్"
+      },
+      "to": "/ict"
+     },
+     {
+      "label": {
+       "en": "Projects & Initiatives",
+       "te": "ప్రాజెక్టులు & కార్యక్రమాలు"
+      },
+      "to": "/ict/projects"
+     }
+    ]
+   },
+   {
+    "id": "policies",
+    "label": {
+     "en": "Policies",
+     "te": "విధానాలు"
+    },
+    "to": "/policies",
+    "children": [
+     {
+      "label": {
+       "en": "Policies",
+       "te": "విధానాలు"
+      },
+      "to": "/policies"
+     },
+     {
+      "label": {
+       "en": "Investor's Corner",
+       "te": "పెట్టుబడిదారుల విభాగం"
+      },
+      "to": "/investors"
+     }
+    ]
+   },
+   {
+    "id": "ecitizen",
+    "label": {
+     "en": "e-Citizen",
+     "te": "ఇ-పౌరుడు"
+    },
+    "to": "/ecitizen",
+    "children": [
+     {
+      "label": {
+       "en": "Right to Information",
+       "te": "సమాచార హక్కు"
+      },
+      "to": "/ecitizen/rti"
+     },
+     {
+      "label": {
+       "en": "Acts & Rules",
+       "te": "చట్టాలు & నియమాలు"
+      },
+      "to": "/ecitizen/acts"
+     },
+     {
+      "label": {
+       "en": "Government Orders",
+       "te": "ప్రభుత్వ ఆదేశాలు"
+      },
+      "to": "/ecitizen/government-orders"
+     },
+     {
+      "label": {
+       "en": "notifications",
+       "te": "notifications"
+      },
+      "to": "/ecitizen/notifications"
+     },
+     {
+      "label": {
+       "en": "Policies",
+       "te": "విధానాలు"
+      },
+      "to": "/ecitizen/policies"
+     },
+     {
+      "label": {
+       "en": "Guidelines",
+       "te": "మార్గదర్శకాలు"
+      },
+      "to": "/ecitizen/guidelines"
+     },
+     {
+      "label": {
+       "en": "FAQs",
+       "te": "తరచుగా అడిగే ప్రశ్నలు"
+      },
+      "to": "/ecitizen/faqs"
+     },
+     {
+      "label": {
+       "en": "Useful Links",
+       "te": "ఉపయోగకరమైన లింకులు"
+      },
+      "to": "/ecitizen/useful-links"
+     },
+     {
+      "label": {
+       "en": "IT Act 2000",
+       "te": "IT చట్టం 2000"
+      },
+      "to": "/ecitizen/it-act-2000"
+     },
+     {
+      "label": {
+       "en": "PoSH Act",
+       "te": "PoSH చట్టం"
+      },
+      "to": "/ecitizen/posh-act"
+     }
+    ]
+   },
+   {
+    "id": "tenders",
+    "label": {
+     "en": "Tenders",
+     "te": "టెండర్లు"
+    },
+    "to": "/tenders",
+    "children": [
+     {
+      "label": {
+       "en": "Open Tenders",
+       "te": "తెరిచి ఉన్న టెండర్లు"
+      },
+      "to": "/tenders?status=open"
+     },
+     {
+      "label": {
+       "en": "Closed Tenders",
+       "te": "మూసిన టెండర్లు"
+      },
+      "to": "/tenders?status=closed"
+     }
+    ]
+   },
+   {
+    "id": "media",
+    "label": {
+     "en": "Media",
+     "te": "మీడియా"
+    },
+    "to": "/media",
+    "children": [
+     {
+      "label": {
+       "en": "Science Stories",
+       "te": "విజ్ఞాన కథలు"
+      },
+      "to": "/media/science-stories"
+     },
+     {
+      "label": {
+       "en": "Events",
+       "te": "కార్యక్రమాలు"
+      },
+      "to": "/media/events"
+     }
+    ]
+   },
+   {
+    "id": "contact",
+    "label": {
+     "en": "Contact Us",
+     "te": "సంప్రదించండి"
+    },
+    "to": "/contact",
+    "children": []
+   }
+  ],
+  "heroSlides": [
+   {
+    "title": {
+     "en": "Building a space-tech and semiconductor future for Andhra Pradesh",
+     "te": "ఆంధ్రప్రదేశ్ కోసం అంతరిక్ష-టెక్ మరియు సెమీకండక్టర్ భవిష్యత్తును నిర్మిస్తున్నాము"
+    },
+    "subtitle": {
+     "en": "Science, technology and innovation for a developed Andhra Pradesh",
+     "te": "అభివృద్ధి చెందిన ఆంధ్రప్రదేశ్ కోసం విజ్ఞానం, సాంకేతికత, ఆవిష్కరణ"
+    },
+    "ctaLabel": {
+     "en": "Explore Organisations",
+     "te": "సంస్థలను అన్వేషించండి"
+    },
+    "ctaLink": "/organisations",
+    "image": ""
+   },
+   {
+    "title": {
+     "en": "e-Governance and emerging technologies for every citizen",
+     "te": "ప్రతి పౌరుడికి ఇ-గవర్నెన్స్ మరియు ఉద్భవిస్తున్న సాంకేతికతలు"
+    },
+    "subtitle": {
+     "en": "Transparent, accessible and secure digital services from the Department.",
+     "te": "శాఖ నుండి పారదర్శక, ప్రాప్యత మరియు సురక్షిత డిజిటల్ సేవలు."
+    },
+    "ctaLabel": {
+     "en": "e-Citizen Services",
+     "te": "ఇ-పౌర సేవలు"
+    },
+    "ctaLink": "/ecitizen",
+    "image": ""
+   },
+   {
+    "title": {
+     "en": "Science for society — research, innovation and inclusive growth",
+     "te": "సమాజం కోసం విజ్ఞానం — పరిశోధన, ఆవిష్కరణ, సమగ్ర వృద్ధి"
+    },
+    "subtitle": {
+     "en": "Sector policies that attract investment and create high-value jobs.",
+     "te": "పెట్టుబడులను ఆకర్షించి అధిక-విలువ ఉద్యోగాలను సృష్టించే రంగ విధానాలు."
+    },
+    "ctaLabel": {
+     "en": "Read the Policies",
+     "te": "విధానాలు చదవండి"
+    },
+    "ctaLink": "/policies",
+    "image": ""
+   }
+  ],
+  "audiences": [
+   {
+    "id": "citizens",
+    "icon": "Users",
+    "title": {
+     "en": "Citizens",
+     "te": "పౌరులు"
+    },
+    "blurb": {
+     "en": "Access services, schemes, Right to Information and grievance redressal.",
+     "te": "సేవలు, పథకాలు, సమాచార హక్కు మరియు ఫిర్యాదు పరిష్కారాన్ని పొందండి."
+    },
+    "links": [
+     {
+      "label": {
+       "en": "Right to Information",
+       "te": "సమాచార హక్కు"
+      },
+      "to": "/ecitizen/rti"
+     },
+     {
+      "label": {
+       "en": "Government Orders",
+       "te": "ప్రభుత్వ ఆదేశాలు"
+      },
+      "to": "/ecitizen/government-orders"
+     },
+     {
+      "label": {
+       "en": "FAQs",
+       "te": "తరచుగా అడిగే ప్రశ్నలు"
+      },
+      "to": "/ecitizen/faqs"
+     },
+     {
+      "label": {
+       "en": "Contact Us",
+       "te": "సంప్రదించండి"
+      },
+      "to": "/contact"
+     }
+    ]
+   },
+   {
+    "id": "students",
+    "icon": "GraduationCap",
+    "title": {
+     "en": "Students",
+     "te": "విద్యార్థులు"
+    },
+    "blurb": {
+     "en": "Explore science fairs, talent search programmes, internships and scholarships.",
+     "te": "విజ్ఞాన ప్రదర్శనలు, ప్రతిభా అన్వేషణ కార్యక్రమాలు, ఇంటర్న్‌షిప్‌లు మరియు స్కాలర్‌షిప్‌లను అన్వేషించండి."
+    },
+    "links": [
+     {
+      "label": {
+       "en": "Events",
+       "te": "కార్యక్రమాలు"
+      },
+      "to": "/media/events"
+     },
+     {
+      "label": {
+       "en": "Science Stories",
+       "te": "విజ్ఞాన కథలు"
+      },
+      "to": "/media/science-stories"
+     },
+     {
+      "label": {
+       "en": "Notifications & Circulars",
+       "te": "నోటిఫికేషన్లు & సర్క్యులర్లు"
+      },
+      "to": "/ecitizen/notifications"
+     },
+     {
+      "label": {
+       "en": "Awards",
+       "te": "అవార్డులు"
+      },
+      "to": "/about/awards"
+     }
+    ]
+   },
+   {
+    "id": "researchers",
+    "icon": "FlaskConical",
+    "title": {
+     "en": "Researchers",
+     "te": "పరిశోధకులు"
+    },
+    "blurb": {
+     "en": "Find research grants, fellowships, policy documents and collaboration opportunities.",
+     "te": "పరిశోధన గ్రాంట్లు, ఫెలోషిప్‌లు, విధాన పత్రాలు మరియు సహకార అవకాశాలను కనుగొనండి."
+    },
+    "links": [
+     {
+      "label": {
+       "en": "Policies",
+       "te": "విధానాలు"
+      },
+      "to": "/policies"
+     },
+     {
+      "label": {
+       "en": "Documents",
+       "te": "పత్రాలు"
+      },
+      "to": "/ecitizen/guidelines"
+     },
+     {
+      "label": {
+       "en": "Organisations",
+       "te": "సంస్థలు"
+      },
+      "to": "/organisations"
+     },
+     {
+      "label": {
+       "en": "ICT",
+       "te": "ICT"
+      },
+      "to": "/ict/projects"
+     }
+    ]
+   },
+   {
+    "id": "investors",
+    "icon": "Briefcase",
+    "title": {
+     "en": "Investors",
+     "te": "పెట్టుబడిదారులు"
+    },
+    "blurb": {
+     "en": "Learn about incentives, sector policies, land banks and single-window clearances.",
+     "te": "ప్రోత్సాహకాలు, రంగ విధానాలు, భూ బ్యాంకులు మరియు ఏక్-విండో అనుమతుల గురించి తెలుసుకోండి."
+    },
+    "links": [
+     {
+      "label": {
+       "en": "Investor's Corner",
+       "te": "పెట్టుబడిదారుల విభాగం"
+      },
+      "to": "/investors"
+     },
+     {
+      "label": {
+       "en": "Policies",
+       "te": "విధానాలు"
+      },
+      "to": "/policies"
+     },
+     {
+      "label": {
+       "en": "Tenders",
+       "te": "టెండర్లు"
+      },
+      "to": "/tenders"
+     },
+     {
+      "label": {
+       "en": "Contact Us",
+       "te": "సంప్రదించండి"
+      },
+      "to": "/contact"
+     }
+    ]
+   }
+  ],
+  "services": [
+   {
+    "icon": "Building2",
+    "title": {
+     "en": "Organisations",
+     "te": "సంస్థలు"
+    },
+    "text": {
+     "en": "Eight organisations driving research, innovation, e-Governance and space applications across the State.",
+     "te": "రాష్ట్రవ్యాప్తంగా పరిశోధన, ఆవిష్కరణ, ఇ-గవర్నెన్స్ మరియు అంతరిక్ష అనువర్తనాలను నడిపించే ఎనిమిది సంస్థలు."
+    },
+    "to": "/organisations",
+    "tone": "lavender"
+   },
+   {
+    "icon": "ScrollText",
+    "title": {
+     "en": "Policies",
+     "te": "విధానాలు"
+    },
+    "text": {
+     "en": "Sector policies for IT & GCC, electronics, semiconductors, data centres, drones, space and biotechnology.",
+     "te": "ఐటీ & GCC, ఎలక్ట్రానిక్స్, సెమీకండక్టర్లు, డేటా సెంటర్లు, డ్రోన్లు, అంతరిక్షం మరియు జీవ సాంకేతికత రంగ విధానాలు."
+    },
+    "to": "/policies",
+    "tone": "sky"
+   },
+   {
+    "icon": "CalendarDays",
+    "title": {
+     "en": "Events",
+     "te": "కార్యక్రమాలు"
+    },
+    "text": {
+     "en": "Science fairs, conclaves, bootcamps and observances for students, researchers and citizens.",
+     "te": "విద్యార్థులు, పరిశోధకులు మరియు పౌరుల కోసం విజ్ఞాన ప్రదర్శనలు, సదస్సులు, శిబిరాలు."
+    },
+    "to": "/media/events",
+    "tone": "blush"
+   },
+   {
+    "icon": "MapPinned",
+    "title": {
+     "en": "District Explorer",
+     "te": "జిల్లా అన్వేషకుడు"
+    },
+    "text": {
+     "en": "Science and technology institutions and activities across all 26 districts of Andhra Pradesh.",
+     "te": "ఆంధ్రప్రదేశ్‌లోని మొత్తం 26 జిల్లాల్లో విజ్ఞాన, సాంకేతిక సంస్థలు మరియు కార్యక్రమాలు."
+    },
+    "to": "/districts",
+    "tone": "mint"
+   }
+  ],
+  "storyChapters": [
+   {
+    "icon": "FlaskConical",
+    "title": {
+     "en": "Research",
+     "te": "పరిశోధన"
+    },
+    "text": {
+     "en": "Universities and research institutions across the State pursue science that solves real problems — from climate-resilient crops to new materials.",
+     "te": "రాష్ట్రవ్యాప్తంగా విశ్వవిద్యాలయాలు, పరిశోధన సంస్థలు వాతావరణ-నిరోధక పంటల నుండి కొత్త పదార్థాల వరకు నిజమైన సమస్యలను పరిష్కరించే విజ్ఞానాన్ని అన్వేషిస్తాయి."
+    }
+   },
+   {
+    "icon": "Lightbulb",
+    "title": {
+     "en": "Innovation",
+     "te": "ఆవిష్కరణ"
+    },
+    "text": {
+     "en": "Innovation hubs and incubators help ideas become products, with seed funding, mentoring and market access for start-ups.",
+     "te": "ఇన్నోవేషన్ హబ్‌లు, ఇన్‌క్యుబేటర్లు ఆలోచనలను ఉత్పత్తులుగా మార్చడానికి సీడ్ నిధులు, మెంటరింగ్, మార్కెట్ ప్రాప్యత అందిస్తాయి."
+    }
+   },
+   {
+    "icon": "Rocket",
+    "title": {
+     "en": "Industry",
+     "te": "పరిశ్రమ"
+    },
+    "text": {
+     "en": "Policies for electronics, semiconductors, space and data centres attract investment and create high-value jobs.",
+     "te": "ఎలక్ట్రానిక్స్, సెమీకండక్టర్లు, అంతరిక్షం, డేటా సెంటర్ల విధానాలు పెట్టుబడులను ఆకర్షించి అధిక-విలువ ఉద్యోగాలు సృష్టిస్తాయి."
+    }
+   },
+   {
+    "icon": "Sprout",
+    "title": {
+     "en": "Citizens",
+     "te": "పౌరులు"
+    },
+    "text": {
+     "en": "e-Governance, science outreach and skill programmes make technology work for every citizen, in every district.",
+     "te": "ఇ-గవర్నెన్స్, విజ్ఞాన ప్రచారం, నైపుణ్య కార్యక్రమాలు ప్రతి జిల్లాలో ప్రతి పౌరుడికి సాంకేతికతను ఉపయోగకరంగా మారుస్తాయి."
+    }
+   }
+  ],
+  "news": [
+   {
+    "id": "n-1",
+    "date": "2026-10-01",
+    "title": {
+     "en": "DSTI invites expression of interest from CERT-In audited security vendors",
+     "te": "CERT-In ఆడిట్ చేసిన భద్రతా విక్రేతల నుండి DSTI ఆసక్తి వ్యక్తీకరణలు ఆహ్వానం"
+    },
+    "category": "Tender",
+    "link": "/tenders",
+    "isNew": true
+   },
+   {
+    "id": "n-2",
+    "date": "2026-09-28",
+    "title": {
+     "en": "Space-Tech Conclave 2026 to be held at Tirupati on 28–29 October",
+     "te": "స్పేస్-టెక్ సదస్సు 2026 అక్టోబర్ 28–29న తిరుపతిలో"
+    },
+    "category": "Event",
+    "link": "/media/events",
+    "isNew": true
+   },
+   {
+    "id": "n-3",
+    "date": "2026-09-20",
+    "title": {
+     "en": "Circular issued: adoption of GIGW 3.0 for all departmental websites",
+     "te": "సర్క్యులర్: అన్ని శాఖా వెబ్‌సైట్లకు GIGW 3.0 స్వీకరణ"
+    },
+    "category": "Circular",
+    "link": "/ecitizen/notifications",
+    "isNew": false
+   },
+   {
+    "id": "n-4",
+    "date": "2026-09-12",
+    "title": {
+     "en": "G.O. issued for the Space-Tech Incubation Park at Tirupati",
+     "te": "తిరుపతిలో స్పేస్-టెక్ ఇన్‌క్యుబేషన్ పార్క్ కోసం జీఓ విడుదల"
+    },
+    "category": "Government Order",
+    "link": "/ecitizen/government-orders",
+    "isNew": false
+   },
+   {
+    "id": "n-5",
+    "date": "2026-09-04",
+    "title": {
+     "en": "Applications open for AP Science Talent Search 2026",
+     "te": "ఏపీ విజ్ఞాన ప్రతిభా అన్వేషణ 2026 దరఖాస్తులు ప్రారంభం"
+    },
+    "category": "Notification",
+    "link": "/ecitizen/notifications",
+    "isNew": false
+   },
+   {
+    "id": "n-6",
+    "date": "2026-08-24",
+    "title": {
+     "en": "Funds sanctioned for the State Science Fair 2026",
+     "te": "రాష్ట్ర విజ్ఞాన ప్రదర్శన 2026 కోసం నిధులు మంజూరు"
+    },
+    "category": "Government Order",
+    "link": "/ecitizen/government-orders",
+    "isNew": false
+   },
+   {
+    "id": "n-7",
+    "date": "2026-08-11",
+    "title": {
+     "en": "Half-yearly security audit compliance mandated for e-Governance apps",
+     "te": "ఇ-గవర్నెన్స్ యాప్‌లకు అర్ధ-వార్షిక భద్రతా ఆడిట్ నిబంధన తప్పనిసరి"
+    },
+    "category": "Circular",
+    "link": "/ecitizen/notifications",
+    "isNew": false
+   }
+  ],
+  "events": [
+   {
+    "id": "ev-1",
+    "title": {
+     "en": "State Science Fair 2026",
+     "te": "రాష్ట్ర విజ్ఞాన ప్రదర్శన 2026"
+    },
+    "date": "2026-11-14",
+    "endDate": "2026-11-17",
+    "location": {
+     "en": "Amaravati Convention Centre, Vijayawada",
+     "te": "అమరావతి కన్వెన్షన్ సెంటర్, విజయవాడ"
+    },
+    "district": "ntr",
+    "category": "Science Fair",
+    "status": "upcoming",
+    "summary": {
+     "en": "A four-day celebration of science with exhibitions, student projects, robotics and innovation challenges from every district.",
+     "te": "ప్రతి జిల్లా నుండి ప్రదర్శనలు, విద్యార్థి ప్రాజెక్టులు, రోబోటిక్స్ మరియు ఆవిష్కరణ సవాళ్లతో నాలుగు రోజుల విజ్ఞాన వేడుక."
+    },
+    "image": ""
+   },
+   {
+    "id": "ev-2",
+    "title": {
+     "en": "Space-Tech Conclave 2026",
+     "te": "స్పేస్-టెక్ సదస్సు 2026"
+    },
+    "date": "2026-10-28",
+    "endDate": "2026-10-29",
+    "location": {
+     "en": "Tirupati",
+     "te": "తిరుపతి"
+    },
+    "district": "tirupati",
+    "category": "Conclave",
+    "status": "upcoming",
+    "summary": {
+     "en": "Space-tech start-ups, ISRO partners and academia discuss the downstream space economy and Andhra Pradesh’s role.",
+     "te": "స్పేస్-టెక్ స్టార్టప్‌లు, ఇస్రో భాగస్వాములు మరియు అకాడమీ డౌన్‌స్ట్రీమ్ అంతరిక్ష ఆర్థిక వ్యవస్థపై చర్చిస్తారు."
+    },
+    "image": ""
+   },
+   {
+    "id": "ev-3",
+    "title": {
+     "en": "National Science Day 2026",
+     "te": "జాతీయ విజ్ఞాన దినోత్సవం 2026"
+    },
+    "date": "2027-02-28",
+    "location": {
+     "en": "All districts",
+     "te": "అన్ని జిల్లాలు"
+    },
+    "district": "all",
+    "category": "Observance",
+    "status": "upcoming",
+    "summary": {
+     "en": "Science exhibitions, lectures and open-lab days mark the discovery of the Raman Effect across the State.",
+     "te": "రామన్ ఎఫెక్ట్ ఆవిష్కరణను పురస్కరించుకుని రాష్ట్రవ్యాప్తంగా విజ్ఞాన ప్రదర్శనలు, ఉపన్యాసాలు, ఓపెన్-ల్యాబ్ రోజులు."
+    },
+    "endDate": "",
+    "image": ""
+   },
+   {
+    "id": "ev-4",
+    "title": {
+     "en": "Student Innovation Bootcamp — Rayalaseema",
+     "te": "విద్యార్థి ఆవిష్కరణ శిబిరం — రాయలసీమ"
+    },
+    "date": "2026-06-20",
+    "endDate": "2026-06-22",
+    "location": {
+     "en": "Kurnool",
+     "te": "కర్నూలు"
+    },
+    "district": "kurnool",
+    "category": "Bootcamp",
+    "status": "past",
+    "summary": {
+     "en": "Three-day bootcamp mentoring 240 student teams on prototyping, design thinking and pitching.",
+     "te": "ప్రోటోటైపింగ్, డిజైన్ థింకింగ్ మరియు పిచ్‌పై 240 విద్యార్థి జట్లకు మూడు రోజుల శిక్షణ శిబిరం."
+    },
+    "image": ""
+   },
+   {
+    "id": "ev-5",
+    "title": {
+     "en": "Drone Technology Workshop for Farmers",
+     "te": "రైతులకు డ్రోన్ సాంకేతిక వర్క్‌షాప్"
+    },
+    "date": "2026-05-12",
+    "location": {
+     "en": "Guntur",
+     "te": "గుంటూరు"
+    },
+    "district": "guntur",
+    "category": "Workshop",
+    "status": "past",
+    "summary": {
+     "en": "Hands-on demonstration of drone spraying and crop-health mapping for farmer groups.",
+     "te": "రైతు సమూహాలకు డ్రోన్ స్ప్రేయింగ్ మరియు పంట-ఆరోగ్య మ్యాపింగ్ ప్రదర్శన."
+    },
+    "endDate": "",
+    "image": ""
+   },
+   {
+    "id": "ev-6",
+    "title": {
+     "en": "Start-up Demo Day — Amaravati",
+     "te": "స్టార్టప్ డెమో డే — అమరావతి"
+    },
+    "date": "2026-04-08",
+    "location": {
+     "en": "Vijayawada",
+     "te": "విజయవాడ"
+    },
+    "district": "ntr",
+    "category": "Showcase",
+    "status": "past",
+    "summary": {
+     "en": "Fifty start-ups pitched to investors and government departments for pilot deployment.",
+     "te": "యాభై స్టార్టప్‌లు పెట్టుబడిదారులు మరియు ప్రభుత్వ శాఖలకు పైలట్ అమలు కోసం పిచ్ చేశాయి."
+    },
+    "endDate": "",
+    "image": ""
+   }
+  ],
+  "scienceStories": [
+   {
+    "id": "ss-1",
+    "title": {
+     "en": "How millets became Andhra Pradesh’s climate-smart crop",
+     "te": "చిరుధాన్యాలు ఆంధ్రప్రదేశ్ వాతావరణ-స్మార్ట్ పంటగా ఎలా మారాయి"
+    },
+    "videoId": "",
+    "duration": "4:12",
+    "category": "Agriculture",
+    "date": "2026-09-18",
+    "summary": {
+     "en": "Scientists and farmers explain the science behind the millet revival in the State.",
+     "te": "రాష్ట్రంలో చిరుధాన్య పునరుజ్జీవనం వెనుక ఉన్న విజ్ఞానాన్ని శాస్త్రవేత్తలు, రైతులు వివరిస్తారు."
+    },
+    "thumbnail": ""
+   },
+   {
+    "id": "ss-2",
+    "title": {
+     "en": "Inside the Space-Tech Incubation Park",
+     "te": "స్పేస్-టెక్ ఇన్‌క్యుబేషన్ పార్క్ లోపల"
+    },
+    "videoId": "",
+    "duration": "6:05",
+    "category": "Space",
+    "date": "2026-09-02",
+    "summary": {
+     "en": "A walkthrough of the clean rooms, testing labs and start-ups building for orbit.",
+     "te": "క్లీన్ రూమ్‌లు, పరీక్ష ప్రయోగశాలలు మరియు కక్ష్య కోసం నిర్మిస్తున్న స్టార్టప్‌ల పర్యటన."
+    },
+    "thumbnail": ""
+   },
+   {
+    "id": "ss-3",
+    "title": {
+     "en": "Drones over the Godavari delta",
+     "te": "గోదావరి డెల్టాపై డ్రోన్లు"
+    },
+    "videoId": "",
+    "duration": "3:48",
+    "category": "Drones",
+    "date": "2026-08-21",
+    "summary": {
+     "en": "How drone surveys are helping aqua farmers and crop planners in the delta.",
+     "te": "డెల్టాలో ఆక్వా రైతులు మరియు పంట ప్రణాళికదారులకు డ్రోన్ సర్వేలు ఎలా సహాయపడుతున్నాయి."
+    },
+    "thumbnail": ""
+   },
+   {
+    "id": "ss-4",
+    "title": {
+     "en": "AI in the classroom: a teacher’s story",
+     "te": "తరగతి గదిలో AI: ఒక ఉపాధ్యాయుని కథ"
+    },
+    "videoId": "",
+    "duration": "5:20",
+    "category": "AI",
+    "date": "2026-08-05",
+    "summary": {
+     "en": "A government school teacher adapts AI tools to teach science in Telugu.",
+     "te": "ప్రభుత్వ పాఠశాల ఉపాధ్యాయుడు తెలుగులో విజ్ఞానం బోధించడానికి AI సాధనాలను అనుసరించడం."
+    },
+    "thumbnail": ""
+   },
+   {
+    "id": "ss-5",
+    "title": {
+     "en": "The semiconductor supply chain, explained",
+     "te": "సెమీకండక్టర్ సరఫరా శృంఖలం, వివరణ"
+    },
+    "videoId": "",
+    "duration": "7:33",
+    "category": "Semiconductors",
+    "date": "2026-07-19",
+    "summary": {
+     "en": "From sand to silicon: the journey of a chip and Andhra Pradesh’s place in it.",
+     "te": "ఇసుక నుండి సిలికాన్ వరకు: చిప్ ప్రయాణం మరియు అందులో ఆంధ్రప్రదేశ్ స్థానం."
+    },
+    "thumbnail": ""
+   },
+   {
+    "id": "ss-6",
+    "title": {
+     "en": "Women in science: stories from Rayalaseema",
+     "te": "విజ్ఞానంలో మహిళలు: రాయలసీమ కథలు"
+    },
+    "videoId": "",
+    "duration": "5:54",
+    "category": "Inspiration",
+    "date": "2026-06-28",
+    "summary": {
+     "en": "Three researchers from the region on their path to the laboratory.",
+     "te": "ప్రయోగశాల వైపు ప్రయాణంపై ఈ ప్రాంతానికి చెందిన ముగ్గురు పరిశోధకులు."
+    },
+    "thumbnail": ""
+   }
+  ],
+  "tenders": [
+   {
+    "id": "T-2026-018",
+    "tenderNo": "DSTI/APTS/2026/018",
+    "title": {
+     "en": "Supply, installation and commissioning of network equipment for the Space-Tech Incubation Park",
+     "te": "స్పేస్-టెక్ ఇన్‌క్యుబేషన్ పార్క్ కోసం నెట్‌వర్క్ పరికరాల సరఫరా, అమరిక మరియు ప్రారంభం"
+    },
+    "department": "APTS",
+    "district": "tirupati",
+    "publishedDate": "2026-09-28",
+    "closingDate": "2026-10-20",
+    "status": "open",
+    "emd": "₹ 1,50,000",
+    "documents": [
+     {
+      "name": "Tender Document",
+      "file": "/uploads/seed/tenders/T-2026-018.pdf",
+      "size": "1.2 MB"
+     }
+    ]
+   },
+   {
+    "id": "T-2026-017",
+    "tenderNo": "DSTI/APIS/2026/017",
+    "title": {
+     "en": "Selection of an agency for operating the rural innovation centres in Rayalaseema",
+     "te": "రాయలసీమలో గ్రామీణ ఆవిష్కరణ కేంద్రాల నిర్వహణకు సంస్థ ఎంపిక"
+    },
+    "department": "APIS",
+    "district": "kurnool",
+    "publishedDate": "2026-09-22",
+    "closingDate": "2026-10-12",
+    "status": "open",
+    "emd": "₹ 75,000",
+    "documents": [
+     {
+      "name": "RFP Document",
+      "file": "/uploads/seed/tenders/T-2026-017.pdf",
+      "size": "860 KB"
+     }
+    ]
+   },
+   {
+    "id": "T-2026-016",
+    "tenderNo": "DSTI/APSRAC/2026/016",
+    "title": {
+     "en": "Procurement of high-resolution satellite imagery and GIS software licences",
+     "te": "అధిక-రిజల్యూషన్ ఉపగ్రహ చిత్రాలు మరియు GIS సాఫ్ట్‌వేర్ లైసెన్సుల కొనుగోలు"
+    },
+    "department": "APSRAC",
+    "district": "guntur",
+    "publishedDate": "2026-09-10",
+    "closingDate": "2026-09-30",
+    "status": "closed",
+    "emd": "₹ 1,00,000",
+    "documents": [
+     {
+      "name": "Tender Document",
+      "file": "/uploads/seed/tenders/T-2026-016.pdf",
+      "size": "1.1 MB"
+     }
+    ]
+   },
+   {
+    "id": "T-2026-015",
+    "tenderNo": "DSTI/APEDC/2026/015",
+    "title": {
+     "en": "Development of common facility centre at the Electronics Manufacturing Cluster, Chittoor",
+     "te": "చిత్తూరు ఎలక్ట్రానిక్స్ తయారీ క్లస్టర్‌లో సాధారణ సౌకర్య కేంద్రం అభివృద్ధి"
+    },
+    "department": "APEDC",
+    "district": "chittoor",
+    "publishedDate": "2026-08-28",
+    "closingDate": "2026-09-18",
+    "status": "closed",
+    "emd": "₹ 2,50,000",
+    "documents": [
+     {
+      "name": "Tender Document",
+      "file": "/uploads/seed/tenders/T-2026-015.pdf",
+      "size": "2.4 MB"
+     }
+    ]
+   },
+   {
+    "id": "T-2026-014",
+    "tenderNo": "DSTI/APCOST/2026/014",
+    "title": {
+     "en": "Event management services for the State Science Fair 2026",
+     "te": "రాష్ట్ర విజ్ఞాన ప్రదర్శన 2026 కోసం ఈవెంట్ నిర్వహణ సేవలు"
+    },
+    "department": "APCOST",
+    "district": "ntr",
+    "publishedDate": "2026-08-05",
+    "closingDate": "2026-08-26",
+    "status": "closed",
+    "emd": "₹ 40,000",
+    "documents": [
+     {
+      "name": "Tender Document",
+      "file": "/uploads/seed/tenders/T-2026-014.pdf",
+      "size": "640 KB"
+     }
+    ]
+   },
+   {
+    "id": "T-2026-019",
+    "tenderNo": "DSTI/DSTI/2026/019",
+    "title": {
+     "en": "Empanelment of CERT-In audited vendors for annual security audits of departmental websites",
+     "te": "శాఖా వెబ్‌సైట్ల వార్షిక భద్రతా ఆడిట్‌ల కోసం CERT-In ఆడిట్ చేసిన విక్రేతల ఎంపిక"
+    },
+    "department": "DSTI",
+    "district": "ntr",
+    "publishedDate": "2026-10-01",
+    "closingDate": "2026-10-25",
+    "status": "open",
+    "emd": "₹ 25,000",
+    "documents": [
+     {
+      "name": "EOI Document",
+      "file": "/uploads/seed/tenders/T-2026-019.pdf",
+      "size": "520 KB"
+     }
+    ]
+   }
+  ],
+  "documents": [
+   {
+    "id": "go-42",
+    "type": "go",
+    "number": "G.O.Ms.No.42",
+    "date": "2026-09-12",
+    "title": {
+     "en": "Establishment of the Space-Tech Incubation Park at Tirupati",
+     "te": "తిరుపతిలో స్పేస్-టెక్ ఇన్‌క్యుబేషన్ పార్క్ ఏర్పాటు"
+    },
+    "department": "Science, Technology & Innovation",
+    "file": "/uploads/seed/go/GO-42-2026.pdf",
+    "size": "420 KB",
+    "topic": ""
+   },
+   {
+    "id": "go-38",
+    "type": "go",
+    "number": "G.O.Ms.No.38",
+    "date": "2026-08-24",
+    "title": {
+     "en": "Sanction of funds for the State Science Fair 2026",
+     "te": "రాష్ట్ర విజ్ఞాన ప్రదర్శన 2026 కోసం నిధుల మంజూరు"
+    },
+    "department": "Science, Technology & Innovation",
+    "file": "/uploads/seed/go/GO-38-2026.pdf",
+    "size": "310 KB",
+    "topic": ""
+   },
+   {
+    "id": "go-27",
+    "type": "go",
+    "number": "G.O.Ms.No.27",
+    "date": "2026-06-05",
+    "title": {
+     "en": "Notifying the Drone Policy implementation guidelines",
+     "te": "డ్రోన్ విధాన అమలు మార్గదర్శకాల నోటిఫికేషన్"
+    },
+    "department": "Science, Technology & Innovation",
+    "file": "/uploads/seed/go/GO-27-2026.pdf",
+    "size": "1.1 MB",
+    "topic": ""
+   },
+   {
+    "id": "go-15",
+    "type": "go",
+    "number": "G.O.Ms.No.15",
+    "date": "2026-03-18",
+    "title": {
+     "en": "Constitution of the AP Council for Science, Technology & Innovation",
+     "te": "ఏపీ విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ మండలి ఏర్పాటు"
+    },
+    "department": "Science, Technology & Innovation",
+    "file": "/uploads/seed/go/GO-15-2026.pdf",
+    "size": "280 KB",
+    "topic": ""
+   },
+   {
+    "id": "go-09",
+    "type": "go",
+    "number": "G.O.Ms.No.09",
+    "date": "2026-01-22",
+    "title": {
+     "en": "Incentives for semiconductor and display manufacturing units",
+     "te": "సెమీకండక్టర్ మరియు డిస్ప్లే తయారీ యూనిట్లకు ప్రోత్సాహకాలు"
+    },
+    "department": "Science, Technology & Innovation",
+    "file": "/uploads/seed/go/GO-09-2026.pdf",
+    "size": "760 KB",
+    "topic": ""
+   },
+   {
+    "id": "notif-64",
+    "type": "notification",
+    "number": "Notification No.64",
+    "date": "2026-09-30",
+    "title": {
+     "en": "Empanelment of CERT-In audited vendors for security audits",
+     "te": "భద్రతా ఆడిట్‌ల కోసం CERT-In ఆడిట్ చేసిన విక్రేతల ఎంపిక"
+    },
+    "department": "Science, Technology & Innovation",
+    "file": "/uploads/seed/notifications/N-64-2026.pdf",
+    "size": "190 KB",
+    "topic": ""
+   },
+   {
+    "id": "notif-61",
+    "type": "notification",
+    "number": "Notification No.61",
+    "date": "2026-09-04",
+    "title": {
+     "en": "Applications invited for the AP Science Talent Search 2026",
+     "te": "ఏపీ విజ్ఞాన ప్రతిభా అన్వేషణ 2026 కోసం దరఖాస్తులు ఆహ్వానం"
+    },
+    "department": "APCOST",
+    "file": "/uploads/seed/notifications/N-61-2026.pdf",
+    "size": "150 KB",
+    "topic": ""
+   },
+   {
+    "id": "notif-55",
+    "type": "notification",
+    "number": "Notification No.55",
+    "date": "2026-07-19",
+    "title": {
+     "en": "Start-up grant applications under the Technology & Innovation Policy",
+     "te": "సాంకేతిక & ఆవిష్కరణ విధానం కింద స్టార్టప్ గ్రాంట్ దరఖాస్తులు"
+    },
+    "department": "APIS",
+    "file": "/uploads/seed/notifications/N-55-2026.pdf",
+    "size": "240 KB",
+    "topic": ""
+   },
+   {
+    "id": "circ-31",
+    "type": "circular",
+    "number": "Circular No.31",
+    "date": "2026-09-20",
+    "title": {
+     "en": "Adoption of the GIGW 3.0 guidelines for all departmental websites",
+     "te": "అన్ని శాఖా వెబ్‌సైట్లకు GIGW 3.0 మార్గదర్శకాల స్వీకరణ"
+    },
+    "department": "APTS",
+    "file": "/uploads/seed/circulars/C-31-2026.pdf",
+    "size": "320 KB",
+    "topic": ""
+   },
+   {
+    "id": "circ-28",
+    "type": "circular",
+    "number": "Circular No.28",
+    "date": "2026-08-11",
+    "title": {
+     "en": "Half-yearly security audit compliance for e-Governance applications",
+     "te": "ఇ-గవర్నెన్స్ అప్లికేషన్లకు అర్ధ-వార్షిక భద్రతా ఆడిట్ నిబంధన"
+    },
+    "department": "APTS",
+    "file": "/uploads/seed/circulars/C-28-2026.pdf",
+    "size": "280 KB",
+    "topic": ""
+   },
+   {
+    "id": "act-it",
+    "type": "act",
+    "number": "Act No.21 of 2000",
+    "date": "2000-06-09",
+    "title": {
+     "en": "The Information Technology Act, 2000",
+     "te": "సమాచార సాంకేతిక చట్టం, 2000"
+    },
+    "department": "Ministry of Electronics & IT, GoI",
+    "file": "/uploads/seed/acts/IT-Act-2000.pdf",
+    "size": "1.6 MB",
+    "topic": "it-act"
+   },
+   {
+    "id": "act-rti",
+    "type": "act",
+    "number": "Act No.22 of 2005",
+    "date": "2005-06-15",
+    "title": {
+     "en": "The Right to Information Act, 2005",
+     "te": "సమాచార హక్కు చట్టం, 2005"
+    },
+    "department": "Government of India",
+    "file": "/uploads/seed/acts/RTI-Act-2005.pdf",
+    "size": "980 KB",
+    "topic": "rti"
+   },
+   {
+    "id": "act-posh",
+    "type": "act",
+    "number": "Act No.14 of 2013",
+    "date": "2013-04-22",
+    "title": {
+     "en": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+     "te": "కార్యాలయంలో మహిళల లైంగిక వేధింపుల నిరోధ చట్టం, 2013"
+    },
+    "department": "Government of India",
+    "file": "/uploads/seed/acts/PoSH-Act-2013.pdf",
+    "size": "1.2 MB",
+    "topic": "posh"
+   },
+   {
+    "id": "rule-it",
+    "type": "rule",
+    "number": "G.S.R. 313(E)",
+    "date": "2011-04-11",
+    "title": {
+     "en": "Information Technology (Intermediary Guidelines) Rules, 2011",
+     "te": "సమాచార సాంకేతిక (మధ్యవర్తి మార్గదర్శకాలు) నియమాలు, 2011"
+    },
+    "department": "Ministry of Electronics & IT, GoI",
+    "file": "/uploads/seed/rules/IT-Rules-2011.pdf",
+    "size": "540 KB",
+    "topic": "it-act"
+   },
+   {
+    "id": "rule-rti",
+    "type": "rule",
+    "number": "Notification",
+    "date": "2006-10-12",
+    "title": {
+     "en": "AP Right to Information Rules, 2006",
+     "te": "ఏపీ సమాచార హక్కు నియమాలు, 2006"
+    },
+    "department": "Government of Andhra Pradesh",
+    "file": "/uploads/seed/rules/AP-RTI-Rules-2006.pdf",
+    "size": "460 KB",
+    "topic": "rti"
+   },
+   {
+    "id": "guide-gigw",
+    "type": "guideline",
+    "number": "GIGW 3.0",
+    "date": "2024-02-01",
+    "title": {
+     "en": "Guidelines for Indian Government Websites (GIGW) 3.0",
+     "te": "భారత ప్రభుత్వ వెబ్‌సైట్ల మార్గదర్శకాలు (GIGW) 3.0"
+    },
+    "department": "NIC / MeitY",
+    "file": "/uploads/seed/guidelines/GIGW-3.0.pdf",
+    "size": "2.1 MB",
+    "topic": ""
+   },
+   {
+    "id": "guide-wcag",
+    "type": "guideline",
+    "number": "WCAG 2.1 AA",
+    "date": "2018-06-05",
+    "title": {
+     "en": "Web Content Accessibility Guidelines (WCAG) 2.1 — Level AA",
+     "te": "వెబ్ విషయ ప్రాప్యత మార్గదర్శకాలు (WCAG) 2.1 — స్థాయి AA"
+    },
+    "department": "W3C",
+    "file": "/uploads/seed/guidelines/WCAG-2.1.pdf",
+    "size": "1.4 MB",
+    "topic": ""
+   },
+   {
+    "id": "it-proc",
+    "type": "guideline",
+    "number": "Procedure",
+    "date": "2000-10-17",
+    "title": {
+     "en": "IT Act 2000 — Rules of procedure and adjudication",
+     "te": "IT చట్టం 2000 — ప్రక్రియ మరియు న్యాయనిర్ణయ నియమాలు"
+    },
+    "department": "Department of Science, Technology & Innovation",
+    "file": "/uploads/seed/it-act/IT-Act-Procedure.pdf",
+    "size": "620 KB",
+    "topic": "it-act"
+   },
+   {
+    "id": "it-judg",
+    "type": "guideline",
+    "number": "Judgements",
+    "date": "2021-05-30",
+    "title": {
+     "en": "IT Act 2000 — Landmark judgements compilation",
+     "te": "IT చట్టం 2000 — ప్రముఖ తీర్పుల సంకలనం"
+    },
+    "department": "Department of Science, Technology & Innovation",
+    "file": "/uploads/seed/it-act/IT-Act-Judgements.pdf",
+    "size": "880 KB",
+    "topic": "it-act"
+   },
+   {
+    "id": "posh-guide",
+    "type": "guideline",
+    "number": "PoSH",
+    "date": "2013-12-09",
+    "title": {
+     "en": "PoSH Act — Internal Committee constitution and process",
+     "te": "PoSH చట్టం — అంతర్గత కమిటీ ఏర్పాటు మరియు ప్రక్రియ"
+    },
+    "department": "Department of Science, Technology & Innovation",
+    "file": "/uploads/seed/posh/PoSH-Process.pdf",
+    "size": "400 KB",
+    "topic": "posh"
+   }
+  ],
+  "organisations": [
+   {
+    "id": "apis",
+    "abbr": "APIS",
+    "name": {
+     "en": "Andhra Pradesh Innovation Society",
+     "te": "ఆంధ్రప్రదేశ్ ఇన్నోవేషన్ సొసైటీ"
+    },
+    "category": "Innovation",
+    "established": 2018,
+    "website": "https://apis.ap.gov.in",
+    "district": "ntr",
+    "summary": {
+     "en": "The nodal agency for fostering a culture of innovation and start-ups across Andhra Pradesh.",
+     "te": "ఆంధ్రప్రదేశ్ అంతటా ఆవిష్కరణ మరియు స్టార్టప్ సంస్కృతిని పెంపొందించే నోడల్ సంస్థ."
+    },
+    "functions": [
+     {
+      "en": "Run the AP Innovation & Start-up Policy incentives",
+      "te": "ఏపీ ఇన్నోవేషన్ & స్టార్టప్ విధాన ప్రోత్సాహకాలను నిర్వహించడం"
+     },
+     {
+      "en": "Operate incubators and innovation hubs",
+      "te": "ఇన్‌క్యుబేటర్లు మరియు ఇన్నోవేషన్ హబ్‌లను నిర్వహించడం"
+     },
+     {
+      "en": "Coordinate hackathons and grand challenges",
+      "te": "హ్యాకథాన్‌లు మరియు గ్రాండ్ ఛాలెంజ్‌లను సమన్వయం చేయడం"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apcost",
+    "abbr": "APCOST",
+    "name": {
+     "en": "AP State Council of Science & Technology",
+     "te": "ఏపీ రాష్ట్ర విజ్ఞాన & సాంకేతిక మండలి"
+    },
+    "category": "Science & Technology",
+    "established": 1980,
+    "website": "https://apcost.ap.gov.in",
+    "district": "guntur",
+    "summary": {
+     "en": "Advises the Government on science and technology policy and promotes scientific temper among citizens.",
+     "te": "విజ్ఞాన, సాంకేతిక విధానంపై ప్రభుత్వానికి సలహా ఇస్తుంది; పౌరుల్లో శాస్త్రీయ దృక్పథాన్ని పెంపొందిస్తుంది."
+    },
+    "functions": [
+     {
+      "en": "Fund research and development projects",
+      "te": "పరిశోధన మరియు అభివృద్ధి ప్రాజెక్టులకు నిధులు"
+     },
+     {
+      "en": "Run science popularisation and science clubs",
+      "te": "విజ్ఞాన ప్రచారం మరియు సైన్స్ క్లబ్‌లు నిర్వహించడం"
+     },
+     {
+      "en": "Support National Science Day and science fairs",
+      "te": "జాతీయ విజ్ఞాన దినోత్సవం మరియు విజ్ఞాన ప్రదర్శనలకు మద్దతు"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apts",
+    "abbr": "APTS",
+    "name": {
+     "en": "Andhra Pradesh Technology Services",
+     "te": "ఆంధ్రప్రదేశ్ టెక్నాలజీ సర్వీసెస్"
+    },
+    "category": "e-Governance",
+    "established": 2000,
+    "website": "https://apts.ap.gov.in",
+    "district": "ntr",
+    "summary": {
+     "en": "The State’s technology implementation and e-Governance agency delivering IT projects across departments.",
+     "te": "రాష్ట్ర సాంకేతిక అమలు మరియు ఇ-గవర్నెన్స్ సంస్థ; శాఖల అంతటా ఐటీ ప్రాజెక్టులను అందిస్తుంది."
+    },
+    "functions": [
+     {
+      "en": "Design and run e-Governance applications",
+      "te": "ఇ-గవర్నెన్స్ అప్లికేషన్‌ల రూపకల్పన మరియు నిర్వహణ"
+     },
+     {
+      "en": "Manage the State Data Centre ecosystem",
+      "te": "రాష్ట్ర డేటా సెంటర్ పర్యావరణ వ్యవస్థ నిర్వహణ"
+     },
+     {
+      "en": "Implement cyber-security frameworks",
+      "te": "సైబర్-భద్రతా ఫ్రేమ్‌వర్క్‌ల అమలు"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apsrac",
+    "abbr": "APSRAC",
+    "name": {
+     "en": "AP State Remote Sensing Applications Centre",
+     "te": "ఏపీ రాష్ట్ర రిమోట్ సెన్సింగ్ అప్లికేషన్స్ సెంటర్"
+    },
+    "category": "Space & Geospatial",
+    "established": 1985,
+    "website": "https://apsrac.ap.gov.in",
+    "district": "guntur",
+    "summary": {
+     "en": "Applies satellite remote sensing and GIS for governance, planning, agriculture and disaster management.",
+     "te": "పరిపాలన, ప్రణాళిక, వ్యవసాయం మరియు విపత్తు నిర్వహణ కోసం ఉపగ్రహ రిమోట్ సెన్సింగ్ మరియు GIS వినియోగించడం."
+    },
+    "functions": [
+     {
+      "en": "Provide geospatial maps and analyses",
+      "te": "భౌగోళిక పటాలు మరియు విశ్లేషణలు అందించడం"
+     },
+     {
+      "en": "Support irrigation and crop monitoring",
+      "te": "నీటిపారుదల మరియు పంట పర్యవేక్షణకు మద్దతు"
+     },
+     {
+      "en": "Maintain the State spatial data infrastructure",
+      "te": "రాష్ట్ర ప్రాదేశిక డేటా మౌలిక సదుపాయాలు నిర్వహించడం"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apsac",
+    "abbr": "APSAC",
+    "name": {
+     "en": "AP Space Applications Centre",
+     "te": "ఏపీ అంతరిక్ష అనువర్తనాల కేంద్రం"
+    },
+    "category": "Space & Geospatial",
+    "established": 2021,
+    "website": "https://apsac.ap.gov.in",
+    "district": "tirupati",
+    "summary": {
+     "en": "Drives Andhra Pradesh’s space technology ecosystem, satellite data utilisation and the space-tech start-up mission.",
+     "te": "ఆంధ్రప్రదేశ్ అంతరిక్ష సాంకేతిక పర్యావరణ వ్యవస్థ, ఉపగ్రహ డేటా వినియోగం మరియు స్పేస్-టెక్ స్టార్టప్ మిషన్‌ను నడిపిస్తుంది."
+    },
+    "functions": [
+     {
+      "en": "Promote the Andhra Pradesh Space-Tech Policy",
+      "te": "ఆంధ్రప్రదేశ్ అంతరిక్ష-టెక్ విధానాన్ని ప్రోత్సహించడం"
+     },
+     {
+      "en": "Support downstream satellite applications",
+      "te": "డౌన్‌స్ట్రీమ్ ఉపగ్రహ అనువర్తనాలకు మద్దతు"
+     },
+     {
+      "en": "Facilitate space-tech incubation",
+      "te": "స్పేస్-టెక్ ఇన్‌క్యుబేషన్‌కు సహకారం"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apmedtech",
+    "abbr": "AMTZ",
+    "name": {
+     "en": "Andhra Pradesh MedTech Zone",
+     "te": "ఆంధ్రప్రదేశ్ మెడ్‌టెక్ జోన్"
+    },
+    "category": "Life Sciences",
+    "established": 2016,
+    "website": "https://amtz.in",
+    "district": "visakhapatnam",
+    "summary": {
+     "en": "A dedicated medical-device manufacturing ecosystem and the first WHO-listed incubator for medical technology.",
+     "te": "అంకితమైన వైద్య-పరికరాల తయారీ పర్యావరణ వ్యవస్థ; వైద్య సాంకేతికతకు మొదటి WHO-జాబితా ఇన్‌క్యుబేటర్."
+    },
+    "functions": [
+     {
+      "en": "Provide common facility centres for MedTech",
+      "te": "మెడ్‌టెక్ కోసం సాధారణ సౌకర్య కేంద్రాలు అందించడం"
+     },
+     {
+      "en": "Support medical-device R&D and testing",
+      "te": "వైద్య-పరికరాల పరిశోధన మరియు పరీక్షలకు మద్దతు"
+     },
+     {
+      "en": "Incubate health-tech start-ups",
+      "te": "హెల్త్-టెక్ స్టార్టప్‌లకు ఇన్‌క్యుబేషన్"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apedc",
+    "abbr": "APEDC",
+    "name": {
+     "en": "AP Electronics Development Corporation",
+     "te": "ఏపీ ఎలక్ట్రానిక్స్ అభివృద్ధి సంస్థ"
+    },
+    "category": "Electronics",
+    "established": 2015,
+    "website": "https://apedc.ap.gov.in",
+    "district": "chittoor",
+    "summary": {
+     "en": "Promotes electronics manufacturing and the electronics component ecosystem in the State.",
+     "te": "రాష్ట్రంలో ఎలక్ట్రానిక్స్ తయారీ మరియు ఎలక్ట్రానిక్స్ భాగాల పర్యావరణ వ్యవస్థను ప్రోత్సహిస్తుంది."
+    },
+    "functions": [
+     {
+      "en": "Develop electronics manufacturing clusters",
+      "te": "ఎలక్ట్రానిక్స్ తయారీ క్లస్టర్ల అభివృద్ధి"
+     },
+     {
+      "en": "Administer electronics incentives",
+      "te": "ఎలక్ట్రానిక్స్ ప్రోత్సాహకాల పరిపాలన"
+     },
+     {
+      "en": "Attract electronics investment",
+      "te": "ఎలక్ట్రానిక్స్ పెట్టుబడులను ఆకర్షించడం"
+     }
+    ],
+    "logo": ""
+   },
+   {
+    "id": "apcsti",
+    "abbr": "APCSTI",
+    "name": {
+     "en": "AP Council for Science, Technology & Innovation",
+     "te": "ఏపీ విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ మండలి"
+    },
+    "category": "Science & Technology",
+    "established": 2019,
+    "website": "https://dsti.ap.gov.in",
+    "district": "ntr",
+    "summary": {
+     "en": "The apex advisory body coordinating the State’s science, technology and innovation missions.",
+     "te": "రాష్ట్ర విజ్ఞాన, సాంకేతిక మరియు ఆవిష్కరణ మిషన్లను సమన్వయం చేసే అత్యున్నత సలహా సంస్థ."
+    },
+    "functions": [
+     {
+      "en": "Coordinate State STI missions",
+      "te": "రాష్ట్ర STI మిషన్ల సమన్వయం"
+     },
+     {
+      "en": "Advise on emerging technologies",
+      "te": "ఉద్భవిస్తున్న సాంకేతికతలపై సలహా"
+     },
+     {
+      "en": "Monitor policy outcomes",
+      "te": "విధాన ఫలితాల పర్యవేక్షణ"
+     }
+    ],
+    "logo": ""
+   }
+  ],
+  "policies": [
+   {
+    "id": "it-gcc",
+    "name": {
+     "en": "IT & Global Capability Centres (GCC) Policy",
+     "te": "ఐటీ & గ్లోబల్ కేపబిలిటీ సెంటర్ల (GCC) విధానం"
+    },
+    "sector": "Information Technology",
+    "year": 2024,
+    "status": "In force",
+    "relatedOrgs": [
+     "apts",
+     "apedc"
+    ],
+    "summary": {
+     "en": "Positions Andhra Pradesh as the preferred destination for IT services and Global Capability Centres, with incentives for new units, expansion and job creation.",
+     "te": "ఐటీ సేవలు మరియు గ్లోబల్ కేపబిలిటీ సెంటర్లకు ఆంధ్రప్రదేశ్‌ను ప్రధాన గమ్యస్థానంగా నిలిపే విధానం; కొత్త యూనిట్లు, విస్తరణ మరియు ఉద్యోగ సృష్టికి ప్రోత్సాహకాలు."
+    },
+    "objectives": [
+     {
+      "en": "Attract marquee IT and GCC investments",
+      "te": "ప్రముఖ ఐటీ మరియు GCC పెట్టుబడులను ఆకర్షించడం"
+     },
+     {
+      "en": "Create high-value technology jobs",
+      "te": "అధిక-విలువ సాంకేతిక ఉద్యోగాల సృష్టి"
+     },
+     {
+      "en": "Develop tier-2 and tier-3 IT destinations",
+      "te": "టైర్-2 మరియు టైర్-3 ఐటీ గమ్యస్థానాల అభివృద్ధి"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Capital subsidy on fixed assets",
+      "te": "స్థిర ఆస్తులపై మూలధన సబ్సిడీ"
+     },
+     {
+      "en": "Employment-linked incentive per job created",
+      "te": "సృష్టించిన ప్రతి ఉద్యోగానికి ఉద్యోగ-ఆధారిత ప్రోత్సాహకం"
+     },
+     {
+      "en": "Stamp duty and electricity tariff reimbursement",
+      "te": "స్టాంప్ డ్యూటీ మరియు విద్యుత్ టారిఫ్ వాపసు"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "electronics",
+    "name": {
+     "en": "Electronics Policy",
+     "te": "ఎలక్ట్రానిక్స్ విధానం"
+    },
+    "sector": "Electronics",
+    "year": 2023,
+    "status": "In force",
+    "relatedOrgs": [
+     "apedc"
+    ],
+    "summary": {
+     "en": "Builds a complete electronics manufacturing ecosystem, from components and PCB assembly to finished devices.",
+     "te": "భాగాలు మరియు PCB అసెంబ్లీ నుండి పూర్తి పరికరాల వరకు పూర్తి ఎలక్ట్రానిక్స్ తయారీ పర్యావరణ వ్యవస్థను నిర్మించడం."
+    },
+    "objectives": [
+     {
+      "en": "Grow electronics manufacturing output",
+      "te": "ఎలక్ట్రానిక్స్ తయారీ ఉత్పత్తిని పెంచడం"
+     },
+     {
+      "en": "Develop electronics manufacturing clusters",
+      "te": "ఎలక్ట్రానిక్స్ తయారీ క్లస్టర్ల అభివృద్ధి"
+     },
+     {
+      "en": "Create a skilled electronics workforce",
+      "te": "నైపుణ్యం కలిగిన ఎలక్ట్రానిక్స్ కార్మిక శక్తిని సృష్టించడం"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Capital subsidy linked to investment",
+      "te": "పెట్టుబడికి అనుసంధానించిన మూలధన సబ్సిడీ"
+     },
+     {
+      "en": "Interest subvention on term loans",
+      "te": "సావధాన రుణాలపై వడ్డీ రాయితీ"
+     },
+     {
+      "en": "Support for common facility centres",
+      "te": "సాధారణ సౌకర్య కేంద్రాలకు మద్దతు"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "semiconductor",
+    "name": {
+     "en": "Semiconductor & Display Fab Policy",
+     "te": "సెమీకండక్టర్ & డిస్ప్లే ఫ్యాబ్ విధానం"
+    },
+    "sector": "Semiconductors",
+    "year": 2024,
+    "status": "In force",
+    "relatedOrgs": [
+     "apedc"
+    ],
+    "summary": {
+     "en": "Targets semiconductor fabrication, ATMP/OSAT units and display manufacturing with a competitive incentive package.",
+     "te": "సెమీకండక్టర్ ఫ్యాబ్రికేషన్, ATMP/OSAT యూనిట్లు మరియు డిస్ప్లే తయారీని పోటీ ప్రోత్సాహక ప్యాకేజీతో లక్ష్యంగా పెట్టుకుంది."
+    },
+    "objectives": [
+     {
+      "en": "Establish semiconductor fabs and ATMP units",
+      "te": "సెమీకండక్టర్ ఫ్యాబ్‌లు మరియు ATMP యూనిట్ల ఏర్పాటు"
+     },
+     {
+      "en": "Build a semiconductor talent pipeline",
+      "te": "సెమీకండక్టర్ నైపుణ్య పైప్‌లైన్ నిర్మాణం"
+     },
+     {
+      "en": "Anchor the semiconductor supply chain",
+      "te": "సెమీకండక్టర్ సరఫరా శృంఖలాన్ని స్థిరపరచడం"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Capital support for fab and ATMP projects",
+      "te": "ఫ్యాబ్ మరియు ATMP ప్రాజెక్టులకు మూలధన మద్దతు"
+     },
+     {
+      "en": "Land and utility concessions",
+      "te": "భూమి మరియు యుటిలిటీ రాయితీలు"
+     },
+     {
+      "en": "Skill development and training grants",
+      "te": "నైపుణ్యాభివృద్ధి మరియు శిక్షణ గ్రాంట్లు"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "data-centre",
+    "name": {
+     "en": "Data Centre Policy",
+     "te": "డేటా సెంటర్ విధానం"
+    },
+    "sector": "Data Centres",
+    "year": 2023,
+    "status": "In force",
+    "relatedOrgs": [
+     "apts"
+    ],
+    "summary": {
+     "en": "Encourages hyperscale and edge data centres, making Andhra Pradesh a data-centre and cloud hub on the east coast.",
+     "te": "హైపర్‌స్కేల్ మరియు ఎడ్జ్ డేటా సెంటర్లను ప్రోత్సహిస్తూ, ఆంధ్రప్రదేశ్‌ను తూర్పు తీరంలో డేటా సెంటర్ మరియు క్లౌడ్ హబ్‌గా మార్చడం."
+    },
+    "objectives": [
+     {
+      "en": "Attract hyperscale data-centre investment",
+      "te": "హైపర్‌స్కేల్ డేటా సెంటర్ పెట్టుబడిని ఆకర్షించడం"
+     },
+     {
+      "en": "Ensure reliable power and connectivity",
+      "te": "నమ్మదగిన విద్యుత్ మరియు కనెక్టివిటీని నిర్ధారించడం"
+     },
+     {
+      "en": "Grow the cloud and hosting ecosystem",
+      "te": "క్లౌడ్ మరియు హోస్టింగ్ పర్యావరణ వ్యవస్థను పెంచడం"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Power tariff concessions for data centres",
+      "te": "డేటా సెంటర్లకు విద్యుత్ టారిఫ్ రాయితీలు"
+     },
+     {
+      "en": "Capital subsidy on IT infrastructure",
+      "te": "ఐటీ మౌలిక సదుపాయాలపై మూలధన సబ్సిడీ"
+     },
+     {
+      "en": "Single-window clearances",
+      "te": "ఏక్-విండో అనుమతులు"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "drone",
+    "name": {
+     "en": "Drone Policy",
+     "te": "డ్రోన్ విధానం"
+    },
+    "sector": "Drones & UAV",
+    "year": 2022,
+    "status": "In force",
+    "relatedOrgs": [
+     "apsac"
+    ],
+    "summary": {
+     "en": "Promotes drone manufacturing, drone-as-a-service delivery and a drone pilot training ecosystem across the State.",
+     "te": "రాష్ట్రవ్యాప్తంగా డ్రోన్ తయారీ, డ్రోన్-అస్-ఎ-సర్వీస్ మరియు డ్రోన్ పైలట్ శిక్షణ పర్యావరణ వ్యవస్థను ప్రోత్సహిస్తుంది."
+    },
+    "objectives": [
+     {
+      "en": "Establish drone manufacturing clusters",
+      "te": "డ్రోన్ తయారీ క్లస్టర్ల ఏర్పాటు"
+     },
+     {
+      "en": "Adopt drone services in agriculture and governance",
+      "te": "వ్యవసాయం మరియు పరిపాలనలో డ్రోన్ సేవల స్వీకరణ"
+     },
+     {
+      "en": "Create certified drone pilots",
+      "te": "ధృవీకరించిన డ్రోన్ పైలట్ల సృష్టి"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Manufacturing and testing incentives",
+      "te": "తయారీ మరియు పరీక్షల ప్రోత్సాహకాలు"
+     },
+     {
+      "en": "Support for drone pilot training centres",
+      "te": "డ్రోన్ పైలట్ శిక్షణ కేంద్రాలకు మద్దతు"
+     },
+     {
+      "en": "Government procurement preference",
+      "te": "ప్రభుత్వ కొనుగోలు ప్రాధాన్యత"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "space",
+    "name": {
+     "en": "Space-Tech Policy",
+     "te": "అంతరిక్ష-టెక్ విధానం"
+    },
+    "sector": "Space Technology",
+    "year": 2023,
+    "status": "In force",
+    "relatedOrgs": [
+     "apsac",
+     "apsrac"
+    ],
+    "summary": {
+     "en": "Builds a space-technology value chain of satellite manufacturing, launch support, ground stations and downstream applications.",
+     "te": "ఉపగ్రహ తయారీ, ప్రయోగ మద్దతు, గ్రౌండ్ స్టేషన్లు మరియు డౌన్‌స్ట్రీమ్ అనువర్తనాల అంతరిక్ష-సాంకేతిక విలువ శృంఖలాన్ని నిర్మించడం."
+    },
+    "objectives": [
+     {
+      "en": "Grow space-tech start-ups and MSMEs",
+      "te": "స్పేస్-టెక్ స్టార్టప్‌లు మరియు MSMEల వృద్ధి"
+     },
+     {
+      "en": "Establish ground stations and test facilities",
+      "te": "గ్రౌండ్ స్టేషన్లు మరియు పరీక్ష సౌకర్యాల ఏర్పాటు"
+     },
+     {
+      "en": "Enable geospatial data-driven governance",
+      "te": "భౌగోళిక డేటా-ఆధారిత పరిపాలనను సాధ్యం చేయడం"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Capital and R&D support for space-tech",
+      "te": "స్పేస్-టెక్‌కు మూలధన మరియు పరిశోధన మద్దతు"
+     },
+     {
+      "en": "Preference for Indian space-tech products",
+      "te": "భారతీయ స్పేస్-టెక్ ఉత్పత్తులకు ప్రాధాన్యత"
+     },
+     {
+      "en": "Incubation and testing infrastructure",
+      "te": "ఇన్‌క్యుబేషన్ మరియు పరీక్ష మౌలిక సదుపాయాలు"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "biotechnology",
+    "name": {
+     "en": "Biotechnology Policy",
+     "te": "జీవ సాంకేతిక విధానం"
+    },
+    "sector": "Life Sciences",
+    "year": 2021,
+    "status": "In force",
+    "relatedOrgs": [
+     "apmedtech"
+    ],
+    "summary": {
+     "en": "Accelerates the life-sciences and biotechnology sector through research parks, incubation and industry partnerships.",
+     "te": "పరిశోధన పార్కులు, ఇన్‌క్యుబేషన్ మరియు పరిశ్రమ భాగస్వామ్యాల ద్వారా జీవ విజ్ఞాన మరియు జీవ సాంకేతిక రంగాన్ని వేగవంతం చేస్తుంది."
+    },
+    "objectives": [
+     {
+      "en": "Promote biotech R&D and manufacturing",
+      "te": "బయోటెక్ పరిశోధన మరియు తయారీని ప్రోత్సహించడం"
+     },
+     {
+      "en": "Develop biotech parks and incubators",
+      "te": "బయోటెక్ పార్కులు మరియు ఇన్‌క్యుబేటర్ల అభివృద్ధి"
+     },
+     {
+      "en": "Strengthen industry–academia links",
+      "te": "పరిశ్రమ–అకాడమీ సంబంధాలను బలోపేతం చేయడం"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Capital subsidy for biotech units",
+      "te": "బయోటెక్ యూనిట్లకు మూలధన సబ్సిడీ"
+     },
+     {
+      "en": "R&D grants and incubation support",
+      "te": "పరిశోధన గ్రాంట్లు మరియు ఇన్‌క్యుబేషన్ మద్దతు"
+     },
+     {
+      "en": "Skill and talent development",
+      "te": "నైపుణ్య మరియు ప్రతిభావంతుల అభివృద్ధి"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "science",
+    "name": {
+     "en": "Science Policy",
+     "te": "విజ్ఞాన విధానం"
+    },
+    "sector": "Science",
+    "year": 2022,
+    "status": "In force",
+    "relatedOrgs": [
+     "apcost",
+     "apcsti"
+    ],
+    "summary": {
+     "en": "Promotes scientific temper, science education and grant support for basic and applied research across the State.",
+     "te": "శాస్త్రీయ దృక్పథం, విజ్ఞాన విద్య మరియు రాష్ట్రవ్యాప్తంగా ప్రాథమిక మరియు అనువర్తిత పరిశోధనకు గ్రాంట్ మద్దతును ప్రోత్సహిస్తుంది."
+    },
+    "objectives": [
+     {
+      "en": "Strengthen scientific temper and outreach",
+      "te": "శాస్త్రీయ దృక్పథం మరియు ప్రచారాన్ని బలోపేతం చేయడం"
+     },
+     {
+      "en": "Support research grants and fellowships",
+      "te": "పరిశోధన గ్రాంట్లు మరియు ఫెలోషిప్‌లకు మద్దతు"
+     },
+     {
+      "en": "Improve science infrastructure in universities",
+      "te": "విశ్వవిద్యాలయాల్లో విజ్ఞాన మౌలిక సదుపాయాల మెరుగుదల"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Research grants for institutions",
+      "te": "సంస్థలకు పరిశోధన గ్రాంట్లు"
+     },
+     {
+      "en": "Science popularisation programme funding",
+      "te": "విజ్ఞాన ప్రచార కార్యక్రమాలకు నిధులు"
+     },
+     {
+      "en": "Awards and fellowships for scientists",
+      "te": "శాస్త్రవేత్తలకు అవార్డులు మరియు ఫెలోషిప్‌లు"
+     }
+    ],
+    "file": ""
+   },
+   {
+    "id": "technology-innovation",
+    "name": {
+     "en": "Technology & Innovation Policy",
+     "te": "సాంకేతిక & ఆవిష్కరణ విధానం"
+    },
+    "sector": "Innovation",
+    "year": 2024,
+    "status": "In force",
+    "relatedOrgs": [
+     "apis",
+     "apcsti"
+    ],
+    "summary": {
+     "en": "Creates a thriving innovation and start-up ecosystem with incubators, funding and a single window for emerging technologies.",
+     "te": "ఇన్‌క్యుబేటర్లు, నిధులు మరియు ఉద్భవిస్తున్న సాంకేతికతలకు ఏక్-విండోతో వర్ధిల్లే ఆవిష్కరణ మరియు స్టార్టప్ పర్యావరణ వ్యవస్థను సృష్టించడం."
+    },
+    "objectives": [
+     {
+      "en": "Support start-ups from idea to scale",
+      "te": "ఆలోచన నుండి స్కేల్ వరకు స్టార్టప్‌లకు మద్దతు"
+     },
+     {
+      "en": "Establish incubators in every region",
+      "te": "ప్రతి ప్రాంతంలో ఇన్‌క్యుబేటర్ల ఏర్పాటు"
+     },
+     {
+      "en": "Promote emerging technologies: AI, IoT, blockchain",
+      "te": "AI, IoT, బ్లాక్‌చెయిన్ వంటి ఉద్భవిస్తున్న సాంకేతికతల ప్రోత్సాహం"
+     }
+    ],
+    "incentives": [
+     {
+      "en": "Seed and scale-up funding",
+      "te": "సీడ్ మరియు స్కేల్-అప్ నిధులు"
+     },
+     {
+      "en": "Incubation and mentoring support",
+      "te": "ఇన్‌క్యుబేషన్ మరియు మెంటరింగ్ మద్దతు"
+     },
+     {
+      "en": "Innovation challenge grants",
+      "te": "ఆవిష్కరణ ఛాలెంజ్ గ్రాంట్లు"
+     }
+    ],
+    "file": ""
+   }
+  ],
+  "egov": [
+   {
+    "id": "egov-1",
+    "name": {
+     "en": "Integrated Departmental Service Portal",
+     "te": "సమగ్ర శాఖా సేవా పోర్టల్"
+    },
+    "summary": {
+     "en": "A single digital window for all Department services, approvals, incentives and grievance redressal, integrated with Aadhaar and e-KYC.",
+     "te": "అన్ని శాఖా సేవలు, అనుమతులు, ప్రోత్సాహకాలు మరియు ఫిర్యాదు పరిష్కారానికి ఒకే డిజిటల్ విండో; ఆధార్ మరియు ఈ-కేవైసీతో అనుసంధానం."
+    },
+    "status": "Live",
+    "tags": [
+     "Single window",
+     "e-KYC",
+     "Grievance"
+    ]
+   },
+   {
+    "id": "egov-2",
+    "name": {
+     "en": "Digital Document & e-Office",
+     "te": "డిజిటల్ పత్రం & ఈ-ఆఫీసు"
+    },
+    "summary": {
+     "en": "Paperless file movement, digital signatures and an online record room for Government Orders, notifications and tenders.",
+     "te": "పేపర్‌లెస్ ఫైల్ కదలిక, డిజిటల్ సంతకాలు మరియు ప్రభుత్వ ఆదేశాలు, నోటిఫికేషన్లు, టెండర్ల కోసం ఆన్‌లైన్ రికార్డ్ రూమ్."
+    },
+    "status": "Live",
+    "tags": [
+     "e-Office",
+     "Paperless",
+     "e-Sign"
+    ]
+   },
+   {
+    "id": "egov-3",
+    "name": {
+     "en": "Geospatial Decision Support",
+     "te": "భౌగోళిక నిర్ణయ మద్దతు"
+    },
+    "summary": {
+     "en": "Satellite and GIS based dashboards for land use, crops, water bodies and disaster risk, used by multiple departments.",
+     "te": "భూమి వినియోగం, పంటలు, నీటి వనరులు మరియు విపత్తు ప్రమాదం కోసం ఉపగ్రహ మరియు GIS ఆధారిత డాష్‌బోర్డులు."
+    },
+    "status": "Live",
+    "tags": [
+     "GIS",
+     "Remote sensing",
+     "Dashboards"
+    ]
+   },
+   {
+    "id": "egov-4",
+    "name": {
+     "en": "State Cyber-security Operations Centre",
+     "te": "రాష్ట్ర సైబర్-భద్రతా కార్యకలాపాల కేంద్రం"
+    },
+    "summary": {
+     "en": "24x7 monitoring aligned to the AP Cyber Security Framework, protecting departmental applications and citizen data.",
+     "te": "ఏపీ సైబర్ భద్రతా ఫ్రేమ్‌వర్క్‌కు అనుగుణంగా 24x7 పర్యవేక్షణ, శాఖా అప్లికేషన్లు మరియు పౌరుల డేటాను రక్షించడం."
+    },
+    "status": "Live",
+    "tags": [
+     "Cyber security",
+     "SOC",
+     "OWASP"
+    ]
+   }
+  ],
+  "projects": [
+   {
+    "id": "proj-1",
+    "name": {
+     "en": "AP Fibre Grid & Last-Mile Connectivity",
+     "te": "ఏపీ ఫైబర్ గ్రిడ్ & లాస్ట్-మైల్ కనెక్టివిటీ"
+    },
+    "sector": "Connectivity",
+    "summary": {
+     "en": "Extending high-speed fibre to every village and government institution to enable digital service delivery.",
+     "te": "డిజిటల్ సేవల అందజేతను సాధ్యం చేయడానికి ప్రతి గ్రామం మరియు ప్రభుత్వ సంస్థకు హై-స్పీడ్ ఫైబర్ విస్తరణ."
+    },
+    "status": "Ongoing",
+    "progress": 78
+   },
+   {
+    "id": "proj-2",
+    "name": {
+     "en": "Drone Services for Agriculture",
+     "te": "వ్యవసాయానికి డ్రోన్ సేవలు"
+    },
+    "sector": "Drones",
+    "summary": {
+     "en": "Drone-based crop health surveys, spraying and yield estimation deployed through village service centres.",
+     "te": "గ్రామ సేవా కేంద్రాల ద్వారా డ్రోన్ ఆధారిత పంట ఆరోగ్య సర్వేలు, స్ప్రేయింగ్ మరియు దిగుబడి అంచనా."
+    },
+    "status": "Ongoing",
+    "progress": 62
+   },
+   {
+    "id": "proj-3",
+    "name": {
+     "en": "Space-Tech Incubation Park",
+     "te": "స్పేస్-టెక్ ఇన్‌క్యుబేషన్ పార్క్"
+    },
+    "sector": "Space",
+    "summary": {
+     "en": "A dedicated facility for space-tech start-ups with clean rooms, testing labs and a ground-station demonstrator.",
+     "te": "క్లీన్ రూమ్‌లు, పరీక్ష ప్రయోగశాలలు మరియు గ్రౌండ్-స్టేషన్ ప్రదర్శనతో స్పేస్-టెక్ స్టార్టప్‌లకు అంకిత సౌకర్యం."
+    },
+    "status": "In progress",
+    "progress": 45
+   },
+   {
+    "id": "proj-4",
+    "name": {
+     "en": "AI & Emerging Technologies Mission",
+     "te": "AI & ఉద్భవిస్తున్న సాంకేతికతల మిషన్"
+    },
+    "sector": "AI",
+    "summary": {
+     "en": "Applied AI pilot projects in health, agriculture and citizen services, with an ethics and safety framework.",
+     "te": "ఆరోగ్యం, వ్యవసాయం మరియు పౌర సేవలలో అనువర్తిత AI పైలట్ ప్రాజెక్టులు; నైతికత మరియు భద్రతా ఫ్రేమ్‌వర్క్‌తో."
+    },
+    "status": "Ongoing",
+    "progress": 55
+   },
+   {
+    "id": "proj-5",
+    "name": {
+     "en": "Semiconductor Fab & ATMP Cluster",
+     "te": "సెమీకండక్టర్ ఫ్యాబ్ & ATMP క్లస్టర్"
+    },
+    "sector": "Semiconductors",
+    "summary": {
+     "en": "Development of land, power and talent infrastructure for semiconductor and display manufacturing.",
+     "te": "సెమీకండక్టర్ మరియు డిస్ప్లే తయారీ కోసం భూమి, విద్యుత్ మరియు ప్రతిభా మౌలిక సదుపాయాల అభివృద్ధి."
+    },
+    "status": "In progress",
+    "progress": 38
+   },
+   {
+    "id": "proj-6",
+    "name": {
+     "en": "Digital Literacy & Rural Innovation",
+     "te": "డిజిటల్ అక్షరాస్యత & గ్రామీణ ఆవిష్కరణ"
+    },
+    "sector": "Skilling",
+    "summary": {
+     "en": "Digital literacy drives and rural innovation centres to ensure inclusive access to technology.",
+     "te": "సాంకేతికతకు సమగ్ర ప్రాప్యత కోసం డిజిటల్ అక్షరాస్యత కార్యక్రమాలు మరియు గ్రామీణ ఆవిష్కరణ కేంద్రాలు."
+    },
+    "status": "Ongoing",
+    "progress": 70
+   }
+  ],
+  "regions": [
+   {
+    "id": "north-coastal",
+    "name": {
+     "en": "North Coastal Andhra",
+     "te": "ఉత్తర తీరాంధ్ర"
+    },
+    "color": "#4a2bc2"
+   },
+   {
+    "id": "godavari",
+    "name": {
+     "en": "Godavari Region",
+     "te": "గోదావరి ప్రాంతం"
+    },
+    "color": "#8e55b3"
+   },
+   {
+    "id": "krishna",
+    "name": {
+     "en": "Krishna Region",
+     "te": "కృష్ణా ప్రాంతం"
+    },
+    "color": "#1157ce"
+   },
+   {
+    "id": "south-coastal",
+    "name": {
+     "en": "South Coastal Andhra",
+     "te": "దక్షిణ తీరాంధ్ర"
+    },
+    "color": "#08979c"
+   },
+   {
+    "id": "rayalaseema",
+    "name": {
+     "en": "Rayalaseema",
+     "te": "రాయలసీమ"
+    },
+    "color": "#a46800"
+   }
+  ],
+  "districts": [
+   {
+    "id": "srikakulam",
+    "name": {
+     "en": "Srikakulam",
+     "te": "శ్రీకాకుళం"
+    },
+    "region": "north-coastal",
+    "hq": "Srikakulam",
+    "x": 322,
+    "y": 46,
+    "institutions": [
+     {
+      "name": {
+       "en": "JNTU-GV Regional Centre",
+       "te": "జెఎన్‌టియు-జివి ప్రాంతీయ కేంద్రం"
+      },
+      "type": "Institution"
+     },
+     {
+      "name": {
+       "en": "District Science Centre",
+       "te": "జిల్లా విజ్ఞాన కేంద్రం"
+      },
+      "type": "Science Centre"
+     }
+    ],
+    "activities": [
+     {
+      "en": "National Science Day expo",
+      "te": "జాతీయ విజ్ఞాన దినోత్సవ ప్రదర్శన"
+     }
+    ]
+   },
+   {
+    "id": "vizianagaram",
+    "name": {
+     "en": "Vizianagaram",
+     "te": "విజయనగరం"
+    },
+    "region": "north-coastal",
+    "hq": "Vizianagaram",
+    "x": 262,
+    "y": 82,
+    "institutions": [
+     {
+      "name": {
+       "en": "Maharajah’s College (Autonomous)",
+       "te": "మహారాజా కళాశాల"
+      },
+      "type": "Institution"
+     },
+     {
+      "name": {
+       "en": "AP Innovation Society Hub",
+       "te": "ఏపీ ఇన్నోవేషన్ సొసైటీ హబ్"
+      },
+      "type": "Innovation Hub"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Student innovation bootcamp",
+      "te": "విద్యార్థి ఆవిష్కరణ శిబిరం"
+     }
+    ]
+   },
+   {
+    "id": "parvathipuram-manyam",
+    "name": {
+     "en": "Parvathipuram Manyam",
+     "te": "పార్వతీపురం మన్యం"
+    },
+    "region": "north-coastal",
+    "hq": "Parvathipuram",
+    "x": 212,
+    "y": 104,
+    "institutions": [
+     {
+      "name": {
+       "en": "Tribal Science Outreach Centre",
+       "te": "గిరిజన విజ్ఞాన కేంద్రం"
+      },
+      "type": "Outreach"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Science outreach in tribal schools",
+      "te": "గిరిజన పాఠశాలల్లో విజ్ఞాన ప్రచారం"
+     }
+    ]
+   },
+   {
+    "id": "alluri-sitharama-raju",
+    "name": {
+     "en": "Alluri Sitharama Raju",
+     "te": "అల్లూరి సీతారామరాజు"
+    },
+    "region": "north-coastal",
+    "hq": "Paderu",
+    "x": 216,
+    "y": 158,
+    "institutions": [
+     {
+      "name": {
+       "en": "Eastern Ghats Biodiversity Lab",
+       "te": "తూర్పు కనుమల జీవవైవిధ్య ప్రయోగశాల"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Biodiversity documentation drive",
+      "te": "జీవవైవిధ్య నమోదు కార్యక్రమం"
+     }
+    ]
+   },
+   {
+    "id": "visakhapatnam",
+    "name": {
+     "en": "Visakhapatnam",
+     "te": "విశాఖపట్నం"
+    },
+    "region": "north-coastal",
+    "hq": "Visakhapatnam",
+    "x": 278,
+    "y": 128,
+    "institutions": [
+     {
+      "name": {
+       "en": "Andhra University",
+       "te": "ఆంధ్ర విశ్వవిద్యాలయం"
+      },
+      "type": "University"
+     },
+     {
+      "name": {
+       "en": "Millet & Deep-Tech Incubation Centre",
+       "te": "చిరుధాన్య & డీప్-టెక్ ఇన్‌క్యుబేషన్ కేంద్రం"
+      },
+      "type": "Incubator"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Coastal science conclave",
+      "te": "తీర విజ్ఞాన సదస్సు"
+     }
+    ]
+   },
+   {
+    "id": "anakapalli",
+    "name": {
+     "en": "Anakapalli",
+     "te": "అనకాపల్లి"
+    },
+    "region": "north-coastal",
+    "hq": "Anakapalli",
+    "x": 258,
+    "y": 172,
+    "institutions": [
+     {
+      "name": {
+       "en": "Pharma & Life Sciences Cluster",
+       "te": "ఫార్మా & జీవ విజ్ఞాన క్లస్టర్"
+      },
+      "type": "Cluster"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Industry–academia meet",
+      "te": "పరిశ్రమ–అకాడమీ సమావేశం"
+     }
+    ]
+   },
+   {
+    "id": "kakinada",
+    "name": {
+     "en": "Kakinada",
+     "te": "కాకినాడ"
+    },
+    "region": "godavari",
+    "hq": "Kakinada",
+    "x": 306,
+    "y": 222,
+    "institutions": [
+     {
+      "name": {
+       "en": "JNTU Kakinada",
+       "te": "జెఎన్‌టియు కాకినాడ"
+      },
+      "type": "University"
+     },
+     {
+      "name": {
+       "en": "Blue Economy & Marine Tech Park",
+       "te": "నీలి ఆర్థిక వ్యవస్థ & సముద్ర సాంకేతిక పార్క్"
+      },
+      "type": "Tech Park"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Marine robotics workshop",
+      "te": "సముద్ర రోబోటిక్స్ వర్క్‌షాప్"
+     }
+    ]
+   },
+   {
+    "id": "konaseema",
+    "name": {
+     "en": "Dr. B.R. Ambedkar Konaseema",
+     "te": "డాక్టర్ బి.ఆర్. అంబేద్కర్ కోనసీమ"
+    },
+    "region": "godavari",
+    "hq": "Amalapuram",
+    "x": 300,
+    "y": 262,
+    "institutions": [
+     {
+      "name": {
+       "en": "Aquaculture Technology Centre",
+       "te": "ఆక్వాకల్చర్ సాంకేతిక కేంద్రం"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Aqua-tech farmer training",
+      "te": "ఆక్వా-టెక్ రైతు శిక్షణ"
+     }
+    ]
+   },
+   {
+    "id": "east-godavari",
+    "name": {
+     "en": "East Godavari",
+     "te": "తూర్పు గోదావరి"
+    },
+    "region": "godavari",
+    "hq": "Rajahmundry",
+    "x": 252,
+    "y": 248,
+    "institutions": [
+     {
+      "name": {
+       "en": "Godavari Institute of Engineering & Technology",
+       "te": "గోదావరి ఇంజినీరింగ్ & టెక్నాలజీ సంస్థ"
+      },
+      "type": "Institution"
+     }
+    ],
+    "activities": [
+     {
+      "en": "River basin research programme",
+      "te": "నదీ పరీవాహక పరిశోధన కార్యక్రమం"
+     }
+    ]
+   },
+   {
+    "id": "west-godavari",
+    "name": {
+     "en": "West Godavari",
+     "te": "పశ్చిమ గోదావరి"
+    },
+    "region": "godavari",
+    "hq": "Bhimavaram",
+    "x": 214,
+    "y": 288,
+    "institutions": [
+     {
+      "name": {
+       "en": "Agri-Tech Research Station",
+       "te": "వ్యవసాయ-సాంకేతిక పరిశోధన కేంద్రం"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Precision farming demo",
+      "te": "ఖచ్చిత వ్యవసాయ ప్రదర్శన"
+     }
+    ]
+   },
+   {
+    "id": "eluru",
+    "name": {
+     "en": "Eluru",
+     "te": "ఏలూరు"
+    },
+    "region": "godavari",
+    "hq": "Eluru",
+    "x": 198,
+    "y": 252,
+    "institutions": [
+     {
+      "name": {
+       "en": "Millet Research & Processing Centre",
+       "te": "చిరుధాన్య పరిశోధన & ప్రాసెసింగ్ కేంద్రం"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Millet value-chain workshop",
+      "te": "చిరుధాన్య విలువ-శృంఖల వర్క్‌షాప్"
+     }
+    ]
+   },
+   {
+    "id": "krishna",
+    "name": {
+     "en": "Krishna",
+     "te": "కృష్ణా"
+    },
+    "region": "krishna",
+    "hq": "Machilipatnam",
+    "x": 242,
+    "y": 308,
+    "institutions": [
+     {
+      "name": {
+       "en": "Krishna University",
+       "te": "కృష్ణా విశ్వవిద్యాలయం"
+      },
+      "type": "University"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Coastal erosion monitoring",
+      "te": "తీర కోత పర్యవేక్షణ"
+     }
+    ]
+   },
+   {
+    "id": "ntr",
+    "name": {
+     "en": "NTR",
+     "te": "ఎన్‌టీఆర్"
+    },
+    "region": "krishna",
+    "hq": "Vijayawada",
+    "x": 252,
+    "y": 278,
+    "institutions": [
+     {
+      "name": {
+       "en": "AP Innovation & Start-up Hub",
+       "te": "ఏపీ ఇన్నోవేషన్ & స్టార్టప్ హబ్"
+      },
+      "type": "Incubator"
+     },
+     {
+      "name": {
+       "en": "SRM University-AP",
+       "te": "ఎస్‌ఆర్‌ఎం విశ్వవిద్యాలయం-ఏపీ"
+      },
+      "type": "University"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Start-up showcase & demo day",
+      "te": "స్టార్టప్ ప్రదర్శన & డెమో డే"
+     }
+    ]
+   },
+   {
+    "id": "guntur",
+    "name": {
+     "en": "Guntur",
+     "te": "గుంటూరు"
+    },
+    "region": "krishna",
+    "hq": "Guntur",
+    "x": 256,
+    "y": 348,
+    "institutions": [
+     {
+      "name": {
+       "en": "Acharya Nagarjuna University",
+       "te": "ఆచార్య నాగార్జున విశ్వవిద్యాలయం"
+      },
+      "type": "University"
+     },
+     {
+      "name": {
+       "en": "Chilli & Spice Technology Centre",
+       "te": "మిరప & సుగంధ సాంకేతిక కేంద్రం"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Food-tech innovation challenge",
+      "te": "ఫుడ్-టెక్ ఆవిష్కరణ సవాలు"
+     }
+    ]
+   },
+   {
+    "id": "palnadu",
+    "name": {
+     "en": "Palnadu",
+     "te": "పల్నాడు"
+    },
+    "region": "krishna",
+    "hq": "Narasaraopet",
+    "x": 214,
+    "y": 334,
+    "institutions": [
+     {
+      "name": {
+       "en": "Skill & Vocational Technology Centre",
+       "te": "నైపుణ్య & వృత్తి సాంకేతిక కేంద్రం"
+      },
+      "type": "Skill Centre"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Rural skill development camp",
+      "te": "గ్రామీణ నైపుణ్యాభివృద్ధి శిబిరం"
+     }
+    ]
+   },
+   {
+    "id": "bapatla",
+    "name": {
+     "en": "Bapatla",
+     "te": "బాపట్ల"
+    },
+    "region": "south-coastal",
+    "hq": "Bapatla",
+    "x": 266,
+    "y": 388,
+    "institutions": [
+     {
+      "name": {
+       "en": "Agricultural College & Research Institute",
+       "te": "వ్యవసాయ కళాశాల & పరిశోధన సంస్థ"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Climate-resilient crops field day",
+      "te": "వాతావరణ-నిరోధక పంటల క్షేత్ర దినం"
+     }
+    ]
+   },
+   {
+    "id": "prakasam",
+    "name": {
+     "en": "Prakasam",
+     "te": "ప్రకాశం"
+    },
+    "region": "south-coastal",
+    "hq": "Ongole",
+    "x": 256,
+    "y": 428,
+    "institutions": [
+     {
+      "name": {
+       "en": "Solar & Renewable Energy Park",
+       "te": "సౌర & పునరుత్పాదక ఇంధన పార్క్"
+      },
+      "type": "Tech Park"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Renewable energy awareness drive",
+      "te": "పునరుత్పాదక ఇంధన అవగాహన కార్యక్రమం"
+     }
+    ]
+   },
+   {
+    "id": "spsr-nellore",
+    "name": {
+     "en": "Sri Potti Sriramulu Nellore",
+     "te": "శ్రీ పొట్టి శ్రీరాములు నెల్లూరు"
+    },
+    "region": "south-coastal",
+    "hq": "Nellore",
+    "x": 272,
+    "y": 472,
+    "institutions": [
+     {
+      "name": {
+       "en": "Krishnapatnam Industrial & Tech Zone",
+       "te": "కృష్ణపట్నం పారిశ్రామిక & టెక్ జోన్"
+      },
+      "type": "Cluster"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Industrial automation seminar",
+      "te": "పారిశ్రామిక ఆటోమేషన్ సదస్సు"
+     }
+    ]
+   },
+   {
+    "id": "tirupati",
+    "name": {
+     "en": "Tirupati",
+     "te": "తిరుపతి"
+    },
+    "region": "south-coastal",
+    "hq": "Tirupati",
+    "x": 252,
+    "y": 512,
+    "institutions": [
+     {
+      "name": {
+       "en": "IIT Tirupati",
+       "te": "ఐఐటీ తిరుపతి"
+      },
+      "type": "University"
+     },
+     {
+      "name": {
+       "en": "Sri Venkateswara University",
+       "te": "శ్రీ వేంకటేశ్వర విశ్వవిద్యాలయం"
+      },
+      "type": "University"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Space-tech student symposium",
+      "te": "అంతరిక్ష-టెక్ విద్యార్థి సదస్సు"
+     }
+    ]
+   },
+   {
+    "id": "chittoor",
+    "name": {
+     "en": "Chittoor",
+     "te": "చిత్తూరు"
+    },
+    "region": "rayalaseema",
+    "hq": "Chittoor",
+    "x": 228,
+    "y": 562,
+    "institutions": [
+     {
+      "name": {
+       "en": "Electronics Manufacturing Cluster",
+       "te": "ఎలక్ట్రానిక్స్ తయారీ క్లస్టర్"
+      },
+      "type": "Cluster"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Electronics skill programme",
+      "te": "ఎలక్ట్రానిక్స్ నైపుణ్య కార్యక్రమం"
+     }
+    ]
+   },
+   {
+    "id": "annamayya",
+    "name": {
+     "en": "Annamayya",
+     "te": "అన్నమయ్య"
+    },
+    "region": "rayalaseema",
+    "hq": "Rayachoti",
+    "x": 204,
+    "y": 522,
+    "institutions": [
+     {
+      "name": {
+       "en": "Sericulture Technology Centre",
+       "te": "పట్టు పరిశ్రమ సాంకేతిక కేంద్రం"
+      },
+      "type": "Research"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Sericulture modernisation workshop",
+      "te": "పట్టు ఆధునీకరణ వర్క్‌షాప్"
+     }
+    ]
+   },
+   {
+    "id": "kadapa",
+    "name": {
+     "en": "YSR Kadapa",
+     "te": "వైఎస్ఆర్ కడప"
+    },
+    "region": "rayalaseema",
+    "hq": "Kadapa",
+    "x": 178,
+    "y": 482,
+    "institutions": [
+     {
+      "name": {
+       "en": "Yogi Vemana University",
+       "te": "యోగి వేమన విశ్వవిద్యాలయం"
+      },
+      "type": "University"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Mineral & materials science meet",
+      "te": "ఖనిజ & పదార్థ విజ్ఞాన సమావేశం"
+     }
+    ]
+   },
+   {
+    "id": "anantapur",
+    "name": {
+     "en": "Anantapur",
+     "te": "అనంతపురం"
+    },
+    "region": "rayalaseema",
+    "hq": "Anantapur",
+    "x": 122,
+    "y": 502,
+    "institutions": [
+     {
+      "name": {
+       "en": "JNTU Anantapur",
+       "te": "జెఎన్‌టియు అనంతపురం"
+      },
+      "type": "University"
+     },
+     {
+      "name": {
+       "en": "National Institute of Technology (proposed)",
+       "te": "జాతీయ సాంకేతిక సంస్థ (ప్రతిపాదిత)"
+      },
+      "type": "Institution"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Dryland agriculture tech camp",
+      "te": "ఎండు భూమి వ్యవసాయ టెక్ శిబిరం"
+     }
+    ]
+   },
+   {
+    "id": "sri-sathya-sai",
+    "name": {
+     "en": "Sri Sathya Sai",
+     "te": "శ్రీ సత్యసాయి"
+    },
+    "region": "rayalaseema",
+    "hq": "Puttaparthi",
+    "x": 150,
+    "y": 442,
+    "institutions": [
+     {
+      "name": {
+       "en": "Sri Sathya Sai Institute of Higher Learning",
+       "te": "శ్రీ సత్యసాయి ఉన్నత విద్యా సంస్థ"
+      },
+      "type": "University"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Health-tech & AI in medicine workshop",
+      "te": "హెల్త్-టెక్ & వైద్యంలో AI వర్క్‌షాప్"
+     }
+    ]
+   },
+   {
+    "id": "kurnool",
+    "name": {
+     "en": "Kurnool",
+     "te": "కర్నూలు"
+    },
+    "region": "rayalaseema",
+    "hq": "Kurnool",
+    "x": 156,
+    "y": 360,
+    "institutions": [
+     {
+      "name": {
+       "en": "Rayalaseema University",
+       "te": "రాయలసీమ విశ్వవిద్యాలయం"
+      },
+      "type": "University"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Science exhibition for schools",
+      "te": "పాఠశాలల విజ్ఞాన ప్రదర్శన"
+     }
+    ]
+   },
+   {
+    "id": "nandyal",
+    "name": {
+     "en": "Nandyal",
+     "te": "నంద్యాల"
+    },
+    "region": "rayalaseema",
+    "hq": "Nandyal",
+    "x": 176,
+    "y": 404,
+    "institutions": [
+     {
+      "name": {
+       "en": "Solar Manufacturing & Research Park",
+       "te": "సౌర తయారీ & పరిశోధన పార్క్"
+      },
+      "type": "Tech Park"
+     }
+    ],
+    "activities": [
+     {
+      "en": "Clean energy technology conclave",
+      "te": "స్వచ్ఛ ఇంధన సాంకేతిక సదస్సు"
+     }
+    ]
+   }
+  ],
+  "awards": [
+   {
+    "id": "2025",
+    "year": 2025,
+    "title": {
+     "en": "DSTI Awards 2025",
+     "te": "DSTI అవార్డులు 2025"
+    },
+    "awards": [
+     {
+      "name": {
+       "en": "State Scientist of the Year",
+       "te": "రాష్ట్ర శాస్త్రవేత్త ఆఫ్ ది ఇయర్"
+      },
+      "recipient": "Dr. K. Srinivasa Rao",
+      "field": "Materials Science"
+     },
+     {
+      "name": {
+       "en": "Young Innovator Award",
+       "te": "యువ ఆవిష్కర్త అవార్డు"
+      },
+      "recipient": "Ms. B. Harini",
+      "field": "Agri-Tech"
+     },
+     {
+      "name": {
+       "en": "Best Science Outreach Institution",
+       "te": "ఉత్తమ విజ్ఞాన ప్రచార సంస్థ"
+      },
+      "recipient": "APCOST",
+      "field": "Science Popularisation"
+     }
+    ]
+   },
+   {
+    "id": "2024",
+    "year": 2024,
+    "title": {
+     "en": "DSTI Awards 2024",
+     "te": "DSTI అవార్డులు 2024"
+    },
+    "awards": [
+     {
+      "name": {
+       "en": "State Scientist of the Year",
+       "te": "రాష్ట్ర శాస్త్రవేత్త ఆఫ్ ది ఇయర్"
+      },
+      "recipient": "Prof. M. Lakshmi Devi",
+      "field": "Biotechnology"
+     },
+     {
+      "name": {
+       "en": "Young Innovator Award",
+       "te": "యువ ఆవిష్కర్త అవార్డు"
+      },
+      "recipient": "Mr. S. Aravind",
+      "field": "Space-Tech"
+     },
+     {
+      "name": {
+       "en": "Best Science Outreach Institution",
+       "te": "ఉత్తమ విజ్ఞాన ప్రచార సంస్థ"
+      },
+      "recipient": "APSRAC",
+      "field": "Geospatial Outreach"
+     }
+    ]
+   },
+   {
+    "id": "2023",
+    "year": 2023,
+    "title": {
+     "en": "DSTI Awards 2023",
+     "te": "DSTI అవార్డులు 2023"
+    },
+    "awards": [
+     {
+      "name": {
+       "en": "State Scientist of the Year",
+       "te": "రాష్ట్ర శాస్త్రవేత్త ఆఫ్ ది ఇయర్"
+      },
+      "recipient": "Dr. V. Ramesh Babu",
+      "field": "Semiconductor Engineering"
+     },
+     {
+      "name": {
+       "en": "Young Innovator Award",
+       "te": "యువ ఆవిష్కర్త అవార్డు"
+      },
+      "recipient": "Ms. P. Nandini",
+      "field": "Health-Tech"
+     }
+    ]
+   }
+  ],
+  "faqs": [
+   {
+    "q": {
+     "en": "What does the Department of Science, Technology & Innovation (DSTI) do?",
+     "te": "విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ (DSTI) ఏమి చేస్తుంది?"
+    },
+    "a": {
+     "en": "DSTI is the nodal department for science, technology, innovation, electronics, IT and space applications in Andhra Pradesh. It coordinates the State’s science and technology institutions, frames sector policies, drives e-Governance and promotes research and innovation.",
+     "te": "DSTI ఆంధ్రప్రదేశ్‌లో విజ్ఞానం, సాంకేతికత, ఆవిష్కరణ, ఎలక్ట్రానిక్స్, ఐటీ మరియు అంతరిక్ష అనువర్తనాలకు నోడల్ శాఖ. ఇది రాష్ట్ర విజ్ఞాన, సాంకేతిక సంస్థలను సమన్వయం చేస్తుంది, రంగ విధానాలను రూపొందిస్తుంది."
+    }
+   },
+   {
+    "q": {
+     "en": "How do I file a Right to Information (RTI) request?",
+     "te": "సమాచార హక్కు (RTI) అభ్యర్థనను ఎలా దాఖలు చేయాలి?"
+    },
+    "a": {
+     "en": "Write your request to the Public Information Officer (PIO), DSTI, AP Secretariat, Velagapudi, Amaravati. The RTI Act 2005 and the AP RTI Rules 2006 are available in the e-Citizen section. The PIO responds within 30 days as prescribed.",
+     "te": "మీ అభ్యర్థనను ప్రజా సమాచార అధికారి (PIO), DSTI, ఏపీ సెక్రటేరియట్, వెలగపూడి, అమరావతికి రాయండి. RTI చట్టం 2005 మరియు ఏపీ RTI నియమాలు 2006 ఇ-పౌరుడు విభాగంలో అందుబాటులో ఉన్నాయి."
+    }
+   },
+   {
+    "q": {
+     "en": "What incentives are available for investors in electronics and IT?",
+     "te": "ఎలక్ట్రానిక్స్ మరియు ఐటీలో పెట్టుబడిదారులకు ఎలాంటి ప్రోత్సాహకాలు ఉన్నాయి?"
+    },
+    "a": {
+     "en": "The Electronics, IT & GCC, Semiconductor and Data Centre policies offer capital subsidies, employment-linked incentives, interest subvention, stamp duty and power tariff concessions. Details are on the Investor’s Corner page.",
+     "te": "ఎలక్ట్రానిక్స్, ఐటీ & GCC, సెమీకండక్టర్ మరియు డేటా సెంటర్ విధానాలు మూలధన సబ్సిడీలు, ఉద్యోగ-ఆధారిత ప్రోత్సాహకాలు, వడ్డీ రాయితీ, స్టాంప్ డ్యూటీ మరియు విద్యుత్ టారిఫ్ రాయితీలు అందిస్తాయి."
+    }
+   },
+   {
+    "q": {
+     "en": "How can students participate in science fairs and talent search?",
+     "te": "విద్యార్థులు విజ్ఞాన ప్రదర్శనలు మరియు ప్రతిభా అన్వేషణలో ఎలా పాల్గొనవచ్చు?"
+    },
+    "a": {
+     "en": "Notifications for the State Science Fair, AP Science Talent Search and student innovation bootcamps are published in the Notifications & Circulars section. Schools and colleges can apply through their head of institution.",
+     "te": "రాష్ట్ర విజ్ఞాన ప్రదర్శన, ఏపీ విజ్ఞాన ప్రతిభా అన్వేషణ మరియు విద్యార్థి ఆవిష్కరణ శిబిరాల నోటిఫికేషన్లు నోటిఫికేషన్లు & సర్క్యులర్ల విభాగంలో ప్రచురించబడతాయి."
+    }
+   },
+   {
+    "q": {
+     "en": "How do I download a Government Order or tender document?",
+     "te": "ప్రభుత్వ ఆదేశం లేదా టెండర్ పత్రాన్ని ఎలా డౌన్‌లోడ్ చేయాలి?"
+    },
+    "a": {
+     "en": "Use the e-Citizen → Government Orders page or the Tenders page. Every document has a PDF download link. You can also use the site-wide search to find an order by number or subject.",
+     "te": "ఇ-పౌరుడు → ప్రభుత్వ ఆదేశాలు పేజీ లేదా టెండర్ల పేజీని ఉపయోగించండి. ప్రతి పత్రానికి PDF డౌన్‌లోడ్ లింక్ ఉంటుంది. సైట్-వ్యాప్త శోధనను కూడా ఉపయోగించవచ్చు."
+    }
+   },
+   {
+    "q": {
+     "en": "Is this website accessible to persons with disabilities?",
+     "te": "ఈ వెబ్‌సైట్ వికలాంగులకు ప్రాప్యత కలిగినదా?"
+    },
+    "a": {
+     "en": "Yes. The website follows GIGW and WCAG 2.1 Level AA guidelines. It supports screen readers, keyboard navigation, text resizing, a high-contrast mode and a dark mode. See the Accessibility Statement for details.",
+     "te": "అవును. ఈ వెబ్‌సైట్ GIGW మరియు WCAG 2.1 స్థాయి AA మార్గదర్శకాలను అనుసరిస్తుంది. స్క్రీన్ రీడర్లు, కీబోర్డ్ నావిగేషన్, అక్షర పరిమాణ మార్పు, అధిక-కాంట్రాస్ట్ మరియు చీకటి రూపాన్ని మద్దతు ఇస్తుంది."
+    }
+   },
+   {
+    "q": {
+     "en": "How can I report a technical problem or give feedback?",
+     "te": "సాంకేతిక సమస్యను ఎలా నివేదించాలి లేదా అభిప్రాయం ఇవ్వాలి?"
+    },
+    "a": {
+     "en": "Use the Feedback form on the Contact Us page. Your message is stored securely and a notification is sent to the Department. You may also write to dsti@ap.gov.in.",
+     "te": "సంప్రదించండి పేజీలోని అభిప్రాయ ఫారంను ఉపయోగించండి. మీ సందేశం సురక్షితంగా నిల్వ చేయబడుతుంది మరియు శాఖకు నోటిఫికేషన్ పంపబడుతుంది."
+    }
+   },
+   {
+    "q": {
+     "en": "What is the \"Ask Vigyan Mitra\" assistant?",
+     "te": "\"విజ్ఞాన మిత్రను అడగండి\" సహాయకుడు ఏమిటి?"
+    },
+    "a": {
+     "en": "Vigyan Mitra is a help assistant that answers visitor questions using only the content published on this website, and shows the source page for every answer.",
+     "te": "విజ్ఞాన మిత్ర అనేది సందర్శకుల ప్రశ్నలకు ఈ వెబ్‌సైట్‌లో ప్రచురితమైన విషయం నుండి మాత్రమే సమాధానం ఇచ్చే సహాయకుడు; ప్రతి సమాధానానికి మూల పేజీని చూపిస్తుంది."
+    }
+   }
+  ],
+  "officers": [
+   {
+    "name": "Special Chief Secretary to Government",
+    "designation": "Head of Department",
+    "office": "DSTI, AP Secretariat",
+    "phone": "+91 863 244 1201",
+    "email": "secy-dsti@ap.gov.in",
+    "roleTag": ""
+   },
+   {
+    "name": "Director (Science & Technology)",
+    "designation": "Director",
+    "office": "DSTI, AP Secretariat",
+    "phone": "+91 863 244 1202",
+    "email": "director-dsti@ap.gov.in",
+    "roleTag": ""
+   },
+   {
+    "name": "Joint Secretary (Administration)",
+    "designation": "Public Information Officer (RTI)",
+    "office": "DSTI, AP Secretariat",
+    "phone": "+91 863 244 1210",
+    "email": "pio-dsti@ap.gov.in",
+    "roleTag": "pio"
+   },
+   {
+    "name": "Deputy Secretary (Administration)",
+    "designation": "Appellate Authority (RTI)",
+    "office": "DSTI, AP Secretariat",
+    "phone": "+91 863 244 1211",
+    "email": "aa-dsti@ap.gov.in",
+    "roleTag": ""
+   },
+   {
+    "name": "Presiding Officer, Internal Committee",
+    "designation": "Nodal Officer (PoSH)",
+    "office": "DSTI, AP Secretariat",
+    "phone": "+91 863 244 1215",
+    "email": "ic-dsti@ap.gov.in",
+    "roleTag": "posh"
+   }
+  ],
+  "usefulLinks": [
+   {
+    "name": {
+     "en": "Government of Andhra Pradesh",
+     "te": "Government of Andhra Pradesh"
+    },
+    "url": "https://www.ap.gov.in"
+   },
+   {
+    "name": {
+     "en": "Ministry of Electronics & Information Technology (MeitY)",
+     "te": "Ministry of Electronics & Information Technology (MeitY)"
+    },
+    "url": "https://www.meity.gov.in"
+   },
+   {
+    "name": {
+     "en": "Department of Science & Technology, Government of India",
+     "te": "Department of Science & Technology, Government of India"
+    },
+    "url": "https://dst.gov.in"
+   },
+   {
+    "name": {
+     "en": "ISRO — Indian Space Research Organisation",
+     "te": "ISRO — Indian Space Research Organisation"
+    },
+    "url": "https://www.isro.gov.in"
+   },
+   {
+    "name": {
+     "en": "National Informatics Centre (NIC)",
+     "te": "National Informatics Centre (NIC)"
+    },
+    "url": "https://www.nic.in"
+   },
+   {
+    "name": {
+     "en": "CERT-In",
+     "te": "CERT-In"
+    },
+    "url": "https://www.cert-in.org.in"
+   },
+   {
+    "name": {
+     "en": "W3C — Web Content Accessibility Guidelines",
+     "te": "W3C — Web Content Accessibility Guidelines"
+    },
+    "url": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+   },
+   {
+    "name": {
+     "en": "Guidelines for Indian Government Websites (GIGW)",
+     "te": "Guidelines for Indian Government Websites (GIGW)"
+    },
+    "url": "https://guidelines.india.gov.in"
+   }
+  ],
+  "scienceDays": [
+   {
+    "month": 1,
+    "day": 12,
+    "name": {
+     "en": "National Youth Day",
+     "te": "జాతీయ యువజన దినోత్సవం"
+    },
+    "theme": "Science & Youth"
+   },
+   {
+    "month": 2,
+    "day": 11,
+    "name": {
+     "en": "International Day of Women and Girls in Science",
+     "te": "విజ్ఞానంలో మహిళలు & బాలికల అంతర్జాతీయ దినం"
+    },
+    "theme": "Inclusion"
+   },
+   {
+    "month": 2,
+    "day": 28,
+    "name": {
+     "en": "National Science Day",
+     "te": "జాతీయ విజ్ఞాన దినోత్సవం"
+    },
+    "theme": "Raman Effect"
+   },
+   {
+    "month": 3,
+    "day": 23,
+    "name": {
+     "en": "World Meteorological Day",
+     "te": "ప్రపంచ పవన దినోత్సవం"
+    },
+    "theme": "Weather & Climate"
+   },
+   {
+    "month": 4,
+    "day": 22,
+    "name": {
+     "en": "Earth Day",
+     "te": "భూమి దినోత్సవం"
+    },
+    "theme": "Environment"
+   },
+   {
+    "month": 5,
+    "day": 17,
+    "name": {
+     "en": "World Telecommunication Day",
+     "te": "ప్రపంచ టెలికమ్యూనికేషన్ దినోత్సవం"
+    },
+    "theme": "Connectivity"
+   },
+   {
+    "month": 6,
+    "day": 5,
+    "name": {
+     "en": "World Environment Day",
+     "te": "ప్రపంచ పర్యావరణ దినోత్సవం"
+    },
+    "theme": "Sustainability"
+   },
+   {
+    "month": 7,
+    "day": 11,
+    "name": {
+     "en": "World Population Day",
+     "te": "ప్రపంచ జనాభా దినోత్సవం"
+    },
+    "theme": "Data & Demography"
+   },
+   {
+    "month": 8,
+    "day": 12,
+    "name": {
+     "en": "International Youth Day",
+     "te": "అంతర్జాతీయ యువజన దినం"
+    },
+    "theme": "Innovation"
+   },
+   {
+    "month": 9,
+    "day": 5,
+    "name": {
+     "en": "Teachers’ Day",
+     "te": "ఉపాధ్యాయ దినోత్సవం"
+    },
+    "theme": "Science Education"
+   },
+   {
+    "month": 10,
+    "day": 4,
+    "name": {
+     "en": "World Space Week begins",
+     "te": "ప్రపంచ అంతరిక్ష వారం ప్రారంభం"
+    },
+    "theme": "Space"
+   },
+   {
+    "month": 11,
+    "day": 10,
+    "name": {
+     "en": "World Science Day for Peace & Development",
+     "te": "శాంతి & అభివృద్ధి కోసం ప్రపంచ విజ్ఞాన దినం"
+    },
+    "theme": "Science for Society"
+   },
+   {
+    "month": 12,
+    "day": 2,
+    "name": {
+     "en": "National Pollution Control Day",
+     "te": "జాతీయ కాలుష్య నియంత్రణ దినం"
+    },
+    "theme": "Clean Technology"
+   }
+  ],
+  "thisDay": [
+   {
+    "id": "01-04",
+    "date": "01-04",
+    "text": {
+     "en": "In 1643, Isaac Newton was born — his laws of motion and gravitation shaped modern physics.",
+     "te": "1643లో ఐజాక్ న్యూటన్ జన్మించారు — ఆయన చలన, గురుత్వాకర్షణ నియమాలు ఆధునిక భౌతిక శాస్త్రాన్ని రూపొందించాయి."
+    }
+   },
+   {
+    "id": "02-28",
+    "date": "02-28",
+    "text": {
+     "en": "In 1928, C.V. Raman announced the Raman Effect, which won India its first science Nobel Prize.",
+     "te": "1928లో సి.వి. రామన్ రామన్ ఎఫెక్ట్‌ను ప్రకటించారు — ఇది భారతదేశానికి మొదటి విజ్ఞాన నోబెల్ బహుమతిని అందించింది."
+    }
+   },
+   {
+    "id": "04-12",
+    "date": "04-12",
+    "text": {
+     "en": "In 1961, Yuri Gagarin became the first human in space aboard Vostok 1.",
+     "te": "1961లో యూరీ గగారిన్ వోస్టాక్ 1లో అంతరిక్షంలోకి వెళ్లిన మొదటి మనిషి అయ్యారు."
+    }
+   },
+   {
+    "id": "05-23",
+    "date": "05-23",
+    "text": {
+     "en": "In 1983, India launched its first satellite programme milestone with INSAT-1B.",
+     "te": "1983లో భారతదేశం INSAT-1Bతో తన మొదటి ఉపగ్రహ కార్యక్రమ మైలురాయిని సాధించింది."
+    }
+   },
+   {
+    "id": "07-20",
+    "date": "07-20",
+    "text": {
+     "en": "In 1969, Apollo 11 landed on the Moon — humanity’s first steps on another world.",
+     "te": "1969లో అపోలో 11 చంద్రుడిపై దిగింది — మరో ప్రపంచంపై మానవుని మొదటి అడుగులు."
+    }
+   },
+   {
+    "id": "08-15",
+    "date": "08-15",
+    "text": {
+     "en": "In 1969, ISRO was founded to harness space technology for national development.",
+     "te": "1969లో జాతీయ అభివృద్ధి కోసం అంతరిక్ష సాంకేతికతను వినియోగించడానికి ఇస్రో స్థాపించబడింది."
+    }
+   },
+   {
+    "id": "09-05",
+    "date": "09-05",
+    "text": {
+     "en": "In 1972, India’s first space-based experiment programme expanded with Aryabhata’s design.",
+     "te": "1972లో ఆర్యభట్ట రూపకల్పనతో భారతదేశ మొదటి అంతరిక్ష ప్రయోగ కార్యక్రమం విస్తరించింది."
+    }
+   },
+   {
+    "id": "10-04",
+    "date": "10-04",
+    "text": {
+     "en": "In 1957, Sputnik 1 became the first artificial satellite to orbit the Earth.",
+     "te": "1957లో స్పుత్నిక్ 1 భూమిని చుట్టిన మొదటి కృత్రిమ ఉపగ్రహం అయింది."
+    }
+   },
+   {
+    "id": "11-07",
+    "date": "11-07",
+    "text": {
+     "en": "In 1867, Marie Curie was born — the first person to win two Nobel Prizes in science.",
+     "te": "1867లో మేరీ క్యూరీ జన్మించారు — విజ్ఞానంలో రెండు నోబెల్ బహుమతులు గెలిచిన మొదటి వ్యక్తి."
+    }
+   },
+   {
+    "id": "12-10",
+    "date": "12-10",
+    "text": {
+     "en": "In 1815, Ada Lovelace was born — widely regarded as the first computer programmer.",
+     "te": "1815లో అడా లవ్‌లేస్ జన్మించారు — మొదటి కంప్యూటర్ ప్రోగ్రామర్‌గా పరిగణించబడుతుంది."
+    }
+   }
+  ],
+  "investorIncentives": [
+   {
+    "title": {
+     "en": "Capital Subsidy",
+     "te": "మూలధన సబ్సిడీ"
+    },
+    "detail": {
+     "en": "Up to a prescribed percentage of fixed capital investment for eligible units.",
+     "te": "అర్హత కలిగిన యూనిట్లకు స్థిర మూలధన పెట్టుబడిలో నిర్దేశిత శాతం వరకు."
+    }
+   },
+   {
+    "title": {
+     "en": "Employment-Linked Incentive",
+     "te": "ఉద్యోగ-ఆధారిత ప్రోత్సాహకం"
+    },
+    "detail": {
+     "en": "Reimbursement linked to the number of jobs created for State residents.",
+     "te": "రాష్ట్ర నివాసులకు సృష్టించిన ఉద్యోగాల సంఖ్యకు అనుసంధానించిన వాపసు."
+    }
+   },
+   {
+    "title": {
+     "en": "Interest Subvention",
+     "te": "వడ్డీ రాయితీ"
+    },
+    "detail": {
+     "en": "Support on term loans from scheduled banks and financial institutions.",
+     "te": "షెడ్యూల్డ్ బ్యాంకులు మరియు ఆర్థిక సంస్థల సావధాన రుణాలపై మద్దతు."
+    }
+   },
+   {
+    "title": {
+     "en": "Stamp Duty & Power Tariff",
+     "te": "స్టాంప్ డ్యూటీ & విద్యుత్ టారిఫ్"
+    },
+    "detail": {
+     "en": "Reimbursement concessions, including for data centres and fabs.",
+     "te": "డేటా సెంటర్లు మరియు ఫ్యాబ్‌లతో సహా వాపసు రాయితీలు."
+    }
+   },
+   {
+    "title": {
+     "en": "Land & Utility Support",
+     "te": "భూమి & యుటిలిటీ మద్దతు"
+    },
+    "detail": {
+     "en": "Assistance with land allotment, power and water connections.",
+     "te": "భూమి కేటాయింపు, విద్యుత్ మరియు నీటి కనెక్షన్లలో సహాయం."
+    }
+   },
+   {
+    "title": {
+     "en": "Skill Development Grant",
+     "te": "నైపుణ్యాభివృద్ధి గ్రాంట్"
+    },
+    "detail": {
+     "en": "Support for training and upskilling of the local workforce.",
+     "te": "స్థానిక కార్మిక శక్తి శిక్షణ మరియు నైపుణ్యాభివృద్ధికి మద్దతు."
+    }
+   }
+  ],
+  "pages": [
+   {
+    "id": "website-policy",
+    "title": {
+     "en": "Website Policy",
+     "te": "వెబ్‌సైట్ విధానం"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Purpose",
+       "te": "ఉద్దేశ్యం"
+      },
+      "body": [
+       {
+        "en": "This website is the official website of the Department of Science, Technology & Innovation (DSTI), Government of Andhra Pradesh, and is developed and maintained in accordance with the Guidelines for Indian Government Websites (GIGW).",
+        "te": "ఈ వెబ్‌సైట్ ఆంధ్రప్రదేశ్ ప్రభుత్వ విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ (DSTI) అధికారిక వెబ్‌సైట్; భారత ప్రభుత్వ వెబ్‌సైట్ల మార్గదర్శకాల (GIGW) ప్రకారం రూపొందించి నిర్వహించబడుతుంది."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Content Management",
+       "te": "విషయ నిర్వహణ"
+      },
+      "body": [
+       {
+        "en": "All content is published and updated by authorised officers of the Department through the Content Management System. The Department is responsible for the accuracy and currency of the information published.",
+        "te": "అన్ని విషయాలు శాఖ అధికారులచే విషయ నిర్వహణ వ్యవస్థ (CMS) ద్వారా ప్రచురించబడతాయి మరియు నవీకరించబడతాయి. ప్రచురిత సమాచారం ఖచ్చితత్వానికి శాఖ బాధ్యత వహిస్తుంది."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "External Links",
+       "te": "బాహ్య లింకులు"
+      },
+      "body": [
+       {
+        "en": "Links to external websites are provided for convenience. DSTI is not responsible for the content, accuracy or availability of external websites.",
+        "te": "బాహ్య వెబ్‌సైట్ల లింకులు సౌలభ్యం కోసం అందించబడతాయి. బాహ్య వెబ్‌సైట్ల విషయం, ఖచ్చితత్వం లేదా లభ్యతకు DSTI బాధ్యత వహించదు."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "privacy-policy",
+    "title": {
+     "en": "Privacy Policy",
+     "te": "గోప్యతా విధానం"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Information We Collect",
+       "te": "మేము సేకరించే సమాచారం"
+      },
+      "body": [
+       {
+        "en": "This website does not automatically capture any specific personal information that allows us to identify you, except when you voluntarily provide it through the Feedback form, RTI requests or subscription forms.",
+        "te": "మీరు అభిప్రాయ ఫారం, RTI అభ్యర్థనలు లేదా సభ్యత్వ ఫారాల ద్వారా స్వచ్ఛందంగా అందించిన సమాచారం మినహా, ఈ వెబ్‌సైట్ మీను గుర్తించగల వ్యక్తిగత సమాచారాన్ని స్వయంచాలకంగా సేకరించదు."
+       },
+       {
+        "en": "When you do provide personal information, we collect only what is necessary to respond to your request, and store it securely on servers within Government-approved infrastructure.",
+        "te": "మీరు వ్యక్తిగత సమాచారం అందించినప్పుడు, మీ అభ్యర్థనకు ప్రతిస్పందించడానికి అవసరమైనది మాత్రమే సేకరిస్తాము మరియు ప్రభుత్వ ఆమోదిత మౌలిక సదుపాయాల్లోని సర్వర్లపై సురక్షితంగా నిల్వ చేస్తాము."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Cookies and Analytics",
+       "te": "కుకీలు మరియు విశ్లేషణలు"
+      },
+      "body": [
+       {
+        "en": "The website uses only first-party, privacy-respecting analytics to count visitors and understand which pages are useful. No third-party trackers or advertising scripts are used.",
+        "te": "సందర్శకులను లెక్కించడానికి మరియు ఏ పేజీలు ఉపయోగకరమో అర్థం చేసుకోవడానికి ఈ వెబ్‌సైట్ ప్రథమ-పక్ష, గోప్యతను గౌరవించే విశ్లేషణలను మాత్రమే ఉపయోగిస్తుంది. థర్డ్-పార్టీ ట్రాకర్లు లేదా ప్రకటన స్క్రిప్ట్‌లు ఉపయోగించబడవు."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Disclosure",
+       "te": "వెల్లడి"
+      },
+      "body": [
+       {
+        "en": "We do not sell, rent or share your personal information with third parties, except where required by law.",
+        "te": "చట్టం ద్వారా అవసరమైన సందర్భాల్లో తప్ప, మేము మీ వ్యక్తిగత సమాచారాన్ని థర్డ్-పార్టీలకు విక్రయించము, అద్దెకు ఇవ్వము లేదా పంచుకోము."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "terms-of-use",
+    "title": {
+     "en": "Terms of Use",
+     "te": "ఉపయోగ నిబంధనలు"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Acceptance",
+       "te": "ఆమోదం"
+      },
+      "body": [
+       {
+        "en": "By accessing this website you agree to these terms of use. The content is provided for general information and should not be treated as a substitute for official records or legal advice.",
+        "te": "ఈ వెబ్‌సైట్‌ను యాక్సెస్ చేయడం ద్వారా మీరు ఈ ఉపయోగ నిబంధనలను అంగీకరిస్తారు. విషయం సాధారణ సమాచారం కోసం; అధికారిక రికార్డులకు లేదా న్యాయ సలహాకు ప్రత్యామ్నాయంగా పరిగణించకూడదు."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Intellectual Property",
+       "te": "మేధో సంపత్తి"
+      },
+      "body": [
+       {
+        "en": "All content, design files and source code belong to the Department and may not be reproduced for commercial purposes without written permission.",
+        "te": "అన్ని విషయాలు, డిజైన్ ఫైళ్లు మరియు సోర్స్ కోడ్ శాఖకు చెందుతాయి; లిఖిత అనుమతి లేకుండా వాణిజ్య ప్రయోజనాల కోసం పునరుత్పత్తి చేయకూడదు."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "copyright",
+    "title": {
+     "en": "Copyright",
+     "te": "కాపీరైట్"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Ownership",
+       "te": "యాజమాన్యం"
+      },
+      "body": [
+       {
+        "en": "© Government of Andhra Pradesh, Department of Science, Technology & Innovation. All rights reserved. The source code, design files, content and all rights in them belong to the Department and shall be handed over at the end of the support period or earlier if asked.",
+        "te": "© ఆంధ్రప్రదేశ్ ప్రభుత్వం, విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ. సర్వ హక్కులు కలవు. సోర్స్ కోడ్, డిజైన్ ఫైళ్లు, విషయం మరియు వాటిపై ఉన్న అన్ని హక్కులు శాఖకు చెందుతాయి."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "disclaimer",
+    "title": {
+     "en": "Disclaimer",
+     "te": "నిరాకరణ"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Information Accuracy",
+       "te": "సమాచార ఖచ్చితత్వం"
+      },
+      "body": [
+       {
+        "en": "While every effort is made to keep the information on this website correct and up to date, the Department does not guarantee its completeness or accuracy. Official records held in the Department prevail in case of any discrepancy.",
+        "te": "ఈ వెబ్‌సైట్‌లోని సమాచారాన్ని సరైనదిగా, తాజాగా ఉంచడానికి ప్రయత్నించినప్పటికీ, శాఖ దాని సంపూర్ణత లేదా ఖచ్చితత్వానికి హామీ ఇవ్వదు. ఏదైనా వ్యత్యాసం ఉన్నప్పుడు శాఖ వద్ద ఉన్న అధికారిక రికార్డులే ప్రామాణికం."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "hyperlink-policy",
+    "title": {
+     "en": "Hyperlink Policy",
+     "te": "హైపర్‌లింక్ విధానం"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Links to Our Website",
+       "te": "మా వెబ్‌సైట్‌కు లింకులు"
+      },
+      "body": [
+       {
+        "en": "Other websites may link to this website provided the link clearly identifies DSTI and its official status. The Department reserves the right to request removal of any link.",
+        "te": "ఇతర వెబ్‌సైట్లు ఈ వెబ్‌సైట్‌కు లింక్ చేయవచ్చు, అయితే ఆ లింక్ DSTI మరియు దాని అధికారిక స్థితిని స్పష్టంగా గుర్తించాలి. ఏదైనా లింక్ తొలగించమని కోరే హక్కు శాఖకు ఉంది."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Links from Our Website",
+       "te": "మా వెబ్‌సైట్ నుండి లింకులు"
+      },
+      "body": [
+       {
+        "en": "Links to external websites are provided for convenience and do not imply endorsement. Please read the privacy and security policies of external websites before using them.",
+        "te": "బాహ్య వెబ్‌సైట్ల లింకులు సౌలభ్యం కోసం అందించబడతాయి; అవి ఆమోదాన్ని సూచించవు. వాటిని ఉపయోగించే ముందు బాహ్య వెబ్‌సైట్ల గోప్యత, భద్రతా విధానాలను చదవండి."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "accessibility-statement",
+    "title": {
+     "en": "Accessibility Statement",
+     "te": "ప్రాప్యత ప్రకటన"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Our Commitment",
+       "te": "మా నిబద్ధత"
+      },
+      "body": [
+       {
+        "en": "DSTI is committed to making this website accessible to all users, including persons with disabilities, and aims to conform to the Guidelines for Indian Government Websites (GIGW 3.0) and the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA.",
+        "te": "DSTI ఈ వెబ్‌సైట్‌ను వికలాంగులతో సహా అందరు వినియోగదారులకు ప్రాప్యత కలిగించడానికి కట్టుబడి ఉంది; GIGW 3.0 మరియు WCAG 2.1 స్థాయి AA కి అనుగుణంగా ఉండే లక్ష్యం."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Accessibility Features",
+       "te": "ప్రాప్యత లక్షణాలు"
+      },
+      "body": [
+       {
+        "en": "The website provides a skip-to-main-content link, full keyboard navigation, visible focus outlines, screen-reader support with ARIA labels, resizable text (up to 140%), a high-contrast mode and a dark mode. An interactive District Explorer also offers an equivalent table view.",
+        "te": "ఈ వెబ్‌సైట్ స్కిప్-టు-మెయిన్ లింక్, పూర్తి కీబోర్డ్ నావిగేషన్, కనిపించే ఫోకస్, ARIA లేబుల్స్‌తో స్క్రీన్ రీడర్ మద్దతు, పెంచగల అక్షరాలు (140% వరకు), అధిక-కాంట్రాస్ట్ మరియు చీకటి రూపాన్ని అందిస్తుంది."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Feedback",
+       "te": "అభిప్రాయం"
+      },
+      "body": [
+       {
+        "en": "If you face any difficulty in accessing any part of this website, please write to dsti@ap.gov.in. We will try to resolve the issue and provide the information in an alternative format.",
+        "te": "ఈ వెబ్‌సైట్‌లో ఏదైనా భాగాన్ని యాక్సెస్ చేయడంలో ఇబ్బంది ఎదురైతే dsti@ap.gov.in కు రాయండి. సమస్యను పరిష్కరించి ప్రత్యామ్నాయ ఆకృతిలో సమాచారాన్ని అందించడానికి ప్రయత్నిస్తాము."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ecitizen",
+    "title": {
+     "en": "e-Citizen",
+     "te": "ఇ-పౌరుడు"
+    },
+    "subtitle": {
+     "en": "Information and services for citizens — RTI, acts, orders, policies, guidelines and more.",
+     "te": "పౌరుల కోసం సమాచారం మరియు సేవలు — RTI, చట్టాలు, ఉత్తర్వులు, విధానాలు, మార్గదర్శకాలు."
+    },
+    "sections": []
+   },
+   {
+    "id": "rti",
+    "title": {
+     "en": "Right to Information",
+     "te": "సమాచార హక్కు"
+    },
+    "subtitle": {
+     "en": "Right to Information Act, 2005",
+     "te": "Right to Information Act, 2005"
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "About RTI",
+       "te": "RTI గురించి"
+      },
+      "body": [
+       {
+        "en": "Under the Right to Information Act, 2005, any citizen may request information held by the Department. Requests should be addressed to the Public Information Officer (PIO). The PIO responds within the time prescribed by the Act.",
+        "te": "సమాచార హక్కు చట్టం, 2005 ప్రకారం ఏ పౌరుడైనా శాఖ వద్ద ఉన్న సమాచారాన్ని అభ్యర్థించవచ్చు. అభ్యర్థనలను ప్రజా సమాచార అధికారి (PIO)కి పంపాలి. చట్టం నిర్దేశించిన గడువులో PIO స్పందిస్తారు."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "it-act-2000",
+    "title": {
+     "en": "IT Act 2000",
+     "te": "IT చట్టం 2000"
+    },
+    "subtitle": {
+     "en": "The Information Technology Act, 2000 — rules, procedure and judgements.",
+     "te": "సమాచార సాంకేతిక చట్టం, 2000 — నియమాలు, ప్రక్రియ మరియు తీర్పులు."
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Procedure",
+       "te": "ప్రక్రియ"
+      },
+      "body": [
+       {
+        "en": "Complaints relating to contravention of the IT Act are adjudicated by the Adjudicating Officer of the State as per the IT (Qualification and Experience of Adjudicating Officers and Manner of Holding Enquiry) Rules.",
+        "te": "IT చట్టం ఉల్లంఘనలకు సంబంధించిన ఫిర్యాదులను రాష్ట్ర న్యాయనిర్ణయ అధికారి సంబంధిత నియమాల ప్రకారం విచారిస్తారు."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Judgements",
+       "te": "తీర్పులు"
+      },
+      "body": [
+       {
+        "en": "A compilation of landmark judgements under the IT Act, 2000 is available for download below.",
+        "te": "IT చట్టం, 2000 కింద ప్రముఖ తీర్పుల సంకలనం క్రింద డౌన్‌లోడ్‌కు అందుబాటులో ఉంది."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "posh-act",
+    "title": {
+     "en": "PoSH Act",
+     "te": "PoSH చట్టం"
+    },
+    "subtitle": {
+     "en": "Prevention, prohibition and redressal of sexual harassment at the workplace.",
+     "te": "పని ప్రదేశంలో లైంగిక వేధింపుల నివారణ, నిషేధం మరియు పరిష్కారం."
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "About the Act",
+       "te": "చట్టం గురించి"
+      },
+      "body": [
+       {
+        "en": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013, is implemented across the Department and its organisations. An Internal Committee (IC) handles complaints in a confidential and time-bound manner.",
+        "te": "పని ప్రదేశంలో మహిళలపై లైంగిక వేధింపుల (నివారణ, నిషేధం మరియు పరిష్కారం) చట్టం, 2013 శాఖ మరియు దాని సంస్థల్లో అమలవుతుంది. అంతర్గత కమిటీ (IC) ఫిర్యాదులను గోప్యంగా, నిర్ణీత గడువులో పరిష్కరిస్తుంది."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "screen-reader-access",
+    "title": {
+     "en": "Screen Reader Access",
+     "te": "స్క్రీన్ రీడర్ ప్రాప్యత"
+    },
+    "subtitle": {
+     "en": "",
+     "te": ""
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "Screen reader compatibility",
+       "te": "స్క్రీన్ రీడర్ అనుకూలత"
+      },
+      "body": [
+       {
+        "en": "This website has been designed to be compatible with screen readers. You can also use the Accessibility controls in the top bar to increase text size, switch to high contrast or enable dark mode.",
+        "te": "ఈ వెబ్‌సైట్ స్క్రీన్ రీడర్లకు అనుకూలంగా రూపొందించబడింది. పై బార్‌లోని సులభ ప్రాప్యత నియంత్రణలతో అక్షర పరిమాణం పెంచవచ్చు, అధిక కాంట్రాస్ట్ లేదా చీకటి రూపాన్ని ఎంచుకోవచ్చు."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "Free screen readers",
+       "te": "ఉచిత స్క్రీన్ రీడర్లు"
+      },
+      "body": [
+       {
+        "en": "NVDA (Windows) — https://www.nvaccess.org/download/",
+        "te": "NVDA (Windows) — https://www.nvaccess.org/download/"
+       },
+       {
+        "en": "Orca (Linux) — https://wiki.gnome.org/Projects/Orca",
+        "te": "Orca (Linux) — https://wiki.gnome.org/Projects/Orca"
+       },
+       {
+        "en": "TalkBack (Android) — built into Android",
+        "te": "TalkBack (Android) — built into Android"
+       },
+       {
+        "en": "VoiceOver (macOS / iOS) — built into Apple devices",
+        "te": "VoiceOver (macOS / iOS) — built into Apple devices"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "help",
+    "title": {
+     "en": "Help",
+     "te": "సహాయం"
+    },
+    "subtitle": {
+     "en": "New here? Ask Vigyan Mitra from any page, or read the quick answers below.",
+     "te": "కొత్తగా వచ్చారా? ఏ పేజీ నుండైనా విజ్ఞాన మిత్రను అడగండి లేదా క్రింది సమాధానాలు చదవండి."
+    },
+    "sections": [
+     {
+      "heading": {
+       "en": "How do I use the site search?",
+       "te": "How do I use the site search?"
+      },
+      "body": [
+       {
+        "en": "Click the Search button in the header, type keywords, and pick a result. The search looks across pages, policies, orders, tenders and documents.",
+        "te": "Click the Search button in the header, type keywords, and pick a result. The search looks across pages, policies, orders, tenders and documents."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "How do I change the language to Telugu?",
+       "te": "How do I change the language to Telugu?"
+      },
+      "body": [
+       {
+        "en": "Use the English / తెలుగు switch in the top utility bar. The switch is available on every page.",
+        "te": "Use the English / తెలుగు switch in the top utility bar. The switch is available on every page."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "How do I make the text bigger?",
+       "te": "How do I make the text bigger?"
+      },
+      "body": [
+       {
+        "en": "Use the A- and A+ buttons in the top bar, or the reset button to return to 100%. Text is resizable up to 140%.",
+        "te": "Use the A- and A+ buttons in the top bar, or the reset button to return to 100%. Text is resizable up to 140%."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "How do I download a Government Order or tender?",
+       "te": "How do I download a Government Order or tender?"
+      },
+      "body": [
+       {
+        "en": "Open the relevant page under e-Citizen or Tenders and click the PDF link on the record.",
+        "te": "Open the relevant page under e-Citizen or Tenders and click the PDF link on the record."
+       }
+      ]
+     },
+     {
+      "heading": {
+       "en": "How do I give feedback?",
+       "te": "How do I give feedback?"
+      },
+      "body": [
+       {
+        "en": "Use the Feedback form on the Contact Us page. Your message is stored securely and notified to the Department.",
+        "te": "Use the Feedback form on the Contact Us page. Your message is stored securely and notified to the Department."
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "seedFiles": [
+  "/uploads/seed/tenders/T-2026-018.pdf",
+  "/uploads/seed/tenders/T-2026-017.pdf",
+  "/uploads/seed/tenders/T-2026-016.pdf",
+  "/uploads/seed/tenders/T-2026-015.pdf",
+  "/uploads/seed/tenders/T-2026-014.pdf",
+  "/uploads/seed/tenders/T-2026-019.pdf",
+  "/uploads/seed/go/GO-42-2026.pdf",
+  "/uploads/seed/go/GO-38-2026.pdf",
+  "/uploads/seed/go/GO-27-2026.pdf",
+  "/uploads/seed/go/GO-15-2026.pdf",
+  "/uploads/seed/go/GO-09-2026.pdf",
+  "/uploads/seed/notifications/N-64-2026.pdf",
+  "/uploads/seed/notifications/N-61-2026.pdf",
+  "/uploads/seed/notifications/N-55-2026.pdf",
+  "/uploads/seed/circulars/C-31-2026.pdf",
+  "/uploads/seed/circulars/C-28-2026.pdf",
+  "/uploads/seed/acts/IT-Act-2000.pdf",
+  "/uploads/seed/acts/RTI-Act-2005.pdf",
+  "/uploads/seed/acts/PoSH-Act-2013.pdf",
+  "/uploads/seed/rules/IT-Rules-2011.pdf",
+  "/uploads/seed/rules/AP-RTI-Rules-2006.pdf",
+  "/uploads/seed/guidelines/GIGW-3.0.pdf",
+  "/uploads/seed/guidelines/WCAG-2.1.pdf",
+  "/uploads/seed/it-act/IT-Act-Procedure.pdf",
+  "/uploads/seed/it-act/IT-Act-Judgements.pdf",
+  "/uploads/seed/posh/PoSH-Process.pdf"
+ ]
+}
