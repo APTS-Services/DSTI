@@ -1,4 +1,27 @@
-// Small fetch wrapper for the DSTI API (same origin, cookies, CSRF header).
+// Fetch wrapper for the DSTI API.
+//
+// Every request goes to the single Express backend (VITE_API_BASE_URL, default
+// http://localhost:5000) and never to the React dev server, so the API works on
+// 5173, 4173, a static host or the production domain without a proxy.
+const RAW_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+/** Origin of the backend, without a trailing slash (a "/api" suffix is tolerated). */
+export const API_BASE_URL = String(RAW_BASE).replace(/\/+$/, '').replace(/\/api$/i, '');
+
+/** Absolute URL for an API path such as "/api/public/content". */
+export const apiUrl = (path = '') => `${API_BASE_URL}${String(path).startsWith('/') ? '' : '/'}${path}`;
+
+/**
+ * Absolute URL for a file served by the backend (/uploads/...). Frontend
+ * assets (/images/...), data: URIs and complete URLs are returned unchanged.
+ */
+export const assetUrl = (path) => {
+  const value = String(path || '');
+  if (!value) return '';
+  if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(value)) return value;
+  return value.startsWith('/uploads/') ? apiUrl(value) : value;
+};
+
 let csrfToken = null;
 export const setCsrf = (t) => {
   csrfToken = t || null;
@@ -21,14 +44,14 @@ export const onUnauthorized = (fn) => {
 };
 
 export async function api(path, { method = 'GET', body, form, headers = {} } = {}) {
-  const opts = { method, credentials: 'same-origin', headers: { Accept: 'application/json', ...headers } };
+  const opts = { method, credentials: 'include', headers: { Accept: 'application/json', ...headers } };
   if (csrfToken && method !== 'GET') opts.headers['X-CSRF-Token'] = csrfToken;
   if (form) opts.body = form;
   else if (body !== undefined) {
     opts.headers['Content-Type'] = 'application/json';
     opts.body = JSON.stringify(body);
   }
-  const res = await fetch(path, opts);
+  const res = await fetch(apiUrl(path), opts);
   if (res.status === 204) return null;
   const isJson = (res.headers.get('content-type') || '').includes('json');
   const data = isJson ? await res.json().catch(() => ({})) : null;

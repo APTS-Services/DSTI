@@ -26,6 +26,6 @@ const MAP = {
 const PAGES = { rti: '/ecitizen/rti', 'it-act-2000': '/ecitizen/it-act-2000', 'posh-act': '/ecitizen/posh-act', 'screen-reader-access': '/screen-reader-access', help: '/help', ecitizen: '/ecitizen' };
 
 export default function publicPath(collection, item) {
-  if (collection === 'pages') return PAGES[item.id] || `/policies/${item.id}`;
+  if (collection === 'pages') return item.path || PAGES[item.id] || `/p/${item.id}`;
   return MAP[collection]?.(item) || '/';
 }

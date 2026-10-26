@@ -4,6 +4,7 @@ import { BarChart3, DatabaseBackup, ExternalLink, FolderOpen, History, Inbox, La
 import { useSetting } from '../context/ContentContext';
 import { DEFAULT_LOGO } from '../components/layout/Header';
 import { can, useAdmin } from './AdminContext';
+import { assetUrl } from '../api/client';
 
 export default function Layout() {
   const { user, schemas, logout } = useAdmin();
@@ -18,7 +19,7 @@ export default function Layout() {
   return (
     <div className="admin-shell">
       <aside className={`admin-sidebar ${open ? 'open' : ''}`} aria-label="CMS navigation">
-        <div className="brand"><img src={site.logo || DEFAULT_LOGO} alt="" /> <span>DSTI CMS</span></div>
+        <div className="brand"><img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" /> <span>DSTI CMS</span></div>
         <nav>
           <NavLink to="/admin" end><LayoutDashboard size={16} aria-hidden="true" /> Dashboard</NavLink>
           {Object.entries(groups).map(([g, items]) => (

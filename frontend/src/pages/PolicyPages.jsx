@@ -7,6 +7,7 @@ import useSEO from '../hooks/useSEO';
 import PageHero from '../components/common/PageHero';
 import PageSections from '../components/common/PageSections';
 import Reveal from '../components/common/Reveal';
+import { assetUrl } from '../api/client';
 import NotFound from './NotFound';
 
 const TONES = ['lavender', 'sky', 'blush', 'mint'];
@@ -73,7 +74,7 @@ function Detail() {
           </div>
           <aside className="col-lg-4">
             <div className="dst-card">
-              {p.file && <a href={p.file} className="btn btn-primary w-100 mb-3 d-inline-flex align-items-center justify-content-center gap-2" target="_blank" rel="noopener"><Download size={16} aria-hidden="true" /> {t('downloadPolicy')}</a>}
+              {p.file && <a href={assetUrl(p.file)} className="btn btn-primary w-100 mb-3 d-inline-flex align-items-center justify-content-center gap-2" target="_blank" rel="noopener"><Download size={16} aria-hidden="true" /> {t('downloadPolicy')}</a>}
               {related.length > 0 && (
                 <>
                   <h2 className="h6 fw-bold">{t('implementingOrganisations')}</h2>

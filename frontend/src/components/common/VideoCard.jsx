@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Play, Video } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { assetUrl } from '../../api/client';
 
 export default function VideoCard({ story }) {
   const { t, tc } = useLanguage();
@@ -14,10 +15,10 @@ export default function VideoCard({ story }) {
         {playing && story.videoId && (
           <iframe src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(story.videoId)}?autoplay=1&rel=0`} title={title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
         )}
-        {playing && !story.videoId && story.video && <video src={story.video} controls autoPlay poster={story.thumbnail || undefined}><track kind="captions" /></video>}
+        {playing && !story.videoId && story.video && <video src={assetUrl(story.video)} controls autoPlay poster={assetUrl(story.thumbnail) || undefined}><track kind="captions" /></video>}}
         {!playing && (
           <>
-            {story.thumbnail && <img src={story.thumbnail} alt="" loading="lazy" />}
+            {story.thumbnail && <img src={assetUrl(story.thumbnail)} alt="" loading="lazy" />}
             {hasVideo ? (
               <button type="button" className="play" onClick={() => setPlaying(true)} aria-label={`${t('watchVideo')}: ${title}`}>
                 <span><Play size={26} aria-hidden="true" /></span>

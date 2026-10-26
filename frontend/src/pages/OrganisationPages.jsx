@@ -9,6 +9,8 @@ import Reveal from '../components/common/Reveal';
 import DistrictExplorer from '../components/common/DistrictExplorer';
 import ConnectionsGraph from '../components/home/ConnectionsGraph';
 import { safeHref } from '../utils/format';
+import { assetUrl } from '../api/client';
+import useSiteCounts from '../hooks/useSiteCounts';
 import NotFound from './NotFound';
 
 function List() {
@@ -31,7 +33,7 @@ function List() {
             <Reveal key={o.id} className="col-md-6 col-lg-4" delay={(i % 3) * 0.07}>
               <Link to={`/organisations/${o.id}`} className="dst-card hoverable d-flex flex-column">
                 <div className="d-flex align-items-center gap-3 mb-3">
-                  {o.logo ? <img src={o.logo} alt="" width="48" height="48" className="rounded-3 border" style={{ objectFit: 'contain' }} /> : <span className="icon-chip fw-bold small">{o.abbr.slice(0, 4)}</span>}
+                  {o.logo ? <img src={assetUrl(o.logo)} alt="" width="48" height="48" className="rounded-3 border" style={{ objectFit: 'contain' }} /> : <span className="icon-chip fw-bold small">{o.abbr.slice(0, 4)}</span>}
                   <div><span className="pill">{o.category}</span></div>
                 </div>
                 <h2 className="h5 fw-bold">{tc(o.name)}</h2>
@@ -82,7 +84,7 @@ function Detail() {
           </div>
           <aside className="col-lg-4">
             <div className="dst-card">
-              {o.logo && <img src={o.logo} alt={o.abbr} className="img-fluid mb-3" style={{ maxHeight: 80 }} />}
+              {o.logo && <img src={assetUrl(o.logo)} alt={o.abbr} className="img-fluid mb-3" style={{ maxHeight: 80 }} />}
               <dl className="mb-0 small">
                 <dt>{t('abbreviation')}</dt><dd>{o.abbr}</dd>
                 <dt>{t('category')}</dt><dd>{o.category}</dd>
@@ -101,10 +103,14 @@ function Detail() {
 function Districts() {
   const { t } = useLanguage();
   const [params] = useSearchParams();
-  useSEO({ title: t('districtExplorer'), description: t('districtExplorerDesc') });
+  const districts = useCollection('districts');
+  const counts = useSiteCounts();
+  const total = counts?.districts ?? districts.length;
+  const description = t('districtExplorerDesc').replace('{n}', String(total));
+  useSEO({ title: t('districtExplorer'), description });
   return (
     <>
-      <PageHero title={t('districtExplorer')} subtitle={t('districtExplorerDesc')} crumbs={[{ label: t('organisations'), to: '/organisations' }, { label: t('districtExplorer') }]} />
+      <PageHero title={t('districtExplorer')} subtitle={description} crumbs={[{ label: t('organisations'), to: '/organisations' }, { label: t('districtExplorer') }]} />
       <div className="container section-sm"><DistrictExplorer initial={params.get('district')} key={params.get('district') || 'all'} /></div>
     </>
   );

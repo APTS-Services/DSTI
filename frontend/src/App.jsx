@@ -1,6 +1,6 @@
 // Application shell and routing. Pages are code-split so each visit downloads
 // only what it needs.
-import React, { Suspense, lazy, useCallback, useEffect, useState } from 'react';
+import React, { Suspense, lazy, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ContentProvider, useContent } from './context/ContentContext';
 import { useLanguage } from './i18n/LanguageContext';
@@ -28,8 +28,10 @@ const AdminApp = lazy(() => import('./admin/AdminApp'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  // Run before paint so the new page is measured (and its reveal animations are
+  // triggered) at the top of the window, not at the previous page's offset.
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }, [pathname]);
   return null;
 }

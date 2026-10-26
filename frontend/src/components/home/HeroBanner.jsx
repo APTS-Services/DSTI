@@ -4,6 +4,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react
 import { useCollection, useSetting } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { isExternal, safeHref } from '../../utils/format';
+import { assetUrl } from '../../api/client';
 
 export default function HeroBanner() {
   const { t, tc } = useLanguage();
@@ -25,7 +26,7 @@ export default function HeroBanner() {
 
   return (
     <section className="hero" aria-roledescription="carousel" aria-label={t('keyMessages')}>
-      {s.image && <div className="hero-bg" style={{ backgroundImage: `url("${encodeURI(s.image)}")` }} aria-hidden="true" />}
+      {s.image && <div className="hero-bg" style={{ backgroundImage: `url("${encodeURI(assetUrl(s.image))}")` }} aria-hidden="true" />}
       <div className="container hero-inner d-flex flex-column justify-content-center">
         <div key={i} className="slide" aria-live={paused ? 'polite' : 'off'}>
           <p className="eyebrow mb-3">{tc(site.gov)}</p>

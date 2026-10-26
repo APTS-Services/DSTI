@@ -29,7 +29,7 @@ Terms of Use, Copyright, Disclaimer, Hyperlink Policy, Accessibility Statement, 
 - Responsive on mobile, tablet and desktop. Modern layout with subtle fade-up animations on scroll (disabled automatically for visitors who prefer reduced motion).
 - GIGW / WCAG 2.1 AA: skip link, keyboard navigation, visible focus, ARIA labels, text resize (90–140 %), high-contrast and dark modes, table alternatives for the map and charts, accessibility statement.
 - Site-wide search over pages, policies, orders, documents, tenders, events and more.
-- **Ask Vigyan Mitra** assistant: answers only from the website's own content and links to the source page. It runs in the browser; no external AI service or third-party script.
+- **Ask Vigyan Mitra** assistant: the chat posts each question to `POST /api/v1/assistant/ask`, and the server composes the answer from the records published in MySQL — district profiles, open or closed tenders, policies, documents, FAQs, officers and contact details — always citing the source page(s). The browser keeps a cached-content fallback for when the API is unreachable; no external AI service or third-party script is involved.
 - Interactive **District Explorer** for all 26 districts, with an accessible table view.
 - Home page: hero banner with key messages, latest-updates ticker, "What brings you here?" (Citizens, Students, Researchers, Investors), quick links, statistics, news band, District map, Science Almanac (observances and this-day-in-science), illustrated story, "How it all connects", Science Stories and Events. Each section can be switched on or off from the CMS.
 - Document repository with search, type and year filters, date sorting and PDF download.
@@ -91,11 +91,13 @@ Then:
 
 ```bash
 npm install
-npm run db:setup     # creates the tables and loads the initial content (safe to re-run)
+npm run db:setup     # creates the tables and the reference data (safe to re-run)
+npm run seed         # imports the starter website content from seed/content.json
 npm run dev          # API on http://localhost:5000 (restarts on file changes)
 ```
 
-`npm run db:seed -- --reset` reloads the original seed content (it **replaces all content**; users are kept).
+`npm run seed` is an upsert: existing items are updated, missing ones are created. Use
+`npm run seed -- --reset` to **replace all content** with the seed (users, feedback and analytics are kept).
 
 ### 2.5 Start the frontend
 
@@ -107,8 +109,12 @@ npm install
 npm run dev          # http://localhost:5173
 ```
 
-The Vite dev server forwards `/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` to the backend on port 5000.
-To use a different backend address, copy `frontend/.env.example` to `frontend/.env` and set `VITE_BACKEND_URL`.
+The frontend talks to the API directly: every request is built from `VITE_API_BASE_URL`, which defaults to
+`http://localhost:5000` (see `frontend/.env`), so nothing goes through the React dev-server port. The backend must list
+the frontend origin in `CORS_ORIGIN` — the shipped value already allows `http://localhost:5173` and
+`http://127.0.0.1:5173` (plus the `4173` preview ports). To point the site at another backend, copy
+`frontend/.env.example` to `frontend/.env` and set `VITE_API_BASE_URL` to that API origin and add the frontend origin
+to `CORS_ORIGIN`.
 
 ### 2.6 Sign in to the CMS
 
@@ -118,25 +124,31 @@ a new password. Create accounts for other staff under **Users & roles**.
 > Sign-in encrypts the password in the browser with Web Crypto, which browsers allow only on **HTTPS or `localhost`**.
 > Use `localhost`, not a LAN IP address, when testing over plain HTTP.
 
-### 2.7 Production-style run on one port
+### 2.7 Production-style run (single API origin)
 
 ```bash
 cd frontend && npm run build              # creates frontend/dist
 cd ../backend && NODE_ENV=production npm start
 ```
 
-Express serves the built website, the API and the uploads from one origin (http://localhost:5000). In production mode
-cookies are `Secure` and HSTS is on, so put it behind HTTPS (see section 5).
+The backend is an API-only server: it exposes `/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` on port 5000 and
+never renders HTML. Build the frontend with `VITE_API_BASE_URL` set to the API origin that browsers will use, serve
+`frontend/dist` from your web server (IIS, nginx) and add that website origin to the backend's `CORS_ORIGIN`. Because
+the app builds absolute API and upload URLs, it works from any host — no reverse proxy is required. In production mode
+cookies are `Secure` and HSTS is on, so put both behind HTTPS (see section 5).
 
 ---
 
 ## 3. Running the tests
 
-Both suites use the `dsti_test` database (they drop and recreate its tables). Override the name with `TEST_DB_NAME`.
+The API and end-to-end suites use the `dsti_test` database (they drop and recreate its tables). Override the name with `TEST_DB_NAME`. The assistant tests are pure JavaScript and need no database.
 
 ```bash
 # API, security and role tests (24 tests)
 cd backend && npm test
+
+# Assistant answer-engine tests (retrieval, grounding, citations, English / Telugu)
+cd frontend && npm test
 
 # End-to-end browser tests (22 tests: every page, search, assistant, district map, tenders,
 # documents, feedback, accessibility tools, language switch, mobile layout, SEO, and the full
@@ -155,18 +167,19 @@ The end-to-end suite starts the backend itself on port 5055 (with the built fron
 ```
 backend/
   src/
-    app.js                 Express app: security headers, CSP, routes, static hosting
+    app.js                 Express app: security headers, CSP, routes, /uploads hosting
     server.js              Entry point, timeouts, session clean-up
-    config/env.js          Configuration from .env
-    content/schemas.js     ★ Content model: every CMS section and field is defined here once
-    content/validate.js    Schema-driven server-side validation / sanitisation
-    content/store.js       Content data access + cached public bundle
-    db/schema.sql          MySQL tables          db/migrate.js, db/seed.js
-    middleware/            Sessions, CSRF, roles, rate limits, security guards, errors
-    routes/                public.js (content, feedback, stats, sitemap) · auth.js · admin.js (CMS API)
+    config/                Configuration from .env, MySQL pool
+    content/collections.js ★ Content model: every CMS section and field is defined here once
+    content/settings.js    Single-record settings groups (site, contact, about, home…)
+    repositories/          Content, settings, media and auth data access
+    db/setup.js            Applies database/schema.sql          db/seed.js  imports seed/content.json
+    middleware/            Sessions, CSRF, roles, rate limits, uploads, security headers, errors
+    routes/                public.js (site bundle, feedback, stats) · auth.js · admin.js (CMS API) · v1/ (public REST API)
+    services/              Feedback, analytics, assistant and site services
     utils/                 Password encryption & policy, CAPTCHA, audit log, mailer
+  database/schema.sql      MySQL tables + reference data (roles, districts, categories, settings)
   seed/content.json        Initial website content (English + Telugu)
-  scripts/backup.sh        Scheduled database + uploads backup     scripts/restore.sh
   tests/api.test.js
 frontend/
   src/
@@ -177,7 +190,9 @@ frontend/
     components/            layout (TopBar, Header, Footer, Search, Vigyan Mitra), home sections, common widgets
     pages/                 Public pages
     admin/                 CMS (login, dashboard, schema-driven editors, users, audit, backup…)
-    utils/searchIndex.js   Site search and Vigyan Mitra
+    utils/searchIndex.js   Site-wide search index
+    utils/assistant.js     "Ask Vigyan Mitra" offline fallback engine (live answers come from /api/v1/assistant/ask)
+    tests/                 Assistant answer-engine tests (node --test)
 e2e/                       Playwright tests
 docs/                      SECURITY_AUDIT.md (audit compliance report), CMS_USER_GUIDE.md
 ```
@@ -192,7 +207,7 @@ pick it up automatically; then show it in the relevant React page.
 1. Server: Ubuntu 22.04/24.04 LTS (or RHEL 9), Node.js 20 LTS, MySQL 8, Nginx; domain `dsti.ap.gov.in` with an SSL certificate.
 2. Copy the code, then `npm ci` in `backend` and `frontend`; run `npm run build` in `frontend`.
 3. `backend/.env`: `NODE_ENV=production`, `PUBLIC_ORIGIN=https://dsti.ap.gov.in`, `ALLOWED_HOSTS=dsti.ap.gov.in,www.dsti.ap.gov.in`, `TRUST_PROXY=1`, real DB and SMTP credentials. `chmod 600 .env`.
-4. `npm run db:setup`, then run the app as an unprivileged user with systemd or PM2 (`pm2 start src/server.js --name dsti`).
+4. `npm run db:setup` and `npm run seed`, then run the app as an unprivileged user with systemd or PM2 (`pm2 start src/server.js --name dsti`).
 5. Nginx in front (TLS 1.2/1.3 only):
 
 ```nginx

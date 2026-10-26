@@ -4,6 +4,7 @@ import { Download, FileText, Search } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { formatDate } from '../../utils/format';
 import Empty from './Empty';
+import { assetUrl } from '../../api/client';
 
 const TYPE_KEYS = { go: 'governmentOrders', notification: 'notifications', circular: 'circulars', act: 'acts', rule: 'rules', guideline: 'guidelines' };
 
@@ -82,7 +83,7 @@ export default function DocumentTable({ documents, showTypeFilter = false, capti
                   <td className="d-none d-md-table-cell small text-muted-2">{d.department}</td>
                   <td className="text-end">
                     {d.file ? (
-                      <a href={d.file} className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 text-nowrap" target="_blank" rel="noopener" aria-label={`${t('downloadPdf')}: ${tc(d.title)}${d.size ? ` (${d.size})` : ''}`}>
+                      <a href={assetUrl(d.file)} className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 text-nowrap" target="_blank" rel="noopener" aria-label={`${t('downloadPdf')}: ${tc(d.title)}${d.size ? ` (${d.size})` : ''}`}>
                         <Download size={14} aria-hidden="true" /> PDF{d.size ? <small className="ms-1 opacity-75">{d.size}</small> : null}
                       </a>
                     ) : <FileText size={16} className="text-muted-2" aria-label={t('notAvailable')} />}

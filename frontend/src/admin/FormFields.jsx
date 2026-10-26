@@ -1,7 +1,8 @@
 // Renders CMS form fields from the server-provided schema.
 import React, { useState } from 'react';
 import { ArrowDown, ArrowUp, FileText, Plus, Trash2, Upload } from 'lucide-react';
-import { api } from '../api/client';
+import { api, assetUrl } from '../api/client';
+import { useAdmin } from './AdminContext';
 
 export function emptyValue(field) {
   switch (field.type) {
@@ -61,8 +62,8 @@ function Upload1({ value, onChange, accept, image, id }) {
         {value && <button type="button" className="btn btn-outline-secondary" onClick={() => onChange('')}>Clear</button>}
       </div>
       {err && <div className="text-danger small mt-1">{err}</div>}
-      {value && (image ? <img src={value} alt="" className="mt-2 rounded border" style={{ maxHeight: 90, maxWidth: 200, objectFit: 'contain' }} />
-        : <a href={value} target="_blank" rel="noopener" className="small d-inline-flex align-items-center gap-1 mt-1"><FileText size={13} aria-hidden="true" /> Open file</a>)}
+      {value && (image ? <img src={assetUrl(value)} alt="" className="mt-2 rounded border" style={{ maxHeight: 90, maxWidth: 200, objectFit: 'contain' }} />
+        : <a href={assetUrl(value)} target="_blank" rel="noopener" className="small d-inline-flex align-items-center gap-1 mt-1"><FileText size={13} aria-hidden="true" /> Open file</a>)}
     </div>
   );
 }
@@ -109,6 +110,62 @@ function Controls({ i, n, onMove, onRemove }) {
       <button type="button" className="btn btn-outline-secondary" disabled={i === n - 1} onClick={() => onMove(1)} aria-label="Move down"><ArrowDown size={13} /></button>
       <button type="button" className="btn btn-outline-danger" onClick={onRemove} aria-label="Remove"><Trash2 size={13} /></button>
     </div>
+  );
+}
+
+/**
+ * Link picker for menu entries: choose a published page or an app section, or
+ * fall back to a free-text field for an external address. The values come from
+ * GET /api/admin/schemas (linkTargets), and the server rejects anything that
+ * does not resolve, so a dead menu link cannot be published.
+ */
+function RoutePicker({ id, value, onChange }) {
+  const { schemas } = useAdmin();
+  const [custom, setCustom] = useState(false);
+  const targets = schemas?.linkTargets || { routes: [], pages: [] };
+  const pages = targets.pages || [];
+  const routes = targets.routes || [];
+  const known = [...pages, ...routes].some((t) => t.path === value);
+  const editing = custom || Boolean(value && !known);
+
+  return (
+    <>
+      <select
+        id={id}
+        className="form-select"
+        value={editing ? '__custom' : value || ''}
+        onChange={(e) => {
+          const next = e.target.value;
+          if (next === '__custom') {
+            setCustom(true);
+            return;
+          }
+          setCustom(false);
+          onChange(next);
+        }}
+      >
+        <option value="">— none —</option>
+        {pages.length > 0 && (
+          <optgroup label="Pages">
+            {pages.map((page) => <option key={page.id} value={page.path}>{page.title}</option>)}
+          </optgroup>
+        )}
+        <optgroup label="Site sections">
+          {routes.map((route) => <option key={route.path} value={route.path}>{route.label}</option>)}
+        </optgroup>
+        <option value="__custom">Other / external link…</option>
+      </select>
+      {editing && (
+        <input
+          className="form-control mt-2 font-monospace"
+          value={value || ''}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="/path or https://…"
+          maxLength={500}
+          aria-label="Link URL"
+        />
+      )}
+    </>
   );
 }
 
@@ -161,6 +218,7 @@ function Field({ field, value, onChange, id }) {
     case 'image': return <Upload1 id={id} value={value} onChange={onChange} accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" image />;
     case 'email': return <input id={id} type="email" className="form-control" value={value || ''} onChange={(e) => onChange(e.target.value)} maxLength={160} />;
     case 'url': return <input id={id} className="form-control" value={value || ''} onChange={(e) => onChange(e.target.value)} maxLength={500} placeholder="/page-path or https://…" />;
+    case 'route': return <RoutePicker id={id} value={value} onChange={onChange} />;
     case 'slug': return <input id={id} className="form-control font-monospace" value={value || ''} onChange={(e) => onChange(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))} maxLength={64} />;
     default: return <input id={id} className="form-control" value={value ?? ''} onChange={(e) => onChange(e.target.value)} maxLength={field.max || 300} />;
   }

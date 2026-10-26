@@ -2,13 +2,14 @@ import React from 'react';
 import { CalendarDays, MapPin } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { formatDate } from '../../utils/format';
+import { assetUrl } from '../../api/client';
 
 export default function EventCard({ e }) {
   const { tc, lang } = useLanguage();
   const d = new Date(`${e.date}T00:00:00`);
   return (
     <article className="dst-card hoverable d-flex flex-column">
-      {e.image && <img src={e.image} alt="" className="rounded-3 mb-3 w-100" style={{ aspectRatio: '16/9', objectFit: 'cover' }} loading="lazy" />}
+      {e.image && <img src={assetUrl(e.image)} alt="" className="rounded-3 mb-3 w-100" style={{ aspectRatio: '16/9', objectFit: 'cover' }} loading="lazy" />}
       <div className="d-flex gap-3 align-items-start">
         <span className="text-center rounded-3 bg-primary text-white px-3 py-2 flex-shrink-0">
           <span className="d-block fs-4 fw-bold lh-1">{Number.isNaN(d.getTime()) ? '' : d.getDate()}</span>

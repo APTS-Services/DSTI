@@ -292,10 +292,19 @@ a.dst-card { color: inherit; text-decoration: none; display: block; }
 
 // Tables
 .dst-table { --bs-table-bg: var(--dst-surface); font-size: .93rem; margin: 0;
+  // Separate borders keep each header cell's underline attached while the
+  // sticky column titles are pinned (collapse would leave it behind).
+  border-collapse: separate; border-spacing: 0;
   th { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dst-muted); font-weight: 600; background: var(--dst-soft) !important; white-space: nowrap; }
   td, th { padding: .85rem 1rem; vertical-align: middle; }
+  // Column titles stay visible while the rows scroll beneath them.
+  thead th { position: sticky; top: 0; z-index: 2; }
 }
-.table-wrap { border: 1px solid var(--dst-line); border-radius: 1rem; overflow: auto; background: var(--dst-surface); }
+.table-wrap { border: 1px solid var(--dst-line); border-radius: 1rem; overflow: auto; background: var(--dst-surface);
+  // Long tables scroll inside their card so the pinned column titles keep
+  // showing instead of riding up under the sticky site header.
+  max-height: 75vh;
+}
 
 // District map
 .district-map { background: linear-gradient(180deg, var(--dst-soft), var(--dst-surface)); border: 1px solid var(--dst-line); border-radius: 1rem; padding: .75rem;
@@ -328,6 +337,15 @@ a.dst-card { color: inherit; text-decoration: none; display: block; }
 .bubble { border-radius: 1rem; padding: .65rem .9rem; max-width: 88%; font-size: .93rem; }
 .bubble.me { background: $navy-700; color: #fff; margin-left: auto; border-bottom-right-radius: .25rem; }
 .bubble.bot { background: var(--dst-soft); border-top-left-radius: .25rem; }
+.bubble .vm-facts { display: grid; gap: .3rem; font-size: .88rem;
+  li { display: grid; grid-template-columns: minmax(5rem, 32%) 1fr; gap: .5rem; padding-top: .3rem; border-top: 1px solid var(--dst-line); }
+  li:first-child { border-top: 0; padding-top: 0; }
+}
+.bubble .vm-fact-label { font-weight: 600; color: var(--bs-secondary-color); }
+.bubble .vm-sources a { text-decoration: none; }
+.bubble .vm-sources a:hover { text-decoration: underline; }
+.bubble .vm-cite { flex: 0 0 auto; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: var(--dst-surface); border: 1px solid var(--dst-line); font-size: .68rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.bubble .btn.rounded-pill { font-size: .78rem; }
 
 // Footer
 .site-footer { background: #0b0f19; color: #c7cbd4; font-size: .92rem;

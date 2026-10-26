@@ -1,5 +1,5 @@
-// Site-wide search over all published content, also used by "Ask Vigyan Mitra",
-// which answers only from this content and always cites the source page.
+// Site-wide search over all published content. "Ask Vigyan Mitra" uses the
+// richer records in utils/assistant.js, which answers from the same content.
 
 const bi = (v) => (v && typeof v === 'object' ? `${v.en || ''} ${v.te || ''}` : v || '');
 const one = (v, lang) => (v && typeof v === 'object' ? v[lang] || v.en || '' : v || '');
@@ -97,18 +97,4 @@ function snippet(text, terms) {
   if (at < 0) return text.slice(0, 160);
   const start = Math.max(0, at - 60);
   return `${start > 0 ? '… ' : ''}${text.slice(start, start + 180).trim()}${text.length > start + 180 ? ' …' : ''}`;
-}
-
-/** Vigyan Mitra: answers strictly from site content, with source pages. */
-export function ask(data, question, lang = 'en') {
-  const results = search(data, question, { limit: 4, lang });
-  if (!results.length || results[0].score < 3) return { matched: false, sources: [] };
-  const best = results[0];
-  const title = best.titleObj[lang] || best.titleObj.en;
-  return {
-    matched: true,
-    title,
-    answer: best.snippet,
-    sources: results.slice(0, 3).map((x) => ({ title: x.titleObj[lang] || x.titleObj.en, path: x.path, type: x.type })),
-  };
 }

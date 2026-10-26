@@ -8,6 +8,7 @@ import PageHero from '../components/common/PageHero';
 import Reveal from '../components/common/Reveal';
 import Empty from '../components/common/Empty';
 import NotFound from './NotFound';
+import { assetUrl } from '../api/client';
 
 const TABS = [['intro', '/about'], ['mission', '/about/mission'], ['objectives', '/about/objectives'], ['organisationStructure', '/about/organisation'], ['awards', '/about/awards']];
 
@@ -93,7 +94,7 @@ function Structure() {
   return (
     <Shell titleKey="organisationStructure">
       <p className="fs-5 prose" style={{ maxWidth: 900 }}>{tc(about.orgStructure)}</p>
-      {about.orgChart && <img src={about.orgChart} alt={t('organisationStructure')} className="img-fluid rounded-4 border my-4" />}
+      {about.orgChart && <img src={assetUrl(about.orgChart)} alt={t('organisationStructure')} className="img-fluid rounded-4 border my-4" />}
       <Reveal className="text-center my-4">
         <div className="d-inline-block bg-primary text-white rounded-4 px-4 py-3 fw-semibold">{t('siteName')}</div>
         <div className="mx-auto bg-secondary opacity-25" style={{ width: 2, height: 28 }} />

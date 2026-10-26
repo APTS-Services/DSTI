@@ -1,17 +1,23 @@
 import React from 'react';
 import { useContent } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
+import useSiteCounts from '../../hooks/useSiteCounts';
 import Reveal from '../common/Reveal';
 
 export default function StatsStrip() {
   const { t } = useLanguage();
   const { data } = useContent();
   const c = data.collections;
+  const counts = useSiteCounts();
+
+  // The API counts are authoritative; the bundle counts render instantly and
+  // cover the moment before the request resolves (and an offline API).
+  const value = (key, fallback) => (counts && Number.isFinite(Number(counts[key])) ? counts[key] : fallback);
   const stats = [
-    { v: c.organisations?.length || 0, l: t('organisations') },
-    { v: c.policies?.length || 0, l: t('policies') },
-    { v: c.districts?.length || 0, l: t('districtsCovered') },
-    { v: (c.documents?.length || 0) + (c.tenders?.length || 0), l: t('documentsPublished') },
+    { v: value('organisations', (c.organisations || []).length), l: t('organisations') },
+    { v: value('policies', (c.policies || []).length), l: t('policies') },
+    { v: value('districts', (c.districts || []).length), l: t('districtsCovered') },
+    { v: value('orders', (c.documents || []).length + (c.tenders || []).length), l: t('documentsPublished') },
   ];
   return (
     <section className="section-sm border-bottom" aria-label={t('keyNumbers')}>

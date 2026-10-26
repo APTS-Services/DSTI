@@ -32,7 +32,7 @@ export default function DistrictExplorer({ initial, compact = false }) {
         <div className={compact ? 'col-lg-7' : 'col-lg-7'}>
           {view === 'map' ? (
             <div className="district-map">
-              <svg viewBox="80 0 360 640" role="group" aria-label={t('districtExplorerDesc')} style={{ width: '100%', height: 'auto', maxHeight: compact ? 460 : 620 }}>
+              <svg viewBox="80 0 360 640" role="group" aria-label={t('districtExplorerDesc').replace('{n}', String(districts.length))} style={{ width: '100%', height: 'auto', maxHeight: compact ? 460 : 620 }}>
                 <polygon points={OUTLINE} fill="rgba(11,61,145,.06)" stroke="currentColor" strokeOpacity=".15" strokeWidth="2" />
                 {districts.map((x) => {
                   const active = x.id === d.id;

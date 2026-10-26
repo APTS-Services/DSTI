@@ -1,35 +1,40 @@
 {
   "name": "dsti-backend",
   "version": "1.0.0",
-  "private": true,
-  "description": "API and CMS backend for the DSTI website (Express + MySQL)",
-  "type": "module",
+  "description": "REST API and CMS backend for the DSTI website (Department of Science, Technology & Innovation, Government of Andhra Pradesh)",
   "main": "src/server.js",
-  "engines": {
-    "node": ">=18.18"
-  },
+  "type": "commonjs",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
-    "db:migrate": "node src/db/migrate.js",
-    "db:seed": "node src/db/seed.js",
-    "db:setup": "node src/db/migrate.js && node src/db/seed.js",
-    "test": "node --test --test-concurrency=1 tests/*.test.js"
+    "dev": "nodemon src/server.js",
+    "db:setup": "node src/db/setup.js",
+    "seed": "node src/db/seed.js",
+    "test": "node --test tests/api.test.js"
   },
+  "keywords": [
+    "dsti",
+    "cms",
+    "express",
+    "mysql"
+  ],
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "compression": "^1.8.2",
+    "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^18.0.8",
-    "express": "^4.22.3",
-    "express-rate-limit": "^8.7.1",
-    "helmet": "^8.3.0",
-    "multer": "^2.4.0",
-    "mysql2": "^3.24.6",
-    "nodemailer": "^10.1.2",
-    "svg-captcha": "^1.4.0"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.11.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.3",
+    "nodemailer": "^7.0.13",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "supertest": "^7.3.1"
+    "nodemon": "^3.1.10"
   }
 }

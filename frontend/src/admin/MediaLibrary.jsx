@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Copy, FileText, Trash2, Upload } from 'lucide-react';
-import { api } from '../api/client';
+import { api, assetUrl } from '../api/client';
 import { can, useAdmin } from './AdminContext';
 
 const kb = (n) => (n > 1048576 ? `${(n / 1048576).toFixed(1)} MB` : `${Math.ceil(n / 1024)} KB`);
@@ -55,8 +55,8 @@ export default function MediaLibrary() {
             <tbody>
               {(items || []).map((it) => (
                 <tr key={it.id}>
-                  <td>{it.mime.startsWith('image/') ? <img src={it.url} alt="" width="64" height="40" style={{ objectFit: 'cover' }} className="rounded border" /> : <FileText size={24} className="text-muted-2" aria-hidden="true" />}</td>
-                  <td><a href={it.url} target="_blank" rel="noopener">{it.original_name}</a><small className="d-block font-monospace text-muted-2">{it.url}</small></td>
+                  <td>{it.mime.startsWith('image/') ? <img src={assetUrl(it.url)} alt="" width="64" height="40" style={{ objectFit: 'cover' }} className="rounded border" /> : <FileText size={24} className="text-muted-2" aria-hidden="true" />}</td>
+                  <td><a href={assetUrl(it.url)} target="_blank" rel="noopener">{it.original_name}</a><small className="d-block font-monospace text-muted-2">{it.url}</small></td>
                   <td className="small">{kb(it.size_bytes)}</td>
                   <td className="small text-nowrap">{it.created_at}</td>
                   <td className="text-end text-nowrap">

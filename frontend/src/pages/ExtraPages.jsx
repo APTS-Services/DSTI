@@ -1,6 +1,6 @@
 // Screen reader access, help, sitemap, search results and 404.
 import React, { useMemo } from 'react';
-import { Link, Route, Routes, useSearchParams } from 'react-router-dom';
+import { Link, Route, Routes, useParams, useSearchParams } from 'react-router-dom';
 import { useCollection, useContent } from '../context/ContentContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import useSEO from '../hooks/useSEO';
@@ -21,6 +21,24 @@ function CmsPage({ id, titleKey, faq }) {
         {faq
           ? (page?.sections || []).map((s, i) => <details key={i} className="faq"><summary>{tc(s.heading)}</summary><div className="body">{(s.body || []).map((b, j) => <p key={j} className="mb-1">{tc(b)}</p>)}</div></details>)
           : <PageSections page={page} />}
+      </div>
+    </>
+  );
+}
+
+// Any published CMS page: /p/<identifier>. Pages that already have a dedicated
+// screen (rti, help, statutory…) keep their own URL and also render here.
+function CmsPageView() {
+  const { t, tc } = useLanguage();
+  const { slug } = useParams();
+  const page = useCollection('pages').find((p) => p.id === slug);
+  useSEO({ title: tc(page?.title) || t('pageNotFound'), description: tc(page?.subtitle) });
+  if (!page) return <NotFound />;
+  return (
+    <>
+      <PageHero title={tc(page.title)} subtitle={tc(page.subtitle)} crumbs={[{ label: t('home'), to: '/' }, { label: tc(page.title) }]} />
+      <div className="container section-sm" style={{ maxWidth: 900 }}>
+        <PageSections page={page} />
       </div>
     </>
   );
@@ -90,6 +108,7 @@ function SearchResults() {
 export default function ExtraPages() {
   return (
     <Routes>
+      <Route path="/p/:slug" element={<CmsPageView />} />
       <Route path="/screen-reader-access" element={<CmsPage id="screen-reader-access" titleKey="screenReaderAccess" />} />
       <Route path="/help" element={<CmsPage id="help" titleKey="help" faq />} />
       <Route path="/sitemap" element={<Sitemap />} />

@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Newspaper } from 'lucide-react';
 import { useCollection, useSetting } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { byDateDesc, formatDate, isExternal, safeHref } from '../../utils/format';
+import { assetUrl } from '../../api/client';
 import Reveal from '../common/Reveal';
 import useScroller from '../common/useScroller';
 
@@ -13,7 +14,7 @@ function Card({ n }) {
   const inner = (
     <>
       <div className="thumb">
-        {n.image ? <img src={n.image} alt="" loading="lazy" /> : <span className="ph"><Newspaper size={44} strokeWidth={1.3} aria-hidden="true" /></span>}
+        {n.image ? <img src={assetUrl(n.image)} alt="" loading="lazy" /> : <span className="ph"><Newspaper size={44} strokeWidth={1.3} aria-hidden="true" /></span>}
         <span className="tag">{n.category}</span>
       </div>
       <p className="small text-muted-2 mt-3 mb-0">{formatDate(n.date, lang)}</p>

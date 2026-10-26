@@ -1,6 +1,7 @@
 // Loads all published website content once from the CMS API and keeps it in
 // sync (stale-while-revalidate: cached copy renders instantly, then refreshes).
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { apiUrl } from '../api/client';
 
 const ContentContext = createContext(null);
 const CACHE = 'dsti.content.v1';
@@ -24,7 +25,7 @@ export function ContentProvider({ children }) {
 
   const load = useCallback(async (etag) => {
     try {
-      const res = await fetch('/api/public/content', { headers: etag ? { 'If-None-Match': etag } : {}, credentials: 'same-origin' });
+      const res = await fetch(apiUrl('/api/public/content'), { headers: etag ? { 'If-None-Match': etag } : {}, credentials: 'include' });
       if (res.status === 304) return;
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();

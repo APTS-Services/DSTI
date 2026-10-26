@@ -5,6 +5,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, Search, X } from 'lucide-react';
 import { useCollection, useSetting } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { assetUrl } from '../../api/client';
 
 export const DEFAULT_LOGO = '/images/ap-govt-logo.svg';
 
@@ -56,7 +57,7 @@ export default function Header({ onSearch, onAssistant }) {
     <header className="site-header">
       <div className="container d-flex align-items-center gap-3 py-2" style={{ minHeight: 84 }}>
         <Link to="/" className="brand me-auto" aria-label={`${name} — ${t('home')}`}>
-          <img src={site.logo || DEFAULT_LOGO} alt={tc(site.gov) || t('gov')} width="56" height="56" />
+          <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt={tc(site.gov) || t('gov')} width="56" height="56" />
           <span className="d-flex flex-column">
             <span className="brand-title">{name}</span>
             <span className="brand-sub">{tc(site.gov) || t('gov')}</span>

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { useCollection, useSetting } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
 import SocialIcon from '../common/SocialIcon';
 import { formatDate, safeHref } from '../../utils/format';
+import { apiUrl, assetUrl } from '../../api/client';
 import { DEFAULT_LOGO } from './Header';
 
 const STATUTORY = [
@@ -18,10 +19,23 @@ export default function Footer() {
   const site = useSetting('site');
   const contact = useSetting('contact');
   const nav = useCollection('navigation');
+  const pages = useCollection('pages');
   const [stats, setStats] = useState(null);
 
+  // The "Website Policies & Help" column is driven by the CMS: pages flagged
+  // "Show in the website footer", in their display order. Until an editor flags
+  // any, the previous fixed list is shown so the footer is never empty.
+  const policyLinks = useMemo(() => {
+    const flagged = pages
+      .filter((page) => page.showInFooter)
+      .sort((a, b) => Number(a._order || 0) - Number(b._order || 0))
+      .map((page) => ({ key: page.id, label: tc(page.title), to: page.path || `/p/${page.id}` }));
+    const links = flagged.length ? flagged : STATUTORY.map(([key, to]) => ({ key, label: t(key), to }));
+    return [...links, { key: 'sitemap', label: t('sitemap'), to: '/sitemap' }];
+  }, [pages, t, tc]);
+
   useEffect(() => {
-    fetch('/api/public/stats').then((r) => (r.ok ? r.json() : null)).then(setStats).catch(() => {});
+    fetch(apiUrl('/api/public/stats')).then((r) => (r.ok ? r.json() : null)).then(setStats).catch(() => {});
   }, []);
 
   return (
@@ -30,7 +44,7 @@ export default function Footer() {
         <div className="row g-4 pb-4">
           <div className="col-lg-4">
             <div className="d-flex align-items-center gap-3 mb-3">
-              <img src={site.logo || DEFAULT_LOGO} alt="" width="52" height="52" style={{ background: '#fff', borderRadius: '50%', padding: 3 }} />
+              <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" width="52" height="52" style={{ background: '#fff', borderRadius: '50%', padding: 3 }} />
               <div>
                 <h2 className="mb-0">{tc(site.name) || t('siteName')}</h2>
                 <small>{tc(site.gov) || t('gov')}</small>
@@ -61,7 +75,7 @@ export default function Footer() {
           <div className="col-6 col-lg-3">
             <h3>{t('statutoryPages')}</h3>
             <ul className="list-unstyled d-grid gap-2 mb-0">
-              {STATUTORY.map(([k, to]) => <li key={k}><Link to={to}>{t(k)}</Link></li>)}
+              {policyLinks.map((link) => <li key={link.key}><Link to={link.to}>{link.label}</Link></li>)}
             </ul>
           </div>
           <div className="col-lg-3">

@@ -17,6 +17,7 @@ import Reveal from '../components/common/Reveal';
 import VideoCard from '../components/common/VideoCard';
 import EventCard from '../components/common/EventCard';
 import useScroller from '../components/common/useScroller';
+import useSiteCounts from '../hooks/useSiteCounts';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { byDateDesc } from '../utils/format';
 
@@ -66,6 +67,9 @@ export default function HomePage() {
   const { t, tc } = useLanguage();
   const home = useSetting('home');
   const site = useSetting('site');
+  const districts = useCollection('districts');
+  const counts = useSiteCounts();
+  const districtTotal = counts?.districts ?? districts.length;
   useSEO({ description: tc(site.tagline), path: '/' });
   const show = (k) => home[k] !== false;
 
@@ -81,7 +85,7 @@ export default function HomePage() {
       {(show('showDistricts') || show('showAlmanac')) && (
         <section className="section" aria-labelledby="dist-title">
           <div className="container">
-            <SectionHeading id="dist-title" eyebrow={t('districtExplorer')} title={t('districtExplorerTitle')} subtitle={t('districtExplorerDesc')} action={t('openExplorer')} actionTo="/districts" />
+            <SectionHeading id="dist-title" eyebrow={t('districtExplorer')} title={t('districtExplorerTitle').replace('{n}', String(districtTotal))} subtitle={t('districtExplorerDesc').replace('{n}', String(districtTotal))} action={t('openExplorer')} actionTo="/districts" />
             <div className="row g-4">
               {show('showDistricts') && <Reveal className={show('showAlmanac') ? 'col-xl-8' : 'col-12'}><DistrictExplorer compact /></Reveal>}
               {show('showAlmanac') && <Reveal className={show('showDistricts') ? 'col-xl-4' : 'col-lg-6'} delay={0.1}><AlmanacWidget /></Reveal>}

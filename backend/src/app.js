@@ -1,71 +1,112 @@
-// Express application: security middleware, API routes and static hosting.
-import fs from 'node:fs';
-import path from 'node:path';
-import express from 'express';
-import compression from 'compression';
-import cookieParser from 'cookie-parser';
-import env from './config/env.js';
-import { loadSession } from './middleware/auth.js';
-import { errorHandler, notFound } from './middleware/errors.js';
-import { apiLimiter } from './middleware/rateLimits.js';
-import { hostGuard, methodGuard, noStore, permissionsPolicy, sameOrigin, securityHeaders } from './middleware/security.js';
-import adminRoutes from './routes/admin.js';
-import authRoutes from './routes/auth.js';
-import publicRoutes, { seoRouter } from './routes/public.js';
+// src/app.js — Express application (API + uploaded files only).
+const crypto = require('crypto');
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
 
-export function createApp() {
+const config = require('./config');
+const mountRoutes = require('./routes');
+const logger = require('./utils/logger');
+const securityHeaders = require('./middleware/securityHeaders');
+const errorMiddleware = require('./middleware/errorMiddleware');
+const { asyncHandler } = require('./utils/http');
+const publicService = require('./services/publicService');
+
+function createApp() {
   const app = express();
   app.disable('x-powered-by');
-  app.set('trust proxy', env.trustProxy);
-  app.set('etag', false);
+  app.set('trust proxy', config.trustProxy);
 
-  app.use(methodGuard, hostGuard, securityHeaders, permissionsPolicy, compression());
+  // Request correlation id (also returned as X-Request-ID).
+  app.use((req, res, next) => {
+    req.id = crypto.randomUUID();
+    res.setHeader('X-Request-ID', req.id);
+    next();
+  });
 
-  const jsonSmall = express.json({ limit: '256kb' });
-  app.use((req, res, next) => (req.path === '/api/admin/restore' ? next() : jsonSmall(req, res, next)));
+  morgan.token('id', (req) => req.id || '-');
+  app.use(
+    morgan(':id :remote-addr :method :url :status :res[content-length] :response-time ms', {
+      stream: logger.stream
+    })
+  );
+
+  app.use(compression({ filter: (req, res) => (req.path.toLowerCase().endsWith('.pdf') ? false : compression.filter(req, res)) }));
+
+  app.use(
+    cors({
+      origin(origin, callback) {
+        if (!origin) return callback(null, true);
+        if (config.corsOrigins.includes(origin)) return callback(null, true);
+        // Development convenience: the React dev server may be opened as
+        // localhost or 127.0.0.1 on any port (5173, 4173, ...). Never in production.
+        if (!config.isProduction && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) return callback(null, true);
+        logger.warn(`CORS blocked origin: ${origin}`);
+        return callback(new Error('Not allowed by CORS'));
+      },
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Authorization', 'Content-Type', 'X-CSRF-Token', 'X-Requested-With', 'Accept', 'If-None-Match'],
+      exposedHeaders: ['ETag', 'X-Request-ID'],
+      credentials: true,
+      maxAge: 86400
+    })
+  );
+
+  app.use(securityHeaders);
   app.use(cookieParser());
 
-  app.get('/api/health', (req, res) => res.json({ ok: true }));
-  app.use('/api', apiLimiter, sameOrigin);
-  app.use('/api/public', publicRoutes);
-  app.use('/api/auth', noStore, loadSession, authRoutes);
-  app.use('/api/admin', noStore, loadSession, adminRoutes);
-  app.use('/api', notFound);
+  // The backup restore endpoint accepts larger bodies; everything else is small.
+  const jsonSmall = express.json({ limit: config.limits.jsonBody });
+  app.use((req, res, next) => {
+    if (req.path === '/api/admin/restore') return next();
+    return jsonSmall(req, res, next);
+  });
+  app.use(express.urlencoded({ extended: true, limit: '100kb' }));
 
-  app.use(seoRouter);
+  mountRoutes(app);
+
+  // Search-engine files generated from the CMS content.
+  app.get(
+    '/sitemap.xml',
+    asyncHandler(async (req, res) => {
+      res.type('application/xml').setHeader('Cache-Control', 'public, max-age=3600');
+      res.send(await publicService.sitemapXml());
+    })
+  );
+  app.get('/robots.txt', (req, res) => {
+    res.type('text/plain').send(`User-agent: *\nDisallow: /admin\nDisallow: /api/\nSitemap: ${config.publicOrigin}/sitemap.xml\n`);
+  });
 
   // Uploaded documents and images.
-  app.use('/uploads', express.static(env.uploadDir, {
-    dotfiles: 'deny',
-    index: false,
-    maxAge: '7d',
-    setHeaders: (res, file) => {
-      res.setHeader('X-Content-Type-Options', 'nosniff');
-      // Chrome's PDF viewer refuses sandboxed documents, so only non-PDF files get the sandbox.
-      if (file.endsWith('.pdf')) res.setHeader('Content-Disposition', `inline; filename="${path.basename(file)}"`);
-      else res.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self'; media-src 'self'; sandbox");
-    },
-  }));
-  app.use('/uploads', (req, res) => res.status(404).send('Not found'));
-
-  // Built frontend (production). Vite serves the frontend in development.
-  if (fs.existsSync(path.join(env.frontendDist, 'index.html'))) {
-    app.use(express.static(env.frontendDist, {
+  app.use(
+    '/uploads',
+    express.static(config.paths.uploadsDir, {
+      dotfiles: 'deny',
       index: false,
-      maxAge: '1y',
-      immutable: true,
-      setHeaders: (res, file) => {
-        if (!file.includes(`${path.sep}assets${path.sep}`)) res.setHeader('Cache-Control', 'public, max-age=3600');
-      },
-    }));
-    const indexHtml = path.join(env.frontendDist, 'index.html');
-    app.get('*', (req, res) => {
-      res.setHeader('Cache-Control', 'no-cache');
-      res.sendFile(indexHtml);
-    });
-  }
+      maxAge: '7d',
+      setHeaders(res, file) {
+        res.setHeader('X-Content-Type-Options', 'nosniff');
+        res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' data:; media-src 'self'; object-src 'self'");
+        if (file.toLowerCase().endsWith('.pdf')) res.setHeader('Content-Disposition', `inline; filename="${path.basename(file)}"`);
+      }
+    })
+  );
+  app.use('/uploads', (req, res) => res.status(404).json({ error: 'File not found.' }));
 
-  app.use(notFound);
-  app.use(errorHandler);
+  // JSON 404s — this server never renders HTML pages.
+  app.use('/api', (req, res) => {
+    if (req.path.startsWith('/api/v1')) {
+      return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'API endpoint not found' } });
+    }
+    return res.status(404).json({ error: 'API endpoint not found', path: req.originalUrl });
+  });
+  app.use((req, res) => res.status(404).json({ error: 'Not found', path: req.originalUrl }));
+
+  app.use(errorMiddleware);
   return app;
 }
+
+module.exports = { createApp };

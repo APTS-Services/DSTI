@@ -1,6 +1,7 @@
 // Anonymous page-view counter (no cookies, no personal data).
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { apiUrl } from '../api/client';
 
 export default function usePageTracking() {
   const { pathname } = useLocation();
@@ -16,7 +17,7 @@ export default function usePageTracking() {
       /* ignore */
     }
     const t = setTimeout(() => {
-      fetch('/api/public/hit', {
+      fetch(apiUrl('/api/public/hit'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ path: pathname.slice(0, 120), newVisitor }),

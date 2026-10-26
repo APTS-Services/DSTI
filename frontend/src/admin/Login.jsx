@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Lock, LogIn } from 'lucide-react';
 import { api, encryptSecret } from '../api/client';
+import { assetUrl } from '../api/client';
 import { useSetting } from '../context/ContentContext';
 import Captcha from '../components/common/Captcha';
 import { DEFAULT_LOGO } from '../components/layout/Header';
@@ -50,7 +51,7 @@ export default function Login() {
     <main className="login-wrap">
       <div className="admin-card p-4 p-md-5 w-100" style={{ maxWidth: 440 }}>
         <div className="text-center mb-4">
-          <img src={site.logo || DEFAULT_LOGO} alt="Government of Andhra Pradesh" width="72" height="72" />
+          <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="Government of Andhra Pradesh" width="72" height="72" />
           <h1 className="h4 fw-bold mt-3 mb-1">Content Management System</h1>
           <p className="text-muted-2 small mb-0">{site.name?.en || 'Department of Science, Technology & Innovation'}</p>
         </div>
