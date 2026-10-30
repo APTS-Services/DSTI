@@ -58,7 +58,10 @@ const settings = {
       f('showStory', 'bool', 'Illustrated story'),
       f('showConnections', 'bool', 'How it all connects'),
       f('showStories', 'bool', 'Science stories'),
-      f('showEvents', 'bool', 'Events')
+      f('showEvents', 'bool', 'Events'),
+      f('showGallery', 'bool', 'Photo gallery'),
+      f('galleryTitle', 'bi', 'Gallery title'),
+      f('galleryTagline', 'bi', 'Gallery tagline (shown under the gallery)')
     ]
   },
   system: {

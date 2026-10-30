@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import { ArrowRight, CalendarDays, Video } from 'lucide-react';
-import { useCollection } from '../context/ContentContext';
+import { ArrowRight, CalendarDays, Images, Video } from 'lucide-react';
+import { useCollection, useSetting } from '../context/ContentContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import useSEO from '../hooks/useSEO';
 import PageHero from '../components/common/PageHero';
@@ -11,6 +11,8 @@ import EventCard from '../components/common/EventCard';
 import Empty from '../components/common/Empty';
 import { byDateDesc } from '../utils/format';
 import NotFound from './NotFound';
+import GalleryTile from '../components/common/GalleryGrid';
+import Lightbox from '../components/common/Lightbox';
 
 const isPast = (e) => e.status === 'past' || (e.endDate || e.date) < new Date().toISOString().slice(0, 10);
 
@@ -22,8 +24,8 @@ function Hub() {
       <PageHero title={t('media')} crumbs={[{ label: t('media') }]} />
       <div className="container section-sm">
         <div className="row g-4">
-          {[[Video, 'scienceStories', 'scienceStoriesShort', '/media/science-stories', 'sky'], [CalendarDays, 'events', 'eventsDesc', '/media/events', 'blush']].map(([Icon, k, d, to, tone], i) => (
-            <Reveal key={k} className="col-md-6" delay={i * 0.08}>
+          {[[Images, 'gallery', 'galleryDesc', '/media/gallery', 'lavender'], [Video, 'scienceStories', 'scienceStoriesShort', '/media/science-stories', 'sky'], [CalendarDays, 'events', 'eventsDesc', '/media/events', 'blush']].map(([Icon, k, d, to, tone], i) => (
+            <Reveal key={k} className="col-md-6 col-lg-4" delay={i * 0.08}>
               <Link to={to} className={`feature-card tone-${tone}`}>
                 <Icon size={38} className="icon" aria-hidden="true" />
                 <div className="d-flex justify-content-between gap-3"><h2 className="h3">{t(k)}</h2><span className="arrow" aria-hidden="true"><ArrowRight size={22} /></span></div>
@@ -82,12 +84,47 @@ function Events() {
   );
 }
 
+function Gallery() {
+  const { t, tc } = useLanguage();
+  const photos = useCollection('gallery');
+  const home = useSetting('home');
+  const [album, setAlbum] = useState('');
+  const [open, setOpen] = useState(null);
+  const albums = useMemo(() => [...new Set(photos.map((p) => p.album).filter(Boolean))], [photos]);
+  const list = useMemo(() => [...photos].sort(byDateDesc()).filter((p) => !album || p.album === album), [photos, album]);
+  const title = tc(home.galleryTitle) || t('gallery');
+  useSEO({ title, description: t('galleryDesc') });
+  return (
+    <>
+      <PageHero title={title} subtitle={t('galleryDesc')} crumbs={[{ label: t('media'), to: '/media' }, { label: title }]} />
+      <div className="container section-sm">
+        <div className="d-flex flex-wrap align-items-center gap-2 mb-4" role="group" aria-label={t('filterBy')}>
+          <button type="button" className={`chip ${!album ? 'active' : ''}`} aria-pressed={!album} onClick={() => setAlbum('')}>{t('allAlbums')} <span>{photos.length}</span></button>
+          {albums.map((a) => (
+            <button key={a} type="button" className={`chip ${album === a ? 'active' : ''}`} aria-pressed={album === a} onClick={() => setAlbum(a)}>
+              {a} <span>{photos.filter((p) => p.album === a).length}</span>
+            </button>
+          ))}
+        </div>
+        {!list.length ? <Empty /> : (
+          <div className="gallery-grid">
+            {list.map((p, i) => <GalleryTile key={p.id} photo={p} feature={i === 0 && list.length > 4} onOpen={() => setOpen(i)} />)}
+          </div>
+        )}
+        {tc(home.galleryTagline) && <p className="gallery-tagline">{tc(home.galleryTagline)}</p>}
+      </div>
+      {open !== null && <Lightbox items={list} index={open} onChange={setOpen} onClose={() => setOpen(null)} />}
+    </>
+  );
+}
+
 export default function MediaPages() {
   return (
     <Routes>
       <Route index element={<Hub />} />
       <Route path="science-stories" element={<Stories />} />
       <Route path="events" element={<Events />} />
+      <Route path="gallery" element={<Gallery />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

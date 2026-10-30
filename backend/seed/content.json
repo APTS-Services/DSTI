@@ -179,6 +179,15 @@
       "articlesSubtitle": {
         "en": "Explore the latest announcements, Government Orders, circulars and events from the Department.",
         "te": "శాఖ నుండి తాజా ప్రకటనలు, ప్రభుత్వ ఉత్తర్వులు, సర్క్యులర్లు మరియు కార్యక్రమాలను చూడండి."
+      },
+      "showGallery": true,
+      "galleryTitle": {
+        "en": "Photo Gallery",
+        "te": "ఫోటో గ్యాలరీ"
+      },
+      "galleryTagline": {
+        "en": "Science for every citizen — moments from Andhra Pradesh's journey of discovery and innovation.",
+        "te": "ప్రతి పౌరునికి విజ్ఞానం — ఆంధ్రప్రదేశ్ ఆవిష్కరణ ప్రయాణంలోని క్షణాలు."
       }
     },
     "system": {
@@ -4272,6 +4281,224 @@
           "te": ""
         },
         "showOnHome": true
+      }
+    ],
+    "gallery": [
+      {
+        "id": "photo-rocket-launch",
+        "image": "/images/gallery/rocket-launch.svg",
+        "title": {
+          "en": "Launch day at Sriharikota",
+          "te": "శ్రీహరికోటలో ప్రయోగ దినం"
+        },
+        "caption": {
+          "en": "Students from 26 districts watched a satellite launch from the viewing gallery at Satish Dhawan Space Centre.",
+          "te": "26 జిల్లాల విద్యార్థులు సతీష్ ధావన్ అంతరిక్ష కేంద్రం వీక్షణ గ్యాలరీ నుండి ఉపగ్రహ ప్రయోగాన్ని వీక్షించారు."
+        },
+        "album": "Space & technology",
+        "date": "2026-08-14",
+        "location": {
+          "en": "Sriharikota, Tirupati",
+          "te": "శ్రీహరికోట, తిరుపతి"
+        }
+      },
+      {
+        "id": "photo-satellite-orbit",
+        "image": "/images/gallery/satellite-orbit.svg",
+        "title": {
+          "en": "Space applications for governance",
+          "te": "పాలనకు అంతరిక్ష అనువర్తనాలు"
+        },
+        "caption": {
+          "en": "Remote sensing data from APSAC supports agriculture, water and disaster management.",
+          "te": "APSAC రిమోట్ సెన్సింగ్ డేటా వ్యవసాయం, నీరు మరియు విపత్తు నిర్వహణకు తోడ్పడుతుంది."
+        },
+        "album": "Space & technology",
+        "date": "2026-07-02",
+        "location": {
+          "en": "Vijayawada",
+          "te": "విజయవాడ"
+        }
+      },
+      {
+        "id": "photo-drone-show",
+        "image": "/images/gallery/drone-show.svg",
+        "title": {
+          "en": "Drone summit light show",
+          "te": "డ్రోన్ సదస్సు లైట్ షో"
+        },
+        "caption": {
+          "en": "A formation of drones lit up the evening sky at the Andhra Pradesh drone summit.",
+          "te": "ఆంధ్రప్రదేశ్ డ్రోన్ సదస్సులో డ్రోన్ల సమూహం సాయంత్రం ఆకాశాన్ని వెలిగించింది."
+        },
+        "album": "Innovation & start-ups",
+        "date": "2026-10-22",
+        "location": {
+          "en": "Amaravati",
+          "te": "అమరావతి"
+        }
+      },
+      {
+        "id": "photo-semiconductor-lab",
+        "image": "/images/gallery/semiconductor-lab.svg",
+        "title": {
+          "en": "Semiconductor design lab",
+          "te": "సెమీకండక్టర్ డిజైన్ ల్యాబ్"
+        },
+        "caption": {
+          "en": "Engineers at work in the chip design and testing facility.",
+          "te": "చిప్ డిజైన్ మరియు పరీక్ష కేంద్రంలో ఇంజనీర్లు."
+        },
+        "album": "Innovation & start-ups",
+        "date": "2026-06-18",
+        "location": {
+          "en": "Visakhapatnam",
+          "te": "విశాఖపట్నం"
+        }
+      },
+      {
+        "id": "photo-science-fair",
+        "image": "/images/gallery/science-fair.svg",
+        "title": {
+          "en": "State science fair, National Science Day",
+          "te": "జాతీయ విజ్ఞాన దినోత్సవం రాష్ట్ర విజ్ఞాన ప్రదర్శన"
+        },
+        "caption": {
+          "en": "Young scientists presented more than 400 working models.",
+          "te": "యువ శాస్త్రవేత్తలు 400కు పైగా పని నమూనాలను ప్రదర్శించారు."
+        },
+        "album": "Science outreach",
+        "date": "2026-02-28",
+        "location": {
+          "en": "Guntur",
+          "te": "గుంటూరు"
+        }
+      },
+      {
+        "id": "photo-planetarium",
+        "image": "/images/gallery/planetarium.svg",
+        "title": {
+          "en": "Night-sky show at the planetarium",
+          "te": "ప్లానెటేరియంలో రాత్రి ఆకాశ ప్రదర్శన"
+        },
+        "caption": {
+          "en": "Families explored the planets in a full-dome show.",
+          "te": "కుటుంబాలు పూర్తి-గోపుర ప్రదర్శనలో గ్రహాలను అన్వేషించాయి."
+        },
+        "album": "Science outreach",
+        "date": "2026-05-09",
+        "location": {
+          "en": "Tirupati",
+          "te": "తిరుపతి"
+        }
+      },
+      {
+        "id": "photo-conclave-stage",
+        "image": "/images/gallery/conclave-stage.svg",
+        "title": {
+          "en": "Space-Tech Conclave 2026",
+          "te": "స్పేస్-టెక్ కాన్క్లేవ్ 2026"
+        },
+        "caption": {
+          "en": "Industry, ISRO scientists and start-ups met to shape the State space policy roadmap.",
+          "te": "రాష్ట్ర అంతరిక్ష విధాన ప్రణాళికపై పరిశ్రమ, ఇస్రో శాస్త్రవేత్తలు మరియు స్టార్టప్‌లు చర్చించారు."
+        },
+        "album": "Events & conclaves",
+        "date": "2026-10-29",
+        "location": {
+          "en": "Tirupati",
+          "te": "తిరుపతి"
+        }
+      },
+      {
+        "id": "photo-hackathon",
+        "image": "/images/gallery/hackathon.svg",
+        "title": {
+          "en": "AP Hackathon grand finale",
+          "te": "ఏపీ హ్యాకథాన్ గ్రాండ్ ఫినాలే"
+        },
+        "caption": {
+          "en": "Student teams built solutions for real citizen-service problems in 36 hours.",
+          "te": "విద్యార్థి బృందాలు 36 గంటల్లో పౌర సేవల సమస్యలకు పరిష్కారాలు రూపొందించాయి."
+        },
+        "album": "Innovation & start-ups",
+        "date": "2026-09-12",
+        "location": {
+          "en": "Visakhapatnam",
+          "te": "విశాఖపట్నం"
+        }
+      },
+      {
+        "id": "photo-research-lab",
+        "image": "/images/gallery/research-lab.svg",
+        "title": {
+          "en": "Open lab day",
+          "te": "ఓపెన్ ల్యాబ్ దినం"
+        },
+        "caption": {
+          "en": "Research labs opened their doors to school students.",
+          "te": "పరిశోధన ప్రయోగశాలలు పాఠశాల విద్యార్థులకు తలుపులు తెరిచాయి."
+        },
+        "album": "Science outreach",
+        "date": "2026-04-21",
+        "location": {
+          "en": "Kakinada",
+          "te": "కాకినాడ"
+        }
+      },
+      {
+        "id": "photo-award-ceremony",
+        "image": "/images/gallery/award-ceremony.svg",
+        "title": {
+          "en": "Young Scientist Awards",
+          "te": "యువ శాస్త్రవేత్త పురస్కారాలు"
+        },
+        "caption": {
+          "en": "Awardees were honoured for research in biotechnology, electronics and space science.",
+          "te": "బయోటెక్నాలజీ, ఎలక్ట్రానిక్స్ మరియు అంతరిక్ష విజ్ఞానంలో పరిశోధనకు పురస్కారాలు."
+        },
+        "album": "Events & conclaves",
+        "date": "2026-01-30",
+        "location": {
+          "en": "Amaravati",
+          "te": "అమరావతి"
+        }
+      },
+      {
+        "id": "photo-solar-farm",
+        "image": "/images/gallery/solar-farm.svg",
+        "title": {
+          "en": "Clean energy in the districts",
+          "te": "జిల్లాల్లో స్వచ్ఛ ఇంధనం"
+        },
+        "caption": {
+          "en": "Solar and wind installations supported by technology demonstration projects.",
+          "te": "సాంకేతిక ప్రదర్శన ప్రాజెక్టుల మద్దతుతో సౌర మరియు పవన వ్యవస్థలు."
+        },
+        "album": "Space & technology",
+        "date": "2026-03-15",
+        "location": {
+          "en": "Anantapur",
+          "te": "అనంతపురం"
+        }
+      },
+      {
+        "id": "photo-digital-village",
+        "image": "/images/gallery/digital-village.svg",
+        "title": {
+          "en": "Technology reaches every village",
+          "te": "ప్రతి గ్రామానికి సాంకేతికత"
+        },
+        "caption": {
+          "en": "Village digital assistants help citizens use online services.",
+          "te": "గ్రామ డిజిటల్ సహాయకులు పౌరులకు ఆన్‌లైన్ సేవలు ఉపయోగించడంలో సహాయపడతారు."
+        },
+        "album": "Science outreach",
+        "date": "2026-08-05",
+        "location": {
+          "en": "Srikakulam",
+          "te": "శ్రీకాకుళం"
+        }
       }
     ]
   },

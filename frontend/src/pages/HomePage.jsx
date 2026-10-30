@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCollection, useSetting } from '../context/ContentContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import useSEO from '../hooks/useSEO';
@@ -18,8 +19,10 @@ import VideoCard from '../components/common/VideoCard';
 import EventCard from '../components/common/EventCard';
 import useScroller from '../components/common/useScroller';
 import useSiteCounts from '../hooks/useSiteCounts';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { byDateDesc } from '../utils/format';
+import GalleryTile from '../components/common/GalleryGrid';
+import Lightbox from '../components/common/Lightbox';
 
 function StoriesRow() {
   const { t } = useLanguage();
@@ -42,6 +45,38 @@ function StoriesRow() {
           </div>
         </Reveal>
       </div>
+    </section>
+  );
+}
+
+function GalleryRow() {
+  const { t, tc } = useLanguage();
+  const photos = useCollection('gallery');
+  const home = useSetting('home');
+  const items = useMemo(() => [...photos].sort(byDateDesc()).slice(0, 10), [photos]);
+  const [open, setOpen] = useState(null);
+  const sc = useScroller();
+  if (!items.length) return null;
+  return (
+    <section className="section" aria-labelledby="gallery-title">
+      <div className="container">
+        <SectionHeading id="gallery-title" eyebrow={t('media')} title={tc(home.galleryTitle) || t('gallery')} subtitle={t('galleryDesc')}>
+          <div className="d-flex gap-2">
+            <button type="button" className="btn-square" onClick={sc.prev} disabled={sc.start} aria-label={t('previous')}><ChevronLeft size={20} aria-hidden="true" /></button>
+            <button type="button" className="btn-square" onClick={sc.next} disabled={sc.end} aria-label={t('next')}><ChevronRight size={20} aria-hidden="true" /></button>
+          </div>
+        </SectionHeading>
+        <Reveal>
+          <div ref={sc.ref} className="scroll-row gallery-row" tabIndex={0} role="region" aria-label={t('gallery')}>
+            {items.map((p, i) => <GalleryTile key={p.id} photo={p} onOpen={() => setOpen(i)} />)}
+          </div>
+        </Reveal>
+        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4">
+          {tc(home.galleryTagline) ? <p className="gallery-tagline small-tagline mb-0">{tc(home.galleryTagline)}</p> : <span />}
+          <Link to="/media/gallery" className="btn btn-outline-dark d-inline-flex align-items-center gap-2">{t('viewGallery')} <ArrowRight size={16} aria-hidden="true" /></Link>
+        </div>
+      </div>
+      {open !== null && <Lightbox items={items} index={open} onChange={setOpen} onClose={() => setOpen(null)} />}
     </section>
   );
 }
@@ -104,6 +139,7 @@ export default function HomePage() {
       )}
       {show('showStories') && <StoriesRow />}
       {show('showEvents') && <EventsRow />}
+      {show('showGallery') && <GalleryRow />}
     </>
   );
 }

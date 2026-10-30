@@ -374,6 +374,18 @@ const collections = {
       hooks: 'scienceStories'
     })
   },
+  gallery: {
+    label: 'Photo gallery', group: 'Media', titleField: 'title', sortField: 'date',
+    fields: [
+      f('image', 'image', 'Photograph (landscape, at least 1200×800)', { required: true }),
+      f('title', 'bi', 'Title', { required: true }),
+      f('caption', 'bitext', 'Caption'),
+      f('album', 'text', 'Album (e.g. Events & conclaves)', { max: 60 }),
+      f('date', 'date', 'Date taken'),
+      f('location', 'bi', 'Place')
+    ],
+    storage: block()
+  },
   scienceDays: {
     label: 'Science almanac – observances', group: 'Media', titleField: 'name',
     fields: [

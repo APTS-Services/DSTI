@@ -560,3 +560,13 @@ Object.assign(translations.te, {
   leadership: 'నాయకత్వం', leadershipDesc: 'ఆంధ్రప్రదేశ్‌లో విజ్ఞానం, సాంకేతికత మరియు ఆవిష్కరణలకు మార్గనిర్దేశం చేసే నాయకత్వం.',
   vision: 'దృష్టి', visionMission: 'దృష్టి & లక్ష్యం', ourVision: 'మా దృష్టి', ourMission: 'మా లక్ష్యం',
 });
+
+// ---- Photo gallery ----
+Object.assign(translations.en, {
+  gallery: 'Photo Gallery', galleryDesc: 'Moments from science outreach, events, conclaves and innovation across Andhra Pradesh.',
+  allAlbums: 'All albums', photos: 'photos', viewGallery: 'View gallery', openPhoto: 'Open photo', close: 'Close',
+});
+Object.assign(translations.te, {
+  gallery: 'ఫోటో గ్యాలరీ', galleryDesc: 'ఆంధ్రప్రదేశ్ అంతటా విజ్ఞాన ప్రచారం, కార్యక్రమాలు, సదస్సులు మరియు ఆవిష్కరణల క్షణాలు.',
+  allAlbums: 'అన్ని ఆల్బమ్‌లు', photos: 'ఫోటోలు', viewGallery: 'గ్యాలరీ చూడండి', openPhoto: 'ఫోటో తెరవండి', close: 'మూసివేయండి',
+});

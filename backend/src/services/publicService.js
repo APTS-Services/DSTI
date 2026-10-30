@@ -578,7 +578,7 @@ const SITEMAP_STATIC = [
   '/ecitizen', '/ecitizen/rti', '/ecitizen/acts', '/ecitizen/government-orders', '/ecitizen/notifications',
   '/ecitizen/policies', '/ecitizen/guidelines', '/ecitizen/faqs', '/ecitizen/useful-links',
   '/ecitizen/it-act-2000', '/ecitizen/posh-act', '/tenders', '/media', '/media/science-stories',
-  '/media/events', '/contact', '/feedback', '/screen-reader-access', '/help', '/sitemap'
+  '/media/events', '/media/gallery', '/contact', '/feedback', '/screen-reader-access', '/help', '/sitemap'
 ];
 
 async function sitemapXml() {
