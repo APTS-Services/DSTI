@@ -1,4 +1,5 @@
 // src/repositories/authRepository.js — SQL for sign-in, lockout and passwords.
+const config = require('../config');
 const { q, one } = require('../config/db');
 
 const MAX_ATTEMPTS = 5;
@@ -55,7 +56,10 @@ async function endSessions(userId) {
 }
 
 async function cleanup() {
-  await q('DELETE FROM sessions WHERE expires_at < UTC_TIMESTAMP()');
+  await q(
+    'DELETE FROM sessions WHERE expires_at < UTC_TIMESTAMP() OR last_seen_at < DATE_SUB(UTC_TIMESTAMP(), INTERVAL ? MINUTE)',
+    [config.sessionIdleMinutes]
+  );
   await q('DELETE FROM jwt_blocklist WHERE expires_at < UTC_TIMESTAMP()');
 }
 

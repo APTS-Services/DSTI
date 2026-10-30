@@ -82,7 +82,7 @@ Edit `backend/.env`:
 
 | Variable | Meaning |
 | --- | --- |
-| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` | MySQL connection. **Wrap values containing `#` in double quotes**, e.g. `DB_PASSWORD="Choose-A-Strong#Password1"` |
+| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` | MySQL connection (`DB_PASSWORD` is accepted too). **Wrap values containing `#` in double quotes**, e.g. `DB_PASS="Choose-A-Strong#Password1"` |
 | `ADMIN_USERNAME`, `ADMIN_PASSWORD` | First CMS administrator, created by the seed step. Must be 10–64 characters with upper- and lower-case letters, a digit and a special character. It **must be changed at first sign-in**. |
 | `PUBLIC_ORIGIN` | Address of the website (`http://localhost:5173` in development) |
 | `SMTP_*` | Optional: SMTP server for feedback notification e-mails |
@@ -206,9 +206,13 @@ pick it up automatically; then show it in the relevant React page.
 
 1. Server: Ubuntu 22.04/24.04 LTS (or RHEL 9), Node.js 20 LTS, MySQL 8, Nginx; domain `dsti.ap.gov.in` with an SSL certificate.
 2. Copy the code, then `npm ci` in `backend` and `frontend`; run `npm run build` in `frontend`.
-3. `backend/.env`: `NODE_ENV=production`, `PUBLIC_ORIGIN=https://dsti.ap.gov.in`, `ALLOWED_HOSTS=dsti.ap.gov.in,www.dsti.ap.gov.in`, `TRUST_PROXY=1`, real DB and SMTP credentials. `chmod 600 .env`.
+3. `backend/.env`: `NODE_ENV=production`, `PUBLIC_ORIGIN=https://dsti.ap.gov.in`, `ALLOWED_HOSTS=dsti.ap.gov.in,www.dsti.ap.gov.in`, `TRUST_PROXY=1`, `SESSION_IDLE_MINUTES=20`, a 48-byte random `JWT_SECRET`, real DB and SMTP credentials. `chmod 600 .env`.
 4. `npm run db:setup` and `npm run seed`, then run the app as an unprivileged user with systemd or PM2 (`pm2 start src/server.js --name dsti`).
-5. Nginx in front (TLS 1.2/1.3 only):
+5. Web server in front (TLS 1.2/1.3 only). It serves the built website from `frontend/dist` with the security
+   headers and forwards only `/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` to the API on `127.0.0.1:5000`.
+   On **IIS**, `frontend/dist/web.config` (copied from `frontend/public/web.config` at build time) already sets the
+   headers, the HTTPS redirect and the single-page-app fallback; `backend/web.config` hosts the API with iisnode.
+   On **Nginx**:
 
 ```nginx
 server {
@@ -218,25 +222,36 @@ server {
     ssl_certificate_key /etc/ssl/dsti/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     server_tokens off;
-    client_max_body_size 12m;
+    client_max_body_size 26m;
+
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options DENY always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+    add_header Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()" always;
+
+    if ($request_method !~ ^(GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS)$) { return 405; }
+
+    root /var/www/dsti/frontend/dist;
+    location / { try_files $uri /index.html; }
+    location = /index.html { add_header Cache-Control "no-cache" always; }
+    location /assets/ { expires 1y; access_log off; }
 
     # Optional: allow the CMS only from the Secretariat / VPN network
-    # location /admin { allow 10.0.0.0/8; deny all; proxy_pass http://127.0.0.1:5000; }
     # location /api/admin { allow 10.0.0.0/8; deny all; proxy_pass http://127.0.0.1:5000; }
 
-    location / {
-        proxy_pass http://127.0.0.1:5000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
+    location ~ ^/(api|uploads)/ { proxy_pass http://127.0.0.1:5000; include /etc/nginx/proxy_params; }
+    location ~ ^/(sitemap\.xml|robots\.txt)$ { proxy_pass http://127.0.0.1:5000; include /etc/nginx/proxy_params; }
 }
 server { listen 80; server_name dsti.ap.gov.in; return 301 https://$host$request_uri; }
 ```
 
-6. Backups: schedule `backend/scripts/backup.sh` daily with cron (it reads `.env`, keeps 30 days and writes to
-   `backend/backups/`; copy them off the server). Restore with `scripts/restore.sh`. Administrators can also download
-   or restore a content backup from **CMS → Backup & restore**.
+   With this single-origin set-up, build the website with `VITE_API_BASE_URL=https://dsti.ap.gov.in`.
+
+6. Backups: schedule a nightly `mysqldump --single-transaction dsti_website` and a copy of `backend/uploads/` to
+   storage off the server. Administrators can also download or restore a content backup from
+   **CMS → Administration → Backup & restore**.
 7. Replace the placeholder emblem: **CMS → Settings → Site identity & social → Header logo**. Upload the official
    Government of Andhra Pradesh logo as PNG or WEBP.
 
@@ -246,7 +261,8 @@ server { listen 80; server_name dsti.ap.gov.in; return 301 https://$host$request
 
 The application was reviewed against the OWASP Top 10 (2021) and the usual CERT-In audit checklist before go-live. See
 [`docs/SECURITY_AUDIT.md`](docs/SECURITY_AUDIT.md) for each control and how it is tested. Highlights: strict CSP with
-no inline scripts and no third-party scripts, server-side sessions in httpOnly / SameSite=Strict cookies, CSRF tokens,
+no inline scripts and no third-party scripts, server-side sessions in httpOnly / SameSite=Strict cookies (hashed in the
+database, one per user, 20-minute idle timeout), CSRF tokens and an Origin check, Host allow-list,
 CAPTCHA and account lockout, passwords encrypted in transit and hashed with bcrypt, password policy, history and
 forced first change, role-based access, schema-validated input, upload checks of file signatures, rate limiting, an
 audit trail, and generic error messages.

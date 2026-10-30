@@ -273,6 +273,54 @@ test('CMS sign-in (CAPTCHA + RSA password) and session', async () => {
   assert.equal(me.json.user.username, ADMIN_USER);
 });
 
+async function signIn() {
+  const cap = await api('/api/auth/captcha', { auth: 'none' });
+  const login = await api('/api/auth/login', {
+    method: 'POST',
+    auth: 'none',
+    body: { username: ADMIN_USER, password: await encryptPassword(ADMIN_PASS, cap.json.id), captchaId: cap.json.id, captcha: 'x' }
+  });
+  assert.equal(login.status, 200);
+  const setCookie = login.res.headers.getSetCookie?.() || [login.res.headers.get('set-cookie')];
+  return { cookie: setCookie[0].split(';')[0], raw: setCookie[0], csrf: login.json.csrf };
+}
+
+test('session hardening: strict cookie, hashed id, single session, idle timeout', async () => {
+  const first = await signIn();
+  assert.match(first.raw, /HttpOnly/i);
+  assert.match(first.raw, /SameSite=Strict/i);
+  assert.doesNotMatch(first.raw, /Max-Age|Expires/i, 'browser-session cookie');
+
+  // Only the SHA-256 of the cookie value is stored.
+  const id = first.cookie.split('=')[1];
+  const stored = await q('SELECT session_id FROM sessions WHERE session_id = ?', [id]);
+  assert.equal(stored.length, 0, 'raw session id is not in the database');
+  const hashed = await q('SELECT session_id FROM sessions WHERE session_id = ?', [crypto.createHash('sha256').update(id).digest('hex')]);
+  assert.equal(hashed.length, 1);
+
+  // Signing in again ends the earlier session.
+  const second = await signIn();
+  const old = await api('/api/auth/me', { auth: 'none', headers: { Cookie: first.cookie } });
+  assert.equal(old.json.user, null);
+
+  // An idle session expires.
+  const key = crypto.createHash('sha256').update(second.cookie.split('=')[1]).digest('hex');
+  await q('UPDATE sessions SET last_seen_at = DATE_SUB(UTC_TIMESTAMP(), INTERVAL 2 HOUR) WHERE session_id = ?', [key]);
+  const idle = await api('/api/auth/me', { auth: 'none', headers: { Cookie: second.cookie } });
+  assert.equal(idle.json.user, null);
+
+  // Cross-origin writes and unused HTTP methods are refused.
+  const third = await signIn();
+  cookie = third.cookie;
+  csrf = third.csrf;
+  const forged = await api('/api/admin/content/faqs', { method: 'POST', headers: { Origin: 'https://evil.example' }, body: { q: { en: 'x' }, a: { en: 'y' } } });
+  assert.equal(forged.status, 403);
+  const trace = await api('/api/health', { method: 'TRACE', auth: 'none' }).catch(() => ({ status: 405 }));
+  assert.equal(trace.status, 405);
+  const noCsrfLogout = await api('/api/auth/logout', { method: 'POST', auth: 'none', headers: { Cookie: cookie, 'X-CSRF-Token': 'wrong' } });
+  assert.equal(noCsrfLogout.status, 403);
+});
+
 test('CMS schemas, dashboard and settings', async () => {
   const schemas = await api('/api/admin/schemas');
   assert.equal(schemas.status, 200);

@@ -70,7 +70,7 @@ router.post('/feedback', feedbackLimiter, c.feedback);
 router.get('/search', c.search);
 router.get('/search/suggest', c.suggest);
 router.post('/assistant/ask', assistantLimiter, c.ask);
-router.post('/assistant/feedback', c.assistantFeedback);
+router.post('/assistant/feedback', trackLimiter, c.assistantFeedback);
 
 // Analytics
 router.post('/track/view', trackLimiter, c.trackView);

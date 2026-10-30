@@ -9,7 +9,9 @@ const router = express.Router();
 router.get('/captcha', captchaLimiter, controller.captcha);
 router.get('/key', controller.key);
 router.post('/login', loginLimiter, controller.login);
-router.post('/logout', controller.logout);
+// Logout changes state, so a signed-in browser must present its CSRF token
+// (otherwise any page could sign an editor out).
+router.post('/logout', (req, res, next) => (req.user ? requireCsrf(req, res, next) : next()), controller.logout);
 router.get('/me', controller.me);
 router.post('/change-password', requireAuth, requireCsrf, controller.changePassword);
 

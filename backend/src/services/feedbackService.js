@@ -115,7 +115,13 @@ async function remove(id, user) {
 
 async function exportCsv() {
   const rows = await repository.allForExport();
-  const escape = (value) => `"${String(value ?? '').replace(/"/g, '""')}"`;
+  // Cells starting with = + - @ (or a tab / CR) would run as formulas in Excel
+  // (CSV injection), so they are prefixed with an apostrophe.
+  const escape = (value) => {
+    const text = String(value ?? '');
+    const safe = /^[=+\-@\t\r]/.test(text) ? `'${text}` : text;
+    return `"${safe.replace(/"/g, '""')}"`;
+  };
   const header = ['ID', 'Name', 'Email', 'Phone', 'Subject', 'Message', 'Status', 'Received'];
   const lines = [header.join(',')];
   for (const row of rows) {

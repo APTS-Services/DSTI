@@ -87,13 +87,15 @@ The account is flagged **must change password**; change it immediately from
 | Variable | Required | Description |
 | --- | --- | --- |
 | `PORT` | – | HTTP port (default `5000`) |
-| `HOST` | – | Bind host used in logs (default `127.0.0.1`) |
+| `HOST` | – | Interface the API listens on (default `127.0.0.1`; keep it behind a reverse proxy) |
 | `PUBLIC_ORIGIN` | – | Public site origin for sitemap links |
 | `CORS_ORIGIN` | – | Comma-separated allowed browser origins |
-| `TRUST_PROXY` | – | `true` only behind a trusted reverse proxy |
-| `JWT_SECRET` | ✅ | Signing secret for API tokens |
+| `TRUST_PROXY` | – | `true` or the proxy hop count (`1`) behind a trusted reverse proxy |
+| `ALLOWED_HOSTS` | – | Host-header allow-list in production, e.g. `dsti.ap.gov.in` |
+| `JWT_SECRET` | ✅ | Signing secret for API tokens (32+ characters in production) |
 | `JWT_EXPIRES_IN` | – | Token lifetime (default `8h`) |
-| `SESSION_TTL_DAYS` | – | CMS session lifetime (default `1`) |
+| `SESSION_IDLE_MINUTES` | – | CMS sign-in ends after this idle time (default `20`) |
+| `SESSION_MAX_HOURS` | – | Absolute CMS session limit (default `8`) |
 | `DB_HOST` | ✅ | MySQL host |
 | `DB_PORT` | – | MySQL port (default `3306`) |
 | `DB_USER` | ✅ | MySQL user |

@@ -31,7 +31,7 @@ router.post('/auth/login', loginLimiter, authController.apiLogin);
 router.post('/auth/logout', requireAuth, authController.apiLogout);
 router.post('/auth/refresh', requireAuth, authController.apiRefresh);
 router.post('/auth/change-password', requireAuth, authController.apiChangePassword);
-router.post('/auth/forgot-password', authController.forgotPassword);
+router.post('/auth/forgot-password', loginLimiter, authController.forgotPassword);
 
 router.get('/me', requireAuth, c.me);
 

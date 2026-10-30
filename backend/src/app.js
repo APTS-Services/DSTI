@@ -27,6 +27,23 @@ function createApp() {
     next();
   });
 
+  // Only the methods the API uses; TRACE/TRACK/CONNECT and friends get 405.
+  const METHODS = new Set(['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']);
+  app.use((req, res, next) => {
+    if (METHODS.has(req.method)) return next();
+    res.setHeader('Allow', [...METHODS].join(', '));
+    return res.status(405).json({ error: 'Method not allowed.' });
+  });
+
+  // Host-header allow-list (blocks host-header injection and cache poisoning).
+  if (config.allowedHosts.length) {
+    app.use((req, res, next) => {
+      const host = String(req.hostname || '').toLowerCase();
+      if (config.allowedHosts.includes(host)) return next();
+      return res.status(421).json({ error: 'Unknown host.' });
+    });
+  }
+
   morgan.token('id', (req) => req.id || '-');
   app.use(
     morgan(':id :remote-addr :method :url :status :res[content-length] :response-time ms', {
@@ -57,6 +74,19 @@ function createApp() {
 
   app.use(securityHeaders);
   app.use(cookieParser());
+
+  // Defence in depth on top of SameSite=Strict cookies and CSRF tokens: a
+  // state-changing CMS request must come from an allowed origin.
+  app.use(['/api/admin', '/api/auth', '/api/v1/admin'], (req, res, next) => {
+    if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
+    const origin = req.get('origin');
+    if (!origin) return next();
+    const self = `${req.protocol}://${req.get('host')}`;
+    const devOrigin = !config.isProduction && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+    if (origin === self || config.corsOrigins.includes(origin) || devOrigin) return next();
+    logger.warn(`Blocked cross-origin ${req.method} ${req.originalUrl} from ${origin}`);
+    return res.status(403).json({ error: 'Cross-origin request refused.' });
+  });
 
   // The backup restore endpoint accepts larger bodies; everything else is small.
   const jsonSmall = express.json({ limit: config.limits.jsonBody });

@@ -51,11 +51,14 @@ async function start() {
 
   initCleanupJobs();
 
-  server = app.listen(config.port, '0.0.0.0', () => {
+  const onListening = () => {
     logger.info(`DSTI API listening on http://${config.host}:${config.port}`);
     logger.info(`Allowed CORS origins: ${config.corsOrigins.join(', ') || '(same-origin only)'}`);
     logger.info('Public API: /api/v1   CMS: /api/admin   Site bundle: /api/public/content');
-  });
+  };
+  // Bind to HOST (127.0.0.1 behind a reverse proxy) — never every interface by
+  // default. A named pipe (iisnode) has no host.
+  server = typeof config.port === 'number' ? app.listen(config.port, config.host, onListening) : app.listen(config.port, onListening);
 
   server.on('error', (err) => {
     logger.error(`[listen] ${err.message}`);
