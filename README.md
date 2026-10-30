@@ -8,7 +8,7 @@ content pages, logo, contact details and social media links.
 | Layer | Technology |
 | --- | --- |
 | Frontend | React 18, React Router 7, Bootstrap 5.3 (SCSS, only the parts used), HTML5, CSS3, Vite 7 |
-| Backend | Node.js 18+ and Express 4 |
+| Backend | Node.js 18+ and Express 5 |
 | Database | MySQL 8 (or MariaDB 10.6+) |
 | Tests | Node test runner + Supertest (API), Playwright (end-to-end, desktop and mobile) |
 
@@ -16,12 +16,15 @@ content pages, logo, contact details and social media links.
 
 ## 1. Features (mapped to the Department's requirements)
 
-**Pages** — Home · About (Introduction, Mission, Objectives, Organisation Structure, year-wise Awards) ·
+**Menu** — six groups: About Us · Our Work · Policies · Citizen Services · Media · Contact (each drop-down shows a
+one-line description per page; phones get a drawer with search and the language switch).
+
+**Pages** — Home · About (Introduction, Leadership, Vision & Mission, Objectives, Organisation Structure, year-wise Awards) ·
 Organisations (listing, one page per organisation, District Explorer, "How it all connects") · ICT (e-Governance,
 Projects & Initiatives) · Policies (listing and one page per policy) · Investor's Corner · e-Citizen (RTI, Acts &
 Rules, Government Orders, Notifications / Circulars, Policies, Guidelines, FAQs, Useful Links, IT Act 2000 with
-Procedure and Judgements, PoSH Act) · Tenders (open / closed, document download) · Media (Science Stories videos,
-Events) · Contact Us (Head Office, List of Officers, Feedback form) · Statutory pages (Website Policy, Privacy Policy,
+Procedure and Judgements, PoSH Act) · Tenders (open / closed, document download) · Media (Photo Gallery, Science
+Stories videos, Events) · Contact Us (Head Office, List of Officers) · Feedback (form, public dashboard, tracking) · Statutory pages (Website Policy, Privacy Policy,
 Terms of Use, Copyright, Disclaimer, Hyperlink Policy, Accessibility Statement, Screen Reader Access, Help, Sitemap).
 
 **Features**
@@ -31,10 +34,13 @@ Terms of Use, Copyright, Disclaimer, Hyperlink Policy, Accessibility Statement, 
 - Site-wide search over pages, policies, orders, documents, tenders, events and more.
 - **Ask Vigyan Mitra** assistant: the chat posts each question to `POST /api/v1/assistant/ask`, and the server composes the answer from the records published in MySQL — district profiles, open or closed tenders, policies, documents, FAQs, officers and contact details — always citing the source page(s). The browser keeps a cached-content fallback for when the API is unreachable; no external AI service or third-party script is involved.
 - Interactive **District Explorer** for all 26 districts, with an accessible table view.
-- Home page: hero banner with key messages, latest-updates ticker, "What brings you here?" (Citizens, Students, Researchers, Investors), quick links, statistics, news band, District map, Science Almanac (observances and this-day-in-science), illustrated story, "How it all connects", Science Stories and Events. Each section can be switched on or off from the CMS.
+- **Leadership**: Hon'ble Chief Minister, Minister and Secretary with photographs on the home page and an About > Leadership page.
+- **Photo gallery** with albums, a lightbox (arrows, keyboard, swipe, thumbnails), captions and a tagline; a gallery strip on the home page.
+- **Feedback dashboard**: received, answered, pending, average response time, share answered within 7 days, monthly and category figures (aggregates only). Citizens track their feedback with the reference number and e-mail; the CMS records and e-mails the Department's reply.
+- Home page: hero banner with key messages and the leadership panel, latest-updates ticker, "What brings you here?" (Citizens, Students, Researchers, Investors), quick links, statistics, news band, District map, Science Almanac (observances and this-day-in-science), illustrated story, "How it all connects", Science Stories, Events and the photo gallery. Each section can be switched on or off from the CMS.
 - Document repository with search, type and year filters, date sorting and PDF download.
-- Feedback form with CAPTCHA, stored in MySQL, e-mail notification to the Department (SMTP optional) and a CMS inbox.
-- CMS with three roles (Administrator, Publisher, Editor), draft/publish workflow, file library, audit log, visitor statistics, user management, and content backup / restore.
+- Feedback form with CAPTCHA and categories, stored in MySQL, e-mail notification to the Department (SMTP optional) and a CMS inbox with replies, status tabs, search and CSV export.
+- CMS organised like the website (collapsible groups, find-a-section search, a dashboard with key figures, quick actions and a needs-attention list), with roles (Administrator, Publisher, Editor, Viewer), draft/publish workflow, file library, audit log, visitor statistics, user management, and content backup / restore.
 - SEO: page titles, meta descriptions, canonical links, Open Graph / Twitter cards, `sitemap.xml` and `robots.txt` generated from the CMS.
 - Social media links (managed in the CMS) and an anonymous visitor counter (no cookies, no IP storage).
 - Light and fast: pages are code-split; the home page loads about 80 KB of JavaScript and 33 KB of CSS (gzipped). All content arrives in one cached request, and fonts are self-hosted.
