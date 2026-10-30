@@ -46,6 +46,7 @@ test('admin manages content end to end and changes appear on the website', async
   await expect(page.getByRole('heading', { name: /Welcome/ })).toBeVisible();
 
   // Create a news item
+  await page.locator('.admin-sidebar').getByRole('button', { name: 'Home page' }).click();
   await page.locator('.admin-sidebar').getByRole('link', { name: 'Latest updates / news' }).click();
   await page.getByRole('link', { name: 'Add new' }).click();
   await page.locator('#f-date').fill('2026-10-16');
@@ -130,6 +131,7 @@ test('admin creates an editor; editor can only draft', async ({ page, server, br
   await page.getByRole('button', { name: 'Add user' }).click();
   await page.locator('#uu').fill('editor1');
   await page.locator('#un').fill('Content Editor');
+  await page.locator('#ue').fill('editor1@example.com');
   await page.locator('#ur').selectOption('Editor');
   await page.locator('#up').fill('Edit0r!Pass2026');
   await page.getByRole('button', { name: 'Save' }).click();
@@ -153,11 +155,52 @@ test('admin creates an editor; editor can only draft', async ({ page, server, br
   await ctx.close();
 });
 
+test('CMS menu search finds sections and the dashboard shows key figures', async ({ page, server }) => {
+  await login(page, server, 'admin', ADMIN_PASSWORD);
+  await expect(page.locator('.kpi')).toHaveCount(4);
+  await expect(page.getByRole('heading', { name: 'Needs attention' })).toBeVisible();
+  const side = page.locator('.admin-sidebar');
+  await side.getByPlaceholder('Find a section…').fill('gallery');
+  await side.getByRole('link', { name: 'Photo gallery' }).click();
+  await expect(page.getByRole('heading', { name: 'Photo gallery' })).toBeVisible();
+  await expect(page.locator('img.list-thumb').first()).toBeVisible();
+  await page.goto('/admin');
+  await page.getByRole('link', { name: 'Update leadership' }).click();
+  await expect(page).toHaveURL(/\/admin\/c\/leaders\/new/);
+});
+
+test('admin answers feedback and the citizen sees the reply', async ({ page, server, request }) => {
+  const api = process.env.API_ORIGIN;
+  const cap = await (await request.get(`${api}/api/auth/captcha`)).json();
+  const sent = await request.post(`${api}/api/public/feedback`, {
+    data: { name: 'Reply Tester', email: 'reply@example.com', category: 'Suggestion', subject: 'Evening shows', message: 'Please add evening planetarium shows.', captchaId: cap.id, captcha: server.peek(cap.id) },
+  });
+  expect(sent.status()).toBe(201);
+  const { reference } = await sent.json();
+
+  await login(page, server, 'admin', ADMIN_PASSWORD);
+  await page.locator('.admin-sidebar').getByRole('link', { name: /^Feedback/ }).click();
+  await expect(page.getByRole('heading', { name: 'Feedback', exact: true })).toBeVisible();
+  await page.getByPlaceholder('Search reference, name, text…').fill(reference);
+  await page.locator('.fb-row', { hasText: 'Evening shows' }).click();
+  await page.getByLabel('Reply to the citizen').fill('Thank you. Evening shows start next month.');
+  await page.getByRole('button', { name: 'Send reply' }).click();
+  await expect(page.getByText(/Reply saved/)).toBeVisible();
+  await expect(page.locator('.fb-row', { hasText: 'Evening shows' }).locator('.badge')).toHaveText('Answered');
+
+  await page.goto('/feedback');
+  await page.locator('#tr-ref').fill(reference);
+  await page.locator('#tr-email').fill('reply@example.com');
+  await page.getByRole('button', { name: 'Check status' }).click();
+  await expect(page.locator('.track-result')).toContainText('Evening shows start next month.');
+  await expect(page.locator('.track-result')).toContainText('Answered');
+});
+
 test('feedback inbox, analytics, audit log and backup pages work', async ({ page, server }) => {
   await login(page, server, 'admin', ADMIN_PASSWORD);
-  for (const [link, heading] of [['Feedback inbox', 'Feedback inbox'], ['Visitor statistics', 'Visitor statistics'], ['Audit log', 'Audit log'], ['Backup & restore', 'Backup & restore'], ['Files & images', 'Files & images']]) {
+  for (const [link, heading] of [[/^Feedback/, 'Feedback'], ['Visitor statistics', 'Visitor statistics'], ['Audit log', 'Audit log'], ['Backup & restore', 'Backup & restore'], ['Files & images', 'Files & images']]) {
     await page.locator('.admin-sidebar').getByRole('link', { name: link }).click();
-    await expect(page.getByRole('heading', { name: heading })).toBeVisible();
+    await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
   }
   await page.locator('.admin-sidebar').getByRole('link', { name: 'Audit log' }).click();
   await expect(page.getByText('LOGIN_FAILED').first()).toBeVisible();

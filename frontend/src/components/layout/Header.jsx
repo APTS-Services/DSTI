@@ -22,7 +22,7 @@ function LanguageToggle({ className = '' }) {
   const { lang, setLang } = useLanguage();
   const next = lang === 'en' ? 'te' : 'en';
   return (
-    <button type="button" className={`btn-lang ${className}`} lang={next} onClick={() => setLang(next)} aria-label={next === 'te' ? 'తెలుగులో చూడండి' : 'View in English'}>
+    <button type="button" className={`btn-lang ${className}`} lang={next} onClick={() => setLang(next)} title={next === 'te' ? 'తెలుగులో చూడండి' : 'View in English'}>
       {next === 'te' ? 'తెలుగు' : 'English'}
     </button>
   );

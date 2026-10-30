@@ -53,7 +53,7 @@ export default function Users() {
           <div className="row g-3">
             <div className="col-md-4"><label className="form-label" htmlFor="uu">Username</label><input id="uu" className="form-control" value={edit.username} onChange={set('username')} disabled={Boolean(edit.id)} maxLength={50} required /></div>
             <div className="col-md-4"><label className="form-label" htmlFor="un">Full name</label><input id="un" className="form-control" value={edit.full_name} onChange={set('full_name')} maxLength={120} required /></div>
-            <div className="col-md-4"><label className="form-label" htmlFor="ue">E-mail</label><input id="ue" type="email" className="form-control" value={edit.email} onChange={set('email')} maxLength={160} /></div>
+            <div className="col-md-4"><label className="form-label" htmlFor="ue">E-mail <span className="text-danger">*</span></label><input id="ue" type="email" className="form-control" value={edit.email} onChange={set('email')} maxLength={160} required /></div>
             <div className="col-md-4"><label className="form-label" htmlFor="ur">Role</label><select id="ur" className="form-select" value={edit.role} onChange={set('role')}><option>Administrator</option><option>Publisher</option><option>Editor</option></select></div>
             <div className="col-md-5"><label className="form-label" htmlFor="up">{edit.id ? 'Reset password (optional)' : 'Temporary password'}</label><input id="up" type="password" className="form-control" value={edit.password} onChange={set('password')} maxLength={64} autoComplete="new-password" /><div className="form-text">{POLICY}</div></div>
             <div className="col-md-3 d-flex flex-column justify-content-center gap-2">

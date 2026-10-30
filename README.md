@@ -141,24 +141,28 @@ cookies are `Secure` and HSTS is on, so put both behind HTTPS (see section 5).
 
 ## 3. Running the tests
 
-The API and end-to-end suites use the `dsti_test` database (they drop and recreate its tables). Override the name with `TEST_DB_NAME`. The assistant tests are pure JavaScript and need no database.
+The API and end-to-end suites use the `dsti_test` database (create it and grant the application user access as in
+§2.3, then run `DB_NAME=dsti_test npm run db:setup` once in `backend`). They read the database credentials from
+`backend/.env`. Override the name with `TEST_DB_NAME`. The assistant tests are pure JavaScript and need no database.
 
 ```bash
-# API, security and role tests (24 tests)
-cd backend && npm test
+# API, security and role tests (17 tests: sessions, CSRF / Origin checks, feedback replies and tracking, roles, uploads …)
+cd backend && DB_NAME=dsti_test npm test
 
 # Assistant answer-engine tests (retrieval, grounding, citations, English / Telugu)
 cd frontend && npm test
 
-# End-to-end browser tests (22 tests: every page, search, assistant, district map, tenders,
-# documents, feedback, accessibility tools, language switch, mobile layout, SEO, and the full
-# CMS workflow: forced password change, create / upload / publish / unpublish / delete,
-# repeaters, settings, editor role, inbox, audit log, backup)
-cd frontend && npm run build
-cd ../e2e && npm install && npx playwright install chromium && npm test
+# End-to-end browser tests (28 tests, desktop and mobile): every page, a crawler that opens every link in the
+# menus, footer and sitemap, search, assistant, district map, tenders, documents, feedback submission, dashboard and
+# tracking, photo gallery and lightbox, leadership, accessibility tools, language switch, mobile drawer and layout,
+# SEO, and the full CMS workflow (forced password change, create / upload / publish / unpublish / delete, repeaters,
+# settings, editor role, menu search, feedback reply, audit log, backup)
+cd e2e && npm install && npx playwright install chromium && npm test
 ```
 
-The end-to-end suite starts the backend itself on port 5055 (with the built frontend), so nothing else needs to be running.
+The end-to-end suite resets `dsti_test`, builds the website into `e2e/.site`, and runs the API (port 5056) and the
+website (port 5055) itself, so nothing else needs to be running. To use a Chromium that is already installed, set
+`PW_CHROMIUM_PATH` to its executable.
 
 ---
 

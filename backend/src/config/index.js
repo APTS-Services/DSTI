@@ -52,7 +52,7 @@ const config = {
   },
   paths: {
     // backend/uploads — never inside src/
-    uploadsDir: path.join(__dirname, '..', '..', 'uploads'),
+    uploadsDir: process.env.UPLOAD_DIR ? path.resolve(process.env.UPLOAD_DIR) : path.join(__dirname, '..', '..', 'uploads'),
     backupsDir: path.join(__dirname, '..', '..', 'backups')
   },
   limits: {

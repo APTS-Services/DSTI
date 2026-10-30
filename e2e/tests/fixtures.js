@@ -1,35 +1,56 @@
-// Starts the real backend (serving the production frontend build) inside the
-// test worker, on a dedicated test database, so tests can read CAPTCHA answers.
+// Runs the real API (on the dsti_test database) and a static server for the
+// built website inside the test worker, so the tests can read CAPTCHA answers.
+import fs from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
+import { createRequire } from 'node:module';
 import { test as base, expect } from '@playwright/test';
+import { API_PORT, E2E_ENV, ROOT, SITE_PORT } from './env.js';
 
-process.env.NODE_ENV = 'test';
-process.env.DB_NAME = process.env.TEST_DB_NAME || 'dsti_test';
-process.env.ADMIN_USERNAME = 'admin';
-process.env.ADMIN_PASSWORD = 'Init!alPass2026';
-process.env.UPLOAD_DIR = './uploads-e2e';
-process.env.PUBLIC_ORIGIN = 'http://localhost:5055';
+Object.assign(process.env, E2E_ENV);
+const require = createRequire(import.meta.url);
 
 export const ADMIN_PASSWORD = 'E2e!Secure#2026';
+const SITE_DIR = path.join(ROOT, 'e2e', '.site');
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff', '.png': 'image/png', '.json': 'application/json', '.config': 'text/plain' };
+
+/** Static host for the built site with the single-page-app fallback; search-engine files come from the API. */
+function siteServer() {
+  return http.createServer((req, res) => {
+    const url = new URL(req.url, 'http://localhost');
+    if (/^\/(sitemap\.xml|robots\.txt|uploads\/)/.test(url.pathname)) {
+      const upstream = http.request({ port: API_PORT, path: req.url, method: req.method, headers: req.headers }, (r) => { res.writeHead(r.statusCode, r.headers); r.pipe(res); });
+      return req.pipe(upstream);
+    }
+    let file = path.join(SITE_DIR, decodeURIComponent(url.pathname));
+    if (!file.startsWith(SITE_DIR) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) file = path.join(SITE_DIR, 'index.html');
+    res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
+    return fs.createReadStream(file).pipe(res);
+  });
+}
 
 export const test = base.extend({
   server: [async ({}, use) => {
-    const { query, closePool } = await import('../../backend/src/db/pool.js');
-    const { seed } = await import('../../backend/src/db/seed.js');
-    const { createApp } = await import('../../backend/src/app.js');
-    const captcha = await import('../../backend/src/utils/captcha.js');
-    for (const t of ['sessions', 'password_history', 'users', 'content', 'uploads', 'feedback', 'visits', 'page_views', 'audit_log']) {
-      await query('SET FOREIGN_KEY_CHECKS = 0');
-      await query(`DROP TABLE IF EXISTS ${t}`);
-    }
-    await query('SET FOREIGN_KEY_CHECKS = 1');
-    await seed({ reset: true, quiet: true });
-    const server = createApp().listen(5055);
-    await use({ peek: captcha.peekCaptcha, query });
-    server.close();
-    await closePool();
-    const { default: env } = await import('../../backend/src/config/env.js');
-    const fs = await import('node:fs');
-    fs.rmSync(env.uploadDir, { recursive: true, force: true });
+    // Record each CAPTCHA's answer from the generated image before the app
+    // modules take their reference to createCaptcha.
+    const captcha = require(path.join(ROOT, 'backend/src/utils/captcha.js'));
+    const answers = new Map();
+    const original = captcha.createCaptcha;
+    captcha.createCaptcha = () => {
+      const result = original();
+      answers.set(result.id, [...result.svg.matchAll(/>([A-Z0-9])<\/text>/g)].map((m) => m[1]).join(''));
+      return result;
+    };
+    const { createApp } = require(path.join(ROOT, 'backend/src/app.js'));
+    const db = require(path.join(ROOT, 'backend/src/config/db.js'));
+    const api = createApp().listen(API_PORT, '127.0.0.1');
+    const site = siteServer().listen(SITE_PORT);
+    await use({ peek: (id) => answers.get(id) });
+    api.closeAllConnections?.();
+    site.closeAllConnections?.();
+    await new Promise((r) => api.close(r));
+    await new Promise((r) => site.close(r));
+    await db.pool.end();
   }, { scope: 'worker', auto: true }],
 });
 
