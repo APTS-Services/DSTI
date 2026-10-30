@@ -44,7 +44,7 @@ Each finding was verified against the code (not the documentation), fixed and co
 | **A06 Vulnerable Components** | Small dependency set, lock files committed, `npm audit` clean. Re-run before each half-yearly audit. |
 | **A07 Identification & Authentication** | CAPTCHA on sign-in and feedback (single use, 5-minute expiry); one generic failure message and constant-time behaviour for unknown users; lock-out after 5 failures for 15 minutes; password policy (10–64 characters, upper, lower, digit, symbol, not the username, not one of the last 3); forced change of the first password; session regenerated at sign-in and password change. |
 | **A08 Software & Data Integrity** | No CDNs or third-party scripts. Uploads checked by extension **and** file signature (PDF, PNG, JPG, WEBP, MP4, VTT; SVG, HTML and double extensions rejected), renamed to random names, served with `nosniff` and a sandboxing CSP. Restores validated against the schema. |
-| **A09 Logging & Monitoring** | Audit log of sign-ins, failures, lock-outs, password changes, every create / update / delete / publish, uploads, settings, users, backups and restores (user, action, item, IP, time), visible to Administrators. Request id on every response and log line. |
+| **A09 Logging & Monitoring** | Audit log of sign-ins, failures, lock-outs, password changes, every create / update / delete / publish, uploads, settings, users, feedback replies, backups and restores (user, action, item, IP, time), visible to Administrators. Request id on every response and log line. |
 | **A10 SSRF** | The server never fetches URLs supplied by users. |
 
 ## 3. Checks commonly raised in CERT-In audits
@@ -57,14 +57,14 @@ Each finding was verified against the code (not the documentation), fixed and co
 | Password in URL / GET | Never; POST bodies only, encrypted |
 | Concurrent sessions | One per user |
 | Session timeout | 20 minutes idle, 8 hours absolute (configurable) |
-| Brute force throttling (per IP) | Sign-in 10 / 15 min, CAPTCHA 60 / 15 min, feedback 5 / 30 min, assistant 30 / 10 min, page tracking 300 / 10 min |
+| Brute force throttling (per IP) | Sign-in 10 / 15 min, CAPTCHA 60 / 15 min, feedback 5 / 30 min, feedback tracking 20 / 15 min, assistant 30 / 10 min, page tracking 300 / 10 min |
 | User enumeration | Identical response for unknown users and wrong passwords; forgot-password always answers the same |
 | Error handling | Generic messages; no versions, stack traces or SQL errors |
 | File upload | Allow-list, signature check, size limit (`MAX_UPLOAD_MB`), random names, stored outside the code, never executed |
 | Sensitive data in browser storage | None. Only display preferences and a cache of public content |
 | HTTPS | HTTP → HTTPS redirect and HSTS; `upgrade-insecure-requests` in the website CSP |
 | Admin interface exposure | `robots.txt` disallows `/admin` and `/api/`; restricting `/admin` and `/api/admin` to the Secretariat network or VPN is recommended (README §5) |
-| Privacy | Feedback collects only what is needed; the visitor counter stores no IP addresses and sets no cookies |
+| Privacy | Feedback collects only what is needed; the visitor counter stores no IP addresses and sets no cookies; feedback tracking needs both the reference number and the e-mail address, and the public feedback dashboard shows only totals |
 | Database privileges | Dedicated application user without `DROP`, `GRANT`, `FILE` or `SUPER` |
 | Secrets | Only in `backend/.env` (git-ignored, `chmod 600`) |
 | Backups | CMS → Backup & restore (content); schedule a nightly `mysqldump` of the database and a copy of `uploads/` off the server |

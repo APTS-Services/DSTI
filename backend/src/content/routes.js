@@ -33,6 +33,7 @@ const SITE_ROUTES = [
   { path: '/media/science-stories', label: 'Media — Science Stories' },
   { path: '/media/events', label: 'Media — Events' },
   { path: '/contact', label: 'Contact Us' },
+  { path: '/feedback', label: 'Feedback & feedback dashboard' },
   { path: '/screen-reader-access', label: 'Screen Reader Access' },
   { path: '/help', label: 'Help' },
   { path: '/sitemap', label: 'Sitemap' },

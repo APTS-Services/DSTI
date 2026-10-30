@@ -21,6 +21,7 @@ function createRateLimiter({ windowMinutes = 15, max = 30, message = 'Too many r
 const loginLimiter = createRateLimiter({ windowMinutes: 15, max: 10, message: 'Too many sign-in attempts. Please wait 15 minutes.' });
 const captchaLimiter = createRateLimiter({ windowMinutes: 15, max: 60, message: 'Too many requests. Please try again shortly.' });
 const feedbackLimiter = createRateLimiter({ windowMinutes: 30, max: 5, message: 'Too many feedback submissions. Please try again later.' });
+const feedbackTrackLimiter = createRateLimiter({ windowMinutes: 15, max: 20, message: 'Too many tracking requests. Please try again later.' });
 const hitLimiter = createRateLimiter({ windowMinutes: 10, max: 150, message: 'Too many requests.' });
 const assistantLimiter = createRateLimiter({ windowMinutes: 10, max: 30, message: 'Too many questions. Please try again later.' });
 const trackLimiter = createRateLimiter({ windowMinutes: 10, max: 300, message: 'Too many requests.' });
@@ -30,6 +31,7 @@ module.exports = {
   loginLimiter,
   captchaLimiter,
   feedbackLimiter,
+  feedbackTrackLimiter,
   hitLimiter,
   assistantLimiter,
   trackLimiter

@@ -23,6 +23,7 @@ const ECitizen = lazy(() => import('./pages/ECitizenPages'));
 const TendersPage = lazy(() => import('./pages/TendersPage'));
 const Media = lazy(() => import('./pages/MediaPages'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const FeedbackPage = lazy(() => import('./pages/FeedbackPage'));
 const Extra = lazy(() => import('./pages/ExtraPages'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
 
@@ -71,6 +72,7 @@ function PublicSite() {
               <Route path="/tenders" element={<TendersPage />} />
               <Route path="/media/*" element={<Media />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/feedback" element={<FeedbackPage />} />
               <Route path="*" element={<Extra />} />
             </Routes>
           </Suspense>

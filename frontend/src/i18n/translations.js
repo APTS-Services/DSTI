@@ -511,3 +511,42 @@ Object.assign(translations.te, {
   type_document: 'పత్రం', type_event: 'కార్యక్రమం', type_video: 'వీడియో', type_faq: 'ప్రశ్న', type_award: 'అవార్డు',
   type_district: 'జిల్లా', type_news: 'సమాచారం',
 });
+
+// ---- Feedback page and dashboard ----
+Object.assign(translations.en, {
+  feedback: 'Feedback', feedbackTitle: 'Feedback & Suggestions',
+  feedbackIntro: 'Tell us what you think. Every message gets a reference number, is answered by the Department and can be tracked here.',
+  feedbackBoard: 'Feedback at a glance', feedbackBoardDesc: 'How the Department is responding to citizens. Figures update automatically.',
+  fbReceived: 'Feedback received', fbAnswered: 'Answered', fbPending: 'Pending', fbAvgResponse: 'Average response time',
+  fbWithin7: 'Answered within 7 days', fbLast30: 'received in the last 30 days', fbOfTotal: 'of all feedback',
+  fbAwaiting: 'awaiting a reply', fbFromReceipt: 'from receipt to first reply', fbNoData: 'No feedback has been answered yet.',
+  fbMonthly: 'Last 6 months', fbByCategory: 'By category', hours: 'hours', days: 'days',
+  category: 'Category', fbCatGeneral: 'General', trackFeedback: 'Track your feedback',
+  trackFeedbackDesc: 'Enter the reference number you received and the e-mail address you used.',
+  trackButton: 'Check status', status: 'Status', receivedOn: 'Received on', answeredOn: 'Answered on',
+  departmentReply: 'Reply from the Department', noReplyYet: 'The Department is examining your feedback. You will receive a reply by e-mail.',
+  howWeHandle: 'How we handle your feedback', fbStep1: 'You receive a reference number at once.',
+  fbStep2: 'The concerned section examines it.', fbStep3: 'The Department replies by e-mail — usually within 7 days.',
+  fbStep4: 'You can track the status and read the reply on this page.', giveFeedback: 'Give feedback',
+  feedbackCta: 'Have a suggestion, question or grievance? Send it to the Department and track the reply online.',
+  feedbackTable: 'Feedback received and answered by month', month: 'Month',
+});
+
+Object.assign(translations.te, {
+  feedback: 'అభిప్రాయం', feedbackTitle: 'అభిప్రాయాలు & సూచనలు',
+  feedbackIntro: 'మీ అభిప్రాయం తెలియజేయండి. ప్రతి సందేశానికి సూచన సంఖ్య ఇవ్వబడుతుంది, శాఖ సమాధానం ఇస్తుంది మరియు ఇక్కడ ట్రాక్ చేయవచ్చు.',
+  feedbackBoard: 'అభిప్రాయాల సారాంశం', feedbackBoardDesc: 'పౌరులకు శాఖ ఎలా స్పందిస్తోందో. గణాంకాలు స్వయంచాలకంగా నవీకరించబడతాయి.',
+  fbReceived: 'అందిన అభిప్రాయాలు', fbAnswered: 'సమాధానమిచ్చినవి', fbPending: 'పెండింగ్', fbAvgResponse: 'సగటు స్పందన సమయం',
+  fbWithin7: '7 రోజుల్లో సమాధానం', fbLast30: 'గత 30 రోజుల్లో అందినవి', fbOfTotal: 'మొత్తం అభిప్రాయాలలో',
+  fbAwaiting: 'సమాధానం కోసం వేచి ఉన్నవి', fbFromReceipt: 'అందినప్పటి నుండి మొదటి సమాధానం వరకు', fbNoData: 'ఇంకా ఏ అభిప్రాయానికీ సమాధానం ఇవ్వలేదు.',
+  fbMonthly: 'గత 6 నెలలు', fbByCategory: 'వర్గం వారీగా', hours: 'గంటలు', days: 'రోజులు',
+  category: 'వర్గం', fbCatGeneral: 'సాధారణం', trackFeedback: 'మీ అభిప్రాయాన్ని ట్రాక్ చేయండి',
+  trackFeedbackDesc: 'మీకు వచ్చిన సూచన సంఖ్య మరియు మీరు ఉపయోగించిన ఇ-మెయిల్ నమోదు చేయండి.',
+  trackButton: 'స్థితి చూడండి', status: 'స్థితి', receivedOn: 'అందిన తేదీ', answeredOn: 'సమాధానం తేదీ',
+  departmentReply: 'శాఖ సమాధానం', noReplyYet: 'శాఖ మీ అభిప్రాయాన్ని పరిశీలిస్తోంది. మీకు ఇ-మెయిల్ ద్వారా సమాధానం వస్తుంది.',
+  howWeHandle: 'మీ అభిప్రాయాన్ని మేము ఎలా పరిష్కరిస్తాము', fbStep1: 'మీకు వెంటనే సూచన సంఖ్య వస్తుంది.',
+  fbStep2: 'సంబంధిత విభాగం దాన్ని పరిశీలిస్తుంది.', fbStep3: 'శాఖ ఇ-మెయిల్ ద్వారా సమాధానం ఇస్తుంది — సాధారణంగా 7 రోజుల్లో.',
+  fbStep4: 'ఈ పేజీలో స్థితిని ట్రాక్ చేసి సమాధానం చదవవచ్చు.', giveFeedback: 'అభిప్రాయం ఇవ్వండి',
+  feedbackCta: 'సూచన, ప్రశ్న లేదా ఫిర్యాదు ఉందా? శాఖకు పంపి సమాధానాన్ని ఆన్‌లైన్‌లో ట్రాక్ చేయండి.',
+  feedbackTable: 'నెల వారీగా అందిన మరియు సమాధానమిచ్చిన అభిప్రాయాలు', month: 'నెల',
+});

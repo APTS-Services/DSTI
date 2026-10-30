@@ -42,6 +42,7 @@ export function buildIndex(data) {
   r.push(rec('structure', 'page', { en: 'Organisation Structure', te: 'సంస్థాగత నిర్మాణం' }, join(s.about?.orgStructure), '/about/organisation'));
   r.push(rec('investors', 'page', { en: "Investor's Corner", te: 'పెట్టుబడిదారుల విభాగం' }, join(s.investors?.intro, s.investors?.whyInvest, L('investorIncentives').map((i) => [i.title, i.detail])), '/investors'));
   r.push(rec('contact', 'page', { en: 'Contact Us', te: 'సంప్రదించండి' }, join('head office address phone email officers feedback', s.contact?.headOffice, s.contact?.email, s.contact?.phone), '/contact'));
+  r.push(rec('feedback', 'page', { en: 'Feedback & Suggestions', te: 'అభిప్రాయాలు & సూచనలు' }, 'feedback suggestion grievance complaint track reference status reply response time dashboard', '/feedback'));
   r.push(rec('districts', 'page', { en: 'District Explorer', te: 'జిల్లా అన్వేషిణి' }, 'district map 26 districts science institutions activities andhra pradesh', '/districts'));
 
   L('organisations').forEach((o) => r.push(rec(`org-${o.id}`, 'organisation', o.name, join(o.abbr, o.category, o.summary, o.functions), `/organisations/${o.id}`)));

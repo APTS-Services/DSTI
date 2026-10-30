@@ -19,6 +19,16 @@ const feedback = asyncHandler(async (req, res) => {
   res.status(201).json({ ok: true, reference: result.reference });
 });
 
+/** Aggregate feedback figures for the public dashboard (no personal data). */
+const feedbackStats = asyncHandler(async (req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=60');
+  res.json(await feedbackService.publicStats());
+});
+
+const trackFeedback = asyncHandler(async (req, res) => {
+  res.json(await feedbackService.track(req.body || {}));
+});
+
 /** Privacy-friendly hit counter — no cookie, no raw IP stored. */
 const hit = asyncHandler(async (req, res) => {
   await analyticsService.trackView(req.body || {}, req);
@@ -36,4 +46,4 @@ const counts = asyncHandler(async (req, res) => {
   res.json(await publicService.counts());
 });
 
-module.exports = { content, feedback, hit, stats, counts };
+module.exports = { content, feedback, feedbackStats, trackFeedback, hit, stats, counts };

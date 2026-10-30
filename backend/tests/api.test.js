@@ -321,6 +321,41 @@ test('session hardening: strict cookie, hashed id, single session, idle timeout'
   assert.equal(noCsrfLogout.status, 403);
 });
 
+test('feedback reply, public dashboard figures and tracking', async () => {
+  const ref = `FB-${String(feedbackId).padStart(5, '0')}`;
+  const before = await api('/api/public/feedback/stats', { auth: 'none' });
+  assert.equal(before.status, 200);
+  assert.ok(before.json.received >= 1);
+  assert.equal(before.json.received, before.json.answered + before.json.pending);
+  assert.equal(JSON.stringify(before.json).includes('tester@example.com'), false, 'no personal data');
+
+  // Tracking needs the matching e-mail; the answer is the same for any mismatch.
+  const wrong = await api('/api/public/feedback/track', { method: 'POST', auth: 'none', body: { reference: ref, email: 'someone@else.com' } });
+  assert.equal(wrong.status, 404);
+  const pending = await api('/api/public/feedback/track', { method: 'POST', auth: 'none', body: { reference: ref, email: 'TESTER@example.com' } });
+  assert.equal(pending.status, 200);
+  assert.equal(pending.json.response, '');
+
+  const tooShort = await api(`/api/admin/feedback/${feedbackId}/reply`, { method: 'POST', body: { response: 'ok' } });
+  assert.equal(tooShort.status, 400);
+  const reply = await api(`/api/admin/feedback/${feedbackId}/reply`, { method: 'POST', body: { response: 'Thank you, the matter has been examined.' } });
+  assert.equal(reply.status, 200);
+
+  const tracked = await api('/api/public/feedback/track', { method: 'POST', auth: 'none', body: { reference: ref, email: 'tester@example.com' } });
+  assert.equal(tracked.json.status, 'replied');
+  assert.equal(tracked.json.response, 'Thank you, the matter has been examined.');
+  assert.ok(tracked.json.respondedAt);
+
+  const stats = await api('/api/admin/feedback/stats');
+  assert.equal(stats.status, 200);
+  assert.ok(stats.json.answered >= 1);
+  assert.ok(stats.json.avgResponseHours !== null);
+
+  const csv = await api('/api/admin/feedback/export');
+  assert.equal(csv.status, 200);
+  assert.match(String(csv.json), /Reference,.*Reply/);
+});
+
 test('CMS schemas, dashboard and settings', async () => {
   const schemas = await api('/api/admin/schemas');
   assert.equal(schemas.status, 200);

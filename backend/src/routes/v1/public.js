@@ -65,6 +65,7 @@ router.get('/events/:slug', c.event);
 router.get('/contact/office', c.office);
 router.get('/contact/officers', c.officers);
 router.post('/feedback', feedbackLimiter, c.feedback);
+router.get('/feedback/stats', c.feedbackStats);
 
 // Search & assistant
 router.get('/search', c.search);

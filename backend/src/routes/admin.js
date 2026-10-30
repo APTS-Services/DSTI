@@ -34,7 +34,11 @@ router.get('/uploads', anyRole, controller.listUploads);
 router.delete('/uploads/:id', publisher, controller.deleteUpload);
 
 // Feedback inbox
-router.get('/feedback', requireRole('Administrator', 'Publisher', 'Viewer'), controller.listFeedback);
+const feedbackReader = requireRole('Administrator', 'Publisher', 'Viewer');
+router.get('/feedback', feedbackReader, controller.listFeedback);
+router.get('/feedback/stats', feedbackReader, controller.feedbackStats);
+router.get('/feedback/export', publisher, controller.exportFeedback);
+router.post('/feedback/:id/reply', publisher, controller.replyFeedback);
 router.patch('/feedback/:id', publisher, controller.updateFeedback);
 router.delete('/feedback/:id', admin, controller.deleteFeedback);
 

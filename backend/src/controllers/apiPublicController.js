@@ -86,6 +86,8 @@ const feedback = asyncHandler(async (req, res) => {
   sendCreated(res, { reference: result.reference });
 });
 
+const feedbackStats = asyncHandler(async (req, res) => sendSuccess(res, await feedbackService.publicStats()));
+
 const search = asyncHandler(async (req, res) => {
   const result = await searchService.search(req.query);
   sendSuccess(res, result.hits, result.meta);
@@ -175,6 +177,7 @@ module.exports = {
   office,
   officers,
   feedback,
+  feedbackStats,
   search,
   suggest,
   ask,

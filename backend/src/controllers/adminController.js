@@ -75,6 +75,19 @@ const updateFeedback = asyncHandler(async (req, res) => {
   res.json(await feedbackService.setStatus(Number(req.params.id), req.body?.status, req.user));
 });
 
+const feedbackStats = asyncHandler(async (req, res) => {
+  res.json(await feedbackService.publicStats());
+});
+
+const replyFeedback = asyncHandler(async (req, res) => {
+  res.json(await feedbackService.reply(Number(req.params.id), req.body?.response, req.user));
+});
+
+const exportFeedback = asyncHandler(async (req, res) => {
+  res.setHeader('Content-Disposition', `attachment; filename="dsti-feedback-${new Date().toISOString().slice(0, 10)}.csv"`);
+  res.type('text/csv; charset=utf-8').send(`\uFEFF${await feedbackService.exportCsv()}`);
+});
+
 const deleteFeedback = asyncHandler(async (req, res) => {
   res.json(await feedbackService.remove(Number(req.params.id), req.user));
 });
@@ -146,6 +159,9 @@ module.exports = {
   deleteUpload,
   listFeedback,
   updateFeedback,
+  feedbackStats,
+  replyFeedback,
+  exportFeedback,
   deleteFeedback,
   analytics,
   listUsers,

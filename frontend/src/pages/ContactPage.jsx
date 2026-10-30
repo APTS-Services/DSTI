@@ -1,96 +1,11 @@
-import React, { useRef, useState } from 'react';
-import { CheckCircle2, Clock, Mail, MapPin, Phone, Printer, Send } from 'lucide-react';
-import { api, ApiError } from '../api/client';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Clock, Mail, MapPin, MessageSquareText, Phone, Printer } from 'lucide-react';
 import { useCollection, useSetting } from '../context/ContentContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import useSEO from '../hooks/useSEO';
 import PageHero from '../components/common/PageHero';
-import Captcha from '../components/common/Captcha';
 import Reveal from '../components/common/Reveal';
-
-const EMPTY = { name: '', email: '', phone: '', subject: '', message: '' };
-
-function FeedbackForm() {
-  const { t } = useLanguage();
-  const [form, setForm] = useState(EMPTY);
-  const [captcha, setCaptcha] = useState('');
-  const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState({ state: 'idle' });
-  const capRef = useRef(null);
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
-
-  const validate = () => {
-    const e = {};
-    if (form.name.trim().length < 2) e.name = t('errName');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) e.email = t('errEmail');
-    if (form.phone && !/^[6-9]\d{9}$/.test(form.phone.trim())) e.phone = t('errPhone');
-    if (form.message.trim().length < 10) e.message = t('errMessage');
-    if (!captcha.trim()) e.captcha = t('errCaptcha');
-    return e;
-  };
-
-  const submit = async (ev) => {
-    ev.preventDefault();
-    const e = validate();
-    setErrors(e);
-    if (Object.keys(e).length) return;
-    setStatus({ state: 'sending' });
-    try {
-      const res = await api('/api/public/feedback', { method: 'POST', body: { ...form, captchaId: capRef.current?.id, captcha } });
-      setStatus({ state: 'done', ref: res.reference });
-      setForm(EMPTY);
-      capRef.current?.refresh();
-    } catch (err) {
-      const fields = err instanceof ApiError ? err.body.fields || (err.body.field ? { [err.body.field]: err.message } : {}) : {};
-      setErrors(fields);
-      setStatus({ state: 'error', message: err.message });
-      capRef.current?.refresh();
-    }
-  };
-
-  if (status.state === 'done') {
-    return (
-      <div className="alert alert-success d-flex gap-3" role="status">
-        <CheckCircle2 aria-hidden="true" />
-        <div><strong>{t('feedbackSuccess')}</strong><div>{t('referenceNo')}: {status.ref}</div>
-          <button type="button" className="btn btn-sm btn-outline-success mt-2" onClick={() => setStatus({ state: 'idle' })}>{t('sendAnother')}</button></div>
-      </div>
-    );
-  }
-
-  const field = (k, label, props = {}) => (
-    <div className={props.full ? 'col-12' : 'col-md-6'}>
-      <label htmlFor={`fb-${k}`} className="form-label">{label}{props.required && <span className="text-danger"> *</span>}</label>
-      {props.textarea ? (
-        <textarea id={`fb-${k}`} className={`form-control ${errors[k] ? 'is-invalid' : ''}`} rows={5} value={form[k]} onChange={set(k)} maxLength={2000} required={props.required} aria-invalid={Boolean(errors[k])} aria-describedby={errors[k] ? `fb-${k}-err` : undefined} />
-      ) : (
-        <input id={`fb-${k}`} type={props.type || 'text'} className={`form-control ${errors[k] ? 'is-invalid' : ''}`} value={form[k]} onChange={set(k)} maxLength={props.max || 150} required={props.required} autoComplete={props.auto} inputMode={props.mode} aria-invalid={Boolean(errors[k])} aria-describedby={errors[k] ? `fb-${k}-err` : undefined} />
-      )}
-      {errors[k] && <div id={`fb-${k}-err`} className="invalid-feedback">{errors[k]}</div>}
-    </div>
-  );
-
-  return (
-    <form onSubmit={submit} noValidate className="row g-3" aria-describedby="fb-note">
-      {status.state === 'error' && <div className="col-12"><div className="alert alert-danger mb-0" role="alert">{status.message}</div></div>}
-      {field('name', t('yourName'), { required: true, max: 100, auto: 'name' })}
-      {field('email', t('yourEmail'), { required: true, type: 'email', max: 160, auto: 'email' })}
-      {field('phone', t('yourPhone'), { type: 'tel', max: 10, auto: 'tel', mode: 'numeric' })}
-      {field('subject', t('subject'), { max: 150 })}
-      {field('message', t('yourMessage'), { required: true, textarea: true, full: true })}
-      <div className="col-12">
-        <Captcha ref={capRef} value={captcha} onChange={setCaptcha} invalid={Boolean(errors.captcha)} id="fb-captcha" />
-        {errors.captcha && <div className="text-danger small mt-1">{errors.captcha}</div>}
-      </div>
-      <div className="col-12 d-flex flex-wrap align-items-center gap-3">
-        <button type="submit" className="btn btn-primary d-inline-flex align-items-center gap-2" disabled={status.state === 'sending'}>
-          {status.state === 'sending' ? <span className="spinner-border spinner-border-sm" aria-hidden="true" /> : <Send size={16} aria-hidden="true" />} {t('sendFeedback')}
-        </button>
-        <small id="fb-note" className="text-muted-2">{t('feedbackPrivacy')}</small>
-      </div>
-    </form>
-  );
-}
 
 export default function ContactPage() {
   const { t, tc } = useLanguage();
@@ -115,13 +30,18 @@ export default function ContactPage() {
             </div>
           </Reveal>
           <Reveal className="col-lg-7" delay={0.08}>
-            <div className="dst-card p-4">
-              <h2 className="h4 fw-bold mb-3">{t('feedbackForm')}</h2>
-              <FeedbackForm />
+            <div className="feature-card tone-mint">
+              <MessageSquareText size={38} className="icon" aria-hidden="true" />
+              <h2 className="h4">{t('feedbackTitle')}</h2>
+              <p>{t('feedbackCta')}</p>
+              <div className="d-flex flex-wrap gap-2 mt-auto">
+                <Link to="/feedback" className="btn btn-primary d-inline-flex align-items-center gap-2">{t('giveFeedback')} <ArrowRight size={16} aria-hidden="true" /></Link>
+                <Link to="/feedback#fb-board-title" className="btn btn-outline-dark">{t('feedbackBoard')}</Link>
+              </div>
             </div>
           </Reveal>
         </div>
-        <h2 className="section-title h3 mt-5 mb-3">{t('listOfOfficers')}</h2>
+        <h2 id="officers" className="section-title h3 mt-5 mb-3">{t('listOfOfficers')}</h2>
         <div className="table-wrap">
           <table className="table dst-table">
             <caption className="visually-hidden">{t('listOfOfficers')}</caption>
