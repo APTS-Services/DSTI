@@ -28,6 +28,17 @@ async function addMissingColumns(connection, dbName) {
   }
 }
 
+// Earlier releases created "admin" with the published password Admin@12345.
+// If that account was never signed into (the password is still the forced-
+// change default), remove it; the seed step creates the first administrator
+// from .env instead.
+const OLD_DEFAULT_HASH = '$2b$12$O6olTjjuRbGi8yoEPHZPKOq7NLr9xIhF4wUVpaUwnf5S5PiZ0CcW.';
+
+async function removeDefaultAdmin(connection) {
+  const [result] = await connection.query('DELETE FROM users WHERE password_hash = ? AND must_change_password = 1', [OLD_DEFAULT_HASH]);
+  if (result.affectedRows) console.log('Removed the unused default administrator account (published password).');
+}
+
 async function main() {
   const dbName = process.env.DB_NAME || 'dsti_website';
   if (!/^[A-Za-z0-9_]+$/.test(dbName)) {
@@ -48,6 +59,7 @@ async function main() {
   try {
     await connection.query(sql);
     await addMissingColumns(connection, dbName);
+    await removeDefaultAdmin(connection);
     console.log(`Schema applied to ${dbName}.`);
   } finally {
     await connection.end();

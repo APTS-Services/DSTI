@@ -20,6 +20,8 @@ const { q } = require('../config/db');
 const contentRepository = require('../repositories/contentRepository');
 const mediaRepository = require('../repositories/mediaRepository');
 const { getCollection } = require('../content/collections');
+const bcrypt = require('bcryptjs');
+const { passwordProblems } = require('../utils/security');
 
 const seedFile = path.join(__dirname, '..', '..', 'seed', 'content.json');
 
@@ -127,6 +129,31 @@ async function materialiseSeedFiles(files) {
   return created;
 }
 
+/**
+ * Creates the first CMS administrator from ADMIN_USERNAME / ADMIN_PASSWORD
+ * when the database has no active administrator. The password must meet the
+ * policy and has to be changed at first sign-in.
+ */
+async function ensureAdmin() {
+  const [existing] = await q(
+    "SELECT COUNT(*) AS total FROM users u JOIN roles r ON r.role_id = u.role_id WHERE r.role_name = 'admin' AND u.is_active = 1"
+  );
+  if (Number(existing.total) > 0) return;
+  const username = String(process.env.ADMIN_USERNAME || 'admin').trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD || '';
+  const problems = passwordProblems(password, username);
+  if (!/^[a-z0-9._-]{3,50}$/.test(username) || problems.length) {
+    console.warn(`! No administrator created: set ADMIN_USERNAME and a strong ADMIN_PASSWORD in .env (password ${problems.join(', ') || 'missing'}), then run the seed again.`);
+    return;
+  }
+  await q(
+    `INSERT INTO users (username, full_name, email, password_hash, role_id, is_active, must_change_password)
+     SELECT ?, 'Website Administrator', ?, ?, role_id, 1, 1 FROM roles WHERE role_name = 'admin'`,
+    [username, process.env.ADMIN_EMAIL || `${username}@dsti.ap.gov.in`, await bcrypt.hash(password, 12)]
+  );
+  console.log(`Administrator "${username}" created; the password must be changed at first sign-in.`);
+}
+
 async function seed({ reset = false } = {}) {
   let data;
   try {
@@ -173,6 +200,8 @@ async function seed({ reset = false } = {}) {
   for (const [name, value] of Object.entries(data.settings || {})) {
     items.push({ collection: '_settings', item_key: name, status: 'published', sort_order: 0, data: value });
   }
+
+  await ensureAdmin();
 
   const { restored, warnings } = await contentRepository.restore(items);
   for (const warning of warnings) console.warn(`! ${warning}`);

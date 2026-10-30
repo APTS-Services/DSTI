@@ -30,7 +30,8 @@ Each finding was verified against the code (not the documentation), fixed and co
 | 13 | `web.config` showed IIS detailed errors to remote users | Medium | `DetailedLocalOnly`, verbs allow-list, hidden segments (`.env`, `node_modules`, `backups`, `logs`) | manual |
 | 14 | The built website had no security headers when hosted on IIS | Medium | `frontend/public/web.config` (copied to `dist`) sends CSP, HSTS, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP and forces HTTPS | response headers |
 | 15 | No rate limit on `forgot-password` and assistant feedback | Low | Rate limited | manual |
-| 16 | Documentation claimed controls the code did not have (items 2–4, 7, 8) | Info | Controls implemented; this report rewritten to match the code | this document |
+| 16 | The database schema created an `admin` account with a password published in the source (`Admin@12345`); anyone reaching an unused installation could claim it | Critical | No default account. `npm run seed` creates the first administrator from `ADMIN_USERNAME` / `ADMIN_PASSWORD` (policy-checked, forced change at first sign-in); `db:setup` removes the old default account if it was never used | manual |
+| 17 | Documentation claimed controls the code did not have (items 2–4, 7, 8, 16) | Info | Controls implemented; this report rewritten to match the code | this document |
 
 ## 2. OWASP Top 10 controls
 

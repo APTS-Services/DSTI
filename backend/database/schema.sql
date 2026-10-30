@@ -611,12 +611,9 @@ INSERT IGNORE INTO districts (name_en, slug) VALUES
  ('Sri Sathya Sai','sri-sathya-sai'),('YSR Kadapa','ysr-kadapa'),
  ('Annamayya','annamayya'),('Chittoor','chittoor'),('Tirupati','tirupati');
 
--- Default CMS administrator: username admin / password Admin@12345
--- (must be changed at first sign-in).
-INSERT IGNORE INTO users (username, full_name, email, password_hash, role_id, is_active, must_change_password)
-VALUES ('admin', 'Website Administrator', 'admin@dsti.ap.gov.in',
-        '$2b$12$O6olTjjuRbGi8yoEPHZPKOq7NLr9xIhF4wUVpaUwnf5S5PiZ0CcW.',
-        (SELECT role_id FROM roles WHERE role_name = 'admin'), 1, 1);
+-- No default administrator is created here: `npm run seed` creates the first
+-- one from ADMIN_USERNAME / ADMIN_PASSWORD in .env (a published default
+-- password is a standard audit finding).
 
 INSERT IGNORE INTO site_settings (setting_key, setting_value) VALUES
  ('site', '{"name":{"en":"Department of Science, Technology & Innovation","te":"విజ్ఞాన, సాంకేతిక మరియు ఆవిష్కరణల శాఖ"},"shortName":"DSTI","gov":{"en":"Government of Andhra Pradesh","te":"ఆంధ్రప్రదేశ్ ప్రభుత్వం"},"tagline":{"en":"Science, Technology and Innovation for a better Andhra Pradesh","te":"మెరుగైన ఆంధ్రప్రదేశ్ కోసం విజ్ఞానం, సాంకేతికత మరియు ఆవిష్కరణ"},"logo":"","domain":"https://dsti.ap.gov.in","ctaLabel":{"en":"Contact us","te":"మమ్మల్ని సంప్రదించండి"},"footerAbout":{"en":"The Department of Science, Technology & Innovation promotes science, technology and innovation across Andhra Pradesh.","te":"విజ్ఞాన, సాంకేతిక మరియు ఆవిష్కరణల శాఖ ఆంధ్రప్రదేశ్ అంతటా విజ్ఞానం, సాంకేతికత మరియు ఆవిష్కరణలను ప్రోత్సహిస్తుంది."},"social":[{"id":"facebook","label":"Facebook","href":"https://www.facebook.com/APDSTI"},{"id":"x","label":"X (Twitter)","href":"https://x.com/APDSTI"},{"id":"youtube","label":"YouTube","href":"https://www.youtube.com/@APDSTI"}]}'),
