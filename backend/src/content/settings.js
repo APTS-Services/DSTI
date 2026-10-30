@@ -32,6 +32,7 @@ const settings = {
     label: 'About the Department', roles: ['Administrator', 'Publisher'],
     fields: [
       f('intro', 'bilist', 'Introduction paragraphs'),
+      f('vision', 'bitext', 'Vision'),
       f('mission', 'bitext', 'Mission'),
       f('objectives', 'bilist', 'Objectives'),
       f('orgStructure', 'bitext', 'Organisation structure'),

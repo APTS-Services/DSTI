@@ -108,6 +108,10 @@
       "orgStructure": {
         "en": "The Department is headed by the Special Chief Secretary. It coordinates eight organisations, including the AP Innovation Society, the AP State Council of Science & Technology, APTS, APSRAC, APSAC, AMTZ, APEDC and the AP Council for Science, Technology & Innovation. Each organisation reports through the Department to the Government.",
         "te": "ఈ శాఖకు ప్రత్యేక ప్రధాన కార్యదర్శి నేతృత్వం వహిస్తారు. ఇది ఎనిమిది సంస్థలను సమన్వయం చేస్తుంది — ఏపీ ఇన్నోవేషన్ సొసైటీ, ఏపీ రాష్ట్ర విజ్ఞాన & సాంకేతిక మండలి, APTS, APSRAC, APSAC, AMTZ, APEDC మరియు ఏపీ విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ మండలి."
+      },
+      "vision": {
+        "en": "An innovation-led Andhra Pradesh where science and technology improve every citizen's life, create quality jobs and make the State a global hub for space, semiconductors, electronics and deep-tech by 2047.",
+        "te": "విజ్ఞానం మరియు సాంకేతికత ప్రతి పౌరుడి జీవితాన్ని మెరుగుపరిచే, నాణ్యమైన ఉద్యోగాలు సృష్టించే మరియు 2047 నాటికి రాష్ట్రాన్ని అంతరిక్షం, సెమీకండక్టర్లు, ఎలక్ట్రానిక్స్ మరియు డీప్-టెక్‌కు ప్రపంచ కేంద్రంగా మార్చే ఆవిష్కరణ-ఆధారిత ఆంధ్రప్రదేశ్."
       }
     },
     "investors": {
@@ -4203,6 +4207,71 @@
             ]
           }
         ]
+      }
+    ],
+    "leaders": [
+      {
+        "id": "chief-minister",
+        "name": {
+          "en": "Sri N. Chandrababu Naidu",
+          "te": "శ్రీ నారా చంద్రబాబు నాయుడు"
+        },
+        "designation": {
+          "en": "Hon'ble Chief Minister",
+          "te": "గౌరవ ముఖ్యమంత్రి"
+        },
+        "portfolio": {
+          "en": "Government of Andhra Pradesh",
+          "te": "ఆంధ్రప్రదేశ్ ప్రభుత్వం"
+        },
+        "photo": "/images/leaders/cm.svg",
+        "message": {
+          "en": "",
+          "te": ""
+        },
+        "showOnHome": true
+      },
+      {
+        "id": "minister",
+        "name": {
+          "en": "",
+          "te": ""
+        },
+        "designation": {
+          "en": "Hon'ble Minister",
+          "te": "గౌరవ మంత్రి"
+        },
+        "portfolio": {
+          "en": "Science & Technology",
+          "te": "విజ్ఞాన శాస్త్రం & సాంకేతికత"
+        },
+        "photo": "/images/leaders/minister.svg",
+        "message": {
+          "en": "",
+          "te": ""
+        },
+        "showOnHome": true
+      },
+      {
+        "id": "secretary",
+        "name": {
+          "en": "",
+          "te": ""
+        },
+        "designation": {
+          "en": "Secretary to Government",
+          "te": "ప్రభుత్వ కార్యదర్శి"
+        },
+        "portfolio": {
+          "en": "Department of Science, Technology & Innovation",
+          "te": "విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ"
+        },
+        "photo": "/images/leaders/secretary.svg",
+        "message": {
+          "en": "",
+          "te": ""
+        },
+        "showOnHome": true
       }
     ]
   },

@@ -211,6 +211,26 @@ img, svg { max-width: 100%; }
 .btn-square:hover:not(:disabled) { background: #111827; color: #fff; }
 .btn-square:disabled { opacity: .35; }
 
+// Leadership (hero panel, About page)
+.leader { margin: 0; text-align: center;
+  .leader-photo { aspect-ratio: 5 / 6; border-radius: 1rem; overflow: hidden; background: linear-gradient(135deg, $navy-700, $navy-500); }
+  .leader-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  figcaption { margin-top: .75rem; display: grid; gap: .1rem; }
+  figcaption strong { font-size: 1.02rem; line-height: 1.3; color: var(--bs-heading-color); }
+  figcaption span { font-size: .85rem; color: var(--dst-muted); }
+}
+.leader-profile blockquote { border-left: 3px solid var(--dst-accent); padding-left: .9rem; font-style: italic; color: var(--bs-body-color); }
+.hero-leaders { display: grid; grid-template-columns: repeat(3, 1fr); gap: .85rem; text-decoration: none; padding: 1rem; border-radius: 1.25rem;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(6px);
+  &.count-1 { grid-template-columns: minmax(0, 220px); justify-content: center; }
+  &.count-2 { grid-template-columns: repeat(2, 1fr); }
+  .leader-photo { border: 3px solid rgba(255, 255, 255, .85); box-shadow: 0 12px 24px -12px rgba(0, 0, 0, .5); }
+  figcaption strong { color: #fff; font-size: .9rem; }
+  figcaption span { color: rgba(255, 255, 255, .78); font-size: .76rem; line-height: 1.35; }
+  &:hover .leader-photo { border-color: #ffd28a; }
+  @include media-breakpoint-down(sm) { gap: .5rem; padding: .65rem; figcaption strong { font-size: .78rem; } figcaption span { font-size: .68rem; } }
+}
+
 // ---------- News ticker ----------
 .ticker { background: var(--dst-surface); border-bottom: 1px solid var(--dst-line); font-size: .92rem;
   .label { background: var(--dst-accent); color: #fff; font-weight: 600; padding: .55rem 1rem; white-space: nowrap; }

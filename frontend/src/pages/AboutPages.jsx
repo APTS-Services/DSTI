@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link, Route, Routes, useLocation, useSearchParams } from 'react-router-dom';
-import { Award, CheckCircle2, Target } from 'lucide-react';
+import { Award, CheckCircle2, Eye, Target } from 'lucide-react';
 import { useCollection, useSetting } from '../context/ContentContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import useSEO from '../hooks/useSEO';
@@ -9,8 +9,9 @@ import Reveal from '../components/common/Reveal';
 import Empty from '../components/common/Empty';
 import NotFound from './NotFound';
 import { assetUrl } from '../api/client';
+import LeaderCard, { leaderText } from '../components/common/LeaderCard';
 
-const TABS = [['intro', '/about'], ['mission', '/about/mission'], ['objectives', '/about/objectives'], ['organisationStructure', '/about/organisation'], ['awards', '/about/awards']];
+const TABS = [['intro', '/about'], ['leadership', '/about/leadership'], ['visionMission', '/about/mission'], ['objectives', '/about/objectives'], ['organisationStructure', '/about/organisation'], ['awards', '/about/awards']];
 
 function SubNav() {
   const { t } = useLanguage();
@@ -59,14 +60,50 @@ function Intro() {
 }
 
 function Mission() {
-  const { tc } = useLanguage();
+  const { t, tc } = useLanguage();
   const about = useSetting('about');
   return (
-    <Shell titleKey="mission">
-      <Reveal className="feature-card tone-sky p-4 p-lg-5" style={{ maxWidth: 900 }}>
-        <Target size={40} className="icon" aria-hidden="true" />
-        <p className="fs-4 fw-medium lh-base mb-0">{tc(about.mission)}</p>
-      </Reveal>
+    <Shell titleKey="visionMission">
+      <div className="row g-4">
+        {tc(about.vision) && (
+          <Reveal className="col-lg-6">
+            <div className="feature-card tone-lavender p-4 p-lg-5">
+              <Eye size={40} className="icon" aria-hidden="true" />
+              <h2 className="h4">{t('ourVision')}</h2>
+              <p className="fs-5 lh-base">{tc(about.vision)}</p>
+            </div>
+          </Reveal>
+        )}
+        <Reveal className={tc(about.vision) ? 'col-lg-6' : 'col-lg-9'} delay={0.08}>
+          <div className="feature-card tone-sky p-4 p-lg-5">
+            <Target size={40} className="icon" aria-hidden="true" />
+            <h2 className="h4">{t('ourMission')}</h2>
+            <p className="fs-5 lh-base">{tc(about.mission)}</p>
+          </div>
+        </Reveal>
+      </div>
+    </Shell>
+  );
+}
+
+function Leadership() {
+  const { t, tc } = useLanguage();
+  const leaders = useCollection('leaders');
+  return (
+    <Shell titleKey="leadership">
+      <p className="text-muted-2 mb-4">{t('leadershipDesc')}</p>
+      {!leaders.length ? <Empty /> : (
+        <div className="row g-4">
+          {leaders.map((l, i) => (
+            <Reveal key={l.id} className="col-sm-6 col-lg-4" delay={(i % 3) * 0.07}>
+              <div className="dst-card leader-profile">
+                <LeaderCard leader={l} />
+                {tc(l.message) && <blockquote className="mb-0 mt-3">“{tc(l.message)}”<footer className="small text-muted-2 mt-2">— {leaderText(l, tc).title}</footer></blockquote>}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      )}
     </Shell>
   );
 }
@@ -151,6 +188,7 @@ export default function AboutPages() {
   return (
     <Routes>
       <Route index element={<Intro />} />
+      <Route path="leadership" element={<Leadership />} />
       <Route path="mission" element={<Mission />} />
       <Route path="objectives" element={<Objectives />} />
       <Route path="organisation" element={<Structure />} />

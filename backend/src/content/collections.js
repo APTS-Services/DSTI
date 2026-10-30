@@ -144,6 +144,19 @@ const collections = {
       }
     })
   },
+  leaders: {
+    label: 'Leadership (CM, Minister, officers)', group: 'Department', titleField: 'designation', keyField: 'id',
+    fields: [
+      f('id', 'slug', 'Identifier', { required: true }),
+      f('name', 'bi', 'Name (leave empty until confirmed)'),
+      f('designation', 'bi', 'Designation', { required: true }),
+      f('portfolio', 'bi', 'Portfolio / department'),
+      f('photo', 'image', 'Official photograph (portrait, 400×480)'),
+      f('message', 'bitext', 'Message (shown on the Leadership page)'),
+      f('showOnHome', 'bool', 'Show on the home page')
+    ],
+    storage: block()
+  },
   awards: {
     label: 'Awards (year-wise)', group: 'Department', titleField: 'title', keyField: 'id', sortField: 'year',
     fields: [

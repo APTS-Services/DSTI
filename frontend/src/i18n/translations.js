@@ -550,3 +550,13 @@ Object.assign(translations.te, {
   feedbackCta: 'సూచన, ప్రశ్న లేదా ఫిర్యాదు ఉందా? శాఖకు పంపి సమాధానాన్ని ఆన్‌లైన్‌లో ట్రాక్ చేయండి.',
   feedbackTable: 'నెల వారీగా అందిన మరియు సమాధానమిచ్చిన అభిప్రాయాలు', month: 'నెల',
 });
+
+// ---- Leadership, vision ----
+Object.assign(translations.en, {
+  leadership: 'Leadership', leadershipDesc: 'The leadership guiding science, technology and innovation in Andhra Pradesh.',
+  vision: 'Vision', visionMission: 'Vision & Mission', ourVision: 'Our vision', ourMission: 'Our mission',
+});
+Object.assign(translations.te, {
+  leadership: 'నాయకత్వం', leadershipDesc: 'ఆంధ్రప్రదేశ్‌లో విజ్ఞానం, సాంకేతికత మరియు ఆవిష్కరణలకు మార్గనిర్దేశం చేసే నాయకత్వం.',
+  vision: 'దృష్టి', visionMission: 'దృష్టి & లక్ష్యం', ourVision: 'మా దృష్టి', ourMission: 'మా లక్ష్యం',
+});

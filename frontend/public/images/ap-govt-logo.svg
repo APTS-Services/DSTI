@@ -1,12 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Government of Andhra Pradesh">
-  <!-- Placeholder emblem. Replace with the official Government of Andhra Pradesh logo from the CMS (Settings > Site identity). -->
-  <circle cx="60" cy="60" r="57" fill="#ffffff" stroke="#0b3d91" stroke-width="4"/>
-  <circle cx="60" cy="60" r="47" fill="none" stroke="#c8a24a" stroke-width="2"/>
-  <g fill="#0b3d91">
-    <path d="M60 22l5 10h-10z"/>
-    <rect x="42" y="36" width="36" height="6" rx="2"/>
-    <rect x="45" y="44" width="6" height="26"/><rect x="57" y="44" width="6" height="26"/><rect x="69" y="44" width="6" height="26"/>
-    <rect x="38" y="72" width="44" height="6" rx="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Government of Andhra Pradesh">
+  <!-- Stylised placeholder of the Andhra Pradesh state emblem (Poorna Kumbham).
+       Replace with the official emblem file: CMS > Settings > Site identity > Header logo. -->
+  <defs>
+    <path id="arcTop" d="M24 100a76 76 0 0 1 152 0"/>
+    <path id="arcBottom" d="M18 100a82 82 0 0 0 164 0"/>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6b84a"/><stop offset="1" stop-color="#b8862b"/></linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="97" fill="#fff"/>
+  <circle cx="100" cy="100" r="94" fill="none" stroke="#0b3d91" stroke-width="4"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="url(#gold)" stroke-width="1.5" stroke-dasharray="2 3"/>
+  <circle cx="100" cy="100" r="58" fill="#f4f7fd" stroke="#0b3d91" stroke-width="2.5"/>
+  <text font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#0b3d91" letter-spacing=".6">
+    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">GOVERNMENT OF ANDHRA PRADESH</textPath>
+  </text>
+  <text font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="700" fill="#b8862b" letter-spacing="1.4">
+    <textPath href="#arcBottom" startOffset="50%" text-anchor="middle">SCIENCE · TECHNOLOGY · INNOVATION</textPath>
+  </text>
+  <!-- Poorna Kumbham: mango leaves, coconut, pot and base -->
+  <g fill="#18794e">
+    <path d="M100 78c-9-6-21-6-30-1 9 5 21 6 30 1z"/><path d="M100 78c9-6 21-6 30-1-9 5-21 6-30 1z"/>
+    <path d="M100 76c-6-8-16-11-25-9 6 7 16 10 25 9z"/><path d="M100 76c6-8 16-11 25-9-6 7-16 10-25 9z"/>
   </g>
-  <text x="60" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#0b3d91">GOVT OF AP</text>
+  <ellipse cx="100" cy="66" rx="10" ry="12" fill="#a0612b"/>
+  <path d="M94 58c4-6 8-6 12 0" fill="none" stroke="#6b3d16" stroke-width="2"/>
+  <path d="M78 84h44c2 6 6 10 6 20 0 14-12 24-28 24s-28-10-28-24c0-10 4-14 6-20z" fill="url(#gold)" stroke="#8a5a14" stroke-width="1.5"/>
+  <path d="M75 100h50" stroke="#0b3d91" stroke-width="3"/>
+  <path d="M77 108h46" stroke="#8a5a14" stroke-width="1" stroke-dasharray="3 2"/>
+  <path d="M88 128h24l4 8H84z" fill="url(#gold)" stroke="#8a5a14" stroke-width="1.5"/>
+  <text x="100" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#0b3d91" font-style="italic">सत्यमेव जयते</text>
 </svg>

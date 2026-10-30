@@ -8,7 +8,8 @@
 const SITE_ROUTES = [
   { path: '/', label: 'Home' },
   { path: '/about', label: 'About the Department — Introduction' },
-  { path: '/about/mission', label: 'About — Mission' },
+  { path: '/about/leadership', label: 'About — Leadership' },
+  { path: '/about/mission', label: 'About — Vision & Mission' },
   { path: '/about/objectives', label: 'About — Objectives' },
   { path: '/about/organisation', label: 'About — Organisation Structure' },
   { path: '/about/awards', label: 'About — Awards' },
