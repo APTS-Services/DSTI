@@ -1,61 +1,105 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { BarChart3, DatabaseBackup, ExternalLink, FolderOpen, History, Inbox, LayoutDashboard, LogOut, Menu, Settings, UserCog, UserRound } from 'lucide-react';
+import { ChevronDown, ExternalLink, LayoutDashboard, LogOut, Menu, Search, UserRound, X } from 'lucide-react';
 import { useSetting } from '../context/ContentContext';
 import { DEFAULT_LOGO } from '../components/layout/Header';
 import { can, useAdmin } from './AdminContext';
-import { assetUrl } from '../api/client';
+import { assetUrl, api } from '../api/client';
+import { ADMIN_TOOLS, FEEDBACK_LINK, buildSections } from './adminNav';
+
+const STORE = 'dsti.cms.open';
+
+function readOpen() {
+  try {
+    return JSON.parse(sessionStorage.getItem(STORE) || '{}') || {};
+  } catch {
+    return {};
+  }
+}
 
 export default function Layout() {
   const { user, schemas, logout } = useAdmin();
   const site = useSetting('site');
-  const [open, setOpen] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const [query, setQuery] = useState('');
+  const [openGroups, setOpenGroups] = useState(readOpen);
+  const [unread, setUnread] = useState(0);
   const { pathname } = useLocation();
-  useEffect(() => setOpen(false), [pathname]);
+  const sections = useMemo(() => buildSections(schemas), [schemas]);
+  const allowed = (link) => !link.roles || can(user, ...link.roles);
 
-  const groups = {};
-  Object.entries(schemas?.collections || {}).forEach(([key, c]) => { (groups[c.group] = groups[c.group] || []).push([key, c]); });
+  useEffect(() => setDrawer(false), [pathname]);
+  useEffect(() => {
+    try { sessionStorage.setItem(STORE, JSON.stringify(openGroups)); } catch { /* storage unavailable */ }
+  }, [openGroups]);
+  // The section holding the current page is always open.
+  useEffect(() => {
+    const current = sections.find((s) => s.items.some((i) => pathname === i.to || pathname.startsWith(`${i.to}/`)));
+    if (current && !openGroups[current.id]) setOpenGroups((g) => ({ ...g, [current.id]: true }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, sections]);
+  useEffect(() => {
+    if (!allowed(FEEDBACK_LINK)) return;
+    api('/api/admin/dashboard').then((d) => setUnread(d?.feedback?.unread || 0)).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  const term = query.trim().toLowerCase();
+  const filtered = term
+    ? sections.map((s) => ({ ...s, items: s.items.filter((i) => `${i.label} ${s.label}`.toLowerCase().includes(term)) })).filter((s) => s.items.length)
+    : sections;
+  const tools = ADMIN_TOOLS.filter(allowed).filter((l) => !term || l.label.toLowerCase().includes(term));
 
   return (
     <div className="admin-shell">
-      <aside className={`admin-sidebar ${open ? 'open' : ''}`} aria-label="CMS navigation">
-        <div className="brand"><img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" /> <span>DSTI CMS</span></div>
+      <aside className={`admin-sidebar ${drawer ? 'open' : ''}`} aria-label="CMS navigation">
+        <div className="brand">
+          <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" />
+          <span><strong>DSTI CMS</strong><small>Website management</small></span>
+          <button type="button" className="btn btn-sm text-white ms-auto d-lg-none" onClick={() => setDrawer(false)} aria-label="Close menu"><X size={18} /></button>
+        </div>
+        <div className="side-search">
+          <Search size={14} aria-hidden="true" />
+          <input type="search" placeholder="Find a section…" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Find a CMS section" />
+        </div>
         <nav>
-          <NavLink to="/admin" end><LayoutDashboard size={16} aria-hidden="true" /> Dashboard</NavLink>
-          {Object.entries(groups).map(([g, items]) => (
-            <div key={g}>
-              <div className="grp">{g}</div>
-              {items.map(([key, c]) => <NavLink key={key} to={`/admin/c/${key}`}>{c.label}</NavLink>)}
-            </div>
-          ))}
-          {schemas && Object.keys(schemas.settings).length > 0 && (
-            <>
-              <div className="grp">Settings</div>
-              {Object.entries(schemas.settings).map(([key, s]) => <NavLink key={key} to={`/admin/settings/${key}`}><Settings size={15} aria-hidden="true" /> {s.label}</NavLink>)}
-            </>
+          <NavLink to="/admin" end className="side-link"><LayoutDashboard size={17} aria-hidden="true" /> Dashboard</NavLink>
+          {allowed(FEEDBACK_LINK) && (!term || 'feedback inbox'.includes(term)) && (
+            <NavLink to={FEEDBACK_LINK.to} className="side-link"><FEEDBACK_LINK.icon size={17} aria-hidden="true" /> Feedback {unread > 0 && <span className="side-badge">{unread}</span>}</NavLink>
           )}
-          <div className="grp">Administration</div>
-          <NavLink to="/admin/media"><FolderOpen size={16} aria-hidden="true" /> Files & images</NavLink>
-          {can(user, 'Administrator', 'Publisher') && <NavLink to="/admin/feedback"><Inbox size={16} aria-hidden="true" /> Feedback inbox</NavLink>}
-          <NavLink to="/admin/analytics"><BarChart3 size={16} aria-hidden="true" /> Visitor statistics</NavLink>
-          {can(user, 'Administrator') && (
-            <>
-              <NavLink to="/admin/users"><UserCog size={16} aria-hidden="true" /> Users & roles</NavLink>
-              <NavLink to="/admin/audit"><History size={16} aria-hidden="true" /> Audit log</NavLink>
-              <NavLink to="/admin/backup"><DatabaseBackup size={16} aria-hidden="true" /> Backup & restore</NavLink>
-            </>
-          )}
+          <div className="side-label">Website content</div>
+          {filtered.map((s) => {
+            const open = Boolean(term) || openGroups[s.id];
+            const Icon = s.icon;
+            return (
+              <div key={s.id} className="side-group">
+                <button type="button" className="side-link" aria-expanded={open} onClick={() => setOpenGroups((g) => ({ ...g, [s.id]: !g[s.id] }))}>
+                  <Icon size={17} aria-hidden="true" /> {s.label} <ChevronDown size={15} className="ms-auto chev" aria-hidden="true" />
+                </button>
+                {open && (
+                  <div className="side-sub">
+                    {s.items.map((i) => <NavLink key={i.key} to={i.to}>{i.label}</NavLink>)}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          {tools.length > 0 && <div className="side-label">Administration</div>}
+          {tools.map((l) => <NavLink key={l.to} to={l.to} className="side-link"><l.icon size={17} aria-hidden="true" /> {l.label}</NavLink>)}
+          {term && !filtered.length && !tools.length && <p className="small px-3 text-white-50">Nothing matches “{query}”.</p>}
         </nav>
       </aside>
-      {open && <button type="button" className="position-fixed top-0 start-0 w-100 h-100 border-0 bg-dark opacity-50 d-lg-none" style={{ zIndex: 1044 }} aria-label="Close menu" onClick={() => setOpen(false)} />}
+      {drawer && <button type="button" className="admin-backdrop d-lg-none" aria-label="Close menu" onClick={() => setDrawer(false)} />}
       <div className="admin-main">
-        <header className="admin-topbar d-flex align-items-center gap-2 px-3 py-2">
-          <button type="button" className="btn btn-outline-secondary btn-icon d-lg-none" onClick={() => setOpen(true)} aria-label="Open menu"><Menu size={18} /></button>
-          <a href="/" target="_blank" rel="noopener" className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 ms-auto">View website <ExternalLink size={14} aria-hidden="true" /></a>
-          <Link to="/admin/account" className="btn btn-sm btn-light d-inline-flex align-items-center gap-2"><UserRound size={15} aria-hidden="true" /> <span className="d-none d-sm-inline">{user.name}</span> <span className="badge text-bg-primary">{user.role}</span></Link>
-          <button type="button" className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1" onClick={logout}><LogOut size={14} aria-hidden="true" /> Sign out</button>
+        <header className="admin-topbar d-flex align-items-center gap-2 px-3 px-lg-4">
+          <button type="button" className="btn btn-outline-secondary btn-icon d-lg-none" onClick={() => setDrawer(true)} aria-label="Open menu"><Menu size={18} /></button>
+          <a href="/" target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 ms-auto">View website <ExternalLink size={14} aria-hidden="true" /></a>
+          <Link to="/admin/account" className="btn btn-sm btn-light d-inline-flex align-items-center gap-2" title="My account and password">
+            <UserRound size={15} aria-hidden="true" /> <span className="d-none d-sm-inline">{user.name}</span> <span className="badge text-bg-primary">{user.role}</span>
+          </Link>
+          <button type="button" className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1" onClick={logout}><LogOut size={14} aria-hidden="true" /> <span className="d-none d-sm-inline">Sign out</span></button>
         </header>
-        <main id="main-content" className="p-3 p-lg-4">
+        <main id="main-content" className="admin-content">
           {!schemas ? <div className="skeleton" style={{ height: 200 }} /> : <Outlet />}
         </main>
       </div>
