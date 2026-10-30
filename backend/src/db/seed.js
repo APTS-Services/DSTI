@@ -143,6 +143,12 @@ async function seed({ reset = false } = {}) {
   const items = [];
   let skipped = 0;
 
+  // Collections the seed owns completely (e.g. the main menu): items that are
+  // no longer in content.json are removed so a re-run leaves no stale entries.
+  for (const name of data.replace || []) {
+    if (getCollection(name)?.storage.kind === 'block') await q('DELETE FROM cms_blocks WHERE collection = ?', [name]);
+  }
+
   // Placeholder files first: document rows resolve their file_id against
   // media_files, so the media rows must exist before the import runs.
   const filesCreated = await materialiseSeedFiles(data.seedFiles);

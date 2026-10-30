@@ -29,6 +29,8 @@ const SITE_ROUTES = [
   { path: '/ecitizen/guidelines', label: 'e-Citizen — Guidelines' },
   { path: '/ecitizen/faqs', label: 'e-Citizen — FAQs' },
   { path: '/ecitizen/useful-links', label: 'e-Citizen — Useful Links' },
+  { path: '/ecitizen/it-act-2000', label: 'e-Citizen — IT Act 2000' },
+  { path: '/ecitizen/posh-act', label: 'e-Citizen — PoSH Act' },
   { path: '/tenders', label: 'Tenders' },
   { path: '/media', label: 'Media' },
   { path: '/media/science-stories', label: 'Media — Science Stories' },

@@ -110,7 +110,8 @@ const collections = {
       f('id', 'slug', 'Identifier', { required: true }),
       f('label', 'bi', 'Menu label', { required: true }),
       f('to', 'route', 'Link', { required: true }),
-      f('children', 'repeater', 'Sub-menu', { fields: [f('label', 'bi', 'Label', { required: true }), f('to', 'route', 'Link', { required: true })] })
+      f('blurb', 'bi', 'One-line description (shown in the drop-down)'),
+      f('children', 'repeater', 'Sub-menu', { fields: [f('label', 'bi', 'Label', { required: true }), f('to', 'route', 'Link', { required: true }), f('desc', 'bi', 'Short description')] })
     ],
     storage: block()
   },

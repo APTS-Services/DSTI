@@ -167,8 +167,8 @@
       "showStats": true,
       "showDistricts": true,
       "showAlmanac": true,
-      "showStory": true,
-      "showConnections": true,
+      "showStory": false,
+      "showConnections": false,
       "showArticles": true,
       "showStories": true,
       "showEvents": true,
@@ -197,111 +197,151 @@
   "collections": {
     "navigation": [
       {
-        "id": "home",
-        "label": {
-          "en": "Home",
-          "te": "హోమ్"
-        },
-        "to": "/",
-        "children": []
-      },
-      {
         "id": "about",
         "label": {
-          "en": "About the Department",
-          "te": "శాఖ పరిచయం"
+          "en": "About Us",
+          "te": "మా గురించి"
         },
         "to": "/about",
+        "blurb": {
+          "en": "Who we are, our leadership and what we stand for.",
+          "te": "మేము ఎవరం, మా నాయకత్వం మరియు మా లక్ష్యాలు."
+        },
         "children": [
           {
             "label": {
               "en": "Introduction",
               "te": "పరిచయం"
             },
-            "to": "/about"
+            "to": "/about",
+            "desc": {
+              "en": "The Department at a glance",
+              "te": "శాఖ సంక్షిప్తంగా"
+            }
           },
           {
             "label": {
-              "en": "Mission",
-              "te": "మిషన్"
+              "en": "Leadership",
+              "te": "నాయకత్వం"
             },
-            "to": "/about/mission"
+            "to": "/about/leadership",
+            "desc": {
+              "en": "Chief Minister, Minister and officers",
+              "te": "ముఖ్యమంత్రి, మంత్రి మరియు అధికారులు"
+            }
+          },
+          {
+            "label": {
+              "en": "Vision & Mission",
+              "te": "దృష్టి & లక్ష్యం"
+            },
+            "to": "/about/mission",
+            "desc": {
+              "en": "Where we are headed",
+              "te": "మా గమ్యం"
+            }
           },
           {
             "label": {
               "en": "Objectives",
               "te": "లక్ష్యాలు"
             },
-            "to": "/about/objectives"
+            "to": "/about/objectives",
+            "desc": {
+              "en": "What we set out to achieve",
+              "te": "మేము సాధించదలచినవి"
+            }
           },
           {
             "label": {
               "en": "Organisation Structure",
               "te": "సంస్థ నిర్మాణం"
             },
-            "to": "/about/organisation"
+            "to": "/about/organisation",
+            "desc": {
+              "en": "How the Department is organised",
+              "te": "శాఖ నిర్మాణం"
+            }
           },
           {
             "label": {
               "en": "Awards",
               "te": "అవార్డులు"
             },
-            "to": "/about/awards"
+            "to": "/about/awards",
+            "desc": {
+              "en": "Recognition, year by year",
+              "te": "సంవత్సరం వారీ గుర్తింపు"
+            }
           }
         ]
       },
       {
-        "id": "organisations",
+        "id": "work",
         "label": {
-          "en": "Organisations",
-          "te": "సంస్థలు"
+          "en": "Our Work",
+          "te": "మా పని"
         },
         "to": "/organisations",
-        "children": [
-          {
-            "label": {
-              "en": "All Organisations",
-              "te": "అన్ని సంస్థలు"
-            },
-            "to": "/organisations"
-          },
-          {
-            "label": {
-              "en": "District Explorer",
-              "te": "జిల్లా అన్వేషకుడు"
-            },
-            "to": "/districts"
-          },
-          {
-            "label": {
-              "en": "How it all connects",
-              "te": "అన్నీ ఎలా అనుసంధానమవుతాయి"
-            },
-            "to": "/how-it-connects"
-          }
-        ]
-      },
-      {
-        "id": "ict",
-        "label": {
-          "en": "ICT",
-          "te": "ICT"
+        "blurb": {
+          "en": "Organisations, programmes and projects across all 26 districts.",
+          "te": "26 జిల్లాల్లో సంస్థలు, కార్యక్రమాలు మరియు ప్రాజెక్టులు."
         },
-        "to": "/ict",
         "children": [
+          {
+            "label": {
+              "en": "Organisations",
+              "te": "సంస్థలు"
+            },
+            "to": "/organisations",
+            "desc": {
+              "en": "Bodies under the Department",
+              "te": "శాఖ పరిధిలోని సంస్థలు"
+            }
+          },
           {
             "label": {
               "en": "e-Governance",
               "te": "ఇ-గవర్నెన్స్"
             },
-            "to": "/ict"
+            "to": "/ict",
+            "desc": {
+              "en": "Digital services for citizens",
+              "te": "పౌరులకు డిజిటల్ సేవలు"
+            }
           },
           {
             "label": {
               "en": "Projects & Initiatives",
               "te": "ప్రాజెక్టులు & కార్యక్రమాలు"
             },
-            "to": "/ict/projects"
+            "to": "/ict/projects",
+            "desc": {
+              "en": "Flagship projects and progress",
+              "te": "ప్రధాన ప్రాజెక్టులు, పురోగతి"
+            }
+          },
+          {
+            "label": {
+              "en": "District Explorer",
+              "te": "జిల్లా అన్వేషకుడు"
+            },
+            "to": "/districts",
+            "desc": {
+              "en": "Science & technology in every district",
+              "te": "ప్రతి జిల్లాలో విజ్ఞానం & సాంకేతికత"
+            }
+          },
+          {
+            "label": {
+              "en": "How it all connects",
+              "te": "అన్నీ ఎలా అనుసంధానమవుతాయి"
+            },
+            "to": "/how-it-connects",
+            "desc": {
+              "en": "Policies, sectors and organisations",
+              "te": "విధానాలు, రంగాలు, సంస్థలు"
+            }
           }
         ]
       },
@@ -312,37 +352,71 @@
           "te": "విధానాలు"
         },
         "to": "/policies",
+        "blurb": {
+          "en": "Sector policies and support for investors.",
+          "te": "రంగ విధానాలు మరియు పెట్టుబడిదారులకు మద్దతు."
+        },
         "children": [
           {
             "label": {
-              "en": "Policies",
-              "te": "విధానాలు"
+              "en": "All Policies",
+              "te": "అన్ని విధానాలు"
             },
-            "to": "/policies"
+            "to": "/policies",
+            "desc": {
+              "en": "IT, electronics, space, drones and more",
+              "te": "ఐటీ, ఎలక్ట్రానిక్స్, అంతరిక్షం, డ్రోన్లు"
+            }
           },
           {
             "label": {
               "en": "Investor's Corner",
               "te": "పెట్టుబడిదారుల విభాగం"
             },
-            "to": "/investors"
+            "to": "/investors",
+            "desc": {
+              "en": "Why and how to invest",
+              "te": "ఎందుకు, ఎలా పెట్టుబడి పెట్టాలి"
+            }
           }
         ]
       },
       {
-        "id": "ecitizen",
+        "id": "citizen",
         "label": {
-          "en": "e-Citizen",
-          "te": "ఇ-పౌరుడు"
+          "en": "Citizen Services",
+          "te": "పౌర సేవలు"
         },
         "to": "/ecitizen",
+        "blurb": {
+          "en": "Tenders, orders, RTI and everything citizens need.",
+          "te": "టెండర్లు, ఉత్తర్వులు, సమాచార హక్కు మరియు పౌరులకు అవసరమైనవన్నీ."
+        },
         "children": [
           {
             "label": {
-              "en": "Right to Information",
-              "te": "సమాచార హక్కు"
+              "en": "Tenders",
+              "te": "టెండర్లు"
             },
-            "to": "/ecitizen/rti"
+            "to": "/tenders",
+            "desc": {
+              "en": "Open and closed tenders",
+              "te": "తెరిచిన మరియు మూసిన టెండర్లు"
+            }
+          },
+          {
+            "label": {
+              "en": "Government Orders",
+              "te": "ప్రభుత్వ ఉత్తర్వులు"
+            },
+            "to": "/ecitizen/government-orders"
+          },
+          {
+            "label": {
+              "en": "Notifications & Circulars",
+              "te": "నోటిఫికేషన్లు & సర్క్యులర్లు"
+            },
+            "to": "/ecitizen/notifications"
           },
           {
             "label": {
@@ -353,27 +427,6 @@
           },
           {
             "label": {
-              "en": "Government Orders",
-              "te": "ప్రభుత్వ ఆదేశాలు"
-            },
-            "to": "/ecitizen/government-orders"
-          },
-          {
-            "label": {
-              "en": "notifications",
-              "te": "notifications"
-            },
-            "to": "/ecitizen/notifications"
-          },
-          {
-            "label": {
-              "en": "Policies",
-              "te": "విధానాలు"
-            },
-            "to": "/ecitizen/policies"
-          },
-          {
-            "label": {
               "en": "Guidelines",
               "te": "మార్గదర్శకాలు"
             },
@@ -381,17 +434,10 @@
           },
           {
             "label": {
-              "en": "FAQs",
-              "te": "తరచుగా అడిగే ప్రశ్నలు"
+              "en": "Right to Information",
+              "te": "సమాచార హక్కు"
             },
-            "to": "/ecitizen/faqs"
-          },
-          {
-            "label": {
-              "en": "Useful Links",
-              "te": "ఉపయోగకరమైన లింకులు"
-            },
-            "to": "/ecitizen/useful-links"
+            "to": "/ecitizen/rti"
           },
           {
             "label": {
@@ -406,30 +452,20 @@
               "te": "PoSH చట్టం"
             },
             "to": "/ecitizen/posh-act"
-          }
-        ]
-      },
-      {
-        "id": "tenders",
-        "label": {
-          "en": "Tenders",
-          "te": "టెండర్లు"
-        },
-        "to": "/tenders",
-        "children": [
-          {
-            "label": {
-              "en": "Open Tenders",
-              "te": "తెరిచి ఉన్న టెండర్లు"
-            },
-            "to": "/tenders?status=open"
           },
           {
             "label": {
-              "en": "Closed Tenders",
-              "te": "మూసిన టెండర్లు"
+              "en": "FAQs",
+              "te": "తరచుగా అడిగే ప్రశ్నలు"
             },
-            "to": "/tenders?status=closed"
+            "to": "/ecitizen/faqs"
+          },
+          {
+            "label": {
+              "en": "Useful Links",
+              "te": "ఉపయోగకరమైన లింకులు"
+            },
+            "to": "/ecitizen/useful-links"
           }
         ]
       },
@@ -440,31 +476,92 @@
           "te": "మీడియా"
         },
         "to": "/media",
+        "blurb": {
+          "en": "Photos, videos and events.",
+          "te": "ఫోటోలు, వీడియోలు మరియు కార్యక్రమాలు."
+        },
         "children": [
+          {
+            "label": {
+              "en": "Photo Gallery",
+              "te": "ఫోటో గ్యాలరీ"
+            },
+            "to": "/media/gallery",
+            "desc": {
+              "en": "Moments from across the State",
+              "te": "రాష్ట్రవ్యాప్త క్షణాలు"
+            }
+          },
           {
             "label": {
               "en": "Science Stories",
               "te": "విజ్ఞాన కథలు"
             },
-            "to": "/media/science-stories"
+            "to": "/media/science-stories",
+            "desc": {
+              "en": "Short science videos",
+              "te": "చిన్న విజ్ఞాన వీడియోలు"
+            }
           },
           {
             "label": {
               "en": "Events",
               "te": "కార్యక్రమాలు"
             },
-            "to": "/media/events"
+            "to": "/media/events",
+            "desc": {
+              "en": "Upcoming and past events",
+              "te": "రాబోయే మరియు గత కార్యక్రమాలు"
+            }
           }
         ]
       },
       {
         "id": "contact",
         "label": {
-          "en": "Contact Us",
+          "en": "Contact",
           "te": "సంప్రదించండి"
         },
         "to": "/contact",
-        "children": []
+        "blurb": {
+          "en": "Reach the Department and track your feedback.",
+          "te": "శాఖను సంప్రదించండి, మీ అభిప్రాయాన్ని ట్రాక్ చేయండి."
+        },
+        "children": [
+          {
+            "label": {
+              "en": "Contact Us",
+              "te": "సంప్రదించండి"
+            },
+            "to": "/contact",
+            "desc": {
+              "en": "Address, phone and e-mail",
+              "te": "చిరునామా, ఫోన్, ఇ-మెయిల్"
+            }
+          },
+          {
+            "label": {
+              "en": "Feedback & Dashboard",
+              "te": "అభిప్రాయం & సారాంశం"
+            },
+            "to": "/feedback",
+            "desc": {
+              "en": "Send feedback, track the reply",
+              "te": "అభిప్రాయం పంపండి, సమాధానం ట్రాక్ చేయండి"
+            }
+          },
+          {
+            "label": {
+              "en": "List of Officers",
+              "te": "అధికారుల జాబితా"
+            },
+            "to": "/contact#officers",
+            "desc": {
+              "en": "Who to contact",
+              "te": "ఎవరిని సంప్రదించాలి"
+            }
+          }
+        ]
       }
     ],
     "heroSlides": [
@@ -4529,5 +4626,8 @@
     "/uploads/seed/it-act/IT-Act-Procedure.pdf",
     "/uploads/seed/it-act/IT-Act-Judgements.pdf",
     "/uploads/seed/posh/PoSH-Process.pdf"
+  ],
+  "replace": [
+    "navigation"
   ]
 }

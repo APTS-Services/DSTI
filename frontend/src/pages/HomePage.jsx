@@ -84,7 +84,10 @@ function GalleryRow() {
 function EventsRow() {
   const { t } = useLanguage();
   const events = useCollection('events');
-  const items = useMemo(() => events.filter((e) => e.status !== 'past').sort((a, b) => a.date.localeCompare(b.date)).slice(0, 3), [events]);
+  const items = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    return events.filter((e) => e.status !== 'past' && (e.endDate || e.date) >= today).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 3);
+  }, [events]);
   if (!items.length) return null;
   return (
     <section className="section" aria-labelledby="events-title">
@@ -115,8 +118,9 @@ export default function HomePage() {
       {show('showTicker') && <NewsTicker />}
       {show('showServices') && <FeatureCards />}
       {show('showStats') && <StatsStrip />}
-      {show('showAudiences') && <WhatBringsYouHere />}
       {show('showArticles') && <ArticlesBand />}
+      {show('showAudiences') && <WhatBringsYouHere />}
+      {show('showGallery') && <GalleryRow />}
       {(show('showDistricts') || show('showAlmanac')) && (
         <section className="section" aria-labelledby="dist-title">
           <div className="container">
@@ -139,7 +143,6 @@ export default function HomePage() {
       )}
       {show('showStories') && <StoriesRow />}
       {show('showEvents') && <EventsRow />}
-      {show('showGallery') && <GalleryRow />}
     </>
   );
 }

@@ -28,12 +28,31 @@ const Extra = lazy(() => import('./pages/ExtraPages'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   // Run before paint so the new page is measured (and its reveal animations are
   // triggered) at the top of the window, not at the previous page's offset.
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  }, [pathname]);
+    if (!hash) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname, hash]);
+  // Links such as /contact#officers: the target may only exist once the
+  // lazily loaded page has rendered, so look for it for a short while.
+  useEffect(() => {
+    if (!hash) return undefined;
+    let tries = 0;
+    const id = decodeURIComponent(hash.slice(1));
+    const timer = setInterval(() => {
+      const el = document.getElementById(id);
+      if (el || ++tries > 30) {
+        clearInterval(timer);
+        if (el) {
+          el.scrollIntoView({ block: 'start' });
+          if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+          el.focus({ preventScroll: true });
+        }
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, [pathname, hash]);
   return null;
 }
 

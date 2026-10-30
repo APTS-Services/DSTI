@@ -31,7 +31,7 @@ export default function Footer() {
       .sort((a, b) => Number(a._order || 0) - Number(b._order || 0))
       .map((page) => ({ key: page.id, label: tc(page.title), to: page.path || `/p/${page.id}` }));
     const links = flagged.length ? flagged : STATUTORY.map(([key, to]) => ({ key, label: t(key), to }));
-    return [...links, { key: 'sitemap', label: t('sitemap'), to: '/sitemap' }];
+    return links.some((link) => link.to === '/sitemap') ? links : [...links, { key: 'sitemap', label: t('sitemap'), to: '/sitemap' }];
   }, [pages, t, tc]);
 
   useEffect(() => {
@@ -69,6 +69,7 @@ export default function Footer() {
           <div className="col-6 col-lg-2">
             <h3>{t('quickLinks')}</h3>
             <ul className="list-unstyled d-grid gap-2 mb-0">
+              <li><Link to="/">{t('home')}</Link></li>
               {nav.slice(0, 8).map((n) => <li key={n.id}><Link to={n.to}>{tc(n.label)}</Link></li>)}
             </ul>
           </div>
@@ -85,6 +86,7 @@ export default function Footer() {
               {contact.phone && <li className="d-flex gap-2"><Phone size={16} className="flex-shrink-0 mt-1" aria-hidden="true" /> <a href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a></li>}
               {contact.email && <li className="d-flex gap-2"><Mail size={16} className="flex-shrink-0 mt-1" aria-hidden="true" /> <a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
             </ul>
+            <Link to="/feedback" className="btn btn-sm btn-footer mt-3">{t('giveFeedback')}</Link>
           </div>
         </div>
         <div className="bottom d-flex flex-wrap justify-content-between gap-2 py-3">
