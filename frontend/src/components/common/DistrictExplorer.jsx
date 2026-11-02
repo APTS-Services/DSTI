@@ -28,8 +28,8 @@ export default function DistrictExplorer({ initial, compact = false }) {
           <Table2 size={15} aria-hidden="true" className="me-1" /> {t('tableView')}
         </button>
       </div>
-      <div className="row g-4">
-        <div className={compact ? 'col-lg-7' : 'col-lg-7'}>
+      <div className={`row g-4 ${view === 'table' ? 'district-table-mode' : ''}`}>
+        <div className={view === 'table' ? 'col-12' : 'col-lg-7'}>
           {view === 'map' ? (
             <div className="district-map">
               <svg viewBox="80 0 360 640" role="group" aria-label={t('districtExplorerDesc').replace('{n}', String(districts.length))} style={{ width: '100%', height: 'auto', maxHeight: compact ? 460 : 620 }}>
@@ -69,7 +69,8 @@ export default function DistrictExplorer({ initial, compact = false }) {
             </div>
           )}
         </div>
-        <div className="col-lg-5">
+        {view === 'map' && (
+  <div className="col-lg-5">
           <div className="dst-card" aria-live="polite">
             <p className="section-eyebrow d-flex align-items-center gap-1 mb-1"><MapPin size={14} aria-hidden="true" /> {t('district')}</p>
             <h3 className="h3 fw-bold mb-1">{tc(d.name)}</h3>
@@ -91,8 +92,9 @@ export default function DistrictExplorer({ initial, compact = false }) {
                 <ul className="small mb-0">{d.activities.map((a, i) => <li key={i}>{tc(a)}</li>)}</ul>
               </>
             )}
-          </div>
+                    </div>
         </div>
+        )}
       </div>
     </div>
   );

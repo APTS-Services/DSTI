@@ -15,7 +15,7 @@ export default function VideoCard({ story }) {
         {playing && story.videoId && (
           <iframe src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(story.videoId)}?autoplay=1&rel=0`} title={title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
         )}
-        {playing && !story.videoId && story.video && <video src={assetUrl(story.video)} controls autoPlay poster={assetUrl(story.thumbnail) || undefined}><track kind="captions" /></video>}}
+        {playing && !story.videoId && story.video && <video src={assetUrl(story.video)} controls autoPlay poster={assetUrl(story.thumbnail) || undefined}><track kind="captions" /></video>}
         {!playing && (
           <>
             {story.thumbnail && <img src={assetUrl(story.thumbnail)} alt="" loading="lazy" />}

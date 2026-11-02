@@ -577,3 +577,75 @@ details.faq { border: 1px solid var(--dst-line); border-radius: .85rem; backgrou
 }
 .track-reply { white-space: pre-wrap; background: var(--dst-surface); border-radius: .6rem; padding: .75rem; border-left: 3px solid #22a06b; }
 .list-thumb { width: 56px; height: 40px; border-radius: .4rem; object-fit: cover; background: var(--dst-soft); flex-shrink: 0; display: inline-block; border: 1px solid var(--dst-line); }
+
+/* =========================================
+   DISTRICT EXPLORER - TABLE VIEW ONLY
+========================================= */
+
+.district-table-mode {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.district-table-mode > .col-12 {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.district-table-mode .table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.district-table-mode .dst-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  margin-bottom: 0;
+}
+
+.district-table-mode .dst-table th,
+.district-table-mode .dst-table td {
+  padding: 14px 12px;
+  vertical-align: middle;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.district-table-mode .dst-table th:nth-child(1) {
+  width: 30%;
+}
+
+.district-table-mode .dst-table th:nth-child(2) {
+  width: 25%;
+}
+
+.district-table-mode .dst-table th:nth-child(3) {
+  width: 27%;
+}
+
+.district-table-mode .dst-table th:nth-child(4) {
+  width: 18%;
+  text-align: center;
+}
+
+.district-table-mode .dst-table th:first-child button {
+  white-space: normal;
+  text-align: left;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .district-table-mode .dst-table th,
+  .district-table-mode .dst-table td {
+    padding: 9px 6px;
+    font-size: 12px;
+  }
+}
