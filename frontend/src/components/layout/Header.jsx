@@ -7,9 +7,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, ChevronDown, Menu, MessageCircleQuestion, Phone, Search, X } from 'lucide-react';
 import { useCollection, useSetting } from '../../context/ContentContext';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { assetUrl } from '../../api/client';
 
-export const DEFAULT_LOGO = '/images/ap-govt-logo.svg';
+export const DEFAULT_LOGO = '/images/logo.png';
 
 const base = (to) => (to || '').split(/[?#]/)[0];
 
@@ -88,7 +87,7 @@ export default function Header({ onSearch, onAssistant }) {
     <header className="site-header">
       <div className="container d-flex align-items-center gap-2 gap-md-3 header-bar">
         <Link to="/" className="brand me-auto" aria-label={`${name} — ${t('home')}`}>
-          <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt={gov} width="58" height="58" />
+          <img src={DEFAULT_LOGO} alt={gov} width="58" height="58" />
           <span className="d-flex flex-column">
             <span className="brand-title">{name}</span>
             <span className="brand-sub">{gov}</span>
@@ -155,7 +154,7 @@ export default function Header({ onSearch, onAssistant }) {
           <div className="panel">
             <div className="panel-head">
               <Link to="/" className="d-flex align-items-center gap-2 text-decoration-none text-body" onClick={() => setDrawer(false)}>
-                <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" width="40" height="40" />
+                <img src={DEFAULT_LOGO} alt="" width="40" height="40" />
                 <strong className="small lh-sm">{name}</strong>
               </Link>
               <button type="button" className="btn-round" onClick={() => setDrawer(false)} aria-label={t('closeMenu')} autoFocus>
