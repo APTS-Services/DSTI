@@ -368,14 +368,119 @@ a.dst-card { color: inherit; text-decoration: none; display: block; }
   max-height: 75vh;
 }
 
-// District map
-.district-map { background: linear-gradient(180deg, var(--dst-soft), var(--dst-surface)); border: 1px solid var(--dst-line); border-radius: 1rem; padding: .75rem;
-  .node { cursor: pointer; transition: r .2s ease; }
-  .node:focus { outline: none; }
-  .node:focus-visible circle { stroke: #ffb703; stroke-width: 5; }
-  text { font-size: 12px; fill: var(--bs-body-color); font-weight: 600; pointer-events: none; }
+
+// ---------- District map ----------
+.district-map {
+  background: linear-gradient(180deg, #f5f8ff, #ffffff);
+  border: 1px solid var(--dst-line);
+  border-radius: 1rem;
+  padding: 1rem;
+
+  .node {
+    cursor: pointer;
+    transition: r .2s ease;
+  }
+
+  .node:focus {
+    outline: none;
+  }
+
+  .node:focus-visible circle {
+    stroke: #ffb703;
+    stroke-width: 5;
+  }
 }
-.legend-dot { width: .75rem; height: .75rem; border-radius: 50%; display: inline-block; }
+
+// Actual geographic district map
+
+/* Andhra Pradesh District Explorer - Government GIS */
+.district-geo-map {
+  background: #F4F7FA;
+  border: 1px solid #DCE4ED;
+  border-radius: 18px;
+  padding: 22px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(31, 51, 73, 0.045);
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    shape-rendering: geometricPrecision;
+    text-rendering: geometricPrecision;
+  }
+
+  .district-geo-feature {
+    cursor: pointer;
+    outline: none;
+  }
+
+  .district-geo-feature path {
+    stroke: #FFFFFF;
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    transition: filter 180ms ease;
+  }
+
+  .district-geo-feature text {
+    fill: #243447 !important;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 12px !important;
+    font-weight: 700;
+    stroke: #FFFFFF;
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    paint-order: stroke fill;
+    pointer-events: none;
+  }
+
+  .district-geo-feature:hover path {
+    filter: brightness(1.06) drop-shadow(0 2px 3px rgba(30,45,60,.16));
+  }
+
+  .district-geo-feature.is-selected path {
+    stroke: #243447;
+    stroke-width: 3.5px;
+    filter: drop-shadow(0 3px 5px rgba(30,45,60,.2));
+  }
+
+  .district-geo-feature:focus-visible path {
+    stroke: #B17A25;
+    stroke-width: 4px;
+  }
+
+  ul {
+    border-top: 1px solid #DFE6EE;
+    padding-top: 18px;
+    margin-top: 16px !important;
+    gap: 16px 22px !important;
+  }
+
+  li {
+    color: #34465A;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .legend-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+}
+
+
+
+.legend-dot {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 50%;
+  display: inline-block;
+}
 
 // Floating assistant launcher (like the support widget)
 .assistant-launcher {
@@ -649,3 +754,445 @@ details.faq { border: 1px solid var(--dst-line); border-radius: .85rem; backgrou
     font-size: 12px;
   }
 }
+.district-geo-map {
+  background: #F4F7FA;
+  border: 1px solid #DFE7EF;
+  border-radius: 18px;
+  padding: 20px;
+  overflow: hidden;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .district-geo-feature {
+    outline: none;
+  }
+
+  .district-geo-feature:hover rect {
+    stroke: #64748B;
+    stroke-width: 1.3px;
+  }
+
+  .district-geo-feature:focus-visible path {
+    stroke: #B17A25;
+    stroke-width: 4px;
+  }
+}
+
+
+/* ==========================================
+   COMPACT HOMEPAGE HERO BANNER
+========================================== */
+
+.hero.hero-compact {
+  min-height: 460px;
+  height: auto;
+  padding: 42px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-compact .hero-inner {
+  width: 100%;
+}
+
+.hero-compact .row {
+  align-items: center;
+}
+
+.hero-compact-content {
+  width: 100%;
+}
+
+.hero-compact .hero-title {
+  font-size: clamp(30px, 3.1vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  max-width: 100%;
+  margin-bottom: 14px;
+}
+
+.hero-compact .hero-compact-subtitle {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.hero-compact .eyebrow {
+  margin-bottom: 10px;
+}
+
+.hero-compact-controls {
+  margin-top: 28px !important;
+}
+
+.hero-compact-leaders {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-compact .hero-leaders {
+  width: 100%;
+  max-width: 470px;
+}
+
+/* TABLET */
+
+@media (max-width: 991.98px) {
+  .hero.hero-compact {
+    min-height: auto;
+    height: auto;
+    padding: 45px 0;
+  }
+
+  .hero-compact .hero-title {
+    font-size: clamp(28px, 5vw, 38px);
+  }
+
+  .hero-compact-leaders {
+    margin-top: 10px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 575.98px) {
+  .hero.hero-compact {
+    padding: 35px 0;
+  }
+
+  .hero-compact .hero-title {
+    font-size: 29px;
+    line-height: 1.2;
+  }
+
+  .hero-compact .hero-compact-subtitle {
+    font-size: 16px;
+  }
+
+  .hero-compact-controls {
+    margin-top: 22px !important;
+  }
+}
+
+/* ==========================================
+   FINAL HOMEPAGE HERO BANNER HEIGHT FIX
+========================================== */
+
+.hero.hero-compact {
+  min-height: 460px;
+  height: auto;
+  padding: 28px 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Override original hero-inner height and spacing */
+.hero.hero-compact .hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Keep banner content vertically centred */
+.hero.hero-compact .row {
+  align-items: center;
+}
+
+/* Title sizing */
+.hero.hero-compact .hero-title {
+  font-size: clamp(30px, 3.1vw, 44px);
+  line-height: 1.15;
+  max-width: 100%;
+  margin-bottom: 14px;
+}
+
+/* Subtitle spacing */
+.hero.hero-compact .hero-compact-subtitle {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Leadership cards alignment */
+.hero.hero-compact .hero-compact-leaders {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero.hero-compact .hero-leaders {
+  width: 100%;
+  max-width: 470px;
+}
+
+/* Slide controls */
+.hero.hero-compact .hero-compact-controls {
+  margin-top: 24px !important;
+}
+
+/* Tablet */
+@media (max-width: 991.98px) {
+  .hero.hero-compact {
+    min-height: auto;
+    padding: 35px 0;
+  }
+
+  .hero.hero-compact .hero-inner {
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
+  .hero.hero-compact {
+    padding: 28px 0;
+  }
+
+  .hero.hero-compact .hero-title {
+    font-size: 29px;
+    line-height: 1.2;
+  }
+
+  .hero.hero-compact .hero-compact-subtitle {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================
+   HOMEPAGE HERO - CONSISTENT SLIDE HEIGHT
+========================================== */
+
+.hero.hero-compact {
+  height: 580px;
+  min-height: 580px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero.hero-compact .hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.hero.hero-compact .row {
+  width: 100%;
+  align-items: center;
+}
+
+.hero.hero-compact .slide {
+  width: 100%;
+}
+
+.hero.hero-compact .hero-title {
+  font-size: clamp(28px, 2.5vw, 36px);
+  line-height: 1.12;
+  letter-spacing: -0.7px;
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+
+.hero.hero-compact .hero-compact-subtitle {
+  font-size: 17px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.hero.hero-compact .eyebrow {
+  margin-bottom: 10px;
+}
+
+.hero.hero-compact .hero-compact-controls {
+  margin-top: 20px !important;
+}
+
+.hero.hero-compact .hero-compact-leaders {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero.hero-compact .hero-leaders {
+  width: 100%;
+  max-width: 470px;
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+  .hero.hero-compact {
+    height: auto;
+    min-height: 410px;
+    padding: 35px 0;
+  }
+
+  .hero.hero-compact .hero-inner {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .hero.hero-compact .hero-title {
+    font-size: clamp(28px, 4vw, 36px);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 575.98px) {
+  .hero.hero-compact {
+    height: auto;
+    min-height: 0;
+    padding: 30px 0;
+  }
+
+  .hero.hero-compact .hero-title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .hero.hero-compact .hero-compact-subtitle {
+    font-size: 16px;
+  }
+}
+/* ==========================================
+   FIX HERO BANNER SLIDE CONTROL POSITION
+   ========================================== */
+
+.hero.hero-compact {
+  position: relative;
+}
+
+.hero.hero-compact .hero-compact-controls {
+  position: absolute !important;
+  left: max(24px, calc((100% - 1150px) / 2));
+  bottom: 64px;
+  width: min(650px, calc(100% - 48px));
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+/* Tablet and mobile */
+@media (max-width: 991.98px) {
+  .hero.hero-compact .hero-compact-controls {
+    position: relative !important;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 24px !important;
+  }
+}
+
+/* ==========================================
+   FINAL DISTRICT EXPLORER HOMEPAGE LAYOUT
+========================================== */
+
+/* Give the homepage district section more usable width */
+.district-home-section > .container {
+  max-width: 1360px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* Align details panel with the MAP top,
+   not with the Map/Table buttons */
+@media (min-width: 1200px) {
+  .district-home-section .district-side-column {
+    padding-top: 0 !important;
+    margin-top: 42px !important;
+  }
+}
+
+/* Slightly reduce map size and remove excess inner spacing */
+.district-home-section .district-geo-map {
+  padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep map positioned towards the left */
+.district-home-section .district-geo-map svg {
+  display: block;
+  width: 94%;
+  max-width: 94%;
+  height: auto;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Right-side selected district card */
+.district-home-section .district-selected-details {
+  width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+/* Tablet */
+@media (max-width: 1199.98px) {
+  .district-home-section .district-side-column {
+    margin-top: 0 !important;
+  }
+
+  .district-home-section .district-geo-map svg {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767.98px) {
+  .district-home-section > .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .district-home-section .district-geo-map {
+    padding: 8px;
+  }
+
+  .district-home-section .district-selected-details {
+    padding: 16px;
+  }
+}
+
+/* ==========================================
+   HOMEPAGE DISTRICT MAP AND RIGHT PANEL ALIGNMENT
+========================================== */
+
+@media (min-width: 1200px) {
+  .district-home-section .district-side-column {
+    margin-top: 26px !important;
+    padding-top: 0 !important;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .district-home-section .district-side-column {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+

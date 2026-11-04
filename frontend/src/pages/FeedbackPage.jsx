@@ -200,11 +200,11 @@ export default function FeedbackPage() {
         </div>
         <FeedbackBoard stats={stats} />
       </section>
-      <section className="container pb-5">
+      <section id="feedback-form" className="container pb-5" aria-labelledby="feedback-form-title">
         <div className="row g-4">
           <Reveal className="col-lg-7">
             <div className="dst-card">
-              <h2 className="h5 fw-bold mb-3">{t('feedbackForm')}</h2>
+              <h2 id="feedback-form-title" className="h5 fw-bold mb-3">{t('feedbackForm')}</h2>
               <FeedbackForm onSent={(ref) => { setLastRef(ref); reload(); }} />
             </div>
           </Reveal>
