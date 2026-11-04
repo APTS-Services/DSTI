@@ -54,7 +54,7 @@ export default function Layout() {
     <div className="admin-shell">
       <aside className={`admin-sidebar ${drawer ? 'open' : ''}`} aria-label="CMS navigation">
         <div className="brand">
-          <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" />
+          <img src={DEFAULT_LOGO} alt="" />
           <span><strong>DSTI CMS</strong><small>Website management</small></span>
           <button type="button" className="btn btn-sm text-white ms-auto d-lg-none" onClick={() => setDrawer(false)} aria-label="Close menu"><X size={18} /></button>
         </div>
