@@ -441,7 +441,19 @@ function rtiAnswer(state) {
 
 function tenderAnswer(state) {
   const all = state.data.collections?.tenders || [];
-  if (!all.length) return null;
+  if (!all.length) {
+    const lang = state.lang;
+    return reply(state, {
+      intent: 'tenders',
+      lead: lang === 'te'
+        ? 'ఈ వెబ్‌సైట్‌లో ప్రస్తుతం టెండర్లు ఏవీ ప్రచురించబడలేదు.'
+        : 'No tenders are published on this website right now.',
+      note: lang === 'te'
+        ? 'కొత్త నోటీసులు టెండర్ల పేజీలో ప్రచురించబడతాయి.'
+        : 'New notices are published on the tenders page when they are issued.',
+      sources: [{ title: LABEL.tendersPage, path: '/tenders' }],
+    });
+  }
   const q = state.qLower;
   const wantsClosed = /closed|expired|past|మూస|ముగిసిన/.test(q);
   const wantsOpen = /open|live|current|closing|తెరిచి|ప్రస్తుత/.test(q);

@@ -33,7 +33,7 @@ Terms of Use, Copyright, Disclaimer, Hyperlink Policy, Accessibility Statement, 
 - GIGW / WCAG 2.1 AA: skip link, keyboard navigation, visible focus, ARIA labels, text resize (90–140 %), high-contrast and dark modes, table alternatives for the map and charts, accessibility statement.
 - Site-wide search over pages, policies, orders, documents, tenders, events and more.
 - **Ask Vigyan Mitra** assistant: the chat posts each question to `POST /api/v1/assistant/ask`, and the server composes the answer from the records published in MySQL — district profiles, open or closed tenders, policies, documents, FAQs, officers and contact details — always citing the source page(s). The browser keeps a cached-content fallback for when the API is unreachable; no external AI service or third-party script is involved.
-- Interactive **District Explorer** for all 26 districts, with an accessible table view.
+- Interactive **District Explorer** for all 28 districts, with an accessible table view.
 - **Leadership**: Hon'ble Chief Minister, Minister and Secretary with photographs on the home page and an About > Leadership page.
 - **Photo gallery** with albums, a lightbox (arrows, keyboard, swipe, thumbnails), captions and a tagline; a gallery strip on the home page.
 - **Feedback dashboard**: received, answered, pending, average response time, share answered within 7 days, monthly and category figures (aggregates only). Citizens track their feedback with the reference number and e-mail; the CMS records and e-mails the Department's reply.

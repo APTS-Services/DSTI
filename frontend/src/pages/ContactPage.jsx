@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Clock,
+  ExternalLink,
   Mail,
   MapPin,
   MessageSquareText,
@@ -115,6 +116,39 @@ export default function ContactPage() {
             </div>
           </Reveal>
         </div>
+
+        {c.mapEmbed && (
+          <Reveal className="mt-4">
+            <div className="map-card">
+              <iframe
+                src={c.mapEmbed}
+                title={t('locationMap')}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+
+              <div className="map-card-bar">
+                <span className="d-inline-flex align-items-center gap-2">
+                  <MapPin size={16} aria-hidden="true" />
+                  <strong>{t('locationMap')}</strong>
+                </span>
+
+                {c.mapUrl && (
+                  <a
+                    href={c.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary btn-sm d-inline-flex align-items-center gap-2"
+                  >
+                    {t('getDirections')}
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </Reveal>
+        )}
 
         <h2
           id="officers"

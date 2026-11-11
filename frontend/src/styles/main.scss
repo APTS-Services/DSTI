@@ -262,6 +262,14 @@ img, svg { max-width: 100%; }
   figcaption span { font-size: .85rem; color: var(--dst-muted); }
 }
 .leader-profile blockquote { border-left: 3px solid var(--dst-accent); padding-left: .9rem; font-style: italic; color: var(--bs-body-color); }
+
+// Contact page location map
+.map-card { border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--dst-line); background: var(--dst-surface);
+  iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+  .map-card-bar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; padding: .85rem 1.15rem; }
+  .map-card-bar strong { font-size: .95rem; color: var(--bs-heading-color); }
+  @include media-breakpoint-down(sm) { iframe { aspect-ratio: 4 / 3; } }
+}
 .hero-leaders { display: grid; grid-template-columns: repeat(3, 1fr); gap: .85rem; text-decoration: none; padding: 1rem; border-radius: 1.25rem;
   background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(6px);
   &.count-1 { grid-template-columns: minmax(0, 220px); justify-content: center; }

@@ -22,6 +22,8 @@ const settings = {
     label: 'Contact details', roles: ['Administrator', 'Publisher'],
     fields: [
       f('headOffice', 'bitext', 'Head office address'),
+      f('mapUrl', 'url', 'Google Maps link (opens directions)'),
+      f('mapEmbed', 'url', 'Google Maps embed URL (shown on the contact page)'),
       f('phone', 'text', 'Phone', { max: 40 }),
       f('fax', 'text', 'Fax', { max: 40 }),
       f('email', 'email', 'Email'),

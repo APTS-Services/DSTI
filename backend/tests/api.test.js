@@ -104,7 +104,7 @@ after(async () => {
   if (downloadMediaPath) {
     await fs.rm(path.join(config.paths.uploadsDir, path.basename(downloadMediaPath)), { force: true }).catch(() => {});
   }
-  await q("DELETE FROM assistant_logs WHERE question LIKE 'zzzqqq%' OR question = 'What is the drone policy?'");
+  await q("DELETE FROM assistant_logs WHERE question LIKE 'zzzqqq%' OR question = 'What is the science and technology policy?'");
   // Remove the suite's own administrator (sessions and password history cascade).
   await q('DELETE FROM users WHERE username = ?', [ADMIN_USER]);
   // The tracking test deletes its own page_view; bring today's summary back in
@@ -183,21 +183,21 @@ test('public /api/v1 reads and bilingual fallback', async () => {
   await api('/api/v1/contact/office');
   await api('/api/v1/settings/public');
 
-  const search = await api('/api/v1/search?q=drone');
+  const search = await api('/api/v1/search?q=APCOST');
   assert.equal(search.status, 200);
-  assert.ok(search.json.data.length > 0, 'search finds the drone policy');
+  assert.ok(search.json.data.length > 0, 'search finds APCOST');
 });
 
 test('assistant answers from site content and logs unknown questions', async () => {
   const answer = await api('/api/v1/assistant/ask', {
     method: 'POST',
-    body: { question: 'What is the drone policy?', lang: 'en' }
+    body: { question: 'What is the science and technology policy?', lang: 'en' }
   });
   assert.equal(answer.status, 200);
   assert.equal(answer.json.success, true);
   assert.equal(answer.json.data.answered, true);
   assert.ok(answer.json.data.sources.length > 0);
-  assert.ok(answer.json.data.answer.includes('Drone'));
+  assert.ok(answer.json.data.answer.includes('Science, Technology & Innovation'));
 
   const unknown = await api('/api/v1/assistant/ask', {
     method: 'POST',

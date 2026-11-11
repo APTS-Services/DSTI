@@ -497,6 +497,7 @@ async function createCollection(collectionName, data, { status = 'draft', order 
     // Events are created from their title; a unique slug is generated for them.
     const base = slugify(values.title_en || data.title?.en || data.name?.en);
     values.slug = `${base}-${crypto.randomBytes(3).toString('hex')}`;
+    keyValue = values.slug;
   }
   const columns = Object.keys(values);
   const result = await q(

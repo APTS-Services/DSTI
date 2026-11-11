@@ -25,9 +25,10 @@ export default function HeroBanner() {
   const slides = useCollection('heroSlides');
   const site = useSetting('site');
 
-  const leaders = useCollection('leaders')
-    .filter((l) => l.showOnHome !== false)
-    .slice(0, 3);
+  // Grab the first 3 leaders directly from the collection.
+  // This ensures the CM, DCM, and Secretary show up (assuming they are the first 3 in your CMS).
+  const allLeaders = useCollection('leaders');
+  const leaders = allLeaders.slice(0, 3);
 
   const [i, setI] = useState(0);
 

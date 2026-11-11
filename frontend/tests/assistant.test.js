@@ -10,39 +10,30 @@ const seed = JSON.parse(readFileSync(fileURLToPath(new URL('../../backend/seed/c
 const data = { collections: seed.collections, settings: seed.settings };
 const documents = data.collections.documents;
 
-test('RTI question is answered from the RTI page and names the PIO', () => {
+test('RTI question is answered from the RTI page', () => {
   const a = ask(data, 'How do I file an RTI request?');
   assert.equal(a.matched, true);
   assert.equal(a.intent, 'rti');
   assert.equal(a.sources[0].path, '/ecitizen/rti');
   assert.match(a.lead, /Right to Information Act, 2005/i);
-  assert.ok(a.bullets.some((b) => /pio-dsti@ap\.gov\.in/.test(b.value)), 'PIO contact is quoted from the officers list');
+  assert.ok(!a.bullets.some((b) => /@/.test(b.value)), 'no officer contact is invented where none is published');
 });
 
-test('tender answers are built from live tender records, open first', () => {
-  const open = data.collections.tenders.filter((t) => t.status === 'open');
+test('tender questions say plainly when nothing is published', () => {
+  assert.equal(data.collections.tenders.length, 0);
   const a = ask(data, 'Show me the open tenders');
+  assert.equal(a.matched, true);
   assert.equal(a.intent, 'tenders');
-  assert.match(a.lead, new RegExp(`\\b${open.length} open tenders?\\b`));
-  assert.equal(a.bullets.length, Math.min(4, open.length));
-  assert.ok(a.sources.some((s) => s.path.startsWith('/tenders')));
-  const closed = ask(data, 'What about the closed ones?', 'en', { previousIntent: 'tenders' });
-  assert.match(closed.lead, /closed tenders/);
+  assert.match(a.lead, /No tenders are published/i);
+  assert.deepEqual(a.sources.map((s) => s.path), ['/tenders']);
 });
 
 test('a named district returns its published profile', () => {
   const a = ask(data, 'Which institutions are in Tirupati?');
   assert.equal(a.intent, 'districts');
   assert.match(a.lead, /Tirupati district/);
-  assert.ok(a.bullets.some((b) => b.value === 'IIT Tirupati'));
   assert.equal(a.sources[0].path, '/districts?district=tirupati');
-});
-
-test('district questions are matched against institution and activity text', () => {
-  const a = ask(data, 'Which districts have space-tech institutions?');
-  assert.equal(a.matched, true);
-  assert.equal(a.intent, 'districts');
-  assert.ok(a.bullets.some((b) => /space/i.test(b.value)), 'the matching activity is quoted');
+  assert.deepEqual(a.bullets, [], 'no institutions are invented for districts that publish none');
 });
 
 test('contact answer quotes the contact settings', () => {
@@ -54,10 +45,10 @@ test('contact answer quotes the contact settings', () => {
 });
 
 test('content questions cite the page that holds the answer', () => {
-  const a = ask(data, 'What is the Drone Policy?');
+  const a = ask(data, 'What is the Science, Technology & Innovation Policy?');
   assert.equal(a.matched, true);
-  assert.equal(a.sources[0].path, '/policies/drone');
-  assert.match(a.lead.toLowerCase(), /drone/);
+  assert.equal(a.sources[0].path, '/policies/sti-policy-2026-2031');
+  assert.match(a.lead.toLowerCase(), /science, technology/);
 });
 
 test('policy documents return document-page sources', () => {

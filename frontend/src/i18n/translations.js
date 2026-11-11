@@ -7,7 +7,7 @@ export const translations = {
   en: {
     // Global chrome
     siteName: 'Department of Science, Technology & Innovation',
-    siteShort: 'DSTI',
+    siteShort: 'DST&I',
     gov: 'Government of Andhra Pradesh',
     skipToContent: 'Skip to main content',
     governmentOf: 'Government of Andhra Pradesh',
@@ -158,6 +158,8 @@ export const translations = {
 
     // Contact
     headOffice: 'Head Office',
+    locationMap: 'Location map',
+    getDirections: 'Get directions',
     listOfOfficers: 'List of Officers',
     feedbackForm: 'Feedback Form',
     yourName: 'Your name',
@@ -216,8 +218,8 @@ export const translations = {
 
   te: {
     // Global chrome
-    siteName: 'విజ్ఞాన, సాంకేతిక & ఆవిష్కరణ శాఖ',
-    siteShort: 'DSTI',
+    siteName: 'విజ్ఞాన శాస్త్ర, సాంకేతిక మరియు ఆవిష్కరణల శాఖ',
+    siteShort: 'DST&I',
     gov: 'ఆంధ్రప్రదేశ్ ప్రభుత్వం',
     skipToContent: 'ప్రధాన విషయానికి వెళ్లండి',
     governmentOf: 'ఆంధ్రప్రదేశ్ ప్రభుత్వం',
@@ -367,6 +369,8 @@ export const translations = {
 
     // Contact
     headOffice: 'ప్రధాన కార్యాలయం',
+    locationMap: 'స్థాన పటం',
+    getDirections: 'దిశలు తెలుసుకోండి',
     listOfOfficers: 'అధికారుల జాబితా',
     feedbackForm: 'అభిప్రాయ ఫారం',
     yourName: 'మీ పేరు',
