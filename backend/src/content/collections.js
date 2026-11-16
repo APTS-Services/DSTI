@@ -260,7 +260,7 @@ const collections = {
     storage: table({
       table: 'documents', pk: 'doc_id', keyColumn: 'doc_id',
       status: { kind: 'enum', column: 'status', published: 'published', draft: 'draft', pending: 'draft', archived: 'draft' },
-      order: null,
+      order: 'display_order',
       map: {
         number: { col: 'doc_number' },
         date: { col: 'doc_date' },
@@ -286,7 +286,7 @@ const collections = {
     storage: table({
       table: 'tenders', pk: 'tender_id', keyColumn: 'tender_id',
       status: { kind: 'enum', column: 'publish_status', published: 'published', draft: 'draft', pending: 'draft', archived: 'draft' },
-      order: null,
+      order: 'display_order',
       fixed: { publish_status: 'published' },
       map: {
         tenderNo: { col: 'tender_number' },

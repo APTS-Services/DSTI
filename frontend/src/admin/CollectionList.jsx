@@ -28,7 +28,16 @@ export default function CollectionList() {
     if (!items) return [];
     const term = q.trim().toLowerCase();
     let list = items.filter((i) => (!status || i._status === status) && (!term || JSON.stringify(i).toLowerCase().includes(term)));
-    if (schema?.sortField) list = [...list].sort((a, b) => String(b[schema.sortField] ?? '').localeCompare(String(a[schema.sortField] ?? ''), undefined, { numeric: true }));
+    if (schema?.sortField) {
+      list = [...list].sort((a, b) => {
+        const byField = String(b[schema.sortField] ?? '').localeCompare(String(a[schema.sortField] ?? ''), undefined, { numeric: true });
+        if (byField) return byField;
+        // Same sort value (two tenders published on the same day, for example):
+        // the most recently created item goes first, so a newly added entry sits
+        // at the top instead of at the bottom of its date group.
+        return String(b.id ?? '').localeCompare(String(a.id ?? ''), undefined, { numeric: true });
+      });
+    }
     return list;
   }, [items, q, status, schema]);
 

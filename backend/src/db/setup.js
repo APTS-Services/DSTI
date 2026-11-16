@@ -12,7 +12,9 @@ const ADDED_COLUMNS = [
   ['feedback', 'category', 'VARCHAR(60) NULL AFTER phone'],
   ['feedback', 'response', 'TEXT NULL AFTER status'],
   ['feedback', 'responded_at', 'DATETIME NULL AFTER response'],
-  ['feedback', 'resolved_at', 'DATETIME NULL AFTER responded_at']
+  ['feedback', 'resolved_at', 'DATETIME NULL AFTER responded_at'],
+  ['documents', 'display_order', 'SMALLINT NOT NULL DEFAULT 0 AFTER status'],
+  ['tenders', 'display_order', 'SMALLINT NOT NULL DEFAULT 0 AFTER status']
 ];
 
 async function addMissingColumns(connection, dbName) {
