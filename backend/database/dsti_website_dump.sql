@@ -6,8 +6,8 @@
 -- It creates the dsti_website database, all tables and all seed content,
 -- so no separate schema.sql / npm run seed step is needed.
 --
--- CMS sign-in after import:  username: admin   password: Dsti@2026#Init
--- (you must set a new password at the first sign-in).
+-- CMS sign-in after import: username "admin". The initial password is shared
+-- separately by the project owner. It must be changed at first sign-in.
 -- =====================================================================
 
 CREATE DATABASE IF NOT EXISTS `dsti_website`
