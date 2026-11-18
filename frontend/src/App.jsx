@@ -67,7 +67,7 @@ function PublicSite() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <a href="#main-content" className="skip-link">{t('skipToContent')}</a>
+      <a href="/" className="skip-link">{t('skipToContent')}</a>
       <TopBar />
       <Header onSearch={() => setSearchOpen(true)} onAssistant={() => setAssistantOpen(true)} />
       <ScrollToTop />

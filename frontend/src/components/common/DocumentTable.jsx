@@ -83,8 +83,8 @@ export default function DocumentTable({ documents, showTypeFilter = false, capti
                   <td className="d-none d-md-table-cell small text-muted-2">{d.department}</td>
                   <td className="text-end">
                     {d.file ? (
-                      <a href={assetUrl(d.file)} className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 text-nowrap" target="_blank" rel="noopener" aria-label={`${t('downloadPdf')}: ${tc(d.title)}${d.size ? ` (${d.size})` : ''}`}>
-                        <Download size={14} aria-hidden="true" /> PDF{d.size ? <small className="ms-1 opacity-75">{d.size}</small> : null}
+                      <a href={assetUrl(d.file)} className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 text-nowrap" target="_blank" rel="noopener" aria-label={`${t('downloadPdf')}: ${tc(d.title)}`}>
+                        <Download size={14} aria-hidden="true" /> PDF
                       </a>
                     ) : <FileText size={16} className="text-muted-2" aria-label={t('notAvailable')} />}
                   </td>

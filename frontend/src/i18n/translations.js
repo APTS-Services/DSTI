@@ -530,7 +530,7 @@ Object.assign(translations.en, {
   trackButton: 'Check status', status: 'Status', receivedOn: 'Received on', answeredOn: 'Answered on',
   departmentReply: 'Reply from the Department', noReplyYet: 'The Department is examining your feedback. You will receive a reply by e-mail.',
   howWeHandle: 'How we handle your feedback', fbStep1: 'You receive a reference number at once.',
-  fbStep2: 'The concerned section examines it.', fbStep3: 'The Department replies by e-mail — usually within 7 days.',
+  fbStep2: 'The concerned section examines it.', fbStep3: 'The Department replies by e-mail — within 7 days.',
   fbStep4: 'You can track the status and read the reply on this page.', giveFeedback: 'Give feedback',
   feedbackCta: 'Have a suggestion, question or grievance? Send it to the Department and track the reply online.',
   feedbackTable: 'Feedback received and answered by month', month: 'Month',

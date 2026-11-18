@@ -3,8 +3,6 @@ import { Copy, FileText, Trash2, Upload } from 'lucide-react';
 import { api, assetUrl } from '../api/client';
 import { can, useAdmin } from './AdminContext';
 
-const kb = (n) => (n > 1048576 ? `${(n / 1048576).toFixed(1)} MB` : `${Math.ceil(n / 1024)} KB`);
-
 export default function MediaLibrary() {
   const { user } = useAdmin();
   const [items, setItems] = useState(null);
@@ -51,13 +49,12 @@ export default function MediaLibrary() {
       <div className="admin-card">
         <div className="table-responsive">
           <table className="table align-middle mb-0">
-            <thead className="table-light"><tr><th>Preview</th><th>File</th><th>Size</th><th>Uploaded</th><th className="text-end">Actions</th></tr></thead>
+            <thead className="table-light"><tr><th>Preview</th><th>File</th><th>Uploaded</th><th className="text-end">Actions</th></tr></thead>
             <tbody>
               {(items || []).map((it) => (
                 <tr key={it.id}>
                   <td>{it.mime.startsWith('image/') ? <img src={assetUrl(it.url)} alt="" width="64" height="40" style={{ objectFit: 'cover' }} className="rounded border" /> : <FileText size={24} className="text-muted-2" aria-hidden="true" />}</td>
                   <td><a href={assetUrl(it.url)} target="_blank" rel="noopener">{it.original_name}</a><small className="d-block font-monospace text-muted-2">{it.url}</small></td>
-                  <td className="small">{kb(it.size_bytes)}</td>
                   <td className="small text-nowrap">{it.created_at}</td>
                   <td className="text-end text-nowrap">
                     <button type="button" className="btn btn-sm btn-outline-secondary me-1" onClick={() => copy(it.url)} aria-label="Copy path"><Copy size={14} /></button>
@@ -65,7 +62,7 @@ export default function MediaLibrary() {
                   </td>
                 </tr>
               ))}
-              {items && !items.length && <tr><td colSpan={5} className="text-center text-muted-2 py-4">No files uploaded yet.</td></tr>}
+              {items && !items.length && <tr><td colSpan={4} className="text-center text-muted-2 py-4">No files uploaded yet.</td></tr>}
             </tbody>
           </table>
         </div>

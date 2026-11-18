@@ -3,12 +3,12 @@
 // Every request goes to the single Express backend (VITE_API_BASE_URL, default
 // http://localhost:5000) and never to the React dev server, so the API works on
 // 5173, 4173, a static host or the production domain without a proxy.
-const RAW_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+const RAW_BASE = '';
 
 /** Origin of the backend, without a trailing slash (a "/api" suffix is tolerated). */
 export const API_BASE_URL = String(RAW_BASE).replace(/\/+$/, '').replace(/\/api$/i, '');
 
-/** Absolute URL for an API path such as "/api/public/content". */
+/** Absolute URL for an API path such as "  /api/public/content". */
 export const apiUrl = (path = '') => `${API_BASE_URL}${String(path).startsWith('/') ? '' : '/'}${path}`;
 
 /**

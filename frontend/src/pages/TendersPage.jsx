@@ -70,8 +70,8 @@ export default function TendersPage() {
                 </div>
                 <div className="d-flex flex-wrap gap-2">
                   {(x.documents || []).map((d) => (
-                    <a key={d.file} href={assetUrl(d.file)} target="_blank" rel="noopener" className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1" aria-label={`${t('download')} ${d.name} (PDF${d.size ? `, ${d.size}` : ''})`}>
-                      <Download size={14} aria-hidden="true" /> {d.name}{d.size && <small className="opacity-75 ms-1">({d.size})</small>}
+                    <a key={d.file} href={assetUrl(d.file)} target="_blank" rel="noopener" className="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1" aria-label={`${t('download')} ${d.name} (PDF)`}>
+                      <Download size={14} aria-hidden="true" /> {d.name}
                     </a>
                   ))}
                 </div>
