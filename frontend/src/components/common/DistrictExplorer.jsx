@@ -12,78 +12,87 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import apDistrictGeoJSON from '../../data/ap-districts-simplified.json';
 
 // ============================================
-// REGIONAL COLOUR PALETTE
+// UNIQUE DISTRICT COLOURS
 // ============================================
 
-const REGION_PALETTE = {
-  'north-coastal': '#8FAFC5',
-  godavari: '#A99BC5',
-  krishna: '#D7AD78',
-  'south-coastal': '#83B5A7',
-  rayalaseema: '#C28F82',
-};
+// Generate a repeatable colour from each district ID.
+// New CMS districts receive a colour automatically.
+function getDistrictColor(districtId) {
+  const value = String(districtId || 'unknown');
+  let hash = 0;
 
-function getRegionColor(regionId) {
-  return REGION_PALETTE[regionId] || '#64748b';
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 31 + value.charCodeAt(index)) >>> 0;
+  }
+
+  const hue = hash % 360;
+  const saturation = 48 + (hash % 15);
+  const lightness = 76 + (hash % 7);
+
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
 // ============================================
 // DISTRICT MAP LABELS
 // ============================================
 
-const MAP_LABELS = {
-  parvathipurammanyam: 'P. Manyam',
-  allurisithamararaju: 'ASR',
-  eastgodavari: 'E. Godavari',
-  westgodavari: 'W. Godavari',
-  srisathyasai: 'Sathya Sai',
-  sripottisriramulunellore: 'Nellore',
-  nellore: 'Nellore',
-  anantapuramu: 'Anantapur',
-  ysrkadapa: 'YSR Kadapa',
-  visakhapatnam: 'Vizag',
+const OFFICIAL_DISTRICT_NAMES = {
+  allurisitharamaraju: 'Alluri Sitharama Raju',
+  allurisithamararaju: 'Alluri Sitharama Raju',
   anakapalli: 'Anakapalli',
-  drbrambedkarkonaseema: 'Konaseema',
-  konaseema: 'Konaseema',
-  srikakulam: 'Srikakulam',
-  vizianagaram: 'Vizianagaram',
-  kakinada: 'Kakinada',
-  eluru: 'Eluru',
-  ntr: 'NTR',
-  krishna: 'Krishna',
-  guntur: 'Guntur',
-  bapatla: 'Bapatla',
-  palnadu: 'Palnadu',
-  prakasam: 'Prakasam',
-  kurnool: 'Kurnool',
-  nandyal: 'Nandyal',
+  ananthapuramu: 'Ananthapuramu',
+  anantapuramu: 'Ananthapuramu',
+  ananthapur: 'Ananthapuramu',
   annamayya: 'Annamayya',
-  tirupati: 'Tirupati',
+  bapatla: 'Bapatla',
   chittoor: 'Chittoor',
+  drbrambedkarkonaseema: 'Dr. B.R. Ambedkar Konaseema',
+  konaseema: 'Dr. B.R. Ambedkar Konaseema',
+  eastgodavari: 'East Godavari',
+  eluru: 'Eluru',
+  guntur: 'Guntur',
+  kakinada: 'Kakinada',
+  krishna: 'Krishna',
+  kurnool: 'Kurnool',
+  markapuram: 'Markapuram',
+  nandyal: 'Nandyal',
+  ntr: 'NTR',
+  palnadu: 'Palnadu',
+  parvathipurammanyam: 'Parvathipuram Manyam',
+  parvathipuram: 'Parvathipuram Manyam',
+  polavaram: 'Polavaram',
+  prakasam: 'Prakasam',
+  sripottisriramulunellore: 'Sri Potti Sriramulu Nellore',
+  nellore: 'Sri Potti Sriramulu Nellore',
+  srisathyasai: 'Sri Sathya Sai',
+  srikakulam: 'Srikakulam',
+  tirupati: 'Tirupati',
+  tirupathi: 'Tirupati',
+  visakhapatnam: 'Visakhapatnam',
+  vizag: 'Visakhapatnam',
+  vizianagaram: 'Vizianagaram',
+  ysr: 'YSR',
+  ysrkadapa: 'YSR',
 };
 
 // ============================================
 // MAP DIMENSIONS
 // ============================================
 
-const MAP_WIDTH = 640;
-const MAP_HEIGHT = 560;
-const MAP_PADDING = 22;
+const MAP_WIDTH = 760;
+const MAP_HEIGHT = 820;
+const MAP_PADDING = 18;
 
 // Admin-entered Map X / Map Y values use a 0-600 by 0-700
 // coordinate range. Convert them into this SVG's viewBox.
 function getAdminMapPosition(record) {
-  // The CMS API currently returns these fields as `x` and `y`.
-  // Keep the alternate names for compatibility with older records.
   const rawX =
-    record.x ??
     record.mapX ??
     record.map_x ??
     record.mapPosition?.x ??
     record.map_position?.x;
 
   const rawY =
-    record.y ??
     record.mapY ??
     record.map_y ??
     record.mapPosition?.y ??
@@ -140,6 +149,8 @@ const DISTRICT_ALIASES = {
   srisathyasai: 'srisathyasai',
   ysr: 'ysrkadapa',
   konaseema: 'konaseema',
+  // GeoJSON uses TIRUPATHI while the CMS may use Tirupati.
+  tirupathi: 'tirupati',
 };
 
 function getDistrictRecord(feature, districts) {
@@ -166,10 +177,17 @@ function getDistrictRecord(feature, districts) {
 }
 
 function getMapLabel(record, fallback, translate) {
-  if (!record) return fallback;
+  if (!record) {
+    const normalizedFallback = normalizeName(fallback);
+    return (
+      OFFICIAL_DISTRICT_NAMES[normalizedFallback] ||
+      fallback
+    );
+  }
 
   const translated = translate(record.name);
 
+  // Keep the existing Telugu/localized display when Telugu is selected.
   if (/[^\u0000-\u007f]/.test(translated)) {
     return translated;
   }
@@ -178,10 +196,12 @@ function getMapLabel(record, fallback, translate) {
   const normalizedName = normalizeName(
     record.name?.en || record.name
   );
+  const normalizedFallback = normalizeName(fallback);
 
   return (
-    MAP_LABELS[normalizedId] ||
-    MAP_LABELS[normalizedName] ||
+    OFFICIAL_DISTRICT_NAMES[normalizedId] ||
+    OFFICIAL_DISTRICT_NAMES[normalizedName] ||
+    OFFICIAL_DISTRICT_NAMES[normalizedFallback] ||
     record.name?.en ||
     fallback
   );
@@ -344,6 +364,120 @@ function getLabelPosition(geometry) {
 }
 
 // ============================================
+// LABEL COLLISION AVOIDANCE
+// ============================================
+
+function getLabelLayout(label) {
+  const value = String(label || '');
+  const fontSize = 10;
+  const maxCharacters = 17;
+  const lines = wrapLabel(value, maxCharacters);
+  const lineHeight = 12;
+  const textWidth = Math.max(
+    44,
+    Math.min(190, Math.max(...lines.map((line) => line.length)) * fontSize * 0.58 + 18)
+  );
+  const textHeight = Math.max(22, lines.length * lineHeight + 8);
+
+  return { lines, fontSize, lineHeight, width: textWidth, height: textHeight };
+}
+
+function placeDistrictLabels(features) {
+  const occupied = [];
+  const positioned = new Map();
+
+  // Build a dense set of possible label centres. Each label is assigned
+  // the nearest free position, with a small safety gap around every box.
+  // Unlike the previous best-effort layout, overlapping positions are
+  // rejected completely.
+  const gridPoints = [];
+  const step = 12;
+
+  for (let y = 28; y <= MAP_HEIGHT - 28; y += step) {
+    for (let x = 28; x <= MAP_WIDTH - 28; x += step) {
+      gridPoints.push([x, y]);
+    }
+  }
+
+  // Place the largest labels first so short names cannot block them.
+  const ordered = [...features].sort((a, b) => {
+    const aLayout = getLabelLayout(a.label);
+    const bLayout = getLabelLayout(b.label);
+    return (bLayout.width * bLayout.height) -
+      (aLayout.width * aLayout.height);
+  });
+
+  ordered.forEach((feature) => {
+    const [baseX, baseY] = feature.labelPosition;
+    const layout = getLabelLayout(feature.label);
+
+    const candidates = [...gridPoints].sort((a, b) => {
+      const distanceA = Math.hypot(a[0] - baseX, a[1] - baseY);
+      const distanceB = Math.hypot(b[0] - baseX, b[1] - baseY);
+      return distanceA - distanceB;
+    });
+
+    let chosen = null;
+
+    for (const [x, y] of candidates) {
+      const box = {
+        left: x - layout.width / 2,
+        right: x + layout.width / 2,
+        top: y - layout.height / 2,
+        bottom: y + layout.height / 2,
+      };
+
+      const hasOverlap = occupied.some((other) =>
+        box.left < other.right + 7 &&
+        box.right > other.left - 7 &&
+        box.top < other.bottom + 7 &&
+        box.bottom > other.top - 7
+      );
+
+      if (!hasOverlap) {
+        chosen = { x, y, box };
+        break;
+      }
+    }
+
+    // The map has ample space for the current district count. This
+    // fallback keeps a label visible if a future dataset becomes denser.
+    if (!chosen) {
+      const fallbackX = Math.max(
+        layout.width / 2 + 5,
+        Math.min(MAP_WIDTH - layout.width / 2 - 5, baseX)
+      );
+      const fallbackY = Math.max(
+        layout.height / 2 + 5,
+        Math.min(MAP_HEIGHT - layout.height / 2 - 5, baseY)
+      );
+
+      chosen = {
+        x: fallbackX,
+        y: fallbackY,
+        box: {
+          left: fallbackX - layout.width / 2,
+          right: fallbackX + layout.width / 2,
+          top: fallbackY - layout.height / 2,
+          bottom: fallbackY + layout.height / 2,
+        },
+      };
+    }
+
+    occupied.push(chosen.box);
+    positioned.set(feature.key, {
+      ...feature,
+      labelPosition: [chosen.x, chosen.y],
+      labelAnchorPosition: [baseX, baseY],
+      labelLayout: layout,
+    });
+  });
+
+  return features.map((feature) =>
+    positioned.get(feature.key) || feature
+  );
+}
+// ============================================
 // LABEL TEXT WRAPPING
 // ============================================
 
@@ -373,32 +507,6 @@ function wrapLabel(label, maxCharacters) {
   }
 
   return lines;
-}
-
-function getLabelSettings(label) {
-  const length = String(label || '').length;
-
-  if (length > 15) {
-    return {
-      fontSize: 8,
-      maxCharacters: 10,
-      lineHeight: 9,
-    };
-  }
-
-  if (length > 10) {
-    return {
-      fontSize: 8.5,
-      maxCharacters: 11,
-      lineHeight: 10,
-    };
-  }
-
-  return {
-    fontSize: 9.5,
-    maxCharacters: 12,
-    lineHeight: 11,
-  };
 }
 
 // ============================================
@@ -481,36 +589,26 @@ export default function DistrictExplorer({
   // ============================================
 
   const mapFeatures = useMemo(() => {
-    return apDistrictGeoJSON.features.map((feature) => {
-      const record = getDistrictRecord(
-        feature,
-        districts
-      );
-
+    const features = apDistrictGeoJSON.features.map((feature) => {
+      const record = getDistrictRecord(feature, districts);
       const label = getMapLabel(
         record,
         feature.properties?.district || '',
         tc
       );
+      const districtId = record?.id || feature.properties?.district;
 
       return {
-        key:
-          feature.properties?.objectid ||
-          feature.properties?.district,
-
+        key: feature.properties?.objectid || feature.properties?.district,
         districtId: record?.id,
-
         label,
-
         path: geometryToPath(feature.geometry),
-
-        labelPosition: getLabelPosition(
-          feature.geometry
-        ),
-
-        color: getRegionColor(record?.region),
+        labelPosition: getLabelPosition(feature.geometry),
+        color: getDistrictColor(districtId),
       };
     });
+
+    return placeDistrictLabels(features);
   }, [districts, tc]);
 
   // Districts added through the CMS may not have a GeoJSON boundary.
@@ -541,7 +639,7 @@ export default function DistrictExplorer({
             tc
           ),
           position,
-          color: getRegionColor(district.region),
+          color: getDistrictColor(district.id),
         };
       })
       .filter(Boolean);
@@ -624,7 +722,8 @@ export default function DistrictExplorer({
                 style={{
                   width: '100%',
                   height: 'auto',
-                  maxHeight: compact ? 760 : 850,
+                  overflow: 'visible',
+                  maxHeight: compact ? 820 : 980,
                   display: 'block',
                 }}
               >
@@ -638,19 +737,11 @@ export default function DistrictExplorer({
                   const [labelX, labelY] =
                     feature.labelPosition;
 
-                  const settings = getLabelSettings(
-                    feature.label
-                  );
-
-                  const lines = wrapLabel(
-                    feature.label,
-                    settings.maxCharacters
-                  );
-
+                  const layout = feature.labelLayout || getLabelLayout(feature.label);
+                  const lines = layout.lines;
                   const firstLineY =
-                    labelY -
-                    ((lines.length - 1) *
-                      settings.lineHeight) / 2;
+                    labelY - ((lines.length - 1) * layout.lineHeight) / 2;
+                  const labelCenterY = labelY;
 
                   return (
                     <g
@@ -712,6 +803,7 @@ export default function DistrictExplorer({
                         }
                         strokeLinejoin="round"
                         vectorEffect="non-scaling-stroke"
+                        pointerEvents="visiblePainted"
                         style={{
                           filter: active
                             ? 'brightness(1.06) drop-shadow(0 3px 5px rgba(30,45,60,.2))'
@@ -721,77 +813,94 @@ export default function DistrictExplorer({
                         }}
                       />
 
-                      {/* DISTRICT NAME IN A FITTED BOX */}
 
-                      {(() => {
-                        const labelText = lines.join(' ');
+                    </g>
+                  );
+                })}
 
-                        const labelWidth = Math.max(
-                          34,
-                          Math.min(
-                            112,
-                            labelText.length *
-                              settings.fontSize *
-                              0.58 +
-                              14
-                          )
-                        );
+                {/* DRAW ALL LABELS AFTER ALL POLYGONS SO THEY STAY VISIBLE */}
+                {mapFeatures.map((feature) => {
+                  const active = feature.districtId === selected;
+                  const [labelX, labelY] = feature.labelPosition;
+                  const layout = feature.labelLayout || getLabelLayout(feature.label);
+                  const lines = layout.lines;
+                  const firstLineY =
+                    labelY - ((lines.length - 1) * layout.lineHeight) / 2;
+                  const [anchorX, anchorY] =
+                    feature.labelAnchorPosition || feature.labelPosition;
+                  const moved =
+                    Math.hypot(labelX - anchorX, labelY - anchorY) > 12;
 
-                        const labelHeight = Math.max(
-                          18,
-                          lines.length *
-                            settings.lineHeight +
-                            7
-                        );
+                  return (
+                    <g
+                      key={`label-${feature.key}`}
+                      pointerEvents="all"
+                      role={feature.districtId ? 'button' : undefined}
+                      tabIndex={feature.districtId ? 0 : undefined}
+                      aria-label={`Select ${feature.label}`}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        if (feature.districtId) {
+                          handleDistrictSelect(feature.districtId);
+                        }
+                      }}
+                      onKeyDown={(event) => {
+                        if (
+                          feature.districtId &&
+                          (event.key === 'Enter' || event.key === ' ')
+                        ) {
+                          event.preventDefault();
+                          handleDistrictSelect(feature.districtId);
+                        }
+                      }}
+                      style={{ cursor: feature.districtId ? 'pointer' : 'default' }}
+                    >
+                      {moved && (
+                        <line
+                          x1={anchorX}
+                          y1={anchorY}
+                          x2={labelX}
+                          y2={labelY}
+                          stroke="#526477"
+                          strokeWidth="1.4"
+                          strokeOpacity="0.9"
+                          strokeDasharray="3 2"
+                          pointerEvents="none"
+                        />
+                      )}
 
-                        const labelCenterY =
-                          firstLineY +
-                          ((lines.length - 1) *
-                            settings.lineHeight) / 2;
+                      <rect
+                        x={labelX - layout.width / 2}
+                        y={labelY - layout.height / 2}
+                        width={layout.width}
+                        height={layout.height}
+                        rx="6"
+                        fill="#FFFFFF"
+                        fillOpacity="0.98"
+                        stroke={active ? '#172B43' : '#8FA1B3'}
+                        strokeWidth={active ? 2.2 : 1}
+                      />
 
-                        return (
-                          <g pointerEvents="none">
-                            <rect
-                              x={labelX - labelWidth / 2}
-                              y={labelCenterY - labelHeight / 2}
-                              width={labelWidth}
-                              height={labelHeight}
-                              rx="5"
-                              fill="#FFFFFF"
-                              fillOpacity="0.94"
-                              stroke={
-                                active ? '#243447' : '#D7E0E8'
-                              }
-                              strokeWidth={active ? 1.5 : 0.8}
-                            />
-
-                            <text
-                              x={labelX}
-                              y={firstLineY}
-                              textAnchor="middle"
-                              fontSize={settings.fontSize}
-                              fontWeight={active ? 800 : 700}
-                              fill="#243447"
-                              dominantBaseline="hanging"
-                            >
-                              {lines.map((line, index) => (
-                                <tspan
-                                  key={index}
-                                  x={labelX}
-                                  dy={
-                                    index === 0
-                                      ? 0
-                                      : settings.lineHeight
-                                  }
-                                >
-                                  {line}
-                                </tspan>
-                              ))}
-                            </text>
-                          </g>
-                        );
-                      })()}
-
+                      <text
+                        x={labelX}
+                        y={firstLineY}
+                        textAnchor="middle"
+                        fontSize={layout.fontSize}
+                        fontWeight={active ? 800 : 700}
+                        fill="#243447"
+                        dominantBaseline="hanging"
+                        pointerEvents="none"
+                      >
+                        {lines.map((line, index) => (
+                          <tspan
+                            key={index}
+                            x={labelX}
+                            dy={index === 0 ? 0 : layout.lineHeight}
+                          >
+                            {line}
+                          </tspan>
+                        ))}
+                      </text>
                     </g>
                   );
                 })}
@@ -822,7 +931,7 @@ export default function DistrictExplorer({
 
                   const labelY = Math.max(
                     16,
-                    markerY - 22
+                    markerY - 28
                   );
 
                   return (
@@ -851,6 +960,24 @@ export default function DistrictExplorer({
                       }}
                       style={{ cursor: 'pointer' }}
                     >
+                      <circle
+                        cx={markerX}
+                        cy={markerY}
+                        r={active ? 11 : 9}
+                        fill={marker.color}
+                        stroke={active ? '#243447' : '#FFFFFF'}
+                        strokeWidth={active ? 3 : 2}
+                        vectorEffect="non-scaling-stroke"
+                      />
+
+                      <circle
+                        cx={markerX}
+                        cy={markerY}
+                        r="3"
+                        fill="#FFFFFF"
+                        pointerEvents="none"
+                      />
+
                       <rect
                         x={labelX - labelWidth / 2}
                         y={labelY - 10}
@@ -861,7 +988,7 @@ export default function DistrictExplorer({
                         fillOpacity="0.96"
                         stroke={active ? '#243447' : '#D7E0E8'}
                         strokeWidth={active ? 1.5 : 0.8}
-                        pointerEvents="all"
+                        pointerEvents="none"
                       />
 
                       <text
@@ -882,25 +1009,10 @@ export default function DistrictExplorer({
 
               </svg>
 
-              {/* REGION LEGEND */}
-
-              <ul className="list-unstyled d-flex flex-wrap gap-3 small mb-0 mt-2 px-2">
-                {regions.map((r) => (
-                  <li
-                    key={r.id}
-                    className="d-flex align-items-center gap-1"
-                  >
-                    <span
-                      className="legend-dot"
-                      style={{
-                        background: getRegionColor(r.id),
-                      }}
-                    />
-
-                    {tc(r.name)}
-                  </li>
-                ))}
-              </ul>
+              {/* DISTRICT COLOUR NOTE */}
+              <p className="small text-muted-2 mt-2 mb-0 px-2">
+                Each district has its own colour. Select a district on the map to view its details.
+              </p>
 
             </div>
 
@@ -949,7 +1061,7 @@ export default function DistrictExplorer({
                             handleDistrictSelect(x.id)
                           }
                         >
-                          {tc(x.name)}
+                          {getMapLabel(x, x.name?.en || x.name || x.id, tc)}
                         </button>
                       </th>
 
@@ -995,14 +1107,14 @@ export default function DistrictExplorer({
               </p>
 
               <h3 className="h3 fw-bold mb-1">
-                {tc(d.name)}
+                {getMapLabel(d, d.name?.en || d.name || d.id, tc)}
               </h3>
 
               <p className="text-muted-2 small d-flex align-items-center gap-2">
                 <span
                   className="legend-dot"
                   style={{
-                    background: getRegionColor(d.region),
+                    background: getDistrictColor(d.id),
                   }}
                 />
 
