@@ -484,7 +484,8 @@ CREATE TABLE IF NOT EXISTS page_views (
   device_type    ENUM('mobile','tablet','desktop','other') DEFAULT 'other',
   viewed_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_view_date (viewed_at),
-  KEY idx_view_path (page_path(100))
+  KEY idx_view_path (page_path(100)),
+  KEY idx_view_visitor (visitor_hash, viewed_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS daily_stats (

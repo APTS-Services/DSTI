@@ -12,9 +12,8 @@ import { api } from '../../api/client';
 export function AssistantLauncher({ onOpen }) {
   const { t } = useLanguage();
   return (
-    <button type="button" className="assistant-launcher" onClick={onOpen} aria-label={t('vigyanMitra')}>
+    <button type="button" className="assistant-launcher" onClick={onOpen} aria-label={t('vigyanMitra')} title={t('vigyanMitra')}>
       <span className="avatar"><Bot size={22} aria-hidden="true" /></span>
-      <span className="text"><strong>{t('vigyanMitra')}</strong><small>{t('howCanIHelp')}</small></span>
     </button>
   );
 }

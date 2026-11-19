@@ -15,15 +15,14 @@ function deviceFrom(req) {
 }
 
 /** Records one page view. Paths under /admin and malformed paths are ignored. */
-async function trackView({ path, lang = 'en', newVisitor = false }, req) {
+async function trackView({ path, lang = 'en' }, req) {
   const pagePath = cleanString(path, 300);
   if (!pagePath || !PATH_RE.test(pagePath) || pagePath.startsWith('/admin')) return { ok: true };
   await repository.recordView({
     path: pagePath,
     lang: lang === 'te' ? 'te' : 'en',
     visitorHash: hashVisitor(`${req.ip || ''}|${req.get('user-agent') || ''}`),
-    device: deviceFrom(req),
-    newVisitor: newVisitor === true
+    device: deviceFrom(req)
   });
   return { ok: true };
 }

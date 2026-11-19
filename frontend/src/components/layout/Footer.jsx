@@ -34,8 +34,21 @@ export default function Footer() {
     return links.some((link) => link.to === '/sitemap') ? links : [...links, { key: 'sitemap', label: t('sitemap'), to: '/sitemap' }];
   }, [pages, t, tc]);
 
+  // The counter is live: refresh it when a page view is recorded, and every
+  // minute so other people's visits show up without a reload. `no-store` skips
+  // the 60-second cache the stats endpoint allows.
   useEffect(() => {
-    fetch(apiUrl('/api/public/stats')).then((r) => (r.ok ? r.json() : null)).then(setStats).catch(() => {});
+    const load = () => fetch(apiUrl('/api/public/stats'), { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((s) => s && setStats(s))
+      .catch(() => {});
+    load();
+    window.addEventListener('dsti:visit', load);
+    const timer = setInterval(load, 60000);
+    return () => {
+      window.removeEventListener('dsti:visit', load);
+      clearInterval(timer);
+    };
   }, []);
 
   return (

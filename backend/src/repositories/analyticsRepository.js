@@ -2,7 +2,17 @@
 // Only a salted hash of the visitor identifier is stored; never an IP address.
 const { q, one } = require('../config/db');
 
-async function recordView({ path, lang = 'en', visitorHash = null, device = 'other', newVisitor = false }) {
+async function recordView({ path, lang = 'en', visitorHash = null, device = 'other' }) {
+  // Whether this is a new visitor for the day is decided here, from the hashed
+  // identifier, instead of trusting a flag from the browser: React StrictMode
+  // mounts the tracking effect twice, so the browser used to send
+  // newVisitor=false on every hit and unique_visitors stayed at 0.
+  const seenToday = visitorHash
+    ? await one(
+        'SELECT 1 AS seen FROM page_views WHERE visitor_hash = ? AND viewed_at >= UTC_DATE() AND viewed_at < UTC_DATE() + INTERVAL 1 DAY LIMIT 1',
+        [visitorHash]
+      )
+    : null;
   await q(
     'INSERT INTO page_views (page_path, lang, visitor_hash, device_type) VALUES (?, ?, ?, ?)',
     [String(path).slice(0, 300), lang === 'te' ? 'te' : 'en', visitorHash, device]
@@ -11,7 +21,7 @@ async function recordView({ path, lang = 'en', visitorHash = null, device = 'oth
     `INSERT INTO daily_stats (stat_date, total_views, unique_visitors) VALUES (UTC_DATE(), 1, ?)
      ON DUPLICATE KEY UPDATE total_views = total_views + 1,
        unique_visitors = unique_visitors + VALUES(unique_visitors)`,
-    [newVisitor ? 1 : 0]
+    [seenToday || !visitorHash ? 0 : 1]
   );
 }
 

@@ -631,7 +631,8 @@ CREATE TABLE `page_views` (
   `viewed_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`view_id`),
   KEY `idx_view_date` (`viewed_at`),
-  KEY `idx_view_path` (`page_path`(100))
+  KEY `idx_view_path` (`page_path`(100)),
+  KEY `idx_view_visitor` (`visitor_hash`, `viewed_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
