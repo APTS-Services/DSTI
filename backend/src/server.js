@@ -6,25 +6,44 @@ const logger = require('./utils/logger');
 const { initCleanupJobs } = require('./services/cleanupService');
 
 const app = createApp();
+const SHUTDOWN_TIMEOUT_MS = 10000;
 let server = null;
 let shuttingDown = false;
+let shutdownExitCode = 0;
 
-function gracefulShutdown(source, exitCode = 0) {
-  if (shuttingDown) return;
-  shuttingDown = true;
-  logger.info(`[${source}] Shutting down...`);
-  const timer = setTimeout(() => process.exit(exitCode), 10000);
-  timer.unref();
-  if (!server) {
-    clearTimeout(timer);
-    return process.exit(exitCode);
+function closePool() {
+  return new Promise((resolve) => db.pool.end(() => resolve()));
+}
+
+async function gracefulShutdown(source, exitCode = 0) {
+  if (shuttingDown) {
+    logger.warn(`[${source}] Shutdown already in progress — forcing exit.`);
+    process.exit(shutdownExitCode);
   }
-  server.close(() => {
-    db.pool.end(() => {
-      clearTimeout(timer);
-      process.exit(exitCode);
-    });
-  });
+  shuttingDown = true;
+  shutdownExitCode = exitCode;
+  logger.info(`[${source}] Shutting down...`);
+
+  // A hung request must not keep the process (and the deploy) waiting forever.
+  const forceExit = setTimeout(() => {
+    logger.error(`[shutdown] Timed out after ${SHUTDOWN_TIMEOUT_MS} ms — forcing exit.`);
+    if (server && typeof server.closeAllConnections === 'function') server.closeAllConnections();
+    process.exit(shutdownExitCode);
+  }, SHUTDOWN_TIMEOUT_MS);
+  forceExit.unref();
+
+  if (server) {
+    // Stop accepting new requests, then release idle keep-alive sockets so a
+    // browser or reverse proxy cannot delay shutdown just by holding them open.
+    const closed = new Promise((resolve) => server.close(() => resolve()));
+    if (typeof server.closeIdleConnections === 'function') server.closeIdleConnections();
+    await closed;
+  }
+
+  await closePool();
+  clearTimeout(forceExit);
+  logger.info('Shutdown complete.');
+  process.exit(shutdownExitCode);
 }
 
 process.on('unhandledRejection', (reason) => {
@@ -63,8 +82,10 @@ async function start() {
   server.on('error', (err) => {
     logger.error(`[listen] ${err.message}`);
     if (err.code === 'EADDRINUSE') logger.error(`Port ${config.port} is already in use.`);
-    process.exit(1);
+    gracefulShutdown('listen', 1);
   });
 }
 
-start();
+if (require.main === module) start();
+
+module.exports = { start, gracefulShutdown };

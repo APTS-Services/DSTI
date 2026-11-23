@@ -67,9 +67,9 @@ cd DSTI
 Log in to MySQL as root (`mysql -u root -p`) and run:
 
 ```sql
-CREATE DATABASE dsti CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE dsti_website CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'dsti_app'@'localhost' IDENTIFIED BY 'Choose-A-Strong#Password1';
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, REFERENCES ON dsti.* TO 'dsti_app'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, REFERENCES ON dsti_website.* TO 'dsti_app'@'localhost';
 
 -- Only needed to run the automated tests:
 CREATE DATABASE dsti_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -88,8 +88,9 @@ Edit `backend/.env`:
 
 | Variable | Meaning |
 | --- | --- |
-| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` | MySQL connection (`DB_PASSWORD` is accepted too). **Wrap values containing `#` in double quotes**, e.g. `DB_PASS="Choose-A-Strong#Password1"` |
-| `ADMIN_USERNAME`, `ADMIN_PASSWORD` | First CMS administrator, created by the seed step. Must be 10–64 characters with upper- and lower-case letters, a digit and a special character. It **must be changed at first sign-in**. |
+| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` | MySQL connection (`DB_PASSWORD` is accepted too; `DB_NAME` defaults to `dsti_website`). **Wrap values containing `#` in double quotes**, e.g. `DB_PASS="Choose-A-Strong#Password1"` |
+| `ADMIN_USERNAME`, `ADMIN_PASSWORD` | First CMS administrator, created by the seed step when no active administrator exists. Must be 10–64 characters with upper- and lower-case letters, a digit and a special character. It **must be changed at first sign-in**. |
+| `ADMIN_EMAIL` | Optional e-mail address for the first administrator (defaults to `<username>@dsti.ap.gov.in`). |
 | `PUBLIC_ORIGIN` | Address of the website (`http://localhost:5173` in development) |
 | `SMTP_*` | Optional: SMTP server for feedback notification e-mails |
 
@@ -115,12 +116,14 @@ npm install
 npm run dev          # http://localhost:5173
 ```
 
-The frontend talks to the API directly: every request is built from `VITE_API_BASE_URL`, which defaults to
-`http://localhost:5000` (see `frontend/.env`), so nothing goes through the React dev-server port. The backend must list
-the frontend origin in `CORS_ORIGIN` — the shipped value already allows `http://localhost:5173` and
-`http://127.0.0.1:5173` (plus the `4173` preview ports). To point the site at another backend, copy
-`frontend/.env.example` to `frontend/.env` and set `VITE_API_BASE_URL` to that API origin and add the frontend origin
-to `CORS_ORIGIN`.
+The frontend uses same-origin, relative URLs for every API call. In development the Vite dev server proxies
+`/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` to the backend at `http://localhost:5000` (the proxy is defined in
+`frontend/vite.config.js`), so no API origin has to be configured in the browser and the CMS cookies stay first-party.
+To point the dev server at another backend, change the `backend` constant in `frontend/vite.config.js`.
+
+`frontend/.env` is optional in development. Set `VITE_ALLOWED_HOSTS` (comma-separated) only when you open the dev
+server through a hostname other than `localhost`, such as a LAN IP or a tunnel. The backend still accepts the dev-server
+origin in development; in production the public site origin must be listed in `CORS_ORIGIN`.
 
 ### 2.6 Sign in to the CMS
 
@@ -138,10 +141,10 @@ cd ../backend && NODE_ENV=production npm start
 ```
 
 The backend is an API-only server: it exposes `/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` on port 5000 and
-never renders HTML. Build the frontend with `VITE_API_BASE_URL` set to the API origin that browsers will use, serve
-`frontend/dist` from your web server (IIS, nginx) and add that website origin to the backend's `CORS_ORIGIN`. Because
-the app builds absolute API and upload URLs, it works from any host — no reverse proxy is required. In production mode
-cookies are `Secure` and HSTS is on, so put both behind HTTPS (see section 5).
+never renders HTML. Serve the built `frontend/dist` from your web server (IIS, nginx) on the public origin and forward
+those four paths to the API — the frontend calls them relative to its own origin, so the site and API appear as one
+origin and no absolute API URL is built into the bundle. Add the website origin to the backend's `CORS_ORIGIN`. In
+production mode cookies are `Secure` and HSTS is on, so put both behind HTTPS (see section 5).
 
 ---
 
@@ -181,13 +184,16 @@ backend/
     server.js              Entry point, timeouts, session clean-up
     config/                Configuration from .env, MySQL pool
     content/collections.js ★ Content model: every CMS section and field is defined here once
+    content/resources.js   /api/v1 resource registry (columns, status, filters)
     content/settings.js    Single-record settings groups (site, contact, about, home…)
-    repositories/          Content, settings, media and auth data access
+    content/pagePaths.js   Canonical public URL of a CMS page (footer, link picker, sitemap)
+    content/routes.js      Public URLs the React app serves, used to validate CMS links
+    repositories/          Content, settings, media, feedback, analytics, users and auth data access
     db/setup.js            Applies database/schema.sql          db/seed.js  imports seed/content.json
     middleware/            Sessions, CSRF, roles, rate limits, uploads, security headers, errors
     routes/                public.js (site bundle, feedback, stats) · auth.js · admin.js (CMS API) · v1/ (public REST API)
-    services/              Feedback, analytics, assistant and site services
-    utils/                 Password encryption & policy, CAPTCHA, audit log, mailer
+    services/              Content, public, admin, feedback, analytics, assistant, search, media, backup and user services
+    utils/                 Password encryption & policy, CAPTCHA, audit log, mailer, logger, validation
   database/schema.sql      MySQL tables + reference data (roles, districts, categories, settings)
   seed/content.json        Initial website content (English + Telugu)
   tests/api.test.js
@@ -195,7 +201,9 @@ frontend/
   src/
     App.jsx                Routes (code-split)
     styles/main.scss       Bootstrap 5 theme, animations, dark / high-contrast modes
+    api/client.js          Fetch wrapper, CSRF token and RSA password encryption
     context/               ContentContext (loads CMS content), ThemeContext (accessibility)
+    hooks/                 Shared React hooks
     i18n/                  English / Telugu interface strings
     components/            layout (TopBar, Header, Footer, Search, Vigyan Mitra), home sections, common widgets
     pages/                 Public pages
@@ -207,8 +215,9 @@ e2e/                       Playwright tests
 docs/                      SECURITY_AUDIT.md (audit compliance report), CMS_USER_GUIDE.md
 ```
 
-**Adding a new editable field or section:** add it to `backend/src/content/schemas.js`. Validation and the CMS form
-pick it up automatically; then show it in the relevant React page.
+**Adding a new editable field or section:** add it to `backend/src/content/collections.js` (and, for an `/api/v1`
+resource, to `backend/src/content/resources.js`). Validation and the CMS form pick it up automatically; then show it in
+the relevant React page.
 
 ---
 
@@ -257,7 +266,8 @@ server {
 server { listen 80; server_name dsti.ap.gov.in; return 301 https://$host$request_uri; }
 ```
 
-   With this single-origin set-up, build the website with `VITE_API_BASE_URL=https://dsti.ap.gov.in`.
+   The website is built without an API origin: it calls `/api`, `/uploads`, `/sitemap.xml` and `/robots.txt` on its own
+   origin, and the rules above forward those paths to the API.
 
 6. Backups: schedule a nightly `mysqldump --single-transaction dsti_website` and a copy of `backend/uploads/` to
    storage off the server. Administrators can also download or restore a content backup from

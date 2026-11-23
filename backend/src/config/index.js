@@ -43,6 +43,8 @@ const config = {
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
+    // Bound the startup probe: an unreachable host must fail fast, not hang.
+    connectTimeout: 10000,
     enableKeepAlive: true,
     keepAliveInitialDelay: 0,
     charset: 'utf8mb4_unicode_ci',
@@ -63,7 +65,7 @@ const config = {
 };
 
 const required = ['JWT_SECRET', 'DB_HOST', 'DB_USER', 'DB_NAME'];
-const missing = required.filter((name) => !process.env[name]);
+const missing = required.filter((name) => !String(process.env[name] || '').trim());
 if (missing.length) {
   logger.error(`Missing required environment variable(s): ${missing.join(', ')}`);
   process.exit(1);

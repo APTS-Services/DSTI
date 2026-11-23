@@ -53,13 +53,18 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 
 ```bash
 npm run db:setup     # applies database/schema.sql
-npm run seed         # optional starter content (only fills empty collections)
+npm run seed         # starter content + first administrator (upsert; safe to re-run)
+npm run seed -- --reset   # replace all content collections with the seed
 ```
 
 `db:setup` creates and uses the database named by `DB_NAME` (default
 `dsti_website`) and is idempotent (`CREATE TABLE IF NOT EXISTS`,
 `INSERT IGNORE`). `database/schema.sql` can also be opened directly in MySQL
 Workbench, where it defaults to `dsti_website`.
+
+`npm run seed` upserts collections that have a natural key (slug, block key,
+awards year) and only fills empty auto-increment collections, so re-running it
+never duplicates rows. Pass `-- --reset` to wipe the content collections first.
 
 ### Run
 
@@ -72,13 +77,12 @@ The API listens on `HOST:PORT` (default `127.0.0.1:5000`).
 
 ### First sign-in
 
-| Field | Value |
-| --- | --- |
-| Username | `admin` |
-| Password | `Admin@12345` |
-
-The account is flagged **must change password**; change it immediately from
-`/admin/change-password` or `POST /api/v1/admin/auth/change-password`.
+The first administrator is created by `npm run seed` from `ADMIN_USERNAME` and
+`ADMIN_PASSWORD` in `.env`, and only when the database has no active
+administrator. The password must satisfy the policy (10–64 characters with
+upper- and lower-case letters, a digit and a symbol, and not containing the
+username). The account is flagged **must change password**; change it at first
+sign-in or via `POST /api/v1/admin/auth/change-password`.
 
 ---
 
@@ -100,7 +104,10 @@ The account is flagged **must change password**; change it immediately from
 | `DB_PORT` | – | MySQL port (default `3306`) |
 | `DB_USER` | ✅ | MySQL user |
 | `DB_PASS` | – | MySQL password (may be empty) |
-| `DB_NAME` | ✅ | Database name (`dsti_website`) |
+| `DB_NAME` | ✅ | Database name (default `dsti_website`) |
+| `ADMIN_USERNAME` | – | Username for the first administrator created by the seed (`admin`) |
+| `ADMIN_PASSWORD` | – | Password for the first administrator; the seed creates no account while it is empty or too weak |
+| `ADMIN_EMAIL` | – | E-mail for the first administrator (defaults to `<username>@dsti.ap.gov.in`) |
 | `MAX_UPLOAD_MB` | – | Upload limit (default `25`) |
 | `SMTP_*` | – | Optional feedback notification e-mail (see §9) |
 
@@ -247,7 +254,7 @@ districts, pages, awards (one row per award, grouped by year).
   5 failed attempts. Password history prevents reuse of the last 3 passwords.
 - CMS passwords travel RSA-OAEP encrypted with a per-CAPTCHA nonce; CAPTCHAs
   are single-use and expire after 5 minutes.
-- Session cookies are `httpOnly`, `SameSite=Lax`, `Secure` in production;
+- Session cookies are `httpOnly`, `SameSite=Strict`, `Secure` in production;
   writes additionally require `X-CSRF-Token`.
 - Rate limits on sign-in, CAPTCHA, feedback, assistant and page tracking.
 - Uploads: extension + magic-byte validation, random stored name, size limit,
@@ -261,14 +268,20 @@ districts, pages, awards (one row per award, grouped by year).
 ## 8. Testing
 
 ```bash
-npm test
+# Create and grant the test database as described in the root README (§2.3),
+# then apply the schema once:
+DB_NAME=dsti_test npm run db:setup
+
+# Run the suite against it (TEST_DB_NAME is not read by this suite; DB_NAME is):
+DB_NAME=dsti_test npm test
 ```
 
 The integration suite starts the app on an ephemeral port, signs in through
 the real RSA + CAPTCHA flow (CAPTCHA is patched in-process for automation),
 and exercises the public bundle, `/api/v1` reads, assistant, feedback,
 CMS CRUD, uploads, JWT login, role guards, publish workflow and logout.
-It uses the database configured in `.env` and removes the content, media, user,
+It uses the database named by `DB_NAME` in the environment (point it at
+`dsti_test`, never the live database) and removes the content, media, user,
 feedback and assistant records it creates (audit-log entries remain by design).
 
 ---
@@ -298,5 +311,11 @@ feedback and assistant records it creates (audit-log entries remain by design).
 - Set `NODE_ENV=production`, a strong `JWT_SECRET`, `TRUST_PROXY=true` when a
   proxy terminates TLS, and a least-privilege MySQL user (SELECT/INSERT/
   UPDATE/DELETE on `dsti_website` only).
-- The server fails fast when the database is unreachable or required
-  environment variables are missing, and shuts down gracefully on SIGTERM.
+- Startup fails fast: `JWT_SECRET`, `DB_HOST`, `DB_USER` and `DB_NAME` are
+  validated when the config loads, then the server runs `SELECT 1` through the
+  pool before it binds the port. Either failure logs the reason and exits `1`
+  (the database probe is capped by a 10 s connect timeout).
+- `SIGTERM`/`SIGINT` trigger a graceful shutdown: stop accepting connections,
+  release idle keep-alive sockets, drain in-flight requests, close the MySQL
+  pool and exit `0`. A second signal — or a 10 s timeout — forces exit. Windows/
+  IIS has no POSIX `SIGTERM`, so there the host's stop mechanism applies.
