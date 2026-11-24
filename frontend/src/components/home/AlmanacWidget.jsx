@@ -10,11 +10,15 @@ export default function AlmanacWidget() {
   const days = useCollection('scienceDays');
   const facts = useCollection('thisDay');
 
-  const { today, upcoming } = useMemo(() => {
+  const { factsForDay, upcoming } = useMemo(() => {
     const now = new Date();
     const key = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-    const sorted = [...facts].sort((a, b) => a.date.localeCompare(b.date));
-    const fact = sorted.find((f) => f.date === key) || sorted.find((f) => f.date > key) || sorted[0];
+    const sorted = [...facts].sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+    // Every fact saved for the nearest day is shown, not just the first one.
+    const exact = sorted.find((f) => f.date === key);
+    const next = sorted.find((f) => f.date > key);
+    const dayKey = exact ? key : (next || sorted[0] || {}).date;
+    const factsForDay = dayKey ? sorted.filter((f) => f.date === dayKey) : [];
     const y = now.getFullYear();
     const start = new Date(y, now.getMonth(), now.getDate());
     const list = days.map((d) => {
@@ -22,16 +26,20 @@ export default function AlmanacWidget() {
       if (date < start) date = new Date(y + 1, d.month - 1, d.day);
       return { ...d, date };
     }).sort((a, b) => a.date - b.date).slice(0, 5);
-    return { today: fact, upcoming: list };
+    return { factsForDay, upcoming: list };
   }, [days, facts]);
 
   return (
     <div className="dst-card p-4">
       <p className="section-eyebrow mb-1">{t('scienceAlmanac')}</p>
-      {today && (
+      {factsForDay.length > 0 && (
         <div className="p-3 rounded-3 bg-soft mb-4">
           <p className="d-flex align-items-center gap-2 fw-semibold mb-1"><Sparkles size={16} className="text-warning" aria-hidden="true" /> {t('thisDayInScience')}</p>
-          <p className="mb-0">{tc(today.text)}</p>
+          <div className="d-grid gap-2">
+            {factsForDay.map((fact) => (
+              <p key={fact.id} className="mb-0">{tc(fact.text)}</p>
+            ))}
+          </div>
         </div>
       )}
       <h3 className="h6 fw-bold d-flex align-items-center gap-2"><CalendarDays size={16} aria-hidden="true" /> {t('scienceDays')}</h3>

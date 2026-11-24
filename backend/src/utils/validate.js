@@ -36,6 +36,10 @@ function sanitizeField(field, raw, errors) {
     case 'textarea': {
       const value = cleanMultiline(raw, field.max || (type === 'textarea' ? 5000 : 500));
       if (required && !value) errors.push(`${label} is required.`);
+      // Fields may declare a `pattern` (e.g. the MM-DD day of "this day in science").
+      if (value && field.pattern && !new RegExp(field.pattern).test(value)) {
+        errors.push(`${label} has an invalid format.`);
+      }
       return value;
     }
     case 'bi':

@@ -407,9 +407,10 @@ const collections = {
     })
   },
   thisDay: {
-    label: 'Science almanac – this day in science', group: 'Media', titleField: 'date', keyField: 'id',
+    // No keyField: several facts may share the same day, so each entry gets its
+    // own generated identifier instead of being keyed by the MM-DD date.
+    label: 'Science almanac – this day in science', group: 'Media', titleField: 'date',
     fields: [
-      f('id', 'slug', 'Identifier (MM-DD)', { required: true }),
       f('date', 'text', 'Day (MM-DD)', { required: true, pattern: '^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$' }),
       f('text', 'bitext', 'Fact', { required: true })
     ],
