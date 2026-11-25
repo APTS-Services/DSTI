@@ -56,13 +56,13 @@ export default function Footer() {
       <div className="container">
         <div className="row g-4 pb-4">
           <div className="col-lg-4">
-            <div className="d-flex align-items-center gap-3 mb-3">
-              <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" width="52" height="52" style={{ background: '#fff', borderRadius: '50%', padding: 3 }} />
-              <div>
-                <h2 className="mb-0">{tc(site.name) || t('siteName')}</h2>
-                <small>{tc(site.gov) || t('gov')}</small>
-              </div>
-            </div>
+            <div className="footer-brand d-flex align-items-center gap-3 mb-4">
+  <img src={assetUrl(site.logo) || DEFAULT_LOGO} alt="" />
+  <div className="footer-brand-text">
+    <h2 className="mb-1">{tc(site.name) || t('siteName')}</h2>
+    <small>{tc(site.gov) || t('gov')}</small>
+  </div>
+</div>
             <p className="mb-3">{tc(site.footerAbout)}</p>
             {site.social?.length > 0 && (
               <>

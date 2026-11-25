@@ -490,11 +490,13 @@ a.dst-card { color: inherit; text-decoration: none; display: block; }
 
 // Floating assistant launcher (like the support widget)
 .assistant-launcher {
-  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1040; display: inline-flex; align-items: center; justify-content: center;
-  background: $navy-900; color: #fff; border: 0; border-radius: 50%; padding: .55rem; box-shadow: 0 12px 30px -10px rgba(3, 21, 74, .6); text-align: left;
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1040; display: flex; align-items: center; gap: .85rem;
+  background: $navy-900; color: #fff; border: 0; border-radius: 1rem; padding: .7rem 1.1rem .7rem .75rem; box-shadow: 0 12px 30px -10px rgba(3, 21, 74, .6); text-align: left;
   .avatar { width: 2.9rem; height: 2.9rem; border-radius: 50%; background: #fff; color: $navy-700; display: inline-flex; align-items: center; justify-content: center; position: relative; }
   .avatar::after { content: ''; position: absolute; right: 0; bottom: 2px; width: .7rem; height: .7rem; border-radius: 50%; background: #22c55e; border: 2px solid $navy-900; }
+  strong { display: block; font-size: .95rem; } small { color: rgba(255, 255, 255, .85); }
   &:hover { background: $navy-700; }
+  @include media-breakpoint-down(lg) { padding: .55rem; .text { display: none; } }
 }
 .to-top { position: fixed; right: 1.25rem; bottom: 6.25rem; z-index: 1039; }
 
@@ -522,11 +524,58 @@ a.dst-card { color: inherit; text-decoration: none; display: block; }
 .site-footer { background: #0b0f19; color: #c7cbd4; font-size: .92rem;
   h2, h3 { color: #fff; font-size: 1rem; font-weight: 600; }
   a { color: #c7cbd4; } a:hover { color: #fff; }
-  // Footer emblem: fixed square box so the flex row can't squeeze it
-  img {
-    width: 72px; height: 72px; min-width: 72px; max-width: none;
-    aspect-ratio: 1 / 1; flex: 0 0 72px; object-fit: contain; display: block;
+
+  // Larger government logo; fixed flex basis keeps the text alignment stable.
+  .footer-brand {
+    min-height: 110px;
+    gap: 1.2rem !important;
+    align-items: center;
   }
+  .footer-brand img {
+    width: 110px;
+    height: 110px;
+    min-width: 110px;
+    flex: 0 0 110px;
+    object-fit: contain;
+    display: block;
+    border-radius: 50%;
+    background: transparent !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .footer-brand-text { min-width: 0; }
+  .footer-brand-text h2 {
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .footer-brand-text small {
+    display: block;
+    font-size: .84rem;
+    line-height: 1.4;
+    color: #aeb7c6;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1199.98px) {
+    .footer-brand img {
+      width: 90px;
+      height: 90px;
+      min-width: 90px;
+      flex-basis: 90px;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .footer-brand img {
+      width: 76px;
+      height: 76px;
+      min-width: 76px;
+      flex-basis: 76px;
+    }
+  }
+
   .social a { width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .2); display: inline-flex; align-items: center; justify-content: center; }
   .bottom { border-top: 1px solid rgba(255, 255, 255, .1); font-size: .82rem; }
 }
