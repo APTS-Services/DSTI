@@ -13,7 +13,7 @@ export function AssistantLauncher({ onOpen }) {
   const { t } = useLanguage();
   return (
     <button type="button" className="assistant-launcher" onClick={onOpen} aria-label={t('vigyanMitra')} title={t('vigyanMitra')}>
-      <span className="avatar"><Bot size={22} aria-hidden="true" /></span>
+      <span className="avatar"><Bot size={26} aria-hidden="true" /></span>
     </button>
   );
 }
@@ -153,7 +153,7 @@ export default function VigyanMitra({ open, onClose }) {
       <aside className="sheet">
         <div className="chat-head d-flex align-items-center justify-content-between p-3">
           <div className="d-flex align-items-center gap-2">
-            <span className="d-inline-flex align-items-center justify-content-center rounded-circle bg-white text-primary" style={{ width: 38, height: 38 }}><Bot size={20} aria-hidden="true" /></span>
+            <span className="d-inline-flex align-items-center justify-content-center rounded-circle text-white" style={{ width: 40, height: 40, background: '#03154a' }}><Bot size={24} aria-hidden="true" /></span>
             <div>
               <h2 id="vm-title" className="h6 mb-0 text-white">{t('vigyanMitra')}</h2>
               <small className="opacity-75">{t('vigyanDisclaimer')}</small>
